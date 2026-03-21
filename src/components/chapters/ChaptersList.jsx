@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Chapter1 from './ch1/Chapter1'
 import Chapter2 from './ch2/Chapter2'
 import Chapter3 from './ch3/Chapter3'
+import Chapter4 from './ch4/Chapter4'
 import AppendixA from './appendix/AppendixA'
 import './ChaptersList.css'
 
@@ -18,6 +19,7 @@ function ChaptersList() {
         {viewType === 'chapter' && selectedView === 'ch1' && <Chapter1 />}
         {viewType === 'chapter' && selectedView === 'ch2' && <Chapter2 />}
         {viewType === 'chapter' && selectedView === 'ch3' && <Chapter3 />}
+        {viewType === 'chapter' && selectedView === 'ch4' && <Chapter4 />}
         {viewType === 'appendix' && selectedView === 'A' && <AppendixA />}
       </div>
     )
@@ -54,6 +56,15 @@ function ChaptersList() {
           <div className="chapter-number">Chapter 3</div>
           <h3>The Electromagnetic Field</h3>
           <p>Lorentz force, Faraday tensor, and Maxwell's equations</p>
+          <span className="read-more">Read exercises →</span>
+        </div>
+        <div
+          className="chapter-card"
+          onClick={() => { setSelectedView('ch4'); setViewType('chapter') }}
+        >
+          <div className="chapter-number">Chapter 4</div>
+          <h3>Electromagnetism and Differential Forms</h3>
+          <p>Exterior calculus, Faraday 2-form, and geometric Maxwell equations</p>
           <span className="read-more">Read exercises →</span>
         </div>
       </div>

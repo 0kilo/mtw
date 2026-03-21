@@ -743,7 +743,7 @@ $T^{\mu\nu} = \frac{1}{4\pi} \left( F^{\mu\alpha} F^\nu_{\ \alpha} - \frac{1}{4}
 $T^{\mu\nu}_{\ \ ,\nu} = \frac{1}{4\pi} \left[ F^{\mu\alpha}_{\ \ ,\nu} F^\nu_{\ \alpha} + F^{\mu\alpha} F^\nu_{\ \alpha,\nu} - \frac{1}{2} F_{\alpha\beta,\nu} F^{\alpha\beta} \right] \quad (3.61)$
 
 (b) Manipulate this expression into the form
-$T^\mu_{\ \nu}^{,\nu} = \frac{1}{4\pi} \left[ -F_{\mu\alpha} F^{\alpha\nu}_{\ \ ,\nu} - \frac{1}{2} F^{\alpha\beta} (F_{\alpha\beta,\mu} + F_{\mu\alpha,\beta} + F_{\beta\mu,\alpha}) \right] \quad (3.62)$
+$T^{\mu\nu}_{\ \ \ ,\nu} = \frac{1}{4\pi} \left[ -F_{\mu\alpha} F^{\alpha\nu}_{\ \ ,\nu} - \frac{1}{2} F^{\alpha\beta} (F_{\alpha\beta,\mu} + F_{\mu\alpha,\beta} + F_{\beta\mu,\alpha}) \right] \quad (3.62)$
 
 (c) Use Maxwell's equations to conclude that
 $T^{\mu\nu}_{\ \ ,\nu} = -F^{\mu\alpha} J_\alpha \quad (3.63)$
@@ -764,7 +764,7 @@ Use $F^{\mu\alpha}_{\ \ ,\nu} F^\nu_{\ \alpha} = -F_{\mu\alpha} F^{\alpha\nu}_{\
 $F_{\alpha\beta,\mu} + F_{\mu\alpha,\beta} + F_{\beta\mu,\alpha} = 0$
 
 After manipulation:
-$T^\mu_{\ \nu}^{,\nu} = \frac{1}{4\pi} \left[ -F_{\mu\alpha} F^{\alpha\nu}_{\ \ ,\nu} - \frac{1}{2} F^{\alpha\beta} (F_{\alpha\beta,\mu} + F_{\mu\alpha,\beta} + F_{\beta\mu,\alpha}) \right]$
+$T^{\mu\nu}_{\ \ \ ,\nu} = \frac{1}{4\pi} \left[ -F_{\mu\alpha} F^{\alpha\nu}_{\ \ ,\nu} - \frac{1}{2} F^{\alpha\beta} (F_{\alpha\beta,\mu} + F_{\mu\alpha,\beta} + F_{\beta\mu,\alpha}) \right]$
 
 **Part (c): Maxwell's equations**
 

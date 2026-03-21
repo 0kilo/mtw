@@ -21,6 +21,20 @@ function Dashboard() {
       exercises: 7,
       topics: ['Vectors', '1-Forms', 'Metric Tensor', 'Lorentz Transforms'],
       status: 'complete'
+    },
+    {
+      number: 3,
+      title: 'The Electromagnetic Field',
+      exercises: 18,
+      topics: ['Lorentz Force', 'Faraday Tensor', 'Maxwell Equations', 'Stress-Energy'],
+      status: 'complete'
+    },
+    {
+      number: 4,
+      title: 'Electromagnetism and Differential Forms',
+      exercises: 12,
+      topics: ['Exterior Calculus', 'Differential Forms', 'Hodge Dual', 'Geometric Maxwell'],
+      status: 'complete'
     }
   ]
 
@@ -97,14 +111,14 @@ function Dashboard() {
               <div className="stat-card">
                 <div className="stat-icon">📖</div>
                 <div className="stat-info">
-                  <span className="stat-value">2</span>
+                  <span className="stat-value">4</span>
                   <span className="stat-label">Chapters</span>
                 </div>
               </div>
               <div className="stat-card">
                 <div className="stat-icon">✏️</div>
                 <div className="stat-info">
-                  <span className="stat-value">10</span>
+                  <span className="stat-value">40</span>
                   <span className="stat-label">Exercises Solved</span>
                 </div>
               </div>
