@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+src/reference
+info.txt
+src/chapters/ch1/ch1.md
+src/chapters/ch1/Screenshot from 2026-03-20 18-05-18.png
+src/chapters/ch2/ch2.md
+src/chapters/ch2/ch2.png
+src/chapters/ch3/ch3.md
+src/chapters/ch3/ch3.png
