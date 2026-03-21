@@ -4348,197 +4348,485 @@ l0,-`+(t+144)+`c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 `))+1))}let o=`#`.repeat(i),s=n.enter(`headingAtx`),c=n.enter(`phrasing`);a.move(o+` `);let l=n.containerPhrasing(e,{before:`# `,after:`
 `,...a.current()});return/^[\t ]/.test(l)&&(l=Qw(l.charCodeAt(0))+l.slice(1)),l=l?o+` `+l:o,n.options.closeAtx&&(l+=` `+o),c(),s(),l}iT.peek=aT;function iT(e){return e.value||``}function aT(){return`<`}oT.peek=sT;function oT(e,t,n,r){let i=Yw(n),a=i===`"`?`Quote`:`Apostrophe`,o=n.enter(`image`),s=n.enter(`label`),c=n.createTracker(r),l=c.move(`![`);return l+=c.move(n.safe(e.alt,{before:l,after:`]`,...c.current()})),l+=c.move(`](`),s(),!e.url&&e.title||/[\0- \u007F]/.test(e.url)?(s=n.enter(`destinationLiteral`),l+=c.move(`<`),l+=c.move(n.safe(e.url,{before:l,after:`>`,...c.current()})),l+=c.move(`>`)):(s=n.enter(`destinationRaw`),l+=c.move(n.safe(e.url,{before:l,after:e.title?` `:`)`,...c.current()}))),s(),e.title&&(s=n.enter(`title${a}`),l+=c.move(` `+i),l+=c.move(n.safe(e.title,{before:l,after:i,...c.current()})),l+=c.move(i),s()),l+=c.move(`)`),o(),l}function sT(){return`!`}cT.peek=lT;function cT(e,t,n,r){let i=e.referenceType,a=n.enter(`imageReference`),o=n.enter(`label`),s=n.createTracker(r),c=s.move(`![`),l=n.safe(e.alt,{before:c,after:`]`,...s.current()});c+=s.move(l+`][`),o();let u=n.stack;n.stack=[],o=n.enter(`reference`);let d=n.safe(n.associationId(e),{before:c,after:`]`,...s.current()});return o(),n.stack=u,a(),i===`full`||!l||l!==d?c+=s.move(d+`]`):i===`shortcut`?c=c.slice(0,-1):c+=s.move(`]`),c}function lT(){return`!`}uT.peek=dT;function uT(e,t,n){let r=e.value||``,i="`",a=-1;for(;RegExp("(^|[^`])"+i+"([^`]|$)").test(r);)i+="`";for(/[^ \r\n]/.test(r)&&(/^[ \r\n]/.test(r)&&/[ \r\n]$/.test(r)||/^`|`$/.test(r))&&(r=` `+r+` `);++a<n.unsafe.length;){let e=n.unsafe[a],t=n.compilePattern(e),i;if(e.atBreak)for(;i=t.exec(r);){let e=i.index;r.charCodeAt(e)===10&&r.charCodeAt(e-1)===13&&e--,r=r.slice(0,e)+` `+r.slice(i.index+1)}}return i+r+i}function dT(){return"`"}function fT(e,t){let n=Ld(e);return!!(!t.options.resourceLink&&e.url&&!e.title&&e.children&&e.children.length===1&&e.children[0].type===`text`&&(n===e.url||`mailto:`+n===e.url)&&/^[a-z][a-z+.-]+:/i.test(e.url)&&!/[\0- <>\u007F]/.test(e.url))}pT.peek=mT;function pT(e,t,n,r){let i=Yw(n),a=i===`"`?`Quote`:`Apostrophe`,o=n.createTracker(r),s,c;if(fT(e,n)){let t=n.stack;n.stack=[],s=n.enter(`autolink`);let r=o.move(`<`);return r+=o.move(n.containerPhrasing(e,{before:r,after:`>`,...o.current()})),r+=o.move(`>`),s(),n.stack=t,r}s=n.enter(`link`),c=n.enter(`label`);let l=o.move(`[`);return l+=o.move(n.containerPhrasing(e,{before:l,after:`](`,...o.current()})),l+=o.move(`](`),c(),!e.url&&e.title||/[\0- \u007F]/.test(e.url)?(c=n.enter(`destinationLiteral`),l+=o.move(`<`),l+=o.move(n.safe(e.url,{before:l,after:`>`,...o.current()})),l+=o.move(`>`)):(c=n.enter(`destinationRaw`),l+=o.move(n.safe(e.url,{before:l,after:e.title?` `:`)`,...o.current()}))),c(),e.title&&(c=n.enter(`title${a}`),l+=o.move(` `+i),l+=o.move(n.safe(e.title,{before:l,after:i,...o.current()})),l+=o.move(i),c()),l+=o.move(`)`),s(),l}function mT(e,t,n){return fT(e,n)?`<`:`[`}hT.peek=gT;function hT(e,t,n,r){let i=e.referenceType,a=n.enter(`linkReference`),o=n.enter(`label`),s=n.createTracker(r),c=s.move(`[`),l=n.containerPhrasing(e,{before:c,after:`]`,...s.current()});c+=s.move(l+`][`),o();let u=n.stack;n.stack=[],o=n.enter(`reference`);let d=n.safe(n.associationId(e),{before:c,after:`]`,...s.current()});return o(),n.stack=u,a(),i===`full`||!l||l!==d?c+=s.move(d+`]`):i===`shortcut`?c=c.slice(0,-1):c+=s.move(`]`),c}function gT(){return`[`}function _T(e){let t=e.options.bullet||`*`;if(t!==`*`&&t!==`+`&&t!==`-`)throw Error("Cannot serialize items with `"+t+"` for `options.bullet`, expected `*`, `+`, or `-`");return t}function vT(e){let t=_T(e),n=e.options.bulletOther;if(!n)return t===`*`?`-`:`*`;if(n!==`*`&&n!==`+`&&n!==`-`)throw Error("Cannot serialize items with `"+n+"` for `options.bulletOther`, expected `*`, `+`, or `-`");if(n===t)throw Error("Expected `bullet` (`"+t+"`) and `bulletOther` (`"+n+"`) to be different");return n}function yT(e){let t=e.options.bulletOrdered||`.`;if(t!==`.`&&t!==`)`)throw Error("Cannot serialize items with `"+t+"` for `options.bulletOrdered`, expected `.` or `)`");return t}function bT(e){let t=e.options.rule||`*`;if(t!==`*`&&t!==`-`&&t!==`_`)throw Error("Cannot serialize rules with `"+t+"` for `options.rule`, expected `*`, `-`, or `_`");return t}function xT(e,t,n,r){let i=n.enter(`list`),a=n.bulletCurrent,o=e.ordered?yT(n):_T(n),s=e.ordered?o===`.`?`)`:`.`:vT(n),c=t&&n.bulletLastUsed?o===n.bulletLastUsed:!1;if(!e.ordered){let t=e.children?e.children[0]:void 0;if((o===`*`||o===`-`)&&t&&(!t.children||!t.children[0])&&n.stack[n.stack.length-1]===`list`&&n.stack[n.stack.length-2]===`listItem`&&n.stack[n.stack.length-3]===`list`&&n.stack[n.stack.length-4]===`listItem`&&n.indexStack[n.indexStack.length-1]===0&&n.indexStack[n.indexStack.length-2]===0&&n.indexStack[n.indexStack.length-3]===0&&(c=!0),bT(n)===o&&t){let t=-1;for(;++t<e.children.length;){let n=e.children[t];if(n&&n.type===`listItem`&&n.children&&n.children[0]&&n.children[0].type===`thematicBreak`){c=!0;break}}}}c&&(o=s),n.bulletCurrent=o;let l=n.containerFlow(e,r);return n.bulletLastUsed=o,n.bulletCurrent=a,i(),l}function ST(e){let t=e.options.listItemIndent||`one`;if(t!==`tab`&&t!==`one`&&t!==`mixed`)throw Error("Cannot serialize items with `"+t+"` for `options.listItemIndent`, expected `tab`, `one`, or `mixed`");return t}function CT(e,t,n,r){let i=ST(n),a=n.bulletCurrent||_T(n);t&&t.type===`list`&&t.ordered&&(a=(typeof t.start==`number`&&t.start>-1?t.start:1)+(n.options.incrementListMarker===!1?0:t.children.indexOf(e))+a);let o=a.length+1;(i===`tab`||i===`mixed`&&(t&&t.type===`list`&&t.spread||e.spread))&&(o=Math.ceil(o/4)*4);let s=n.createTracker(r);s.move(a+` `.repeat(o-a.length)),s.shift(o);let c=n.enter(`listItem`),l=n.indentLines(n.containerFlow(e,s.current()),u);return c(),l;function u(e,t,n){return t?(n?``:` `.repeat(o))+e:(n?a:a+` `.repeat(o-a.length))+e}}function wT(e,t,n,r){let i=n.enter(`paragraph`),a=n.enter(`phrasing`),o=n.containerPhrasing(e,r);return a(),i(),o}var TT=Ah([`break`,`delete`,`emphasis`,`footnote`,`footnoteReference`,`image`,`imageReference`,`inlineCode`,`inlineMath`,`link`,`linkReference`,`mdxJsxTextElement`,`mdxTextExpression`,`strong`,`text`,`textDirective`]);function ET(e,t,n,r){return(e.children.some(function(e){return TT(e)})?n.containerPhrasing:n.containerFlow).call(n,e,r)}function DT(e){let t=e.options.strong||`*`;if(t!==`*`&&t!==`_`)throw Error("Cannot serialize strong with `"+t+"` for `options.strong`, expected `*`, or `_`");return t}OT.peek=kT;function OT(e,t,n,r){let i=DT(n),a=n.enter(`strong`),o=n.createTracker(r),s=o.move(i+i),c=o.move(n.containerPhrasing(e,{after:i,before:s,...o.current()})),l=c.charCodeAt(0),u=$w(r.before.charCodeAt(r.before.length-1),l,i);u.inside&&(c=Qw(l)+c.slice(1));let d=c.charCodeAt(c.length-1),f=$w(r.after.charCodeAt(0),d,i);f.inside&&(c=c.slice(0,-1)+Qw(d));let p=o.move(i+i);return a(),n.attentionEncodeSurroundingInfo={after:f.outside,before:u.outside},s+c+p}function kT(e,t,n){return n.options.strong||`*`}function AT(e,t,n,r){return n.safe(e.value,r)}function jT(e){let t=e.options.ruleRepetition||3;if(t<3)throw Error("Cannot serialize rules with repetition `"+t+"` for `options.ruleRepetition`, expected `3` or more");return t}function MT(e,t,n){let r=(bT(n)+(n.options.ruleSpaces?` `:``)).repeat(jT(n));return n.options.ruleSpaces?r.slice(0,-1):r}var NT={blockquote:Bw,break:Ww,code:qw,definition:Xw,emphasis:eT,hardBreak:Ww,heading:rT,html:iT,image:oT,imageReference:cT,inlineCode:uT,link:pT,linkReference:hT,list:xT,listItem:CT,paragraph:wT,root:ET,strong:OT,text:AT,thematicBreak:MT};function PT(){return{enter:{table:FT,tableData:zT,tableHeader:zT,tableRow:LT},exit:{codeText:BT,table:IT,tableData:RT,tableHeader:RT,tableRow:RT}}}function FT(e){let t=e._align;this.enter({type:`table`,align:t.map(function(e){return e===`none`?null:e}),children:[]},e),this.data.inTable=!0}function IT(e){this.exit(e),this.data.inTable=void 0}function LT(e){this.enter({type:`tableRow`,children:[]},e)}function RT(e){this.exit(e)}function zT(e){this.enter({type:`tableCell`,children:[]},e)}function BT(e){let t=this.resume();this.data.inTable&&(t=t.replace(/\\([\\|])/g,VT));let n=this.stack[this.stack.length-1];n.type,n.value=t,this.exit(e)}function VT(e,t){return t===`|`?t:e}function HT(e){let t=e||{},n=t.tableCellPadding,r=t.tablePipeAlign,i=t.stringLength,a=n?` `:`|`;return{unsafe:[{character:`\r`,inConstruct:`tableCell`},{character:`
 `,inConstruct:`tableCell`},{atBreak:!0,character:`|`,after:`[	 :-]`},{character:`|`,inConstruct:`tableCell`},{atBreak:!0,character:`:`,after:`-`},{atBreak:!0,character:`-`,after:`[:|-]`}],handlers:{inlineCode:f,table:o,tableCell:c,tableRow:s}};function o(e,t,n,r){return l(u(e,n,r),e.align)}function s(e,t,n,r){let i=l([d(e,n,r)]);return i.slice(0,i.indexOf(`
-`))}function c(e,t,n,r){let i=n.enter(`tableCell`),o=n.enter(`phrasing`),s=n.containerPhrasing(e,{...r,before:a,after:a});return o(),i(),s}function l(e,t){return Lw(e,{align:t,alignDelimiters:r,padding:n,stringLength:i})}function u(e,t,n){let r=e.children,i=-1,a=[],o=t.enter(`table`);for(;++i<r.length;)a[i]=d(r[i],t,n);return o(),a}function d(e,t,n){let r=e.children,i=-1,a=[],o=t.enter(`tableRow`);for(;++i<r.length;)a[i]=c(r[i],e,t,n);return o(),a}function f(e,t,n){let r=NT.inlineCode(e,t,n);return n.stack.includes(`tableCell`)&&(r=r.replace(/\|/g,`\\$&`)),r}}function UT(){return{exit:{taskListCheckValueChecked:GT,taskListCheckValueUnchecked:GT,paragraph:KT}}}function WT(){return{unsafe:[{atBreak:!0,character:`-`,after:`[:|-]`}],handlers:{listItem:qT}}}function GT(e){let t=this.stack[this.stack.length-2];t.type,t.checked=e.type===`taskListCheckValueChecked`}function KT(e){let t=this.stack[this.stack.length-2];if(t&&t.type===`listItem`&&typeof t.checked==`boolean`){let e=this.stack[this.stack.length-1];e.type;let n=e.children[0];if(n&&n.type===`text`){let r=t.children,i=-1,a;for(;++i<r.length;){let e=r[i];if(e.type===`paragraph`){a=e;break}}a===e&&(n.value=n.value.slice(1),n.value.length===0?e.children.shift():e.position&&n.position&&typeof n.position.start.offset==`number`&&(n.position.start.column++,n.position.start.offset++,e.position.start=Object.assign({},n.position.start)))}}this.exit(e)}function qT(e,t,n,r){let i=e.children[0],a=typeof e.checked==`boolean`&&i&&i.type===`paragraph`,o=`[`+(e.checked?`x`:` `)+`] `,s=n.createTracker(r);a&&s.move(o);let c=NT.listItem(e,t,n,{...r,...s.current()});return a&&(c=c.replace(/^(?:[*+-]|\d+\.)([\r\n]| {1,3})/,l)),c;function l(e){return e+o}}function JT(){return[tw(),Tw(),Aw(),PT(),UT()]}function YT(e){return{extensions:[nw(),Ew(e),jw(),HT(e),WT()]}}var XT={tokenize:uE,partial:!0},ZT={tokenize:dE,partial:!0},QT={tokenize:fE,partial:!0},$T={tokenize:pE,partial:!0},eE={tokenize:mE,partial:!0},tE={name:`wwwAutolink`,tokenize:cE,previous:hE},nE={name:`protocolAutolink`,tokenize:lE,previous:gE},rE={name:`emailAutolink`,tokenize:sE,previous:_E},iE={};function aE(){return{text:iE}}for(var oE=48;oE<123;)iE[oE]=rE,oE++,oE===58?oE=65:oE===91&&(oE=97);iE[43]=rE,iE[45]=rE,iE[46]=rE,iE[95]=rE,iE[72]=[rE,nE],iE[104]=[rE,nE],iE[87]=[rE,tE],iE[119]=[rE,tE];function sE(e,t,n){let r=this,i,a;return o;function o(t){return!vE(t)||!_E.call(r,r.previous)||yE(r.events)?n(t):(e.enter(`literalAutolink`),e.enter(`literalAutolinkEmail`),s(t))}function s(t){return vE(t)?(e.consume(t),s):t===64?(e.consume(t),c):n(t)}function c(t){return t===46?e.check(eE,u,l)(t):t===45||t===95||Qd(t)?(a=!0,e.consume(t),c):u(t)}function l(t){return e.consume(t),i=!0,c}function u(o){return a&&i&&Zd(r.previous)?(e.exit(`literalAutolinkEmail`),e.exit(`literalAutolink`),t(o)):n(o)}}function cE(e,t,n){let r=this;return i;function i(t){return t!==87&&t!==119||!hE.call(r,r.previous)||yE(r.events)?n(t):(e.enter(`literalAutolink`),e.enter(`literalAutolinkWww`),e.check(XT,e.attempt(ZT,e.attempt(QT,a),n),n)(t))}function a(n){return e.exit(`literalAutolinkWww`),e.exit(`literalAutolink`),t(n)}}function lE(e,t,n){let r=this,i=``,a=!1;return o;function o(t){return(t===72||t===104)&&gE.call(r,r.previous)&&!yE(r.events)?(e.enter(`literalAutolink`),e.enter(`literalAutolinkHttp`),i+=String.fromCodePoint(t),e.consume(t),s):n(t)}function s(t){if(Zd(t)&&i.length<5)return i+=String.fromCodePoint(t),e.consume(t),s;if(t===58){let n=i.toLowerCase();if(n===`http`||n===`https`)return e.consume(t),c}return n(t)}function c(t){return t===47?(e.consume(t),a?l:(a=!0,c)):n(t)}function l(t){return t===null||ef(t)||af(t)||cf(t)||sf(t)?n(t):e.attempt(ZT,e.attempt(QT,u),n)(t)}function u(n){return e.exit(`literalAutolinkHttp`),e.exit(`literalAutolink`),t(n)}}function uE(e,t,n){let r=0;return i;function i(t){return(t===87||t===119)&&r<3?(r++,e.consume(t),i):t===46&&r===3?(e.consume(t),a):n(t)}function a(e){return e===null?n(e):t(e)}}function dE(e,t,n){let r,i,a;return o;function o(t){return t===46||t===95?e.check($T,c,s)(t):t===null||af(t)||cf(t)||t!==45&&sf(t)?c(t):(a=!0,e.consume(t),o)}function s(t){return t===95?r=!0:(i=r,r=void 0),e.consume(t),o}function c(e){return i||r||!a?n(e):t(e)}}function fE(e,t){let n=0,r=0;return i;function i(o){return o===40?(n++,e.consume(o),i):o===41&&r<n?a(o):o===33||o===34||o===38||o===39||o===41||o===42||o===44||o===46||o===58||o===59||o===60||o===63||o===93||o===95||o===126?e.check($T,t,a)(o):o===null||af(o)||cf(o)?t(o):(e.consume(o),i)}function a(t){return t===41&&r++,e.consume(t),i}}function pE(e,t,n){return r;function r(o){return o===33||o===34||o===39||o===41||o===42||o===44||o===46||o===58||o===59||o===63||o===95||o===126?(e.consume(o),r):o===38?(e.consume(o),a):o===93?(e.consume(o),i):o===60||o===null||af(o)||cf(o)?t(o):n(o)}function i(e){return e===null||e===40||e===91||af(e)||cf(e)?t(e):r(e)}function a(e){return Zd(e)?o(e):n(e)}function o(t){return t===59?(e.consume(t),r):Zd(t)?(e.consume(t),o):n(t)}}function mE(e,t,n){return r;function r(t){return e.consume(t),i}function i(e){return Qd(e)?n(e):t(e)}}function hE(e){return e===null||e===40||e===42||e===95||e===91||e===93||e===126||af(e)}function gE(e){return!Zd(e)}function _E(e){return!(e===47||vE(e))}function vE(e){return e===43||e===45||e===46||e===95||Qd(e)}function yE(e){let t=e.length,n=!1;for(;t--;){let r=e[t][1];if((r.type===`labelLink`||r.type===`labelImage`)&&!r._balanced){n=!0;break}if(r._gfmAutolinkLiteralWalkedInto){n=!1;break}}return e.length>0&&!n&&(e[e.length-1][1]._gfmAutolinkLiteralWalkedInto=!0),n}var bE={tokenize:OE,partial:!0};function xE(){return{document:{91:{name:`gfmFootnoteDefinition`,tokenize:TE,continuation:{tokenize:EE},exit:DE}},text:{91:{name:`gfmFootnoteCall`,tokenize:wE},93:{name:`gfmPotentialFootnoteCall`,add:`after`,tokenize:SE,resolveTo:CE}}}}function SE(e,t,n){let r=this,i=r.events.length,a=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),o;for(;i--;){let e=r.events[i][1];if(e.type===`labelImage`){o=e;break}if(e.type===`gfmFootnoteCall`||e.type===`labelLink`||e.type===`label`||e.type===`image`||e.type===`link`)break}return s;function s(i){if(!o||!o._balanced)return n(i);let s=Xd(r.sliceSerialize({start:o.end,end:r.now()}));return s.codePointAt(0)!==94||!a.includes(s.slice(1))?n(i):(e.enter(`gfmFootnoteCallLabelMarker`),e.consume(i),e.exit(`gfmFootnoteCallLabelMarker`),t(i))}}function CE(e,t){let n=e.length;for(;n--;)if(e[n][1].type===`labelImage`&&e[n][0]===`enter`){e[n][1];break}e[n+1][1].type=`data`,e[n+3][1].type=`gfmFootnoteCallLabelMarker`;let r={type:`gfmFootnoteCall`,start:Object.assign({},e[n+3][1].start),end:Object.assign({},e[e.length-1][1].end)},i={type:`gfmFootnoteCallMarker`,start:Object.assign({},e[n+3][1].end),end:Object.assign({},e[n+3][1].end)};i.end.column++,i.end.offset++,i.end._bufferIndex++;let a={type:`gfmFootnoteCallString`,start:Object.assign({},i.end),end:Object.assign({},e[e.length-1][1].start)},o={type:`chunkString`,contentType:`string`,start:Object.assign({},a.start),end:Object.assign({},a.end)},s=[e[n+1],e[n+2],[`enter`,r,t],e[n+3],e[n+4],[`enter`,i,t],[`exit`,i,t],[`enter`,a,t],[`enter`,o,t],[`exit`,o,t],[`exit`,a,t],e[e.length-2],e[e.length-1],[`exit`,r,t]];return e.splice(n,e.length-n+1,...s),e}function wE(e,t,n){let r=this,i=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),a=0,o;return s;function s(t){return e.enter(`gfmFootnoteCall`),e.enter(`gfmFootnoteCallLabelMarker`),e.consume(t),e.exit(`gfmFootnoteCallLabelMarker`),c}function c(t){return t===94?(e.enter(`gfmFootnoteCallMarker`),e.consume(t),e.exit(`gfmFootnoteCallMarker`),e.enter(`gfmFootnoteCallString`),e.enter(`chunkString`).contentType=`string`,l):n(t)}function l(s){if(a>999||s===93&&!o||s===null||s===91||af(s))return n(s);if(s===93){e.exit(`chunkString`);let a=e.exit(`gfmFootnoteCallString`);return i.includes(Xd(r.sliceSerialize(a)))?(e.enter(`gfmFootnoteCallLabelMarker`),e.consume(s),e.exit(`gfmFootnoteCallLabelMarker`),e.exit(`gfmFootnoteCall`),t):n(s)}return af(s)||(o=!0),a++,e.consume(s),s===92?u:l}function u(t){return t===91||t===92||t===93?(e.consume(t),a++,l):l(t)}}function TE(e,t,n){let r=this,i=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),a,o=0,s;return c;function c(t){return e.enter(`gfmFootnoteDefinition`)._container=!0,e.enter(`gfmFootnoteDefinitionLabel`),e.enter(`gfmFootnoteDefinitionLabelMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionLabelMarker`),l}function l(t){return t===94?(e.enter(`gfmFootnoteDefinitionMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionMarker`),e.enter(`gfmFootnoteDefinitionLabelString`),e.enter(`chunkString`).contentType=`string`,u):n(t)}function u(t){if(o>999||t===93&&!s||t===null||t===91||af(t))return n(t);if(t===93){e.exit(`chunkString`);let n=e.exit(`gfmFootnoteDefinitionLabelString`);return a=Xd(r.sliceSerialize(n)),e.enter(`gfmFootnoteDefinitionLabelMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionLabelMarker`),e.exit(`gfmFootnoteDefinitionLabel`),f}return af(t)||(s=!0),o++,e.consume(t),t===92?d:u}function d(t){return t===91||t===92||t===93?(e.consume(t),o++,u):u(t)}function f(t){return t===58?(e.enter(`definitionMarker`),e.consume(t),e.exit(`definitionMarker`),i.includes(a)||i.push(a),df(e,p,`gfmFootnoteDefinitionWhitespace`)):n(t)}function p(e){return t(e)}}function EE(e,t,n){return e.check(Ef,t,e.attempt(bE,t,n))}function DE(e){e.exit(`gfmFootnoteDefinition`)}function OE(e,t,n){let r=this;return df(e,i,`gfmFootnoteDefinitionIndent`,5);function i(e){let i=r.events[r.events.length-1];return i&&i[1].type===`gfmFootnoteDefinitionIndent`&&i[2].sliceSerialize(i[1],!0).length===4?t(e):n(e)}}function kE(e){let t=(e||{}).singleTilde,n={name:`strikethrough`,tokenize:i,resolveAll:r};return t??=!0,{text:{126:n},insideSpan:{null:[n]},attentionMarkers:{null:[126]}};function r(e,t){let n=-1;for(;++n<e.length;)if(e[n][0]===`enter`&&e[n][1].type===`strikethroughSequenceTemporary`&&e[n][1]._close){let r=n;for(;r--;)if(e[r][0]===`exit`&&e[r][1].type===`strikethroughSequenceTemporary`&&e[r][1]._open&&e[n][1].end.offset-e[n][1].start.offset===e[r][1].end.offset-e[r][1].start.offset){e[n][1].type=`strikethroughSequence`,e[r][1].type=`strikethroughSequence`;let i={type:`strikethrough`,start:Object.assign({},e[r][1].start),end:Object.assign({},e[n][1].end)},a={type:`strikethroughText`,start:Object.assign({},e[r][1].end),end:Object.assign({},e[n][1].start)},o=[[`enter`,i,t],[`enter`,e[r][1],t],[`exit`,e[r][1],t],[`enter`,a,t]],s=t.parser.constructs.insideSpan.null;s&&Ud(o,o.length,0,yf(s,e.slice(r+1,n),t)),Ud(o,o.length,0,[[`exit`,a,t],[`enter`,e[n][1],t],[`exit`,e[n][1],t],[`exit`,i,t]]),Ud(e,r-1,n-r+3,o),n=r+o.length-2;break}}for(n=-1;++n<e.length;)e[n][1].type===`strikethroughSequenceTemporary`&&(e[n][1].type=`data`);return e}function i(e,n,r){let i=this.previous,a=this.events,o=0;return s;function s(t){return i===126&&a[a.length-1][1].type!==`characterEscape`?r(t):(e.enter(`strikethroughSequenceTemporary`),c(t))}function c(a){let s=vf(i);if(a===126)return o>1?r(a):(e.consume(a),o++,c);if(o<2&&!t)return r(a);let l=e.exit(`strikethroughSequenceTemporary`),u=vf(a);return l._open=!u||u===2&&!!s,l._close=!s||s===2&&!!u,n(a)}}}var AE=class{constructor(){this.map=[]}add(e,t,n){jE(this,e,t,n)}consume(e){if(this.map.sort(function(e,t){return e[0]-t[0]}),this.map.length===0)return;let t=this.map.length,n=[];for(;t>0;)--t,n.push(e.slice(this.map[t][0]+this.map[t][1]),this.map[t][2]),e.length=this.map[t][0];n.push(e.slice()),e.length=0;let r=n.pop();for(;r;){for(let t of r)e.push(t);r=n.pop()}this.map.length=0}};function jE(e,t,n,r){let i=0;if(!(n===0&&r.length===0)){for(;i<e.map.length;){if(e.map[i][0]===t){e.map[i][1]+=n,e.map[i][2].push(...r);return}i+=1}e.map.push([t,n,r])}}function ME(e,t){let n=!1,r=[];for(;t<e.length;){let i=e[t];if(n){if(i[0]===`enter`)i[1].type===`tableContent`&&r.push(e[t+1][1].type===`tableDelimiterMarker`?`left`:`none`);else if(i[1].type===`tableContent`){if(e[t-1][1].type===`tableDelimiterMarker`){let e=r.length-1;r[e]=r[e]===`left`?`center`:`right`}}else if(i[1].type===`tableDelimiterRow`)break}else i[0]===`enter`&&i[1].type===`tableDelimiterRow`&&(n=!0);t+=1}return r}function NE(){return{flow:{null:{name:`table`,tokenize:PE,resolveAll:FE}}}}function PE(e,t,n){let r=this,i=0,a=0,o;return s;function s(e){let t=r.events.length-1;for(;t>-1;){let e=r.events[t][1].type;if(e===`lineEnding`||e===`linePrefix`)t--;else break}let i=t>-1?r.events[t][1].type:null,a=i===`tableHead`||i===`tableRow`?S:c;return a===S&&r.parser.lazy[r.now().line]?n(e):a(e)}function c(t){return e.enter(`tableHead`),e.enter(`tableRow`),l(t)}function l(e){return e===124?u(e):(o=!0,a+=1,u(e))}function u(t){return t===null?n(t):z(t)?a>1?(a=0,r.interrupt=!0,e.exit(`tableRow`),e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),p):n(t):of(t)?df(e,u,`whitespace`)(t):(a+=1,o&&(o=!1,i+=1),t===124?(e.enter(`tableCellDivider`),e.consume(t),e.exit(`tableCellDivider`),o=!0,u):(e.enter(`data`),d(t)))}function d(t){return t===null||t===124||af(t)?(e.exit(`data`),u(t)):(e.consume(t),t===92?f:d)}function f(t){return t===92||t===124?(e.consume(t),d):d(t)}function p(t){return r.interrupt=!1,r.parser.lazy[r.now().line]?n(t):(e.enter(`tableDelimiterRow`),o=!1,of(t)?df(e,m,`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(t):m(t))}function m(t){return t===45||t===58?g(t):t===124?(o=!0,e.enter(`tableCellDivider`),e.consume(t),e.exit(`tableCellDivider`),h):x(t)}function h(t){return of(t)?df(e,g,`whitespace`)(t):g(t)}function g(t){return t===58?(a+=1,o=!0,e.enter(`tableDelimiterMarker`),e.consume(t),e.exit(`tableDelimiterMarker`),_):t===45?(a+=1,_(t)):t===null||z(t)?b(t):x(t)}function _(t){return t===45?(e.enter(`tableDelimiterFiller`),v(t)):x(t)}function v(t){return t===45?(e.consume(t),v):t===58?(o=!0,e.exit(`tableDelimiterFiller`),e.enter(`tableDelimiterMarker`),e.consume(t),e.exit(`tableDelimiterMarker`),y):(e.exit(`tableDelimiterFiller`),y(t))}function y(t){return of(t)?df(e,b,`whitespace`)(t):b(t)}function b(n){return n===124?m(n):n===null||z(n)?!o||i!==a?x(n):(e.exit(`tableDelimiterRow`),e.exit(`tableHead`),t(n)):x(n)}function x(e){return n(e)}function S(t){return e.enter(`tableRow`),C(t)}function C(n){return n===124?(e.enter(`tableCellDivider`),e.consume(n),e.exit(`tableCellDivider`),C):n===null||z(n)?(e.exit(`tableRow`),t(n)):of(n)?df(e,C,`whitespace`)(n):(e.enter(`data`),w(n))}function w(t){return t===null||t===124||af(t)?(e.exit(`data`),C(t)):(e.consume(t),t===92?T:w)}function T(t){return t===92||t===124?(e.consume(t),w):w(t)}}function FE(e,t){let n=-1,r=!0,i=0,a=[0,0,0,0],o=[0,0,0,0],s=!1,c=0,l,u,d,f=new AE;for(;++n<e.length;){let p=e[n],m=p[1];p[0]===`enter`?m.type===`tableHead`?(s=!1,c!==0&&(LE(f,t,c,l,u),u=void 0,c=0),l={type:`table`,start:Object.assign({},m.start),end:Object.assign({},m.end)},f.add(n,0,[[`enter`,l,t]])):m.type===`tableRow`||m.type===`tableDelimiterRow`?(r=!0,d=void 0,a=[0,0,0,0],o=[0,n+1,0,0],s&&(s=!1,u={type:`tableBody`,start:Object.assign({},m.start),end:Object.assign({},m.end)},f.add(n,0,[[`enter`,u,t]])),i=m.type===`tableDelimiterRow`?2:u?3:1):i&&(m.type===`data`||m.type===`tableDelimiterMarker`||m.type===`tableDelimiterFiller`)?(r=!1,o[2]===0&&(a[1]!==0&&(o[0]=o[1],d=IE(f,t,a,i,void 0,d),a=[0,0,0,0]),o[2]=n)):m.type===`tableCellDivider`&&(r?r=!1:(a[1]!==0&&(o[0]=o[1],d=IE(f,t,a,i,void 0,d)),a=o,o=[a[1],n,0,0])):m.type===`tableHead`?(s=!0,c=n):m.type===`tableRow`||m.type===`tableDelimiterRow`?(c=n,a[1]===0?o[1]!==0&&(d=IE(f,t,o,i,n,d)):(o[0]=o[1],d=IE(f,t,a,i,n,d)),i=0):i&&(m.type===`data`||m.type===`tableDelimiterMarker`||m.type===`tableDelimiterFiller`)&&(o[3]=n)}for(c!==0&&LE(f,t,c,l,u),f.consume(t.events),n=-1;++n<t.events.length;){let e=t.events[n];e[0]===`enter`&&e[1].type===`table`&&(e[1]._align=ME(t.events,n))}return e}function IE(e,t,n,r,i,a){let o=r===1?`tableHeader`:r===2?`tableDelimiter`:`tableData`;n[0]!==0&&(a.end=Object.assign({},RE(t.events,n[0])),e.add(n[0],0,[[`exit`,a,t]]));let s=RE(t.events,n[1]);if(a={type:o,start:Object.assign({},s),end:Object.assign({},s)},e.add(n[1],0,[[`enter`,a,t]]),n[2]!==0){let i=RE(t.events,n[2]),a=RE(t.events,n[3]),o={type:`tableContent`,start:Object.assign({},i),end:Object.assign({},a)};if(e.add(n[2],0,[[`enter`,o,t]]),r!==2){let r=t.events[n[2]],i=t.events[n[3]];if(r[1].end=Object.assign({},i[1].end),r[1].type=`chunkText`,r[1].contentType=`text`,n[3]>n[2]+1){let t=n[2]+1,r=n[3]-n[2]-1;e.add(t,r,[])}}e.add(n[3]+1,0,[[`exit`,o,t]])}return i!==void 0&&(a.end=Object.assign({},RE(t.events,i)),e.add(i,0,[[`exit`,a,t]]),a=void 0),a}function LE(e,t,n,r,i){let a=[],o=RE(t.events,n);i&&(i.end=Object.assign({},o),a.push([`exit`,i,t])),r.end=Object.assign({},o),a.push([`exit`,r,t]),e.add(n+1,0,a)}function RE(e,t){let n=e[t],r=n[0]===`enter`?`start`:`end`;return n[1][r]}var zE={name:`tasklistCheck`,tokenize:VE};function BE(){return{text:{91:zE}}}function VE(e,t,n){let r=this;return i;function i(t){return r.previous!==null||!r._gfmTasklistFirstContentOfListItem?n(t):(e.enter(`taskListCheck`),e.enter(`taskListCheckMarker`),e.consume(t),e.exit(`taskListCheckMarker`),a)}function a(t){return af(t)?(e.enter(`taskListCheckValueUnchecked`),e.consume(t),e.exit(`taskListCheckValueUnchecked`),o):t===88||t===120?(e.enter(`taskListCheckValueChecked`),e.consume(t),e.exit(`taskListCheckValueChecked`),o):n(t)}function o(t){return t===93?(e.enter(`taskListCheckMarker`),e.consume(t),e.exit(`taskListCheckMarker`),e.exit(`taskListCheck`),s):n(t)}function s(r){return z(r)?t(r):of(r)?e.check({tokenize:HE},t,n)(r):n(r)}}function HE(e,t,n){return df(e,r,`whitespace`);function r(e){return e===null?n(e):t(e)}}function UE(e){return Kd([aE(),xE(),kE(e),NE(),BE()])}var WE={};function GE(e){let t=this,n=e||WE,r=t.data(),i=r.micromarkExtensions||=[],a=r.fromMarkdownExtensions||=[],o=r.toMarkdownExtensions||=[];i.push(UE(n)),a.push(JT()),o.push(YT(n))}var KE=`# Chapter 1 Summary - Geometrodynamics in Brief
+`))}function c(e,t,n,r){let i=n.enter(`tableCell`),o=n.enter(`phrasing`),s=n.containerPhrasing(e,{...r,before:a,after:a});return o(),i(),s}function l(e,t){return Lw(e,{align:t,alignDelimiters:r,padding:n,stringLength:i})}function u(e,t,n){let r=e.children,i=-1,a=[],o=t.enter(`table`);for(;++i<r.length;)a[i]=d(r[i],t,n);return o(),a}function d(e,t,n){let r=e.children,i=-1,a=[],o=t.enter(`tableRow`);for(;++i<r.length;)a[i]=c(r[i],e,t,n);return o(),a}function f(e,t,n){let r=NT.inlineCode(e,t,n);return n.stack.includes(`tableCell`)&&(r=r.replace(/\|/g,`\\$&`)),r}}function UT(){return{exit:{taskListCheckValueChecked:GT,taskListCheckValueUnchecked:GT,paragraph:KT}}}function WT(){return{unsafe:[{atBreak:!0,character:`-`,after:`[:|-]`}],handlers:{listItem:qT}}}function GT(e){let t=this.stack[this.stack.length-2];t.type,t.checked=e.type===`taskListCheckValueChecked`}function KT(e){let t=this.stack[this.stack.length-2];if(t&&t.type===`listItem`&&typeof t.checked==`boolean`){let e=this.stack[this.stack.length-1];e.type;let n=e.children[0];if(n&&n.type===`text`){let r=t.children,i=-1,a;for(;++i<r.length;){let e=r[i];if(e.type===`paragraph`){a=e;break}}a===e&&(n.value=n.value.slice(1),n.value.length===0?e.children.shift():e.position&&n.position&&typeof n.position.start.offset==`number`&&(n.position.start.column++,n.position.start.offset++,e.position.start=Object.assign({},n.position.start)))}}this.exit(e)}function qT(e,t,n,r){let i=e.children[0],a=typeof e.checked==`boolean`&&i&&i.type===`paragraph`,o=`[`+(e.checked?`x`:` `)+`] `,s=n.createTracker(r);a&&s.move(o);let c=NT.listItem(e,t,n,{...r,...s.current()});return a&&(c=c.replace(/^(?:[*+-]|\d+\.)([\r\n]| {1,3})/,l)),c;function l(e){return e+o}}function JT(){return[tw(),Tw(),Aw(),PT(),UT()]}function YT(e){return{extensions:[nw(),Ew(e),jw(),HT(e),WT()]}}var XT={tokenize:uE,partial:!0},ZT={tokenize:dE,partial:!0},QT={tokenize:fE,partial:!0},$T={tokenize:pE,partial:!0},eE={tokenize:mE,partial:!0},tE={name:`wwwAutolink`,tokenize:cE,previous:hE},nE={name:`protocolAutolink`,tokenize:lE,previous:gE},rE={name:`emailAutolink`,tokenize:sE,previous:_E},iE={};function aE(){return{text:iE}}for(var oE=48;oE<123;)iE[oE]=rE,oE++,oE===58?oE=65:oE===91&&(oE=97);iE[43]=rE,iE[45]=rE,iE[46]=rE,iE[95]=rE,iE[72]=[rE,nE],iE[104]=[rE,nE],iE[87]=[rE,tE],iE[119]=[rE,tE];function sE(e,t,n){let r=this,i,a;return o;function o(t){return!vE(t)||!_E.call(r,r.previous)||yE(r.events)?n(t):(e.enter(`literalAutolink`),e.enter(`literalAutolinkEmail`),s(t))}function s(t){return vE(t)?(e.consume(t),s):t===64?(e.consume(t),c):n(t)}function c(t){return t===46?e.check(eE,u,l)(t):t===45||t===95||Qd(t)?(a=!0,e.consume(t),c):u(t)}function l(t){return e.consume(t),i=!0,c}function u(o){return a&&i&&Zd(r.previous)?(e.exit(`literalAutolinkEmail`),e.exit(`literalAutolink`),t(o)):n(o)}}function cE(e,t,n){let r=this;return i;function i(t){return t!==87&&t!==119||!hE.call(r,r.previous)||yE(r.events)?n(t):(e.enter(`literalAutolink`),e.enter(`literalAutolinkWww`),e.check(XT,e.attempt(ZT,e.attempt(QT,a),n),n)(t))}function a(n){return e.exit(`literalAutolinkWww`),e.exit(`literalAutolink`),t(n)}}function lE(e,t,n){let r=this,i=``,a=!1;return o;function o(t){return(t===72||t===104)&&gE.call(r,r.previous)&&!yE(r.events)?(e.enter(`literalAutolink`),e.enter(`literalAutolinkHttp`),i+=String.fromCodePoint(t),e.consume(t),s):n(t)}function s(t){if(Zd(t)&&i.length<5)return i+=String.fromCodePoint(t),e.consume(t),s;if(t===58){let n=i.toLowerCase();if(n===`http`||n===`https`)return e.consume(t),c}return n(t)}function c(t){return t===47?(e.consume(t),a?l:(a=!0,c)):n(t)}function l(t){return t===null||ef(t)||af(t)||cf(t)||sf(t)?n(t):e.attempt(ZT,e.attempt(QT,u),n)(t)}function u(n){return e.exit(`literalAutolinkHttp`),e.exit(`literalAutolink`),t(n)}}function uE(e,t,n){let r=0;return i;function i(t){return(t===87||t===119)&&r<3?(r++,e.consume(t),i):t===46&&r===3?(e.consume(t),a):n(t)}function a(e){return e===null?n(e):t(e)}}function dE(e,t,n){let r,i,a;return o;function o(t){return t===46||t===95?e.check($T,c,s)(t):t===null||af(t)||cf(t)||t!==45&&sf(t)?c(t):(a=!0,e.consume(t),o)}function s(t){return t===95?r=!0:(i=r,r=void 0),e.consume(t),o}function c(e){return i||r||!a?n(e):t(e)}}function fE(e,t){let n=0,r=0;return i;function i(o){return o===40?(n++,e.consume(o),i):o===41&&r<n?a(o):o===33||o===34||o===38||o===39||o===41||o===42||o===44||o===46||o===58||o===59||o===60||o===63||o===93||o===95||o===126?e.check($T,t,a)(o):o===null||af(o)||cf(o)?t(o):(e.consume(o),i)}function a(t){return t===41&&r++,e.consume(t),i}}function pE(e,t,n){return r;function r(o){return o===33||o===34||o===39||o===41||o===42||o===44||o===46||o===58||o===59||o===63||o===95||o===126?(e.consume(o),r):o===38?(e.consume(o),a):o===93?(e.consume(o),i):o===60||o===null||af(o)||cf(o)?t(o):n(o)}function i(e){return e===null||e===40||e===91||af(e)||cf(e)?t(e):r(e)}function a(e){return Zd(e)?o(e):n(e)}function o(t){return t===59?(e.consume(t),r):Zd(t)?(e.consume(t),o):n(t)}}function mE(e,t,n){return r;function r(t){return e.consume(t),i}function i(e){return Qd(e)?n(e):t(e)}}function hE(e){return e===null||e===40||e===42||e===95||e===91||e===93||e===126||af(e)}function gE(e){return!Zd(e)}function _E(e){return!(e===47||vE(e))}function vE(e){return e===43||e===45||e===46||e===95||Qd(e)}function yE(e){let t=e.length,n=!1;for(;t--;){let r=e[t][1];if((r.type===`labelLink`||r.type===`labelImage`)&&!r._balanced){n=!0;break}if(r._gfmAutolinkLiteralWalkedInto){n=!1;break}}return e.length>0&&!n&&(e[e.length-1][1]._gfmAutolinkLiteralWalkedInto=!0),n}var bE={tokenize:OE,partial:!0};function xE(){return{document:{91:{name:`gfmFootnoteDefinition`,tokenize:TE,continuation:{tokenize:EE},exit:DE}},text:{91:{name:`gfmFootnoteCall`,tokenize:wE},93:{name:`gfmPotentialFootnoteCall`,add:`after`,tokenize:SE,resolveTo:CE}}}}function SE(e,t,n){let r=this,i=r.events.length,a=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),o;for(;i--;){let e=r.events[i][1];if(e.type===`labelImage`){o=e;break}if(e.type===`gfmFootnoteCall`||e.type===`labelLink`||e.type===`label`||e.type===`image`||e.type===`link`)break}return s;function s(i){if(!o||!o._balanced)return n(i);let s=Xd(r.sliceSerialize({start:o.end,end:r.now()}));return s.codePointAt(0)!==94||!a.includes(s.slice(1))?n(i):(e.enter(`gfmFootnoteCallLabelMarker`),e.consume(i),e.exit(`gfmFootnoteCallLabelMarker`),t(i))}}function CE(e,t){let n=e.length;for(;n--;)if(e[n][1].type===`labelImage`&&e[n][0]===`enter`){e[n][1];break}e[n+1][1].type=`data`,e[n+3][1].type=`gfmFootnoteCallLabelMarker`;let r={type:`gfmFootnoteCall`,start:Object.assign({},e[n+3][1].start),end:Object.assign({},e[e.length-1][1].end)},i={type:`gfmFootnoteCallMarker`,start:Object.assign({},e[n+3][1].end),end:Object.assign({},e[n+3][1].end)};i.end.column++,i.end.offset++,i.end._bufferIndex++;let a={type:`gfmFootnoteCallString`,start:Object.assign({},i.end),end:Object.assign({},e[e.length-1][1].start)},o={type:`chunkString`,contentType:`string`,start:Object.assign({},a.start),end:Object.assign({},a.end)},s=[e[n+1],e[n+2],[`enter`,r,t],e[n+3],e[n+4],[`enter`,i,t],[`exit`,i,t],[`enter`,a,t],[`enter`,o,t],[`exit`,o,t],[`exit`,a,t],e[e.length-2],e[e.length-1],[`exit`,r,t]];return e.splice(n,e.length-n+1,...s),e}function wE(e,t,n){let r=this,i=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),a=0,o;return s;function s(t){return e.enter(`gfmFootnoteCall`),e.enter(`gfmFootnoteCallLabelMarker`),e.consume(t),e.exit(`gfmFootnoteCallLabelMarker`),c}function c(t){return t===94?(e.enter(`gfmFootnoteCallMarker`),e.consume(t),e.exit(`gfmFootnoteCallMarker`),e.enter(`gfmFootnoteCallString`),e.enter(`chunkString`).contentType=`string`,l):n(t)}function l(s){if(a>999||s===93&&!o||s===null||s===91||af(s))return n(s);if(s===93){e.exit(`chunkString`);let a=e.exit(`gfmFootnoteCallString`);return i.includes(Xd(r.sliceSerialize(a)))?(e.enter(`gfmFootnoteCallLabelMarker`),e.consume(s),e.exit(`gfmFootnoteCallLabelMarker`),e.exit(`gfmFootnoteCall`),t):n(s)}return af(s)||(o=!0),a++,e.consume(s),s===92?u:l}function u(t){return t===91||t===92||t===93?(e.consume(t),a++,l):l(t)}}function TE(e,t,n){let r=this,i=r.parser.gfmFootnotes||(r.parser.gfmFootnotes=[]),a,o=0,s;return c;function c(t){return e.enter(`gfmFootnoteDefinition`)._container=!0,e.enter(`gfmFootnoteDefinitionLabel`),e.enter(`gfmFootnoteDefinitionLabelMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionLabelMarker`),l}function l(t){return t===94?(e.enter(`gfmFootnoteDefinitionMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionMarker`),e.enter(`gfmFootnoteDefinitionLabelString`),e.enter(`chunkString`).contentType=`string`,u):n(t)}function u(t){if(o>999||t===93&&!s||t===null||t===91||af(t))return n(t);if(t===93){e.exit(`chunkString`);let n=e.exit(`gfmFootnoteDefinitionLabelString`);return a=Xd(r.sliceSerialize(n)),e.enter(`gfmFootnoteDefinitionLabelMarker`),e.consume(t),e.exit(`gfmFootnoteDefinitionLabelMarker`),e.exit(`gfmFootnoteDefinitionLabel`),f}return af(t)||(s=!0),o++,e.consume(t),t===92?d:u}function d(t){return t===91||t===92||t===93?(e.consume(t),o++,u):u(t)}function f(t){return t===58?(e.enter(`definitionMarker`),e.consume(t),e.exit(`definitionMarker`),i.includes(a)||i.push(a),df(e,p,`gfmFootnoteDefinitionWhitespace`)):n(t)}function p(e){return t(e)}}function EE(e,t,n){return e.check(Ef,t,e.attempt(bE,t,n))}function DE(e){e.exit(`gfmFootnoteDefinition`)}function OE(e,t,n){let r=this;return df(e,i,`gfmFootnoteDefinitionIndent`,5);function i(e){let i=r.events[r.events.length-1];return i&&i[1].type===`gfmFootnoteDefinitionIndent`&&i[2].sliceSerialize(i[1],!0).length===4?t(e):n(e)}}function kE(e){let t=(e||{}).singleTilde,n={name:`strikethrough`,tokenize:i,resolveAll:r};return t??=!0,{text:{126:n},insideSpan:{null:[n]},attentionMarkers:{null:[126]}};function r(e,t){let n=-1;for(;++n<e.length;)if(e[n][0]===`enter`&&e[n][1].type===`strikethroughSequenceTemporary`&&e[n][1]._close){let r=n;for(;r--;)if(e[r][0]===`exit`&&e[r][1].type===`strikethroughSequenceTemporary`&&e[r][1]._open&&e[n][1].end.offset-e[n][1].start.offset===e[r][1].end.offset-e[r][1].start.offset){e[n][1].type=`strikethroughSequence`,e[r][1].type=`strikethroughSequence`;let i={type:`strikethrough`,start:Object.assign({},e[r][1].start),end:Object.assign({},e[n][1].end)},a={type:`strikethroughText`,start:Object.assign({},e[r][1].end),end:Object.assign({},e[n][1].start)},o=[[`enter`,i,t],[`enter`,e[r][1],t],[`exit`,e[r][1],t],[`enter`,a,t]],s=t.parser.constructs.insideSpan.null;s&&Ud(o,o.length,0,yf(s,e.slice(r+1,n),t)),Ud(o,o.length,0,[[`exit`,a,t],[`enter`,e[n][1],t],[`exit`,e[n][1],t],[`exit`,i,t]]),Ud(e,r-1,n-r+3,o),n=r+o.length-2;break}}for(n=-1;++n<e.length;)e[n][1].type===`strikethroughSequenceTemporary`&&(e[n][1].type=`data`);return e}function i(e,n,r){let i=this.previous,a=this.events,o=0;return s;function s(t){return i===126&&a[a.length-1][1].type!==`characterEscape`?r(t):(e.enter(`strikethroughSequenceTemporary`),c(t))}function c(a){let s=vf(i);if(a===126)return o>1?r(a):(e.consume(a),o++,c);if(o<2&&!t)return r(a);let l=e.exit(`strikethroughSequenceTemporary`),u=vf(a);return l._open=!u||u===2&&!!s,l._close=!s||s===2&&!!u,n(a)}}}var AE=class{constructor(){this.map=[]}add(e,t,n){jE(this,e,t,n)}consume(e){if(this.map.sort(function(e,t){return e[0]-t[0]}),this.map.length===0)return;let t=this.map.length,n=[];for(;t>0;)--t,n.push(e.slice(this.map[t][0]+this.map[t][1]),this.map[t][2]),e.length=this.map[t][0];n.push(e.slice()),e.length=0;let r=n.pop();for(;r;){for(let t of r)e.push(t);r=n.pop()}this.map.length=0}};function jE(e,t,n,r){let i=0;if(!(n===0&&r.length===0)){for(;i<e.map.length;){if(e.map[i][0]===t){e.map[i][1]+=n,e.map[i][2].push(...r);return}i+=1}e.map.push([t,n,r])}}function ME(e,t){let n=!1,r=[];for(;t<e.length;){let i=e[t];if(n){if(i[0]===`enter`)i[1].type===`tableContent`&&r.push(e[t+1][1].type===`tableDelimiterMarker`?`left`:`none`);else if(i[1].type===`tableContent`){if(e[t-1][1].type===`tableDelimiterMarker`){let e=r.length-1;r[e]=r[e]===`left`?`center`:`right`}}else if(i[1].type===`tableDelimiterRow`)break}else i[0]===`enter`&&i[1].type===`tableDelimiterRow`&&(n=!0);t+=1}return r}function NE(){return{flow:{null:{name:`table`,tokenize:PE,resolveAll:FE}}}}function PE(e,t,n){let r=this,i=0,a=0,o;return s;function s(e){let t=r.events.length-1;for(;t>-1;){let e=r.events[t][1].type;if(e===`lineEnding`||e===`linePrefix`)t--;else break}let i=t>-1?r.events[t][1].type:null,a=i===`tableHead`||i===`tableRow`?S:c;return a===S&&r.parser.lazy[r.now().line]?n(e):a(e)}function c(t){return e.enter(`tableHead`),e.enter(`tableRow`),l(t)}function l(e){return e===124?u(e):(o=!0,a+=1,u(e))}function u(t){return t===null?n(t):z(t)?a>1?(a=0,r.interrupt=!0,e.exit(`tableRow`),e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),p):n(t):of(t)?df(e,u,`whitespace`)(t):(a+=1,o&&(o=!1,i+=1),t===124?(e.enter(`tableCellDivider`),e.consume(t),e.exit(`tableCellDivider`),o=!0,u):(e.enter(`data`),d(t)))}function d(t){return t===null||t===124||af(t)?(e.exit(`data`),u(t)):(e.consume(t),t===92?f:d)}function f(t){return t===92||t===124?(e.consume(t),d):d(t)}function p(t){return r.interrupt=!1,r.parser.lazy[r.now().line]?n(t):(e.enter(`tableDelimiterRow`),o=!1,of(t)?df(e,m,`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(t):m(t))}function m(t){return t===45||t===58?g(t):t===124?(o=!0,e.enter(`tableCellDivider`),e.consume(t),e.exit(`tableCellDivider`),h):x(t)}function h(t){return of(t)?df(e,g,`whitespace`)(t):g(t)}function g(t){return t===58?(a+=1,o=!0,e.enter(`tableDelimiterMarker`),e.consume(t),e.exit(`tableDelimiterMarker`),_):t===45?(a+=1,_(t)):t===null||z(t)?b(t):x(t)}function _(t){return t===45?(e.enter(`tableDelimiterFiller`),v(t)):x(t)}function v(t){return t===45?(e.consume(t),v):t===58?(o=!0,e.exit(`tableDelimiterFiller`),e.enter(`tableDelimiterMarker`),e.consume(t),e.exit(`tableDelimiterMarker`),y):(e.exit(`tableDelimiterFiller`),y(t))}function y(t){return of(t)?df(e,b,`whitespace`)(t):b(t)}function b(n){return n===124?m(n):n===null||z(n)?!o||i!==a?x(n):(e.exit(`tableDelimiterRow`),e.exit(`tableHead`),t(n)):x(n)}function x(e){return n(e)}function S(t){return e.enter(`tableRow`),C(t)}function C(n){return n===124?(e.enter(`tableCellDivider`),e.consume(n),e.exit(`tableCellDivider`),C):n===null||z(n)?(e.exit(`tableRow`),t(n)):of(n)?df(e,C,`whitespace`)(n):(e.enter(`data`),w(n))}function w(t){return t===null||t===124||af(t)?(e.exit(`data`),C(t)):(e.consume(t),t===92?T:w)}function T(t){return t===92||t===124?(e.consume(t),w):w(t)}}function FE(e,t){let n=-1,r=!0,i=0,a=[0,0,0,0],o=[0,0,0,0],s=!1,c=0,l,u,d,f=new AE;for(;++n<e.length;){let p=e[n],m=p[1];p[0]===`enter`?m.type===`tableHead`?(s=!1,c!==0&&(LE(f,t,c,l,u),u=void 0,c=0),l={type:`table`,start:Object.assign({},m.start),end:Object.assign({},m.end)},f.add(n,0,[[`enter`,l,t]])):m.type===`tableRow`||m.type===`tableDelimiterRow`?(r=!0,d=void 0,a=[0,0,0,0],o=[0,n+1,0,0],s&&(s=!1,u={type:`tableBody`,start:Object.assign({},m.start),end:Object.assign({},m.end)},f.add(n,0,[[`enter`,u,t]])),i=m.type===`tableDelimiterRow`?2:u?3:1):i&&(m.type===`data`||m.type===`tableDelimiterMarker`||m.type===`tableDelimiterFiller`)?(r=!1,o[2]===0&&(a[1]!==0&&(o[0]=o[1],d=IE(f,t,a,i,void 0,d),a=[0,0,0,0]),o[2]=n)):m.type===`tableCellDivider`&&(r?r=!1:(a[1]!==0&&(o[0]=o[1],d=IE(f,t,a,i,void 0,d)),a=o,o=[a[1],n,0,0])):m.type===`tableHead`?(s=!0,c=n):m.type===`tableRow`||m.type===`tableDelimiterRow`?(c=n,a[1]===0?o[1]!==0&&(d=IE(f,t,o,i,n,d)):(o[0]=o[1],d=IE(f,t,a,i,n,d)),i=0):i&&(m.type===`data`||m.type===`tableDelimiterMarker`||m.type===`tableDelimiterFiller`)&&(o[3]=n)}for(c!==0&&LE(f,t,c,l,u),f.consume(t.events),n=-1;++n<t.events.length;){let e=t.events[n];e[0]===`enter`&&e[1].type===`table`&&(e[1]._align=ME(t.events,n))}return e}function IE(e,t,n,r,i,a){let o=r===1?`tableHeader`:r===2?`tableDelimiter`:`tableData`;n[0]!==0&&(a.end=Object.assign({},RE(t.events,n[0])),e.add(n[0],0,[[`exit`,a,t]]));let s=RE(t.events,n[1]);if(a={type:o,start:Object.assign({},s),end:Object.assign({},s)},e.add(n[1],0,[[`enter`,a,t]]),n[2]!==0){let i=RE(t.events,n[2]),a=RE(t.events,n[3]),o={type:`tableContent`,start:Object.assign({},i),end:Object.assign({},a)};if(e.add(n[2],0,[[`enter`,o,t]]),r!==2){let r=t.events[n[2]],i=t.events[n[3]];if(r[1].end=Object.assign({},i[1].end),r[1].type=`chunkText`,r[1].contentType=`text`,n[3]>n[2]+1){let t=n[2]+1,r=n[3]-n[2]-1;e.add(t,r,[])}}e.add(n[3]+1,0,[[`exit`,o,t]])}return i!==void 0&&(a.end=Object.assign({},RE(t.events,i)),e.add(i,0,[[`exit`,a,t]]),a=void 0),a}function LE(e,t,n,r,i){let a=[],o=RE(t.events,n);i&&(i.end=Object.assign({},o),a.push([`exit`,i,t])),r.end=Object.assign({},o),a.push([`exit`,r,t]),e.add(n+1,0,a)}function RE(e,t){let n=e[t],r=n[0]===`enter`?`start`:`end`;return n[1][r]}var zE={name:`tasklistCheck`,tokenize:VE};function BE(){return{text:{91:zE}}}function VE(e,t,n){let r=this;return i;function i(t){return r.previous!==null||!r._gfmTasklistFirstContentOfListItem?n(t):(e.enter(`taskListCheck`),e.enter(`taskListCheckMarker`),e.consume(t),e.exit(`taskListCheckMarker`),a)}function a(t){return af(t)?(e.enter(`taskListCheckValueUnchecked`),e.consume(t),e.exit(`taskListCheckValueUnchecked`),o):t===88||t===120?(e.enter(`taskListCheckValueChecked`),e.consume(t),e.exit(`taskListCheckValueChecked`),o):n(t)}function o(t){return t===93?(e.enter(`taskListCheckMarker`),e.consume(t),e.exit(`taskListCheckMarker`),e.exit(`taskListCheck`),s):n(t)}function s(r){return z(r)?t(r):of(r)?e.check({tokenize:HE},t,n)(r):n(r)}}function HE(e,t,n){return df(e,r,`whitespace`);function r(e){return e===null?n(e):t(e)}}function UE(e){return Kd([aE(),xE(),kE(e),NE(),BE()])}var WE={};function GE(e){let t=this,n=e||WE,r=t.data(),i=r.micromarkExtensions||=[],a=r.fromMarkdownExtensions||=[],o=r.toMarkdownExtensions||=[];i.push(UE(n)),a.push(JT()),o.push(YT(n))}var KE=`# Detailed Summary of Chapter 1: *Geometrodynamics in Brief*
 
-**Source:** *Gravitation* by Misner, Thorne, and Wheeler
+## Source and scope
+This document summarizes the attached Chapter 1, **"Geometrodynamics in Brief."** It covers the chapter’s main argument, section-by-section development, major figures, central equations, and a separate detailed summary of every box in the chapter.
 
-**Summary Generated:** March 20, 2026
+## Executive summary
+Chapter 1 introduces general relativity not by beginning with tensor formalism, but by building geometric intuition. Its central claim is that gravity is not best understood as a force acting across distance, but as the manifestation of curved spacetime. Free bodies move along the straightest available paths, called geodesics, and what we call gravitation is the large-scale convergence or divergence of those geodesics.
 
----
+The chapter develops this picture in a carefully staged progression:
 
-## Overview
+1. The **apple parable** introduces the contrast between Newton’s action-at-a-distance picture and Einstein’s local geometric picture.
+2. The chapter then explains how spacetime can be described **with or without coordinates**, emphasizing that events and intervals are more fundamental than labels.
+3. It connects **weightlessness** and universal free fall to the idea of a **local inertial frame**, where physics becomes locally that of special relativity.
+4. It defines what it means for geometry to be **locally Lorentzian**.
+5. It explains that **time is defined so that motion looks simple**.
+6. It shows that gravitation appears through the **relative acceleration of neighboring free particles**, which is the observable signature of curvature.
+7. Finally, it connects the curvature of spacetime to matter through the **Riemann tensor**, the **Einstein tensor**, and the **Einstein field equation** $G = 8\\pi T$.
 
-Chapter 1 provides an intuitive introduction to Einstein's geometric theory of gravity, contrasting it with Newton's view, and establishes the foundational concepts of spacetime, events, coordinates, and local Lorentz geometry.
+The chapter’s deepest slogan appears early and then governs everything that follows:
 
----
+- **Space acts on matter, telling it how to move.**
+- **Matter reacts back on space, telling it how to curve.**
 
-## Key Sections
+That compact statement is the conceptual bridge from Newtonian gravity to geometrodynamics.
 
-### §1.1 The Apple Parable: Einstein vs. Newton
+## High-level roadmap of the chapter
+The chapter is organized around seven main conceptual moves:
 
-**The Story:**
-A student under an apple tree watches ants crawl on an apple's surface, illustrating Einstein's geometric view of gravity:
+### 1. From force to geometry
+The falling apple and the paths of ants on its skin provide an analogy for free particles moving through curved spacetime. A path can be locally straight and still globally participate in a curved geometry.
 
-1. **Geodesics:** When an ant's path on apple skin is unrolled, it runs straight—the shortest path (a geodesic)
+### 2. Events before coordinates
+Spacetime points are identified by what happens there, not primarily by coordinate labels. Coordinates are useful, but secondary.
 
-2. **Geodesic Deviation:** Two ants starting in slightly different directions near the apple's dimple (stem region) follow straight paths locally, but their paths cross and diverge due to the **curvature of the surface**
+### 3. Weightlessness as the natural state of free motion
+Free fall is not the surprising phenomenon. The surprising phenomenon is being prevented from falling. Weightlessness reveals the natural structure of motion in spacetime.
 
-3. **Einstein's Three Key Ideas:**
-   - **Locally, geodesics appear straight**
-   - **Over extended regions, geodesics converge/diverge** at a rate governed by spacetime curvature—this is what we call "gravitation"
-   - **Matter warps geometry** (the dimple exists because the stem is there)
+### 4. Local Lorentz geometry
+In any sufficiently small region, spacetime looks like Minkowski spacetime. That is the spacetime analogue of a small patch on an apple looking approximately Euclidean.
 
-**Famous Summary:**
-> "Space tells matter how to move. Matter tells space how to curve."
+### 5. Time as a definition adapted to simple motion
+A good time coordinate is one that makes free-particle motion look straight and uniform. A bad clock creates fictitious forces.
 
-**Key Insight:** Gravity is not a "force at a distance" but **local geometry** acting on matter.
+### 6. Curvature revealed by geodesic deviation
+A single free particle does not reveal gravity locally. The relative acceleration of neighboring free particles does.
 
----
+### 7. Matter generates curvature
+The chapter closes by showing that curvature is produced by matter through the field equation $G_{\\alpha\\beta} = 8\\pi T_{\\alpha\\beta}$.
 
-### §1.2 Spacetime With and Without Coordinates
+## 1. The parable of the apple
+The chapter opens with a student observing ants moving on the surface of an apple. One ant’s track, when cut out and laid flat, appears perfectly straight. This is the chapter’s entry point into the notion of a **geodesic**: the locally straightest path available on a curved surface.
 
-**Events are Primary:**
-- An **event** is characterized by *what happens there* (e.g., collision of a photon with a particle)
-- Events are like intersections of world lines in a "barn full of hay" (Fig 1.2)
-- Events can be named arbitrarily (like Japanese houses without addresses)
+Two nearby ants begin at the same point and move along different geodesics around the dimple near the apple stem. Their paths later reconverge and cross. In Newtonian language, one is tempted to say that something at the stem has exerted an attraction at a distance. In Einstein’s language, the ants are simply following the local geometry everywhere along their tracks.
 
-**Coordinates are Bookkeeping:**
-- Coordinates are "telephone numbers" for events—convenient for ordering but **do not measure distance**
-- Multiple coordinate systems can catalog the same events (Fig 1.3)
-- **Coordinate singularities** exist (e.g., North Pole on a globe, Schwarzschild r=2m)
-- Minimum **two coordinate patches** required to cover a sphere without singularity (Fig 1.5)
+The analogy is then transferred to spacetime:
 
-**Vectors:**
-- A vector is an arrow between neighboring events
-- Named by components in a given coordinate system
-- The vector exists independently of its name/components
+- the apple’s surface stands in for curved spacetime,
+- ant tracks stand in for world lines of free particles,
+- the magnifying glass stands in for the fact that a sufficiently small region looks flat,
+- the dimple stands in for curvature produced by matter.
 
-**Spacetime as a Manifold:**
-- Idealized as a **4-dimensional continuous manifold**
-- Dimensionality determined by "countdown" procedure (event → neighborhood → boundary → ... → points)
-- **Classical physics** accepts infinitesimal test particles and continuous manifold idealization
-- **Quantum geometrodynamics** predicts spacetime "foam" at the **Planck length**:
-  $$L^* = \\sqrt{\\frac{\\hbar G}{c^3}} = 1.616 \\times 10^{-33} \\text{ cm}$$
+The chapter distills Einstein’s theory into three ideas:
 
----
+1. **Locally, geodesics appear straight.**
+2. **Over extended regions, spacetime curvature makes neighboring geodesics converge or diverge.**
+3. **Matter produces that curvature.**
 
-### §1.3 Weightlessness
+This is then condensed to the famous summary:
 
-**Free Fall is Natural:**
-- "Mystery about fall? What else should the stone do except fall?"
-- **Free fall = weightlessness** = absence of force pushing object from its natural world line
-- The "mystery" is the impact (solid-state physics), not the fall
+$\\text{Space acts on matter, telling it how to move; matter reacts back on space, telling it how to curve.}$
 
-**Universality of Free Fall:**
-- All objects fall with the same acceleration regardless of composition
-- **Roll-Krotkov-Dicke experiment (1964):** Gold and aluminum agree to **1 part in 10¹¹** (Fig 1.6)
-- Verified for molecules, neutrons, electrons, muons
-- Objects don't "look outside" to know how to move—motion is determined **locally**
+## 2. Spacetime with and without coordinates
+The next section argues that coordinates are useful bookkeeping devices, not the essence of spacetime. The primary object is the **event**: a physical happening localized in spacetime.
 
-**Local Inertial Frames:**
-- Inside a freely falling spaceship: keys, pennies, nuts float weightlessly
-- Each object moves in a straight line with uniform velocity (relative to the ship)
-- **No need to reference faraway objects**—physics is simple only when analyzed **locally**
+The chapter gives two ways to think about spacetime:
 
-**Newton vs. Einstein:**
-- Newton's "absolute space" is unobservable and nonexistent
-- Einstein's **local inertial frames** exist and are simple
+- **Coordinate-free:** identify an event by the world lines and interactions that meet there.
+- **Coordinate-based:** assign each event a quadruple of numbers, such as $\\left(x^0,x^1,x^2,x^3\\right)$.
 
----
+A representative coordinate assignment is
 
-### §1.4 Geometry is Locally Lorentzian
+$\\left(x^0,x^1,x^2,x^3\\right) = (77,23,64,11).$
 
-**Local Lorentz Geometry:**
-- On apple surface (thumbprint scale): geometry is **Euclidean**
-- In spacetime (limited region): geometry is **Lorentzian**
-- Theorems valid in special coordinate systems:
-  - **Euclidean coordinates** for Euclidean geometry
-  - **Local Lorentz coordinates** (local inertial frame) for Lorentzian geometry
+The chapter stresses that these numbers are not automatically lengths or times in any simple operational sense. They are more like an elaborate telephone number unless one is working in a specially chosen coordinate system.
 
-**Key Principle:**
-> "Physics is always and everywhere **locally Lorentzian**"
+### Vectors and neighboring events
+Once two nearby events are chosen, one can define a separation vector. In coordinates, the vector components are coordinate differences:
 
-**Three Points:**
-1. Laws of special relativity are valid locally everywhere
-2. This simplicity shows most clearly in a **local Lorentz frame**
-3. To test for a local Lorentz frame: **test for weightlessness!**
+$\\xi^\\alpha = x^\\alpha(\\mathcal B) - x^\\alpha(\\mathcal A).$
 
-**Metric Tensor (Box 1.3):**
-- At each point exists a geometric object **g** (metric tensor)
-- Takes two vectors, outputs a scalar (their dot product)
-- In local Lorentz coordinates:
-  $$g_{00} = -1, \\quad g_{0k} = 0, \\quad g_{jk} = \\delta_{jk}$$
-- Proper distance/interval:
-  $$s^2 = -(\\Delta t)^2 + (\\Delta x)^2 + (\\Delta y)^2 + (\\Delta z)^2$$
+This is only exact in flat spacetime or to arbitrarily good approximation in a sufficiently small region of curved spacetime.
 
----
+### Coordinate singularities
+The chapter warns that coordinate systems can fail even when the underlying geometry is perfectly regular. The classic example is spherical polar coordinates on a globe, which become singular at the poles. A single smooth coordinate chart generally cannot cover a sphere without singularities. Two overlapping patches are required.
 
-### §1.5 Time
+The lesson is philosophical as well as technical: **points and events are primary; coordinates are secondary.**
 
-**Definition:**
-> "Time is defined so that motion looks simple."
+## 3. Continuity, manifold structure, and dimensionality
+By imagining an ever denser mesh of world lines and light rays, the chapter motivates the idealization of spacetime as a smooth four-dimensional manifold.
 
-**Solar Day vs. Sidereal Day:**
-- **Solar day** (noon to noon) varies by ~47 seconds throughout the year due to Earth's elliptical orbit
-- **Sidereal day** (star to star) is more uniform but still imperfect
-- Earth's rotation is slowing (evidenced by ancient eclipse records—Fig 1.8 shows 30° discrepancy for A.D. 484 eclipse)
+The essential picture is this:
 
-**Modern Time Standard:**
-- Atomic clocks define the second
-- Time coordinate chosen so that free particles move uniformly in local Lorentz frames
+- real physical events form a web,
+- that web is idealized as continuous,
+- smooth coordinate systems can then be introduced locally,
+- manifold theory becomes the appropriate mathematical language.
 
----
+The chapter then explains dimensionality by a nested-boundary argument: one can determine an $n$-dimensional manifold by examining the dimensionality of neighborhoods and their boundaries. For spacetime, the result is $4$ dimensions.
 
-## Figures and Their Significance
+### Breakdown at the Planck scale
+The chapter also warns that this smooth manifold picture may fail at extremely small scales. It quotes the Planck length:
 
-| Figure | Description | Key Concept |
-|--------|-------------|-------------|
-| 1.1 | Ants on apple | Geodesics on curved surface |
-| 1.2 | Straws in hay | Events as world line intersections |
-| 1.3 | Coordinate systems | Coordinates as "telephone numbers" |
-| 1.4 | Coordinate singularity | Collapse of coordinate cells |
-| 1.5 | Sphere coordinate patches | Two patches minimum for sphere |
-| 1.6 | Roll-Krotkov-Dicke experiment | Universality of free fall (10⁻¹¹ precision) |
-| 1.7 | Local inertial frame | Weightlessness defines Lorentz frame |
-| 1.8 | Ancient eclipse track | Earth's rotation slowing over centuries |
+$L^* = (\\hbar G/c^3)^{1/2} = 1.616 \\times 10^{-33}\\,\\text{cm}.$
 
----
+At this scale, classical smooth geometry may give way to violent fluctuations or a foamlike structure. The chapter does not explore that in detail here, but flags it as a fundamental limit on naive continuum intuition.
 
-## Box Summaries
+## 4. Weightlessness and the equivalence principle
+The section on **weightlessness** is one of the chapter’s conceptual centers. It insists that the natural state of motion is **free fall**, not rest on the ground.
 
-### Box 1.1: Coordinate Transformations
-- Notation for coordinates and their transformations
-- How vector components transform between systems
+From this point of view:
 
-### Box 1.2: Vectors and Components
-- Vectors exist independently of coordinate systems
-- Components are convenient names for vectors
+- a stone falling is behaving naturally,
+- a person standing on the ground is being accelerated upward by the ground,
+- a freely falling elevator, spacecraft, or orbiting laboratory reveals the normal structure of motion.
 
-### Box 1.3: Local Lorentz vs. Euclidean Geometry
-- **Coordinate-free language** (Robb for Lorentz, Euclid for Euclidean)
-- **Coordinate language** (Lorentz/Poincaré/Minkowski vs. Descartes)
-- Metric tensor components in each system
-- Proper distance/interval formulas
+### Universal free fall
+The chapter emphasizes that bodies of different composition fall with the same acceleration. It cites precision tests showing that aluminum and gold, despite large differences in composition, have indistinguishable gravitational acceleration to extraordinary accuracy.
 
----
+The Roll-Krotkov-Dicke experiment reported approximately
 
-## Key Quotes
+$\\delta g/g = (0.96 \\pm 1.04) \\times 10^{-11},$
 
-> "Don't try to describe motion relative to faraway objects. Physics is simple only when analyzed locally."
+and later Braginsky-Panov work pushed the comparison to roughly
 
-> "Free fall is the natural state of motion."
+$\\delta g/g < 10^{-12}.$
 
-> "Space tells matter how to move. Matter tells space how to curve."
+The chapter interprets this not as a mysterious coincidence, but as evidence that all freely falling bodies follow the same kind of spacetime path.
 
-> "Time is defined so that motion looks simple."
+### Local inertial frames
+A freely falling frame eliminates gravity locally. In such a frame, free particles move in straight lines with uniform velocity. This is the local Lorentz frame, or local inertial frame.
 
-> "Coordinates are nothing but an elaborate kind of telephone number."
+The key operational test is **weightlessness**. If one can create a sufficiently small frame in which free objects drift uniformly without relative acceleration detectable at the given precision, then one has found a local inertial frame.
 
----
+## 5. Geometry is locally Lorentzian
+Just as a tiny patch of an apple looks Euclidean, a sufficiently small region of spacetime looks Lorentzian.
 
-## Connections to Later Chapters
+The chapter states this in both coordinate-free and coordinate-based ways.
 
-- **Chapter 9:** Precise definition of vectors in curved spacetime (tangent vectors)
-- **Chapter 16 & 38:** Detailed discussion of Roll-Krotkov-Dicke experiment
-- **Chapter 31:** Schwarzschild coordinates and black holes
-- **Chapter 44:** Quantum geometrodynamics and spacetime foam
+### Coordinate-free form
+Local Lorentz geometry is defined by relations among proper time, light rays, and free-particle world lines.
 
----
+### Coordinate form
+In suitable local Lorentz coordinates, nearby events satisfy the Minkowski interval relation
 
-## Summary in One Sentence
+$s_{\\mathcal{AB}}^2 = -[x^0(\\mathcal B)-x^0(\\mathcal A)]^2 + [x^1(\\mathcal B)-x^1(\\mathcal A)]^2 + [x^2(\\mathcal B)-x^2(\\mathcal A)]^2 + [x^3(\\mathcal B)-x^3(\\mathcal A)]^2.$
 
-**Einstein's gravity replaces "force at a distance" with local geometry: free-falling objects follow straight world lines in curved spacetime, and spacetime curvature is determined by the matter within it.**
-`;function qE(){return(0,I.jsx)(`div`,{className:`chapter-content`,children:(0,I.jsx)(Bg,{remarkPlugins:[qS,GE],rehypePlugins:[KC],children:KE})})}var JE=`# Chapter 1 Exercises - Solutions
+This is the spacetime analog of the Euclidean distance formula.
+
+### Metric tensor
+The chapter then introduces the metric tensor as the modern mathematical object encoding local geometry. In local Euclidean coordinates on the apple, the metric components are those of the identity matrix. In local Lorentz coordinates on spacetime, the metric takes the Minkowski form
+
+$\\eta_{\\alpha\\beta} = \\mathrm{diag}(-1,1,1,1).$
+
+The metric allows one to compute lengths, intervals, and scalar products of vectors.
+
+## 6. Time
+The chapter’s definition of time is deliberately operational and dynamical:
+
+$\\text{Time is defined so that motion looks simple.}$
+
+A good time coordinate makes free particles move uniformly. A bad clock makes their trajectories look curved and forces the introduction of fictitious forces.
+
+### Bad clocks and fictitious forces
+If $t$ is a good time variable and $T(t)$ is a bad one, then a motion with zero acceleration in $t$ can appear accelerated in $T$. The chapter derives the induced fictitious force as
+
+$F_x = m\\,\\frac{d^2x}{dT^2} = -m\\,\\frac{(dx/dT)(d^2T/dt^2)}{(dT/dt)^2}.$
+
+This is used to argue that Newton’s notion of uniform time was not arbitrary: it was an attempt to choose time so that inertial motion looks simple.
+
+### From solar day to atomic time
+The chapter also explains why the Earth’s rotation is not a perfect standard of time. Seasonal and long-term effects make the mean solar day variable. Historical eclipse data reveal secular slowing of the Earth’s rotation. The chapter uses an ancient eclipse track as evidence that the Earth cannot serve as a perfect long-term clock.
+
+It then motivates the replacement of solar time by better standards, culminating in ephemeris time and then atomic time.
+
+### Geometrodynamic unit of time
+The book adopts the distance light travels in one centimeter as the time unit, so that spacelike and timelike intervals can be measured in a common geometric unit. This is part of the chapter’s consistent use of geometrized units.
+
+## 7. Curvature
+The chapter next turns from local flatness to the real observable content of gravitation: the **relative acceleration of neighboring free particles**.
+
+A single free particle in a local inertial frame does not reveal gravity. But two nearby free particles do. Their separation can grow or shrink due to curvature.
+
+### Newtonian tidal picture
+Near a central mass, if the local $z$-direction is radial, the relative accelerations are approximately
+
+$\\frac{d^2\\xi^x}{dt^2} = -\\frac{m}{r^3}\\xi^x,$
+
+$\\frac{d^2\\xi^y}{dt^2} = -\\frac{m}{r^3}\\xi^y,$
+
+$\\frac{d^2\\xi^z}{dt^2} = +\\frac{2m}{r^3}\\xi^z.$
+
+This is the local tidal field.
+
+### Geodesic deviation
+For a curved surface such as a sphere, nearby geodesics satisfy
+
+$\\frac{d^2\\xi}{ds^2} + R\\xi = 0,$
+
+where $R = 1/a^2$ for a sphere of radius $a$.
+
+In spacetime the corresponding equation is the **equation of geodesic deviation**:
+
+$\\frac{D^2\\xi}{d\\tau^2} + \\mathrm{Riemann}(u,\\xi,u) = 0.$
+
+In component form,
+
+$\\frac{D^2\\xi^\\alpha}{d\\tau^2} + R^\\alpha{}_{\\beta\\gamma\\delta}u^\\beta \\xi^\\gamma u^\\delta = 0.$
+
+This equation is presented as the gravitational analog of the Lorentz force law in electromagnetism.
+
+### Curvature of what?
+A key conceptual correction is made here: it is misleading to think only of the curvature of **space**. The correct geometric object is the curvature of **spacetime**. Ballistic and lightlike trajectories only make sense when space and time are treated together.
+
+## 8. Effect of matter on geometry
+The chapter then reverses the story. If curvature affects matter, what determines curvature itself?
+
+### Interior Earth model
+Using a uniform-density Earth model, the chapter analyzes particles oscillating through a tunnel bored across the Earth. The oscillation period is about $84$ minutes, the same order as a low satellite orbit. From this model the chapter infers specific curvature components inside matter and shows that curvature is directly related to density.
+
+The discussion leads to a local average curvature relation of the form
+
+$R_{\\hat 0\\hat 0} = 4\\pi \\rho,$
+
+in the appropriate local frame.
+
+### Einstein tensor and stress-energy tensor
+The chapter then generalizes this Newtonian-looking relation. A particular contraction of the Riemann tensor, the **Einstein tensor** $G$, is introduced as the geometric object directly tied to matter. Matter itself is encoded in the **stress-energy tensor** $T$.
+
+The resulting field equation is
+
+$G = 8\\pi T,$
+
+or in components,
+
+$G_{\\alpha\\beta} = 8\\pi T_{\\alpha\\beta}.$
+
+The chapter emphasizes the richness of this equation. It simultaneously:
+
+- tells how matter generates average curvature,
+- governs the remaining curvature outside matter,
+- describes gravitational waves,
+- and even encodes equations of motion for matter through local conservation laws.
+
+## Key figures and what they contribute
+
+### Figure 1.1
+The ant tracks on an apple illustrate geodesics on a curved surface. Local flatness and global curvature are made visually intuitive here.
+
+### Figure 1.2
+A barn full of hay symbolizes a web of world lines and events. The point is that events can be identified by what happens there, without first introducing coordinates.
+
+### Figure 1.3
+This figure shows how coordinates act as convenient labels for events and how neighboring events define separation vectors.
+
+### Figure 1.4
+An egg-crate analogy illustrates coordinate singularities. The geometry may be smooth even when the coordinate system collapses cells to zero size.
+
+### Figure 1.5
+Two overlapping patches on a sphere show why one coordinate chart is not enough to cover the two-sphere without singularities.
+
+### Figure 1.6
+The Roll-Krotkov-Dicke torsion-balance experiment is presented as a precision test of composition-independent free fall.
+
+### Figure 1.7
+A model freely falling frame demonstrates the idea of a local Lorentz frame. When the frame is nonrotating and freely falling, projectiles behave inertially.
+
+### Figure 1.8
+Ancient eclipse tracks are used to infer secular slowing of the Earth’s rotation and the inadequacy of the day as a perfect time standard.
+
+### Figure 1.9
+The comparison of a good clock and a bad clock shows that poor time coordinates create fictitious forces and make free motion appear curved.
+
+### Figure 1.10
+A sphere is used to connect curvature directly to geodesic deviation.
+
+### Figure 1.12
+The tunnel-through-the-Earth model connects matter density to spacetime curvature and motivates the path toward the Einstein tensor and field equation.
+
+## Main equations gathered in one place
+
+### Local Lorentz interval
+$s^2 = -(\\Delta x^0)^2 + (\\Delta x^1)^2 + (\\Delta x^2)^2 + (\\Delta x^3)^2.$
+
+### Planck length
+$L^* = (\\hbar G/c^3)^{1/2} = 1.616 \\times 10^{-33}\\,\\text{cm}.$
+
+### Bad-clock fictitious force
+$F_x = -m\\,\\frac{(dx/dT)(d^2T/dt^2)}{(dT/dt)^2}.$
+
+### Geodesic deviation on a sphere
+$\\frac{d^2\\xi}{ds^2} + R\\xi = 0.$
+
+### Geodesic deviation in spacetime
+$\\frac{D^2\\xi^\\alpha}{d\\tau^2} + R^\\alpha{}_{\\beta\\gamma\\delta}u^\\beta\\xi^\\gamma u^\\delta = 0.$
+
+### Geometrized mass conversion
+$m(\\text{cm}) = (G/c^2)\\,m_{\\text{conv}}(\\text{g}).$
+
+### Einstein field equation
+$G = 8\\pi T,$
+
+$G_{\\alpha\\beta} = 8\\pi T_{\\alpha\\beta}.$
+
+## Detailed summaries of the boxes
+
+## Box 1.1 - Mathematical notation for events, coordinates, and vectors
+This box establishes the notation used throughout the book.
+
+### Main points
+- Events are denoted by script letters.
+- Coordinates of an event can be written explicitly as $t(\\mathcal P), x(\\mathcal P), y(\\mathcal P), z(\\mathcal P)$ or more abstractly as $x^\\alpha(\\mathcal P)$.
+- The time coordinate is typically $x^0$.
+- Spatial coordinates are $x^1, x^2, x^3$.
+- One can use several coordinate systems for the same event, distinguished by bars, primes, hats, or other decorations.
+- Coordinate transformations are represented by four functions giving the new coordinates as functions of the old.
+- A separation vector between neighboring events can be denoted by $u$, $v$, or $\\xi$.
+- Vector components transform by derivatives of the coordinate transformation.
+- Einstein summation convention is introduced: repeated indices are automatically summed.
+
+### Why it matters
+This box gives the language needed for the rest of the chapter. It makes clear that coordinates are labels attached to events, while vectors are geometric objects whose component values depend on coordinate choice.
+
+## Box 1.2 - Materials of the most diverse composition fall with the same acceleration
+This box is a historical and experimental survey of universal free fall.
+
+### Main points
+- Aristotle is quoted as holding that heavier bodies fall faster.
+- Pre-Galilean literature sometimes claimed that different materials fall similarly.
+- Galileo is credited with showing that in a medium with negligible resistance, all bodies fall with nearly the same acceleration.
+- Newton compares pendulums made of different substances and finds equal acceleration to high precision.
+- Lorand von Eotvos improves the test dramatically by comparing the directions of effective acceleration for different suspended materials.
+- Roll, Krotkov, and Dicke compare aluminum and gold and find equality of fall to about one part in $10^{11}$.
+- Braginsky and Panov improve this to roughly one part in $10^{12}$.
+- Beall discusses particle-physics consequences of departures from universal free fall.
+
+### Why it matters
+The box supplies the empirical foundation for the equivalence principle. The common "standard world line" of freely falling bodies is not a philosophical guess; it is an experimental fact.
+
+## Box 1.3 - Local Lorentz geometry and local Euclidean geometry: with and without coordinates
+This is the chapter’s most important technical box.
+
+### Main points
+- It compares a tiny Euclidean patch on the apple with a tiny Lorentzian region of spacetime.
+- In coordinate-free Euclidean geometry, the Pythagorean relation characterizes distance.
+- In coordinate Euclidean form, distance is given by the ordinary sum of squares.
+- In coordinate-free Lorentz geometry, intervals are described by light rays and proper times.
+- In coordinate Lorentz form, the interval is
+  $s^2 = -(\\Delta x^0)^2 + (\\Delta x^1)^2 + (\\Delta x^2)^2 + (\\Delta x^3)^2.$
+- The box then introduces the metric tensor $g$ as a bilinear machine acting on two vectors.
+- In local Euclidean coordinates, the metric components reduce to the Kronecker delta.
+- In local Lorentz coordinates, the metric components reduce to the Minkowski matrix $\\eta_{\\alpha\\beta}$.
+
+### Why it matters
+This box is the bridge from visual geometry to modern tensor language. It shows how local Euclidean and local Lorentz structure can be described either geometrically or with coordinates, and proves that the two descriptions are equivalent.
+
+## Box 1.4 - Time today
+This box surveys the evolution of time standards.
+
+### Main points
+- Before 1956, the second was tied to the mean solar day.
+- From 1956 to 1967, the second was defined using the tropical year and ephemeris time.
+- Since 1967, the SI second has been defined by the cesium-133 hyperfine transition, namely $9{,}192{,}631{,}770$ periods.
+- The box distinguishes several time scales: UT0, UT1, UT2, Ephemeris Time, and Coordinated Universal Time (UTC).
+- UTC is held close to Earth-rotation time by occasional leap seconds.
+- A newspaper clipping about a leap second is included to illustrate this operationally.
+- The box ends with a table comparing the stability of familiar clocks, from tuning-fork watches to quartz devices, rubidium clocks, cesium clocks, hydrogen masers, and stabilized lasers.
+
+### Why it matters
+The box shows that timekeeping is not metaphysical but operational. Better clocks better approximate the time coordinate that makes motion look simple.
+
+## Box 1.5 - Test for flatness
+This box gives a practical criterion for when spacetime may be treated as flat.
+
+### Main points
+- Specify the spatial size $L$ and temporal duration $T$ of the region under study.
+- Specify the measurement precision $\\delta\\xi$ for relative separation of nearby test particles.
+- Follow initially parallel world lines through that region.
+- If relative displacements remain below the stated precision, then the region may be treated as flat to that precision.
+- The example near the Earth’s surface considers a region roughly $100\\,\\text{m}$ across followed for about $3\\,\\text{s}$.
+- Over that region, the expected relative displacement from Earth’s tidal field is about $1.72\\,\\text{mm}$.
+
+### Why it matters
+Flatness is not absolute. It is always a matter of scale and experimental precision.
+
+## Box 1.6 - Curvature of what?
+This box addresses a common misunderstanding.
+
+### Main points
+- It criticizes the idea that gravity can be explained merely as curvature of three-dimensional space.
+- It notes that ball and bullet trajectories in space have very different apparent curvatures, so space-curvature pictures alone can mislead.
+- It argues that the correct object is the curvature of spacetime.
+- Light bending by the sun is used as an example where a spacetime treatment is essential.
+- The correct observable is the relative behavior of nearby geodesics, not the embedding of trajectories in an external laboratory picture.
+
+### Why it matters
+This box prevents one of the most common conceptual mistakes in popular accounts of general relativity: replacing spacetime curvature with a purely spatial rubber-sheet picture.
+
+## Box 1.7 - Equation of motion under the influence of a gravitational field and an electromagnetic field, compared and contrasted
+This box compares electromagnetism with gravitation.
+
+### Main points
+- In electromagnetism, acceleration can be defined for a single charged particle relative to an uncharged fiducial one.
+- In gravitation, absolute acceleration of a single free particle is not meaningful in the same way; only relative acceleration between neighboring geodesics is physically significant.
+- Electromagnetic acceleration depends on charge-to-mass ratio $e/m$.
+- Gravitational tidal acceleration is universal for all test particles with the same local state of motion.
+- The driving field in electromagnetism is the electromagnetic tensor; in gravitation it is the Riemann curvature tensor.
+- The Lorentz force law is contrasted with the equation of geodesic deviation.
+
+### Why it matters
+This box clarifies why gravitation in general relativity is not just another force field. Its observable content is geometric and tidal.
+
+## Box 1.8 - Geometrized units
+This box explains the unit system used in the book.
+
+### Main points
+- The chapter sets $c = 1$, $G = 1$, and also uses Boltzmann’s constant $k = 1$ where helpful.
+- It gives conversion factors between conventional units and centimeters.
+- Examples are provided for converting mass, energy, and other quantities into geometric units.
+- The mass of the sun becomes about $1.477\\,\\text{km}$ in geometrized units.
+
+### Why it matters
+Geometrized units make spacetime geometry more transparent by expressing time, mass, and energy in the same underlying unit system.
+
+## Box 1.9 - Galileo Galilei
+This is a historical box devoted to Galileo.
+
+### Main points
+- It gives Galileo’s dates and portrait.
+- It quotes Galileo on free fall, astronomical observation, and the value of reason over authority.
+- It highlights Galileo’s role in rejecting naive Aristotelian mechanics and in opening the path toward modern kinematics and observation-based science.
+
+### Why it matters
+Galileo is presented as the early architect of the empirical and conceptual shift away from inherited authority and toward quantitative laws of motion.
+
+## Box 1.10 - Isaac Newton
+This historical box is devoted to Newton.
+
+### Main points
+- It gives Newton’s dates and image.
+- It quotes Newton on geometry, absolute space, absolute time, and his refusal to speculate beyond phenomena with the famous attitude later paraphrased as *hypotheses non fingo*.
+- It also notes Newton’s retrospective remarks about thinking about gravity in the plague years.
+
+### Why it matters
+Newton is presented both as the creator of the classical framework and as the thinker whose concepts of absolute space and time Einstein eventually had to surpass.
+
+## Box 1.11 - Albert Einstein
+This closing historical box gives Einstein’s dates and several photographs.
+
+### Main points
+- It serves primarily as a visual and biographical marker at the culmination of the chapter.
+- Placed beside the introduction of the Einstein field equation, it signals the historical transition from Newtonian gravitation to spacetime geometry.
+
+### Why it matters
+The box frames the chapter’s end as the arrival at Einstein’s synthesis: gravitation as geometry, governed by $G = 8\\pi T$.
+
+## Final synthesis
+Chapter 1 is a conceptual overture to the whole book. It does not try to prove everything rigorously at once. Instead, it builds a layered understanding:
+
+- **Free motion** means geodesic motion.
+- **Weightlessness** reveals the natural local frame.
+- **Local Lorentz structure** replaces Newton’s absolute space.
+- **Curvature** appears through geodesic deviation.
+- **Matter** generates that curvature through the Einstein field equation.
+
+The chapter begins with ants on an apple and ends with
+
+$G_{\\alpha\\beta} = 8\\pi T_{\\alpha\\beta}.$
+
+That journey is the point of the chapter: to show that what once looked like a force becomes, in Einstein’s hands, the mutual conversation between geometry and matter.`;function qE(){return(0,I.jsx)(`div`,{className:`chapter-content`,children:(0,I.jsx)(Bg,{remarkPlugins:[qS,GE],rehypePlugins:[KC],children:KE})})}var JE=`# Chapter 1 Exercises - Solutions
 
 **Source:** *Gravitation* by Misner, Thorne, and Wheeler
 
