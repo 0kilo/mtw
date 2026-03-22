@@ -25,6 +25,8 @@ function Layout({ children }) {
     if (location.pathname === '/') return 'Overview'
     if (location.pathname === '/chapters') return 'Chapters'
     if (location.pathname === '/appendices') return 'Appendices'
+    if (location.pathname === '/visualizations') return 'Visualizations'
+    if (location.pathname.startsWith('/visualization/')) return 'Visualization Documentation'
     if (location.pathname.startsWith('/appendix/')) return 'Appendix'
     if (location.pathname.startsWith('/chapter/')) {
       const num = location.pathname.split('/').pop()
@@ -57,11 +59,14 @@ function Layout({ children }) {
             <a href="#" className={`nav-item ${isActive('/chapters') ? 'active' : ''}`} onClick={(e) => handleNavClick('/chapters', e)}>
               <span className="nav-label">Chapters</span>
             </a>
+            <a href="#" className={`nav-item ${isActive('/visualizations') ? 'active' : ''}`} onClick={(e) => handleNavClick('/visualizations', e)}>
+              <span className="nav-label">Visualizations</span>
+            </a>
             <a href="#" className={`nav-item ${isActive('/appendices') ? 'active' : ''}`} onClick={(e) => handleNavClick('/appendices', e)}>
               <span className="nav-label">Appendices</span>
             </a>
             <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); setShowViz(false) }}>
-              <span className="nav-label">Viz</span>
+              <span className="nav-label">Viz (Interactive)</span>
             </a>
           </nav>
         </aside>
@@ -105,11 +110,11 @@ function Layout({ children }) {
           <a href="#" className={`nav-item ${isActive('/chapters') ? 'active' : ''}`} onClick={(e) => handleNavClick('/chapters', e)}>
             <span className="nav-label">Chapters</span>
           </a>
+          <a href="#" className={`nav-item ${isActive('/visualizations') ? 'active' : ''}`} onClick={(e) => handleNavClick('/visualizations', e)}>
+            <span className="nav-label">Visualizations</span>
+          </a>
           <a href="#" className={`nav-item ${isActive('/appendices') ? 'active' : ''}`} onClick={(e) => handleNavClick('/appendices', e)}>
             <span className="nav-label">Appendices</span>
-          </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setShowViz(true) }}>
-            <span className="nav-label">Viz</span>
           </a>
         </nav>
       </aside>

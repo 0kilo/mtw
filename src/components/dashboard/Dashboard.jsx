@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import Layout from '../layout/Layout'
-import Graph from '../graph/Graph'
 import './Dashboard.css'
 
 function Dashboard() {
@@ -46,9 +45,19 @@ function Dashboard() {
 
   const visualizations = [
     {
-      name: 'Metric Grid',
-      description: 'Visualize different coordinate systems',
-      systems: ['Cartesian', 'Cylindrical', 'Spherical', 'Q1 Quaternion', 'Schwarzschild']
+      name: 'Level 1: Coordinate Grid',
+      description: 'Simple embedding - map parameter space to 3D',
+      systems: ['Cartesian', 'Cylindrical', 'Spherical', 'Quaternion']
+    },
+    {
+      name: 'Level 2: Metric-Aware Grid',
+      description: 'Proper distances in curved spacetime',
+      systems: ['Schwarzschild', 'FLRW', 'Minkowski']
+    },
+    {
+      name: 'Level 3: Geodesic Grid',
+      description: 'True geodesics - light and particle paths',
+      systems: ['Null Geodesics', 'Timelike Geodesics', 'Light Bending']
     }
   ]
 
@@ -91,6 +100,7 @@ function Dashboard() {
               <div
                 key={viz.name}
                 className="viz-card"
+                onClick={() => navigate('/visualizations')}
               >
                 <div className="viz-icon">🔮</div>
                 <h4>{viz.name}</h4>
@@ -121,18 +131,18 @@ function Dashboard() {
               <span className="stat-label">Exercises Solved</span>
             </div>
           </div>
+          <div className="stat-card" onClick={() => navigate('/visualizations')}>
+            <div className="stat-icon">🔮</div>
+            <div className="stat-info">
+              <span className="stat-value">3</span>
+              <span className="stat-label">Visualization Levels</span>
+            </div>
+          </div>
           <div className="stat-card" onClick={() => navigate('/appendices')}>
             <div className="stat-icon">📚</div>
             <div className="stat-info">
               <span className="stat-value">5</span>
               <span className="stat-label">Appendices</span>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">🔮</div>
-            <div className="stat-info">
-              <span className="stat-value">5</span>
-              <span className="stat-label">Coordinate Systems</span>
             </div>
           </div>
         </section>

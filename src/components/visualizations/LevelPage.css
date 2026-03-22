@@ -1,0 +1,39 @@
+.level-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.level-page-header {
+  margin-bottom: 2rem;
+}
+
+.level-page-header .back-button {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.level-page-header .back-button:hover {
+  background: var(--background);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.level-page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.level-subtitle {
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 500;
+}

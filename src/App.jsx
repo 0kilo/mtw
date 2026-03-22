@@ -7,6 +7,10 @@ import Chapter3 from './components/chapters/ch3/Chapter3'
 import Chapter4 from './components/chapters/ch4/Chapter4'
 import Chapter5 from './components/chapters/ch5/Chapter5'
 import Appendix from './components/chapters/appendix/Appendix'
+import Visualizations from './components/visualizations/Visualizations'
+import Level1Grid from './components/visualizations/Level1Grid'
+import Level2Grid from './components/visualizations/Level2Grid'
+import Level3Grid from './components/visualizations/Level3Grid'
 
 function App() {
   return (
@@ -21,6 +25,10 @@ function App() {
         <Route path="/chapter/5" element={<Chapter5 />} />
         <Route path="/appendices" element={<Appendix />} />
         <Route path="/appendix/:id" element={<Appendix />} />
+        <Route path="/visualizations" element={<Visualizations />} />
+        <Route path="/visualization/level1" element={<Level1Grid />} />
+        <Route path="/visualization/level2" element={<Level2Grid />} />
+        <Route path="/visualization/level3" element={<Level3Grid />} />
       </Routes>
     </BrowserRouter>
   )
