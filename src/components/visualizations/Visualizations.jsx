@@ -142,6 +142,17 @@ function Visualizations() {
           </table>
         </div>
 
+        <div className="interactive-section">
+          <div className="interactive-card" onClick={() => navigate('/viz')}>
+            <div className="interactive-icon">🔮</div>
+            <div className="interactive-content">
+              <h3>Interactive 3D Visualization</h3>
+              <p>Explore coordinate systems and curved spacetime geometries in real-time with our interactive 3D viewer. Rotate, zoom, and pan to examine the grid from any angle.</p>
+              <span className="launch-btn">Launch Interactive Viewer →</span>
+            </div>
+          </div>
+        </div>
+
         <div className="levels-grid">
           {levels.map((level) => (
             <div

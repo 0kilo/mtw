@@ -63,6 +63,62 @@
   background: var(--background);
 }
 
+.interactive-section {
+  margin: 2rem 0;
+}
+
+.interactive-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: white;
+}
+
+.interactive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.interactive-icon {
+  font-size: 4rem;
+  flex-shrink: 0;
+}
+
+.interactive-content {
+  flex: 1;
+}
+
+.interactive-content h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  color: white;
+}
+
+.interactive-content p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.launch-btn {
+  display: inline-block;
+  background: white;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all var(--transition);
+}
+
+.interactive-card:hover .launch-btn {
+  background: var(--surface);
+}
+
 .levels-grid {
   display: flex;
   flex-direction: column;

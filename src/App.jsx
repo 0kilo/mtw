@@ -11,6 +11,7 @@ import Visualizations from './components/visualizations/Visualizations'
 import Level1Grid from './components/visualizations/Level1Grid'
 import Level2Grid from './components/visualizations/Level2Grid'
 import Level3Grid from './components/visualizations/Level3Grid'
+import InteractiveViz from './components/visualizations/InteractiveViz'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/visualization/level1" element={<Level1Grid />} />
         <Route path="/visualization/level2" element={<Level2Grid />} />
         <Route path="/visualization/level3" element={<Level3Grid />} />
+        <Route path="/viz" element={<InteractiveViz />} />
       </Routes>
     </BrowserRouter>
   )

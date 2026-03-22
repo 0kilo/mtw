@@ -21,6 +21,7 @@ function Layout({ children }) {
   }
 
   const getPageTitle = () => {
+    if (location.pathname === '/viz') return 'Interactive Visualization'
     if (showViz) return 'Visualization'
     if (location.pathname === '/') return 'Overview'
     if (location.pathname === '/chapters') return 'Chapters'
@@ -112,6 +113,9 @@ function Layout({ children }) {
           </a>
           <a href="#" className={`nav-item ${isActive('/visualizations') ? 'active' : ''}`} onClick={(e) => handleNavClick('/visualizations', e)}>
             <span className="nav-label">Visualizations</span>
+          </a>
+          <a href="#" className={`nav-item ${isActive('/viz') ? 'active' : ''}`} onClick={(e) => handleNavClick('/viz', e)}>
+            <span className="nav-label">Interactive Viz</span>
           </a>
           <a href="#" className={`nav-item ${isActive('/appendices') ? 'active' : ''}`} onClick={(e) => handleNavClick('/appendices', e)}>
             <span className="nav-label">Appendices</span>

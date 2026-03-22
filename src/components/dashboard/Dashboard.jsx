@@ -100,7 +100,7 @@ function Dashboard() {
               <div
                 key={viz.name}
                 className="viz-card"
-                onClick={() => navigate('/visualizations')}
+                onClick={() => navigate('/viz')}
               >
                 <div className="viz-icon">🔮</div>
                 <h4>{viz.name}</h4>
@@ -113,6 +113,9 @@ function Dashboard() {
               </div>
             ))}
           </div>
+          <button className="view-all-viz" onClick={() => navigate('/visualizations')}>
+            View Documentation →
+          </button>
         </section>
 
         {/* Quick Stats */}

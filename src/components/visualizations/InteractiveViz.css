@@ -1,0 +1,16 @@
+.interactive-viz {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+.viz-container {
+  flex: 1;
+  width: 100%;
+  min-height: 500px;
+}
+
+.viz-container > * {
+  height: 100%;
+  width: 100%;
+}
