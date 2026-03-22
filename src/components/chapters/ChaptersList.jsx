@@ -3,7 +3,8 @@ import Chapter1 from './ch1/Chapter1'
 import Chapter2 from './ch2/Chapter2'
 import Chapter3 from './ch3/Chapter3'
 import Chapter4 from './ch4/Chapter4'
-import AppendixA from './appendix/AppendixA'
+import Chapter5 from './ch5/Chapter5'
+import Appendix from './appendix/Appendix'
 import './ChaptersList.css'
 
 function ChaptersList() {
@@ -14,13 +15,14 @@ function ChaptersList() {
     return (
       <div className="chapters-viewer">
         <button className="back-button" onClick={() => setSelectedView(null)}>
-          ← Back to {viewType === 'chapter' || viewType === 'appendix' ? 'Chapters' : 'Appendices'}
+          ← Back to {viewType === 'chapter' ? 'Chapters' : 'Appendices'}
         </button>
         {viewType === 'chapter' && selectedView === 'ch1' && <Chapter1 />}
         {viewType === 'chapter' && selectedView === 'ch2' && <Chapter2 />}
         {viewType === 'chapter' && selectedView === 'ch3' && <Chapter3 />}
         {viewType === 'chapter' && selectedView === 'ch4' && <Chapter4 />}
-        {viewType === 'appendix' && selectedView === 'A' && <AppendixA />}
+        {viewType === 'chapter' && selectedView === 'ch5' && <Chapter5 />}
+        {viewType === 'appendix' && selectedView === 'main' && <Appendix />}
       </div>
     )
   }
@@ -67,6 +69,15 @@ function ChaptersList() {
           <p>Exterior calculus, Faraday 2-form, and geometric Maxwell equations</p>
           <span className="read-more">Read exercises →</span>
         </div>
+        <div
+          className="chapter-card"
+          onClick={() => { setSelectedView('ch5'); setViewType('chapter') }}
+        >
+          <div className="chapter-number">Chapter 5</div>
+          <h3>Stress-Energy Tensor and Conservation Laws</h3>
+          <p>Energy density, momentum flux, perfect fluids, and angular momentum</p>
+          <span className="read-more">Read exercises →</span>
+        </div>
       </div>
 
       <h2 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Appendices</h2>
@@ -75,12 +86,12 @@ function ChaptersList() {
       <div className="chapter-cards">
         <div
           className="chapter-card"
-          onClick={() => { setSelectedView('A'); setViewType('appendix') }}
+          onClick={() => { setSelectedView('main'); setViewType('appendix') }}
         >
-          <div className="chapter-number">Appendix A</div>
-          <h3>Quaternions and the Exponential Map</h3>
-          <p>Quaternion algebra, exponential function, and Jacobian matrices</p>
-          <span className="read-more">Read reference →</span>
+          <div className="chapter-number">All Appendices</div>
+          <h3>Mathematical Reference Collection</h3>
+          <p>Quaternions, differential geometry, special relativity, and tensor calculus</p>
+          <span className="read-more">Browse appendices →</span>
         </div>
       </div>
     </div>

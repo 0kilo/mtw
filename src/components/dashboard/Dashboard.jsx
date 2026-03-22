@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MetricGraph from '../graph/MetricGraph'
+import Graph from '../graph/Graph'
 import ChaptersList from '../chapters/ChaptersList'
 import './Dashboard.css'
 
@@ -49,7 +49,7 @@ function Dashboard() {
   const renderPage = () => {
     switch (currentPage) {
       case 'viz':
-        return <MetricGraph />
+        return <Graph />
       case 'chapters':
         return <ChaptersList />
       default:

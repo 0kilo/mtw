@@ -1,28 +1,184 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { equidistantPoints, distanceScaleFactors } from './metric/distance'
 
 /**
- * MetricGrid - Generates grids based on a metric tensor g_μν
- * 
- * The metric defines the geometry of spacetime/space.
- * Grid lines follow the coordinate curves of the metric.
- * 
- * @param {Object} metric - Metric tensor components as functions of coordinates
- * @param {Function} metric.g - Returns [g_00, g_01, g_02, g_11, g_12, g_22] at (u,v,w)
- * @param {Function} embedding - Maps (u,v,w) → (x,y,z) for 3D visualization
- * @param {Array} ranges - [[uMin,uMax], [vMin,vMax], [wMin,wMax]]
+ * MetricGrid - Level 2: Metric-Aware Grid
+ *
+ * Renders coordinate grids where line segments are adjusted to represent
+ * equidistant points in the actual geometry defined by the metric tensor.
+ *
+ * @param {Object} metric - Metric config (from metric/)
+ * @param {Array} ranges - [[uMin, uMax], [vMin, vMax], [wMin, wMax]]
  * @param {number} resolution - Grid density
  * @param {string} lineColor - Color of grid lines
+ * @param {boolean} showAxes - Show XYZ axes
+ * @param {number} axisSize - Axes size
+ * @param {boolean} metricAware - If true, adjust for proper distances
  */
 function MetricGrid({
   metric,
-  embedding,
-  ranges = [[-5, 5], [-5, 5], [-5, 5]],
+  ranges: propRanges,
   resolution = 10,
   lineColor = '#6366f1',
+  showAxes = true,
+  axisSize = 5,
+  metricAware = true,
 }) {
   const containerRef = useRef(null)
+
+  // Use provided ranges or fall back to metric defaults
+  const ranges = useMemo(
+    () => propRanges || metric?.ranges || [[-5, 5], [-5, 5], [-5, 5]],
+    [propRanges, metric?.ranges]
+  )
+  const embedding = metric?.embedding
+  const spatialMetric = metric?.spatial
+
+  // Generate mesh lines with optional metric-aware spacing
+  const meshLines = useMemo(() => {
+    if (!embedding) return []
+
+    const [[uMin, uMax], [vMin, vMax], [wMin, wMax]] = ranges
+
+    const uSpan = uMax - uMin
+    const vSpan = vMax - vMin
+    const wSpan = wMax - wMin
+
+    const uDivisions = Math.max(2, Math.round(resolution * uSpan / 10))
+    const vDivisions = Math.max(2, Math.round(resolution * vSpan / 10))
+    const wDivisions = Math.max(2, Math.round(resolution * wSpan / 10))
+
+    const uStep = uSpan / uDivisions
+    const vStep = vSpan / vDivisions
+    const wStep = wSpan / wDivisions
+
+    const lines = []
+
+    // If metric-aware, compute proper distance scaling
+    const getSpacing = () => {
+      if (!metricAware || !spatialMetric) return 0.1
+
+      // Get average scale factors across the grid
+      const samplePoints = [
+        [(uMin + uMax) / 2, (vMin + vMax) / 2, (wMin + wMax) / 2]
+      ]
+
+      const scales = distanceScaleFactors(spatialMetric, samplePoints[0])
+      return Math.min(scales.u, scales.v, scales.w) / resolution * 2
+    }
+
+    const spacing = getSpacing()
+
+    // Lines along U (varying u, fixed v, w)
+    for (let j = 0; j <= vDivisions; j++) {
+      for (let k = 0; k <= wDivisions; k++) {
+        const v = vMin + j * vStep
+        const w = wMin + k * wStep
+        const points = []
+
+        for (let i = 0; i <= uDivisions; i++) {
+          const u = uMin + i * uStep
+          const [x, y, z] = embedding(u, v, w)
+          points.push(new THREE.Vector3(x, y, z))
+        }
+
+        // Apply metric-aware spacing if enabled
+        let finalPoints = points
+        if (metricAware && spatialMetric && spacing > 0) {
+          const paramPoints = []
+          for (let i = 0; i <= uDivisions; i++) {
+            paramPoints.push([uMin + i * uStep, v, w])
+          }
+          finalPoints = equidistantPoints(spatialMetric, paramPoints, spacing)
+            .map(([u, v, w]) => {
+              const [x, y, z] = embedding(u, v, w)
+              return new THREE.Vector3(x, y, z)
+            })
+        }
+
+        if (finalPoints.length > 1) {
+          lines.push({
+            geometry: new THREE.BufferGeometry().setFromPoints(finalPoints),
+            type: 'u'
+          })
+        }
+      }
+    }
+
+    // Lines along V (varying v, fixed u, w)
+    for (let i = 0; i <= uDivisions; i++) {
+      for (let k = 0; k <= wDivisions; k++) {
+        const u = uMin + i * uStep
+        const w = wMin + k * wStep
+        const points = []
+
+        for (let j = 0; j <= vDivisions; j++) {
+          const v = vMin + j * vStep
+          const [x, y, z] = embedding(u, v, w)
+          points.push(new THREE.Vector3(x, y, z))
+        }
+
+        let finalPoints = points
+        if (metricAware && spatialMetric && spacing > 0) {
+          const paramPoints = []
+          for (let j = 0; j <= vDivisions; j++) {
+            paramPoints.push([u, vMin + j * vStep, w])
+          }
+          finalPoints = equidistantPoints(spatialMetric, paramPoints, spacing)
+            .map(([u, v, w]) => {
+              const [x, y, z] = embedding(u, v, w)
+              return new THREE.Vector3(x, y, z)
+            })
+        }
+
+        if (finalPoints.length > 1) {
+          lines.push({
+            geometry: new THREE.BufferGeometry().setFromPoints(finalPoints),
+            type: 'v'
+          })
+        }
+      }
+    }
+
+    // Lines along W (varying w, fixed u, v)
+    for (let i = 0; i <= uDivisions; i++) {
+      for (let j = 0; j <= vDivisions; j++) {
+        const u = uMin + i * uStep
+        const v = vMin + j * vStep
+        const points = []
+
+        for (let k = 0; k <= wDivisions; k++) {
+          const w = wMin + k * wStep
+          const [x, y, z] = embedding(u, v, w)
+          points.push(new THREE.Vector3(x, y, z))
+        }
+
+        let finalPoints = points
+        if (metricAware && spatialMetric && spacing > 0) {
+          const paramPoints = []
+          for (let k = 0; k <= wDivisions; k++) {
+            paramPoints.push([u, v, wMin + k * wStep])
+          }
+          finalPoints = equidistantPoints(spatialMetric, paramPoints, spacing)
+            .map(([u, v, w]) => {
+              const [x, y, z] = embedding(u, v, w)
+              return new THREE.Vector3(x, y, z)
+            })
+        }
+
+        if (finalPoints.length > 1) {
+          lines.push({
+            geometry: new THREE.BufferGeometry().setFromPoints(finalPoints),
+            type: 'w'
+          })
+        }
+      }
+    }
+
+    return lines
+  }, [embedding, ranges, resolution, metricAware, spatialMetric])
 
   useEffect(() => {
     if (!containerRef.current || !embedding) return
@@ -53,73 +209,28 @@ function MetricGrid({
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
 
-    // Create grid group
+    // Material for grid lines
     const color = new THREE.Color(lineColor)
     const material = new THREE.LineBasicMaterial({ color })
+
+    // Grid group
     const gridGroup = new THREE.Group()
 
-    const [uRange, vRange, wRange] = ranges
-    const uDivisions = Math.max(2, Math.round(resolution * (uRange[1] - uRange[0]) / 10))
-    const vDivisions = Math.max(2, Math.round(resolution * (vRange[1] - vRange[0]) / 10))
-    const wDivisions = Math.max(2, Math.round(resolution * (wRange[1] - wRange[0]) / 10))
+    // Add all generated lines
+    meshLines.forEach(({ geometry }) => {
+      const line = new THREE.Line(geometry, material)
+      gridGroup.add(line)
+    })
 
-    const uStep = (uRange[1] - uRange[0]) / uDivisions
-    const vStep = (vRange[1] - vRange[0]) / vDivisions
-    const wStep = (wRange[1] - wRange[0]) / wDivisions
-
-    // Generate grid lines along each coordinate direction
-    // Lines along u (varying u, fixed v, w)
-    for (let j = 0; j <= vDivisions; j++) {
-      const v = vRange[0] + j * vStep
-      for (let k = 0; k <= wDivisions; k++) {
-        const w = wRange[0] + k * wStep
-        const points = []
-        for (let i = 0; i <= uDivisions; i++) {
-          const u = uRange[0] + i * uStep
-          const [x, y, z] = embedding(u, v, w)
-          points.push(new THREE.Vector3(x, y, z))
-        }
-        gridGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material))
-      }
+    // Axes helper
+    if (showAxes) {
+      const axesHelper = new THREE.AxesHelper(axisSize)
+      gridGroup.add(axesHelper)
     }
-
-    // Lines along v (varying v, fixed u, w)
-    for (let i = 0; i <= uDivisions; i++) {
-      const u = uRange[0] + i * uStep
-      for (let k = 0; k <= wDivisions; k++) {
-        const w = wRange[0] + k * wStep
-        const points = []
-        for (let j = 0; j <= vDivisions; j++) {
-          const v = vRange[0] + j * vStep
-          const [x, y, z] = embedding(u, v, w)
-          points.push(new THREE.Vector3(x, y, z))
-        }
-        gridGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material))
-      }
-    }
-
-    // Lines along w (varying w, fixed u, v)
-    for (let i = 0; i <= uDivisions; i++) {
-      const u = uRange[0] + i * uStep
-      for (let j = 0; j <= vDivisions; j++) {
-        const v = vRange[0] + j * vStep
-        const points = []
-        for (let k = 0; k <= wDivisions; k++) {
-          const w = wRange[0] + k * wStep
-          const [x, y, z] = embedding(u, v, w)
-          points.push(new THREE.Vector3(x, y, z))
-        }
-        gridGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material))
-      }
-    }
-
-    // Axes
-    const axesHelper = new THREE.AxesHelper(5)
-    gridGroup.add(axesHelper)
 
     scene.add(gridGroup)
 
-    // Animation
+    // Animation loop
     let running = true
     const animate = () => {
       if (!running) return
@@ -129,7 +240,7 @@ function MetricGrid({
     }
     animate()
 
-    // Resize
+    // Resize handler
     const handleResize = () => {
       camera.aspect = container.clientWidth / container.clientHeight
       camera.updateProjectionMatrix()
@@ -137,92 +248,22 @@ function MetricGrid({
     }
     window.addEventListener('resize', handleResize)
 
+    // Cleanup
     return () => {
       running = false
       window.removeEventListener('resize', handleResize)
       container.removeChild(renderer.domElement)
       renderer.dispose()
       controls.dispose()
+
+      meshLines.forEach(({ geometry }) => geometry.dispose())
+      material.dispose()
     }
-  }, [embedding, ranges, resolution, lineColor, metric])
+  }, [embedding, ranges, resolution, lineColor, showAxes, axisSize, meshLines])
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
   )
-}
-
-// ============ Predefined Metrics ============
-
-/**
- * Cartesian coordinates (flat space)
- * Embedding: identity
- */
-export const cartesianMetric = {
-  name: 'Cartesian',
-  embedding: (x, y, z) => [x, y, z],
-  ranges: [[-5, 5], [-5, 5], [-5, 5]],
-}
-
-/**
- * Cylindrical coordinates (r, θ, z)
- * Embedding: x = r cos θ, y = r sin θ, z = z
- */
-export const cylindricalMetric = {
-  name: 'Cylindrical',
-  embedding: (r, theta, z) => [r * Math.cos(theta), r * Math.sin(theta), z],
-  ranges: [[0, 5], [0, 2 * Math.PI], [-3, 3]],
-}
-
-/**
- * Spherical coordinates (r, θ, φ)
- * Embedding: x = r sin θ cos φ, y = r sin θ sin φ, z = r cos θ
- */
-export const sphericalMetric = {
-  name: 'Spherical',
-  embedding: (r, theta, phi) => [
-    r * Math.sin(theta) * Math.cos(phi),
-    r * Math.sin(theta) * Math.sin(phi),
-    r * Math.cos(theta)
-  ],
-  ranges: [[0, 5], [0, Math.PI], [0, 2 * Math.PI]],
-}
-
-/**
- * Q1: Product-form quaternion exponential coordinates (ω, θ, φ)
- * Embedding uses the vector part of e^z = e^ω·e^(θi)·e^(φj)·e^(ρk) with ρ=0
- */
-export const q1Metric = {
-  name: 'Q1 (Quaternion Product)',
-  embedding: (omega, theta, phi) => {
-    const A = Math.exp(omega)
-    const cosT = Math.cos(theta), sinT = Math.sin(theta)
-    const cosP = Math.cos(phi), sinP = Math.sin(phi)
-    // Vector part of the product-form exponential (with ρ=0)
-    const b = A * (sinT * cosP)  // x component
-    const c = A * (cosT * sinP)  // y component  
-    const d = A * (cosT * cosP * 0 + sinT * sinP * 1)  // z component (simplified for ρ=0)
-    return [b, c, d]
-  },
-  ranges: [[0, 1], [-Math.PI/4, Math.PI/4], [-Math.PI/4, Math.PI/4]],
-}
-
-/**
- * Schwarzschild coordinates (t, r, θ, φ) - spatial slice
- * For visualizing curved spacetime around a massive object
- * Embedding shows the "gravity well"
- */
-export const schwarzschildMetric = {
-  name: 'Schwarzschild (Gravity Well)',
-  // Flamm's paraboloid embedding for spatial curvature
-  embedding: (r, theta, phi) => {
-    const rs = 2  // Schwarzschild radius (normalized)
-    const x = r * Math.sin(theta) * Math.cos(phi)
-    const y = r * Math.sin(theta) * Math.sin(phi)
-    // z shows the curvature: z = 2√(rs(r - rs))
-    const z = r > rs ? 2 * Math.sqrt(rs * (r - rs)) : 0
-    return [x, y, z]
-  },
-  ranges: [[2, 10], [0, Math.PI], [0, 2 * Math.PI]],
 }
 
 export default MetricGrid
