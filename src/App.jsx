@@ -1,7 +1,29 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
+import ChaptersList from './components/chapters/ChaptersList'
+import Chapter1 from './components/chapters/ch1/Chapter1'
+import Chapter2 from './components/chapters/ch2/Chapter2'
+import Chapter3 from './components/chapters/ch3/Chapter3'
+import Chapter4 from './components/chapters/ch4/Chapter4'
+import Chapter5 from './components/chapters/ch5/Chapter5'
+import Appendix from './components/chapters/appendix/Appendix'
 
 function App() {
-  return <Dashboard />
+  return (
+    <BrowserRouter basename="/mtw">
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/chapters" element={<ChaptersList />} />
+        <Route path="/chapter/1" element={<Chapter1 />} />
+        <Route path="/chapter/2" element={<Chapter2 />} />
+        <Route path="/chapter/3" element={<Chapter3 />} />
+        <Route path="/chapter/4" element={<Chapter4 />} />
+        <Route path="/chapter/5" element={<Chapter5 />} />
+        <Route path="/appendices" element={<Appendix />} />
+        <Route path="/appendix/:id" element={<Appendix />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
