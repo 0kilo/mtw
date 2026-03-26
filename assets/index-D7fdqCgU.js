@@ -4056,7 +4056,7 @@ void main() {
 
 	}
 
-}`,vf=class{constructor(){this.texture=null,this.mesh=null,this.depthNear=0,this.depthFar=0}init(e,t){if(this.texture===null){let n=new ac(e.texture);(e.depthNear!==t.depthNear||e.depthFar!==t.depthFar)&&(this.depthNear=e.depthNear,this.depthFar=e.depthFar),this.texture=n}}getMesh(e){if(this.texture!==null&&this.mesh===null){let t=e.cameras[0].viewport,n=new gc({vertexShader:gf,fragmentShader:_f,uniforms:{depthColor:{value:this.texture},depthWidth:{value:t.z},depthHeight:{value:t.w}}});this.mesh=new js(new sc(20,20),n)}return this.mesh}reset(){this.texture=null,this.mesh=null}getDepthTexture(){return this.texture}},yf=class extends ji{constructor(e,t){super();let n=this,r=null,i=1,a=null,o=`local-floor`,s=1,c=null,l=null,u=null,d=null,f=null,p=null,m=typeof XRWebGLBinding<`u`,h=new vf,g={},_=t.getContextAttributes(),v=null,y=null,b=[],x=[],S=new aa,C=null,w=new Uc;w.viewport=new Ta;let T=new Uc;T.viewport=new Ta;let E=[w,T],D=new Jc,O=null,ee=null;this.cameraAutoUpdate=!0,this.enabled=!1,this.isPresenting=!1,this.getController=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getTargetRaySpace()},this.getControllerGrip=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getGripSpace()},this.getHand=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getHandSpace()};function k(e){let t=x.indexOf(e.inputSource);if(t===-1)return;let n=b[t];n!==void 0&&(n.update(e.inputSource,e.frame,c||a),n.dispatchEvent({type:e.type,data:e.inputSource}))}function A(){r.removeEventListener(`select`,k),r.removeEventListener(`selectstart`,k),r.removeEventListener(`selectend`,k),r.removeEventListener(`squeeze`,k),r.removeEventListener(`squeezestart`,k),r.removeEventListener(`squeezeend`,k),r.removeEventListener(`end`,A),r.removeEventListener(`inputsourceschange`,te);for(let e=0;e<b.length;e++){let t=x[e];t!==null&&(x[e]=null,b[e].disconnect(t))}O=null,ee=null,h.reset();for(let e in g)delete g[e];e.setRenderTarget(v),f=null,d=null,u=null,r=null,y=null,se.stop(),n.isPresenting=!1,e.setPixelRatio(C),e.setSize(S.width,S.height,!1),n.dispatchEvent({type:`sessionend`})}this.setFramebufferScaleFactor=function(e){i=e,n.isPresenting===!0&&Ei(`WebXRManager: Cannot change framebuffer scale while presenting.`)},this.setReferenceSpaceType=function(e){o=e,n.isPresenting===!0&&Ei(`WebXRManager: Cannot change reference space type while presenting.`)},this.getReferenceSpace=function(){return c||a},this.setReferenceSpace=function(e){c=e},this.getBaseLayer=function(){return d===null?f:d},this.getBinding=function(){return u===null&&m&&(u=new XRWebGLBinding(r,t)),u},this.getFrame=function(){return p},this.getSession=function(){return r},this.setSession=async function(l){if(r=l,r!==null){if(v=e.getRenderTarget(),r.addEventListener(`select`,k),r.addEventListener(`selectstart`,k),r.addEventListener(`selectend`,k),r.addEventListener(`squeeze`,k),r.addEventListener(`squeezestart`,k),r.addEventListener(`squeezeend`,k),r.addEventListener(`end`,A),r.addEventListener(`inputsourceschange`,te),_.xrCompatible!==!0&&await t.makeXRCompatible(),C=e.getPixelRatio(),e.getSize(S),m&&`createProjectionLayer`in XRWebGLBinding.prototype){let n=null,a=null,o=null;_.depth&&(o=_.stencil?t.DEPTH24_STENCIL8:t.DEPTH_COMPONENT24,n=_.stencil?hr:mr,a=_.stencil?cr:rr);let s={colorFormat:t.RGBA8,depthFormat:o,scaleFactor:i};u=this.getBinding(),d=u.createProjectionLayer(s),r.updateRenderState({layers:[d]}),e.setPixelRatio(1),e.setSize(d.textureWidth,d.textureHeight,!1),y=new Da(d.textureWidth,d.textureHeight,{format:pr,type:Qn,depthTexture:new rc(d.textureWidth,d.textureHeight,a,void 0,void 0,void 0,void 0,void 0,void 0,n),stencilBuffer:_.stencil,colorSpace:e.outputColorSpace,samples:_.antialias?4:0,resolveDepthBuffer:d.ignoreDepthValues===!1,resolveStencilBuffer:d.ignoreDepthValues===!1})}else{let n={antialias:_.antialias,alpha:!0,depth:_.depth,stencil:_.stencil,framebufferScaleFactor:i};f=new XRWebGLLayer(r,t,n),r.updateRenderState({baseLayer:f}),e.setPixelRatio(1),e.setSize(f.framebufferWidth,f.framebufferHeight,!1),y=new Da(f.framebufferWidth,f.framebufferHeight,{format:pr,type:Qn,colorSpace:e.outputColorSpace,stencilBuffer:_.stencil,resolveDepthBuffer:f.ignoreDepthValues===!1,resolveStencilBuffer:f.ignoreDepthValues===!1})}y.isXRRenderTarget=!0,this.setFoveation(s),c=null,a=await r.requestReferenceSpace(o),se.setContext(r),se.start(),n.isPresenting=!0,n.dispatchEvent({type:`sessionstart`})}},this.getEnvironmentBlendMode=function(){if(r!==null)return r.environmentBlendMode},this.getDepthTexture=function(){return h.getDepthTexture()};function te(e){for(let t=0;t<e.removed.length;t++){let n=e.removed[t],r=x.indexOf(n);r>=0&&(x[r]=null,b[r].disconnect(n))}for(let t=0;t<e.added.length;t++){let n=e.added[t],r=x.indexOf(n);if(r===-1){for(let e=0;e<b.length;e++)if(e>=x.length){x.push(n),r=e;break}else if(x[e]===null){x[e]=n,r=e;break}if(r===-1)break}let i=b[r];i&&i.connect(n)}}let ne=new P,re=new P;function ie(e,t,n){ne.setFromMatrixPosition(t.matrixWorld),re.setFromMatrixPosition(n.matrixWorld);let r=ne.distanceTo(re),i=t.projectionMatrix.elements,a=n.projectionMatrix.elements,o=i[14]/(i[10]-1),s=i[14]/(i[10]+1),c=(i[9]+1)/i[5],l=(i[9]-1)/i[5],u=(i[8]-1)/i[0],d=(a[8]+1)/a[0],f=o*u,p=o*d,m=r/(-u+d),h=m*-u;if(t.matrixWorld.decompose(e.position,e.quaternion,e.scale),e.translateX(h),e.translateZ(m),e.matrixWorld.compose(e.position,e.quaternion,e.scale),e.matrixWorldInverse.copy(e.matrixWorld).invert(),i[10]===-1)e.projectionMatrix.copy(t.projectionMatrix),e.projectionMatrixInverse.copy(t.projectionMatrixInverse);else{let t=o+m,n=s+m,i=f-h,a=p+(r-h),u=c*s/n*t,d=l*s/n*t;e.projectionMatrix.makePerspective(i,a,u,d,t,n),e.projectionMatrixInverse.copy(e.projectionMatrix).invert()}}function j(e,t){t===null?e.matrixWorld.copy(e.matrix):e.matrixWorld.multiplyMatrices(t.matrixWorld,e.matrix),e.matrixWorldInverse.copy(e.matrixWorld).invert()}this.updateCamera=function(e){if(r===null)return;let t=e.near,n=e.far;h.texture!==null&&(h.depthNear>0&&(t=h.depthNear),h.depthFar>0&&(n=h.depthFar)),D.near=T.near=w.near=t,D.far=T.far=w.far=n,(O!==D.near||ee!==D.far)&&(r.updateRenderState({depthNear:D.near,depthFar:D.far}),O=D.near,ee=D.far),D.layers.mask=e.layers.mask|6,w.layers.mask=D.layers.mask&-5,T.layers.mask=D.layers.mask&-3;let i=e.parent,a=D.cameras;j(D,i);for(let e=0;e<a.length;e++)j(a[e],i);a.length===2?ie(D,w,T):D.projectionMatrix.copy(w.projectionMatrix),M(e,D,i)};function M(e,t,n){n===null?e.matrix.copy(t.matrixWorld):(e.matrix.copy(n.matrixWorld),e.matrix.invert(),e.matrix.multiply(t.matrixWorld)),e.matrix.decompose(e.position,e.quaternion,e.scale),e.updateMatrixWorld(!0),e.projectionMatrix.copy(t.projectionMatrix),e.projectionMatrixInverse.copy(t.projectionMatrixInverse),e.isPerspectiveCamera&&(e.fov=Fi*2*Math.atan(1/e.projectionMatrix.elements[5]),e.zoom=1)}this.getCamera=function(){return D},this.getFoveation=function(){if(!(d===null&&f===null))return s},this.setFoveation=function(e){s=e,d!==null&&(d.fixedFoveation=e),f!==null&&f.fixedFoveation!==void 0&&(f.fixedFoveation=e)},this.hasDepthSensing=function(){return h.texture!==null},this.getDepthSensingMesh=function(){return h.getMesh(D)},this.getCameraTexture=function(e){return g[e]};let ae=null;function oe(t,i){if(l=i.getViewerPose(c||a),p=i,l!==null){let t=l.views;f!==null&&(e.setRenderTargetFramebuffer(y,f.framebuffer),e.setRenderTarget(y));let i=!1;t.length!==D.cameras.length&&(D.cameras.length=0,i=!0);for(let n=0;n<t.length;n++){let r=t[n],a=null;if(f!==null)a=f.getViewport(r);else{let t=u.getViewSubImage(d,r);a=t.viewport,n===0&&(e.setRenderTargetTextures(y,t.colorTexture,t.depthStencilTexture),e.setRenderTarget(y))}let o=E[n];o===void 0&&(o=new Uc,o.layers.enable(n),o.viewport=new Ta,E[n]=o),o.matrix.fromArray(r.transform.matrix),o.matrix.decompose(o.position,o.quaternion,o.scale),o.projectionMatrix.fromArray(r.projectionMatrix),o.projectionMatrixInverse.copy(o.projectionMatrix).invert(),o.viewport.set(a.x,a.y,a.width,a.height),n===0&&(D.matrix.copy(o.matrix),D.matrix.decompose(D.position,D.quaternion,D.scale)),i===!0&&D.cameras.push(o)}let a=r.enabledFeatures;if(a&&a.includes(`depth-sensing`)&&r.depthUsage==`gpu-optimized`&&m){u=n.getBinding();let e=u.getDepthInformation(t[0]);e&&e.isValid&&e.texture&&h.init(e,r.renderState)}if(a&&a.includes(`camera-access`)&&m){e.state.unbindTexture(),u=n.getBinding();for(let e=0;e<t.length;e++){let n=t[e].camera;if(n){let e=g[n];e||(e=new ac,g[n]=e);let t=u.getCameraImage(n);e.sourceTexture=t}}}}for(let e=0;e<b.length;e++){let t=x[e],n=b[e];t!==null&&n!==void 0&&n.update(t,i,c||a)}ae&&ae(t,i),i.detectedPlanes&&n.dispatchEvent({type:`planesdetected`,data:i}),p=null}let se=new fl;se.setAnimationLoop(oe),this.setAnimationLoop=function(e){ae=e},this.dispose=function(){}}},bf=new Ba,xf=new Aa;function Sf(e,t){function n(e,t){e.matrixAutoUpdate===!0&&e.updateMatrix(),t.value.copy(e.matrix)}function r(t,n){n.color.getRGB(t.fogColor.value,fc(e)),n.isFog?(t.fogNear.value=n.near,t.fogFar.value=n.far):n.isFogExp2&&(t.fogDensity.value=n.density)}function i(e,t,n,r,i){t.isMeshBasicMaterial?a(e,t):t.isMeshLambertMaterial?(a(e,t),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)):t.isMeshToonMaterial?(a(e,t),d(e,t)):t.isMeshPhongMaterial?(a(e,t),u(e,t),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)):t.isMeshStandardMaterial?(a(e,t),f(e,t),t.isMeshPhysicalMaterial&&p(e,t,i)):t.isMeshMatcapMaterial?(a(e,t),m(e,t)):t.isMeshDepthMaterial?a(e,t):t.isMeshDistanceMaterial?(a(e,t),h(e,t)):t.isMeshNormalMaterial?a(e,t):t.isLineBasicMaterial?(o(e,t),t.isLineDashedMaterial&&s(e,t)):t.isPointsMaterial?c(e,t,n,r):t.isSpriteMaterial?l(e,t):t.isShadowMaterial?(e.color.value.copy(t.color),e.opacity.value=t.opacity):t.isShaderMaterial&&(t.uniformsNeedUpdate=!1)}function a(e,r){e.opacity.value=r.opacity,r.color&&e.diffuse.value.copy(r.color),r.emissive&&e.emissive.value.copy(r.emissive).multiplyScalar(r.emissiveIntensity),r.map&&(e.map.value=r.map,n(r.map,e.mapTransform)),r.alphaMap&&(e.alphaMap.value=r.alphaMap,n(r.alphaMap,e.alphaMapTransform)),r.bumpMap&&(e.bumpMap.value=r.bumpMap,n(r.bumpMap,e.bumpMapTransform),e.bumpScale.value=r.bumpScale,r.side===1&&(e.bumpScale.value*=-1)),r.normalMap&&(e.normalMap.value=r.normalMap,n(r.normalMap,e.normalMapTransform),e.normalScale.value.copy(r.normalScale),r.side===1&&e.normalScale.value.negate()),r.displacementMap&&(e.displacementMap.value=r.displacementMap,n(r.displacementMap,e.displacementMapTransform),e.displacementScale.value=r.displacementScale,e.displacementBias.value=r.displacementBias),r.emissiveMap&&(e.emissiveMap.value=r.emissiveMap,n(r.emissiveMap,e.emissiveMapTransform)),r.specularMap&&(e.specularMap.value=r.specularMap,n(r.specularMap,e.specularMapTransform)),r.alphaTest>0&&(e.alphaTest.value=r.alphaTest);let i=t.get(r),a=i.envMap,o=i.envMapRotation;a&&(e.envMap.value=a,bf.copy(o),bf.x*=-1,bf.y*=-1,bf.z*=-1,a.isCubeTexture&&a.isRenderTargetTexture===!1&&(bf.y*=-1,bf.z*=-1),e.envMapRotation.value.setFromMatrix4(xf.makeRotationFromEuler(bf)),e.flipEnvMap.value=a.isCubeTexture&&a.isRenderTargetTexture===!1?-1:1,e.reflectivity.value=r.reflectivity,e.ior.value=r.ior,e.refractionRatio.value=r.refractionRatio),r.lightMap&&(e.lightMap.value=r.lightMap,e.lightMapIntensity.value=r.lightMapIntensity,n(r.lightMap,e.lightMapTransform)),r.aoMap&&(e.aoMap.value=r.aoMap,e.aoMapIntensity.value=r.aoMapIntensity,n(r.aoMap,e.aoMapTransform))}function o(e,t){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,t.map&&(e.map.value=t.map,n(t.map,e.mapTransform))}function s(e,t){e.dashSize.value=t.dashSize,e.totalSize.value=t.dashSize+t.gapSize,e.scale.value=t.scale}function c(e,t,r,i){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,e.size.value=t.size*r,e.scale.value=i*.5,t.map&&(e.map.value=t.map,n(t.map,e.uvTransform)),t.alphaMap&&(e.alphaMap.value=t.alphaMap,n(t.alphaMap,e.alphaMapTransform)),t.alphaTest>0&&(e.alphaTest.value=t.alphaTest)}function l(e,t){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,e.rotation.value=t.rotation,t.map&&(e.map.value=t.map,n(t.map,e.mapTransform)),t.alphaMap&&(e.alphaMap.value=t.alphaMap,n(t.alphaMap,e.alphaMapTransform)),t.alphaTest>0&&(e.alphaTest.value=t.alphaTest)}function u(e,t){e.specular.value.copy(t.specular),e.shininess.value=Math.max(t.shininess,1e-4)}function d(e,t){t.gradientMap&&(e.gradientMap.value=t.gradientMap)}function f(e,t){e.metalness.value=t.metalness,t.metalnessMap&&(e.metalnessMap.value=t.metalnessMap,n(t.metalnessMap,e.metalnessMapTransform)),e.roughness.value=t.roughness,t.roughnessMap&&(e.roughnessMap.value=t.roughnessMap,n(t.roughnessMap,e.roughnessMapTransform)),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)}function p(e,t,r){e.ior.value=t.ior,t.sheen>0&&(e.sheenColor.value.copy(t.sheenColor).multiplyScalar(t.sheen),e.sheenRoughness.value=t.sheenRoughness,t.sheenColorMap&&(e.sheenColorMap.value=t.sheenColorMap,n(t.sheenColorMap,e.sheenColorMapTransform)),t.sheenRoughnessMap&&(e.sheenRoughnessMap.value=t.sheenRoughnessMap,n(t.sheenRoughnessMap,e.sheenRoughnessMapTransform))),t.clearcoat>0&&(e.clearcoat.value=t.clearcoat,e.clearcoatRoughness.value=t.clearcoatRoughness,t.clearcoatMap&&(e.clearcoatMap.value=t.clearcoatMap,n(t.clearcoatMap,e.clearcoatMapTransform)),t.clearcoatRoughnessMap&&(e.clearcoatRoughnessMap.value=t.clearcoatRoughnessMap,n(t.clearcoatRoughnessMap,e.clearcoatRoughnessMapTransform)),t.clearcoatNormalMap&&(e.clearcoatNormalMap.value=t.clearcoatNormalMap,n(t.clearcoatNormalMap,e.clearcoatNormalMapTransform),e.clearcoatNormalScale.value.copy(t.clearcoatNormalScale),t.side===1&&e.clearcoatNormalScale.value.negate())),t.dispersion>0&&(e.dispersion.value=t.dispersion),t.iridescence>0&&(e.iridescence.value=t.iridescence,e.iridescenceIOR.value=t.iridescenceIOR,e.iridescenceThicknessMinimum.value=t.iridescenceThicknessRange[0],e.iridescenceThicknessMaximum.value=t.iridescenceThicknessRange[1],t.iridescenceMap&&(e.iridescenceMap.value=t.iridescenceMap,n(t.iridescenceMap,e.iridescenceMapTransform)),t.iridescenceThicknessMap&&(e.iridescenceThicknessMap.value=t.iridescenceThicknessMap,n(t.iridescenceThicknessMap,e.iridescenceThicknessMapTransform))),t.transmission>0&&(e.transmission.value=t.transmission,e.transmissionSamplerMap.value=r.texture,e.transmissionSamplerSize.value.set(r.width,r.height),t.transmissionMap&&(e.transmissionMap.value=t.transmissionMap,n(t.transmissionMap,e.transmissionMapTransform)),e.thickness.value=t.thickness,t.thicknessMap&&(e.thicknessMap.value=t.thicknessMap,n(t.thicknessMap,e.thicknessMapTransform)),e.attenuationDistance.value=t.attenuationDistance,e.attenuationColor.value.copy(t.attenuationColor)),t.anisotropy>0&&(e.anisotropyVector.value.set(t.anisotropy*Math.cos(t.anisotropyRotation),t.anisotropy*Math.sin(t.anisotropyRotation)),t.anisotropyMap&&(e.anisotropyMap.value=t.anisotropyMap,n(t.anisotropyMap,e.anisotropyMapTransform))),e.specularIntensity.value=t.specularIntensity,e.specularColor.value.copy(t.specularColor),t.specularColorMap&&(e.specularColorMap.value=t.specularColorMap,n(t.specularColorMap,e.specularColorMapTransform)),t.specularIntensityMap&&(e.specularIntensityMap.value=t.specularIntensityMap,n(t.specularIntensityMap,e.specularIntensityMapTransform))}function m(e,t){t.matcap&&(e.matcap.value=t.matcap)}function h(e,n){let r=t.get(n).light;e.referencePosition.value.setFromMatrixPosition(r.matrixWorld),e.nearDistance.value=r.shadow.camera.near,e.farDistance.value=r.shadow.camera.far}return{refreshFogUniforms:r,refreshMaterialUniforms:i}}function Cf(e,t,n,r){let i={},a={},o=[],s=e.getParameter(e.MAX_UNIFORM_BUFFER_BINDINGS);function c(e,t){let n=t.program;r.uniformBlockBinding(e,n)}function l(e,n){let o=i[e.id];o===void 0&&(m(e),o=u(e),i[e.id]=o,e.addEventListener(`dispose`,g));let s=n.program;r.updateUBOMapping(e,s);let c=t.render.frame;a[e.id]!==c&&(f(e),a[e.id]=c)}function u(t){let n=d();t.__bindingPointIndex=n;let r=e.createBuffer(),i=t.__size,a=t.usage;return e.bindBuffer(e.UNIFORM_BUFFER,r),e.bufferData(e.UNIFORM_BUFFER,i,a),e.bindBuffer(e.UNIFORM_BUFFER,null),e.bindBufferBase(e.UNIFORM_BUFFER,n,r),r}function d(){for(let e=0;e<s;e++)if(o.indexOf(e)===-1)return o.push(e),e;return Di(`WebGLRenderer: Maximum number of simultaneously usable uniforms groups reached.`),0}function f(t){let n=i[t.id],r=t.uniforms,a=t.__cache;e.bindBuffer(e.UNIFORM_BUFFER,n);for(let t=0,n=r.length;t<n;t++){let n=Array.isArray(r[t])?r[t]:[r[t]];for(let r=0,i=n.length;r<i;r++){let i=n[r];if(p(i,t,r,a)===!0){let t=i.__offset,n=Array.isArray(i.value)?i.value:[i.value],r=0;for(let a=0;a<n.length;a++){let o=n[a],s=h(o);typeof o==`number`||typeof o==`boolean`?(i.__data[0]=o,e.bufferSubData(e.UNIFORM_BUFFER,t+r,i.__data)):o.isMatrix3?(i.__data[0]=o.elements[0],i.__data[1]=o.elements[1],i.__data[2]=o.elements[2],i.__data[3]=0,i.__data[4]=o.elements[3],i.__data[5]=o.elements[4],i.__data[6]=o.elements[5],i.__data[7]=0,i.__data[8]=o.elements[6],i.__data[9]=o.elements[7],i.__data[10]=o.elements[8],i.__data[11]=0):(o.toArray(i.__data,r),r+=s.storage/Float32Array.BYTES_PER_ELEMENT)}e.bufferSubData(e.UNIFORM_BUFFER,t,i.__data)}}}e.bindBuffer(e.UNIFORM_BUFFER,null)}function p(e,t,n,r){let i=e.value,a=t+`_`+n;if(r[a]===void 0)return typeof i==`number`||typeof i==`boolean`?r[a]=i:r[a]=i.clone(),!0;{let e=r[a];if(typeof i==`number`||typeof i==`boolean`){if(e!==i)return r[a]=i,!0}else if(e.equals(i)===!1)return e.copy(i),!0}return!1}function m(e){let t=e.uniforms,n=0;for(let e=0,r=t.length;e<r;e++){let r=Array.isArray(t[e])?t[e]:[t[e]];for(let e=0,t=r.length;e<t;e++){let t=r[e],i=Array.isArray(t.value)?t.value:[t.value];for(let e=0,r=i.length;e<r;e++){let r=i[e],a=h(r),o=n%16,s=o%a.boundary,c=o+s;n+=s,c!==0&&16-c<a.storage&&(n+=16-c),t.__data=new Float32Array(a.storage/Float32Array.BYTES_PER_ELEMENT),t.__offset=n,n+=a.storage}}}let r=n%16;return r>0&&(n+=16-r),e.__size=n,e.__cache={},this}function h(e){let t={boundary:0,storage:0};return typeof e==`number`||typeof e==`boolean`?(t.boundary=4,t.storage=4):e.isVector2?(t.boundary=8,t.storage=8):e.isVector3||e.isColor?(t.boundary=16,t.storage=12):e.isVector4?(t.boundary=16,t.storage=16):e.isMatrix3?(t.boundary=48,t.storage=48):e.isMatrix4?(t.boundary=64,t.storage=64):e.isTexture?Ei(`WebGLRenderer: Texture samplers can not be part of an uniforms group.`):Ei(`WebGLRenderer: Unsupported uniform value type.`,e),t}function g(t){let n=t.target;n.removeEventListener(`dispose`,g);let r=o.indexOf(n.__bindingPointIndex);o.splice(r,1),e.deleteBuffer(i[n.id]),delete i[n.id],delete a[n.id]}function _(){for(let t in i)e.deleteBuffer(i[t]);o=[],i={},a={}}return{bind:c,update:l,dispose:_}}var wf=new Uint16Array([12469,15057,12620,14925,13266,14620,13807,14376,14323,13990,14545,13625,14713,13328,14840,12882,14931,12528,14996,12233,15039,11829,15066,11525,15080,11295,15085,10976,15082,10705,15073,10495,13880,14564,13898,14542,13977,14430,14158,14124,14393,13732,14556,13410,14702,12996,14814,12596,14891,12291,14937,11834,14957,11489,14958,11194,14943,10803,14921,10506,14893,10278,14858,9960,14484,14039,14487,14025,14499,13941,14524,13740,14574,13468,14654,13106,14743,12678,14818,12344,14867,11893,14889,11509,14893,11180,14881,10751,14852,10428,14812,10128,14765,9754,14712,9466,14764,13480,14764,13475,14766,13440,14766,13347,14769,13070,14786,12713,14816,12387,14844,11957,14860,11549,14868,11215,14855,10751,14825,10403,14782,10044,14729,9651,14666,9352,14599,9029,14967,12835,14966,12831,14963,12804,14954,12723,14936,12564,14917,12347,14900,11958,14886,11569,14878,11247,14859,10765,14828,10401,14784,10011,14727,9600,14660,9289,14586,8893,14508,8533,15111,12234,15110,12234,15104,12216,15092,12156,15067,12010,15028,11776,14981,11500,14942,11205,14902,10752,14861,10393,14812,9991,14752,9570,14682,9252,14603,8808,14519,8445,14431,8145,15209,11449,15208,11451,15202,11451,15190,11438,15163,11384,15117,11274,15055,10979,14994,10648,14932,10343,14871,9936,14803,9532,14729,9218,14645,8742,14556,8381,14461,8020,14365,7603,15273,10603,15272,10607,15267,10619,15256,10631,15231,10614,15182,10535,15118,10389,15042,10167,14963,9787,14883,9447,14800,9115,14710,8665,14615,8318,14514,7911,14411,7507,14279,7198,15314,9675,15313,9683,15309,9712,15298,9759,15277,9797,15229,9773,15166,9668,15084,9487,14995,9274,14898,8910,14800,8539,14697,8234,14590,7790,14479,7409,14367,7067,14178,6621,15337,8619,15337,8631,15333,8677,15325,8769,15305,8871,15264,8940,15202,8909,15119,8775,15022,8565,14916,8328,14804,8009,14688,7614,14569,7287,14448,6888,14321,6483,14088,6171,15350,7402,15350,7419,15347,7480,15340,7613,15322,7804,15287,7973,15229,8057,15148,8012,15046,7846,14933,7611,14810,7357,14682,7069,14552,6656,14421,6316,14251,5948,14007,5528,15356,5942,15356,5977,15353,6119,15348,6294,15332,6551,15302,6824,15249,7044,15171,7122,15070,7050,14949,6861,14818,6611,14679,6349,14538,6067,14398,5651,14189,5311,13935,4958,15359,4123,15359,4153,15356,4296,15353,4646,15338,5160,15311,5508,15263,5829,15188,6042,15088,6094,14966,6001,14826,5796,14678,5543,14527,5287,14377,4985,14133,4586,13869,4257,15360,1563,15360,1642,15358,2076,15354,2636,15341,3350,15317,4019,15273,4429,15203,4732,15105,4911,14981,4932,14836,4818,14679,4621,14517,4386,14359,4156,14083,3795,13808,3437,15360,122,15360,137,15358,285,15355,636,15344,1274,15322,2177,15281,2765,15215,3223,15120,3451,14995,3569,14846,3567,14681,3466,14511,3305,14344,3121,14037,2800,13753,2467,15360,0,15360,1,15359,21,15355,89,15346,253,15325,479,15287,796,15225,1148,15133,1492,15008,1749,14856,1882,14685,1886,14506,1783,14324,1608,13996,1398,13702,1183]),Tf=null;function Ef(){return Tf===null&&(Tf=new Ps(wf,16,16,vr,ar),Tf.name=`DFG_LUT`,Tf.minFilter=Yn,Tf.magFilter=Yn,Tf.wrapS=Wn,Tf.wrapT=Wn,Tf.generateMipmaps=!1,Tf.needsUpdate=!0),Tf}var Df=class{constructor(e={}){let{canvas:t=xi(),context:n=null,depth:r=!0,stencil:i=!1,alpha:a=!1,antialias:o=!1,premultipliedAlpha:s=!0,preserveDrawingBuffer:c=!1,powerPreference:l=`default`,failIfMajorPerformanceCaveat:u=!1,reversedDepthBuffer:d=!1,outputBufferType:f=Qn}=e;this.isWebGLRenderer=!0;let p;if(n!==null){if(typeof WebGLRenderingContext<`u`&&n instanceof WebGLRenderingContext)throw Error(`THREE.WebGLRenderer: WebGL 1 is not supported since r163.`);p=n.getContextAttributes().alpha}else p=a;let m=f,h=new Set([br,yr,_r]),g=new Set([Qn,rr,tr,cr,or,sr]),_=new Uint32Array(4),v=new Int32Array(4),y=null,b=null,x=[],S=[],C=null;this.domElement=t,this.debug={checkShaderErrors:!0,onShaderError:null},this.autoClear=!0,this.autoClearColor=!0,this.autoClearDepth=!0,this.autoClearStencil=!0,this.sortObjects=!0,this.clippingPlanes=[],this.localClippingEnabled=!1,this.toneMapping=0,this.toneMappingExposure=1,this.transmissionResolutionScale=1;let w=this,T=!1;this._outputColorSpace=di;let E=0,D=0,O=null,ee=-1,k=null,A=new Ta,te=new Ta,ne=null,re=new fo(0),ie=0,j=t.width,M=t.height,ae=1,oe=null,se=null,ce=new Ta(0,0,j,M),le=new Ta(0,0,j,M),ue=!1,de=new Hs,fe=!1,pe=!1,me=new Aa,he=new P,ge=new Ta,_e={background:null,fog:null,environment:null,overrideMaterial:null,isScene:!0},ve=!1;function ye(){return O===null?ae:1}let N=n;function be(e,n){return t.getContext(e,n)}try{let e={alpha:!0,depth:r,stencil:i,antialias:o,premultipliedAlpha:s,preserveDrawingBuffer:c,powerPreference:l,failIfMajorPerformanceCaveat:u};if(`setAttribute`in t&&t.setAttribute(`data-engine`,`three.js r183`),t.addEventListener(`webglcontextlost`,Ke,!1),t.addEventListener(`webglcontextrestored`,qe,!1),t.addEventListener(`webglcontextcreationerror`,Je,!1),N===null){let t=`webgl2`;if(N=be(t,e),N===null)throw be(t)?Error(`Error creating WebGL context with your selected attributes.`):Error(`Error creating WebGL context.`)}}catch(e){throw Di(`WebGLRenderer: `+e.message),e}let xe,Se,Ce,we,Te,Ee,De,Oe,ke,Ae,je,Me,Ne,Pe,Fe,Ie,Le,Re,ze,Be,Ve,He,Ue;function We(){xe=new Gl(N),xe.init(),Ve=new hf(N,xe),Se=new xl(N,xe,e,Ve),Ce=new pf(N,xe),Se.reversedDepthBuffer&&d&&Ce.buffers.depth.setReversed(!0),we=new Jl(N),Te=new Kd,Ee=new mf(N,xe,Ce,Te,Se,Ve,we),De=new Wl(w),Oe=new pl(N),He=new yl(N,Oe),ke=new Kl(N,Oe,we,He),Ae=new Xl(N,ke,Oe,He,we),Re=new Yl(N,Se,Ee),Fe=new Sl(Te),je=new Gd(w,De,xe,Se,He,Fe),Me=new Sf(w,Te),Ne=new Xd,Pe=new rf(xe),Le=new vl(w,De,Ce,Ae,p,s),Ie=new ff(w,Ae,Se),Ue=new Cf(N,we,Se,Ce),ze=new bl(N,xe,we),Be=new ql(N,xe,we),we.programs=je.programs,w.capabilities=Se,w.extensions=xe,w.properties=Te,w.renderLists=Ne,w.shadowMap=Ie,w.state=Ce,w.info=we}We(),m!==1009&&(C=new Ql(m,t.width,t.height,r,i));let Ge=new yf(w,N);this.xr=Ge,this.getContext=function(){return N},this.getContextAttributes=function(){return N.getContextAttributes()},this.forceContextLoss=function(){let e=xe.get(`WEBGL_lose_context`);e&&e.loseContext()},this.forceContextRestore=function(){let e=xe.get(`WEBGL_lose_context`);e&&e.restoreContext()},this.getPixelRatio=function(){return ae},this.setPixelRatio=function(e){e!==void 0&&(ae=e,this.setSize(j,M,!1))},this.getSize=function(e){return e.set(j,M)},this.setSize=function(e,n,r=!0){if(Ge.isPresenting){Ei(`WebGLRenderer: Can't change size while VR device is presenting.`);return}j=e,M=n,t.width=Math.floor(e*ae),t.height=Math.floor(n*ae),r===!0&&(t.style.width=e+`px`,t.style.height=n+`px`),C!==null&&C.setSize(t.width,t.height),this.setViewport(0,0,e,n)},this.getDrawingBufferSize=function(e){return e.set(j*ae,M*ae).floor()},this.setDrawingBufferSize=function(e,n,r){j=e,M=n,ae=r,t.width=Math.floor(e*r),t.height=Math.floor(n*r),this.setViewport(0,0,e,n)},this.setEffects=function(e){if(m===1009){console.error(`THREE.WebGLRenderer: setEffects() requires outputBufferType set to HalfFloatType or FloatType.`);return}if(e){for(let t=0;t<e.length;t++)if(e[t].isOutputPass===!0){console.warn(`THREE.WebGLRenderer: OutputPass is not needed in setEffects(). Tone mapping and color space conversion are applied automatically.`);break}}C.setEffects(e||[])},this.getCurrentViewport=function(e){return e.copy(A)},this.getViewport=function(e){return e.copy(ce)},this.setViewport=function(e,t,n,r){e.isVector4?ce.set(e.x,e.y,e.z,e.w):ce.set(e,t,n,r),Ce.viewport(A.copy(ce).multiplyScalar(ae).round())},this.getScissor=function(e){return e.copy(le)},this.setScissor=function(e,t,n,r){e.isVector4?le.set(e.x,e.y,e.z,e.w):le.set(e,t,n,r),Ce.scissor(te.copy(le).multiplyScalar(ae).round())},this.getScissorTest=function(){return ue},this.setScissorTest=function(e){Ce.setScissorTest(ue=e)},this.setOpaqueSort=function(e){oe=e},this.setTransparentSort=function(e){se=e},this.getClearColor=function(e){return e.copy(Le.getClearColor())},this.setClearColor=function(){Le.setClearColor(...arguments)},this.getClearAlpha=function(){return Le.getClearAlpha()},this.setClearAlpha=function(){Le.setClearAlpha(...arguments)},this.clear=function(e=!0,t=!0,n=!0){let r=0;if(e){let e=!1;if(O!==null){let t=O.texture.format;e=h.has(t)}if(e){let e=O.texture.type,t=g.has(e),n=Le.getClearColor(),r=Le.getClearAlpha(),i=n.r,a=n.g,o=n.b;t?(_[0]=i,_[1]=a,_[2]=o,_[3]=r,N.clearBufferuiv(N.COLOR,0,_)):(v[0]=i,v[1]=a,v[2]=o,v[3]=r,N.clearBufferiv(N.COLOR,0,v))}else r|=N.COLOR_BUFFER_BIT}t&&(r|=N.DEPTH_BUFFER_BIT),n&&(r|=N.STENCIL_BUFFER_BIT,this.state.buffers.stencil.setMask(4294967295)),r!==0&&N.clear(r)},this.clearColor=function(){this.clear(!0,!1,!1)},this.clearDepth=function(){this.clear(!1,!0,!1)},this.clearStencil=function(){this.clear(!1,!1,!0)},this.dispose=function(){t.removeEventListener(`webglcontextlost`,Ke,!1),t.removeEventListener(`webglcontextrestored`,qe,!1),t.removeEventListener(`webglcontextcreationerror`,Je,!1),Le.dispose(),Ne.dispose(),Pe.dispose(),Te.dispose(),De.dispose(),Ae.dispose(),He.dispose(),Ue.dispose(),je.dispose(),Ge.dispose(),Ge.removeEventListener(`sessionstart`,tt),Ge.removeEventListener(`sessionend`,nt),rt.stop()};function Ke(e){e.preventDefault(),wi(`WebGLRenderer: Context Lost.`),T=!0}function qe(){wi(`WebGLRenderer: Context Restored.`),T=!1;let e=we.autoReset,t=Ie.enabled,n=Ie.autoUpdate,r=Ie.needsUpdate,i=Ie.type;We(),we.autoReset=e,Ie.enabled=t,Ie.autoUpdate=n,Ie.needsUpdate=r,Ie.type=i}function Je(e){Di(`WebGLRenderer: A WebGL context could not be created. Reason: `,e.statusMessage)}function Ye(e){let t=e.target;t.removeEventListener(`dispose`,Ye),Xe(t)}function Xe(e){Ze(e),Te.remove(e)}function Ze(e){let t=Te.get(e).programs;t!==void 0&&(t.forEach(function(e){je.releaseProgram(e)}),e.isShaderMaterial&&je.releaseShaderCache(e))}this.renderBufferDirect=function(e,t,n,r,i,a){t===null&&(t=_e);let o=i.isMesh&&i.matrixWorld.determinant()<0,s=ft(e,t,n,r,i);Ce.setMaterial(r,o);let c=n.index,l=1;if(r.wireframe===!0){if(c=ke.getWireframeAttribute(n),c===void 0)return;l=2}let u=n.drawRange,d=n.attributes.position,f=u.start*l,p=(u.start+u.count)*l;a!==null&&(f=Math.max(f,a.start*l),p=Math.min(p,(a.start+a.count)*l)),c===null?d!=null&&(f=Math.max(f,0),p=Math.min(p,d.count)):(f=Math.max(f,0),p=Math.min(p,c.count));let m=p-f;if(m<0||m===1/0)return;He.setup(i,r,s,n,c);let h,g=ze;if(c!==null&&(h=Oe.get(c),g=Be,g.setIndex(h)),i.isMesh)r.wireframe===!0?(Ce.setLineWidth(r.wireframeLinewidth*ye()),g.setMode(N.LINES)):g.setMode(N.TRIANGLES);else if(i.isLine){let e=r.linewidth;e===void 0&&(e=1),Ce.setLineWidth(e*ye()),i.isLineSegments?g.setMode(N.LINES):i.isLineLoop?g.setMode(N.LINE_LOOP):g.setMode(N.LINE_STRIP)}else i.isPoints?g.setMode(N.POINTS):i.isSprite&&g.setMode(N.TRIANGLES);if(i.isBatchedMesh)if(i._multiDrawInstances!==null)Oi(`WebGLRenderer: renderMultiDrawInstances has been deprecated and will be removed in r184. Append to renderMultiDraw arguments and use indirection.`),g.renderMultiDrawInstances(i._multiDrawStarts,i._multiDrawCounts,i._multiDrawCount,i._multiDrawInstances);else if(xe.get(`WEBGL_multi_draw`))g.renderMultiDraw(i._multiDrawStarts,i._multiDrawCounts,i._multiDrawCount);else{let e=i._multiDrawStarts,t=i._multiDrawCounts,n=i._multiDrawCount,a=c?Oe.get(c).bytesPerElement:1,o=Te.get(r).currentProgram.getUniforms();for(let r=0;r<n;r++)o.setValue(N,`_gl_DrawID`,r),g.render(e[r]/a,t[r])}else if(i.isInstancedMesh)g.renderInstances(f,m,i.count);else if(n.isInstancedBufferGeometry){let e=n._maxInstanceCount===void 0?1/0:n._maxInstanceCount,t=Math.min(n.instanceCount,e);g.renderInstances(f,m,t)}else g.render(f,m)};function Qe(e,t,n){e.transparent===!0&&e.side===2&&e.forceSinglePass===!1?(e.side=1,e.needsUpdate=!0,lt(e,t,n),e.side=0,e.needsUpdate=!0,lt(e,t,n),e.side=2):lt(e,t,n)}this.compile=function(e,t,n=null){n===null&&(n=e),b=Pe.get(n),b.init(t),S.push(b),n.traverseVisible(function(e){e.isLight&&e.layers.test(t.layers)&&(b.pushLight(e),e.castShadow&&b.pushShadow(e))}),e!==n&&e.traverseVisible(function(e){e.isLight&&e.layers.test(t.layers)&&(b.pushLight(e),e.castShadow&&b.pushShadow(e))}),b.setupLights();let r=new Set;return e.traverse(function(e){if(!(e.isMesh||e.isPoints||e.isLine||e.isSprite))return;let t=e.material;if(t)if(Array.isArray(t))for(let i=0;i<t.length;i++){let a=t[i];Qe(a,n,e),r.add(a)}else Qe(t,n,e),r.add(t)}),b=S.pop(),r},this.compileAsync=function(e,t,n=null){let r=this.compile(e,t,n);return new Promise(t=>{function n(){if(r.forEach(function(e){Te.get(e).currentProgram.isReady()&&r.delete(e)}),r.size===0){t(e);return}setTimeout(n,10)}xe.get(`KHR_parallel_shader_compile`)===null?setTimeout(n,10):n()})};let $e=null;function et(e){$e&&$e(e)}function tt(){rt.stop()}function nt(){rt.start()}let rt=new fl;rt.setAnimationLoop(et),typeof self<`u`&&rt.setContext(self),this.setAnimationLoop=function(e){$e=e,Ge.setAnimationLoop(e),e===null?rt.stop():rt.start()},Ge.addEventListener(`sessionstart`,tt),Ge.addEventListener(`sessionend`,nt),this.render=function(e,t){if(t!==void 0&&t.isCamera!==!0){Di(`WebGLRenderer.render: camera is not an instance of THREE.Camera.`);return}if(T===!0)return;let n=Ge.enabled===!0&&Ge.isPresenting===!0,r=C!==null&&(O===null||n)&&C.begin(w,O);if(e.matrixWorldAutoUpdate===!0&&e.updateMatrixWorld(),t.parent===null&&t.matrixWorldAutoUpdate===!0&&t.updateMatrixWorld(),Ge.enabled===!0&&Ge.isPresenting===!0&&(C===null||C.isCompositing()===!1)&&(Ge.cameraAutoUpdate===!0&&Ge.updateCamera(t),t=Ge.getCamera()),e.isScene===!0&&e.onBeforeRender(w,e,t,O),b=Pe.get(e,S.length),b.init(t),S.push(b),me.multiplyMatrices(t.projectionMatrix,t.matrixWorldInverse),de.setFromProjectionMatrix(me,_i,t.reversedDepth),pe=this.localClippingEnabled,fe=Fe.init(this.clippingPlanes,pe),y=Ne.get(e,x.length),y.init(),x.push(y),Ge.enabled===!0&&Ge.isPresenting===!0){let e=w.xr.getDepthSensingMesh();e!==null&&it(e,t,-1/0,w.sortObjects)}it(e,t,0,w.sortObjects),y.finish(),w.sortObjects===!0&&y.sort(oe,se),ve=Ge.enabled===!1||Ge.isPresenting===!1||Ge.hasDepthSensing()===!1,ve&&Le.addToRenderList(y,e),this.info.render.frame++,fe===!0&&Fe.beginShadows();let i=b.state.shadowsArray;if(Ie.render(i,e,t),fe===!0&&Fe.endShadows(),this.info.autoReset===!0&&this.info.reset(),(r&&C.hasRenderPass())===!1){let n=y.opaque,r=y.transmissive;if(b.setupLights(),t.isArrayCamera){let i=t.cameras;if(r.length>0)for(let t=0,a=i.length;t<a;t++){let a=i[t];ot(n,r,e,a)}ve&&Le.render(e);for(let t=0,n=i.length;t<n;t++){let n=i[t];at(y,e,n,n.viewport)}}else r.length>0&&ot(n,r,e,t),ve&&Le.render(e),at(y,e,t)}O!==null&&D===0&&(Ee.updateMultisampleRenderTarget(O),Ee.updateRenderTargetMipmap(O)),r&&C.end(w),e.isScene===!0&&e.onAfterRender(w,e,t),He.resetDefaultState(),ee=-1,k=null,S.pop(),S.length>0?(b=S[S.length-1],fe===!0&&Fe.setGlobalState(w.clippingPlanes,b.state.camera)):b=null,x.pop(),y=x.length>0?x[x.length-1]:null};function it(e,t,n,r){if(e.visible===!1)return;if(e.layers.test(t.layers)){if(e.isGroup)n=e.renderOrder;else if(e.isLOD)e.autoUpdate===!0&&e.update(t);else if(e.isLight)b.pushLight(e),e.castShadow&&b.pushShadow(e);else if(e.isSprite){if(!e.frustumCulled||de.intersectsSprite(e)){r&&ge.setFromMatrixPosition(e.matrixWorld).applyMatrix4(me);let t=Ae.update(e),i=e.material;i.visible&&y.push(e,t,i,n,ge.z,null)}}else if((e.isMesh||e.isLine||e.isPoints)&&(!e.frustumCulled||de.intersectsObject(e))){let t=Ae.update(e),i=e.material;if(r&&(e.boundingSphere===void 0?(t.boundingSphere===null&&t.computeBoundingSphere(),ge.copy(t.boundingSphere.center)):(e.boundingSphere===null&&e.computeBoundingSphere(),ge.copy(e.boundingSphere.center)),ge.applyMatrix4(e.matrixWorld).applyMatrix4(me)),Array.isArray(i)){let r=t.groups;for(let a=0,o=r.length;a<o;a++){let o=r[a],s=i[o.materialIndex];s&&s.visible&&y.push(e,t,s,n,ge.z,o)}}else i.visible&&y.push(e,t,i,n,ge.z,null)}}let i=e.children;for(let e=0,a=i.length;e<a;e++)it(i[e],t,n,r)}function at(e,t,n,r){let{opaque:i,transmissive:a,transparent:o}=e;b.setupLightsView(n),fe===!0&&Fe.setGlobalState(w.clippingPlanes,n),r&&Ce.viewport(A.copy(r)),i.length>0&&st(i,t,n),a.length>0&&st(a,t,n),o.length>0&&st(o,t,n),Ce.buffers.depth.setTest(!0),Ce.buffers.depth.setMask(!0),Ce.buffers.color.setMask(!0),Ce.setPolygonOffset(!1)}function ot(e,t,n,r){if((n.isScene===!0?n.overrideMaterial:null)!==null)return;if(b.state.transmissionRenderTarget[r.id]===void 0){let e=xe.has(`EXT_color_buffer_half_float`)||xe.has(`EXT_color_buffer_float`);b.state.transmissionRenderTarget[r.id]=new Da(1,1,{generateMipmaps:!0,type:e?ar:Qn,minFilter:Zn,samples:Math.max(4,Se.samples),stencilBuffer:i,resolveDepthBuffer:!1,resolveStencilBuffer:!1,colorSpace:ma.workingColorSpace})}let a=b.state.transmissionRenderTarget[r.id],o=r.viewport||A;a.setSize(o.z*w.transmissionResolutionScale,o.w*w.transmissionResolutionScale);let s=w.getRenderTarget(),c=w.getActiveCubeFace(),l=w.getActiveMipmapLevel();w.setRenderTarget(a),w.getClearColor(re),ie=w.getClearAlpha(),ie<1&&w.setClearColor(16777215,.5),w.clear(),ve&&Le.render(n);let u=w.toneMapping;w.toneMapping=0;let d=r.viewport;if(r.viewport!==void 0&&(r.viewport=void 0),b.setupLightsView(r),fe===!0&&Fe.setGlobalState(w.clippingPlanes,r),st(e,n,r),Ee.updateMultisampleRenderTarget(a),Ee.updateRenderTargetMipmap(a),xe.has(`WEBGL_multisampled_render_to_texture`)===!1){let e=!1;for(let i=0,a=t.length;i<a;i++){let{object:a,geometry:o,material:s,group:c}=t[i];if(s.side===2&&a.layers.test(r.layers)){let t=s.side;s.side=1,s.needsUpdate=!0,ct(a,n,r,o,s,c),s.side=t,s.needsUpdate=!0,e=!0}}e===!0&&(Ee.updateMultisampleRenderTarget(a),Ee.updateRenderTargetMipmap(a))}w.setRenderTarget(s,c,l),w.setClearColor(re,ie),d!==void 0&&(r.viewport=d),w.toneMapping=u}function st(e,t,n){let r=t.isScene===!0?t.overrideMaterial:null;for(let i=0,a=e.length;i<a;i++){let a=e[i],{object:o,geometry:s,group:c}=a,l=a.material;l.allowOverride===!0&&r!==null&&(l=r),o.layers.test(n.layers)&&ct(o,t,n,s,l,c)}}function ct(e,t,n,r,i,a){e.onBeforeRender(w,t,n,r,i,a),e.modelViewMatrix.multiplyMatrices(n.matrixWorldInverse,e.matrixWorld),e.normalMatrix.getNormalMatrix(e.modelViewMatrix),i.onBeforeRender(w,t,n,r,e,a),i.transparent===!0&&i.side===2&&i.forceSinglePass===!1?(i.side=1,i.needsUpdate=!0,w.renderBufferDirect(n,t,r,i,e,a),i.side=0,i.needsUpdate=!0,w.renderBufferDirect(n,t,r,i,e,a),i.side=2):w.renderBufferDirect(n,t,r,i,e,a),e.onAfterRender(w,t,n,r,i,a)}function lt(e,t,n){t.isScene!==!0&&(t=_e);let r=Te.get(e),i=b.state.lights,a=b.state.shadowsArray,o=i.state.version,s=je.getParameters(e,i.state,a,t,n),c=je.getProgramCacheKey(s),l=r.programs;r.environment=e.isMeshStandardMaterial||e.isMeshLambertMaterial||e.isMeshPhongMaterial?t.environment:null,r.fog=t.fog;let u=e.isMeshStandardMaterial||e.isMeshLambertMaterial&&!e.envMap||e.isMeshPhongMaterial&&!e.envMap;r.envMap=De.get(e.envMap||r.environment,u),r.envMapRotation=r.environment!==null&&e.envMap===null?t.environmentRotation:e.envMapRotation,l===void 0&&(e.addEventListener(`dispose`,Ye),l=new Map,r.programs=l);let d=l.get(c);if(d!==void 0){if(r.currentProgram===d&&r.lightsStateVersion===o)return dt(e,s),d}else s.uniforms=je.getUniforms(e),e.onBeforeCompile(s,w),d=je.acquireProgram(s,c),l.set(c,d),r.uniforms=s.uniforms;let f=r.uniforms;return(!e.isShaderMaterial&&!e.isRawShaderMaterial||e.clipping===!0)&&(f.clippingPlanes=Fe.uniform),dt(e,s),r.needsLights=mt(e),r.lightsStateVersion=o,r.needsLights&&(f.ambientLightColor.value=i.state.ambient,f.lightProbe.value=i.state.probe,f.directionalLights.value=i.state.directional,f.directionalLightShadows.value=i.state.directionalShadow,f.spotLights.value=i.state.spot,f.spotLightShadows.value=i.state.spotShadow,f.rectAreaLights.value=i.state.rectArea,f.ltc_1.value=i.state.rectAreaLTC1,f.ltc_2.value=i.state.rectAreaLTC2,f.pointLights.value=i.state.point,f.pointLightShadows.value=i.state.pointShadow,f.hemisphereLights.value=i.state.hemi,f.directionalShadowMatrix.value=i.state.directionalShadowMatrix,f.spotLightMatrix.value=i.state.spotLightMatrix,f.spotLightMap.value=i.state.spotLightMap,f.pointShadowMatrix.value=i.state.pointShadowMatrix),r.currentProgram=d,r.uniformsList=null,d}function ut(e){if(e.uniformsList===null){let t=e.currentProgram.getUniforms();e.uniformsList=ad.seqWithValue(t.seq,e.uniforms)}return e.uniformsList}function dt(e,t){let n=Te.get(e);n.outputColorSpace=t.outputColorSpace,n.batching=t.batching,n.batchingColor=t.batchingColor,n.instancing=t.instancing,n.instancingColor=t.instancingColor,n.instancingMorph=t.instancingMorph,n.skinning=t.skinning,n.morphTargets=t.morphTargets,n.morphNormals=t.morphNormals,n.morphColors=t.morphColors,n.morphTargetsCount=t.morphTargetsCount,n.numClippingPlanes=t.numClippingPlanes,n.numIntersection=t.numClipIntersection,n.vertexAlphas=t.vertexAlphas,n.vertexTangents=t.vertexTangents,n.toneMapping=t.toneMapping}function ft(e,t,n,r,i){t.isScene!==!0&&(t=_e),Ee.resetTextureUnits();let a=t.fog,o=r.isMeshStandardMaterial||r.isMeshLambertMaterial||r.isMeshPhongMaterial?t.environment:null,s=O===null?w.outputColorSpace:O.isXRRenderTarget===!0?O.texture.colorSpace:fi,c=r.isMeshStandardMaterial||r.isMeshLambertMaterial&&!r.envMap||r.isMeshPhongMaterial&&!r.envMap,l=De.get(r.envMap||o,c),u=r.vertexColors===!0&&!!n.attributes.color&&n.attributes.color.itemSize===4,d=!!n.attributes.tangent&&(!!r.normalMap||r.anisotropy>0),f=!!n.morphAttributes.position,p=!!n.morphAttributes.normal,m=!!n.morphAttributes.color,h=0;r.toneMapped&&(O===null||O.isXRRenderTarget===!0)&&(h=w.toneMapping);let g=n.morphAttributes.position||n.morphAttributes.normal||n.morphAttributes.color,_=g===void 0?0:g.length,v=Te.get(r),y=b.state.lights;if(fe===!0&&(pe===!0||e!==k)){let t=e===k&&r.id===ee;Fe.setState(r,e,t)}let x=!1;r.version===v.__version?v.needsLights&&v.lightsStateVersion!==y.state.version?x=!0:v.outputColorSpace===s?i.isBatchedMesh&&v.batching===!1||!i.isBatchedMesh&&v.batching===!0||i.isBatchedMesh&&v.batchingColor===!0&&i.colorTexture===null||i.isBatchedMesh&&v.batchingColor===!1&&i.colorTexture!==null||i.isInstancedMesh&&v.instancing===!1||!i.isInstancedMesh&&v.instancing===!0||i.isSkinnedMesh&&v.skinning===!1||!i.isSkinnedMesh&&v.skinning===!0||i.isInstancedMesh&&v.instancingColor===!0&&i.instanceColor===null||i.isInstancedMesh&&v.instancingColor===!1&&i.instanceColor!==null||i.isInstancedMesh&&v.instancingMorph===!0&&i.morphTexture===null||i.isInstancedMesh&&v.instancingMorph===!1&&i.morphTexture!==null?x=!0:v.envMap===l?r.fog===!0&&v.fog!==a||v.numClippingPlanes!==void 0&&(v.numClippingPlanes!==Fe.numPlanes||v.numIntersection!==Fe.numIntersection)?x=!0:v.vertexAlphas===u&&v.vertexTangents===d&&v.morphTargets===f&&v.morphNormals===p&&v.morphColors===m&&v.toneMapping===h?v.morphTargetsCount!==_&&(x=!0):x=!0:x=!0:x=!0:(x=!0,v.__version=r.version);let S=v.currentProgram;x===!0&&(S=lt(r,t,i));let C=!1,T=!1,E=!1,D=S.getUniforms(),A=v.uniforms;if(Ce.useProgram(S.program)&&(C=!0,T=!0,E=!0),r.id!==ee&&(ee=r.id,T=!0),C||k!==e){Ce.buffers.depth.getReversed()&&e.reversedDepth!==!0&&(e._reversedDepth=!0,e.updateProjectionMatrix()),D.setValue(N,`projectionMatrix`,e.projectionMatrix),D.setValue(N,`viewMatrix`,e.matrixWorldInverse);let t=D.map.cameraPosition;t!==void 0&&t.setValue(N,he.setFromMatrixPosition(e.matrixWorld)),Se.logarithmicDepthBuffer&&D.setValue(N,`logDepthBufFC`,2/(Math.log(e.far+1)/Math.LN2)),(r.isMeshPhongMaterial||r.isMeshToonMaterial||r.isMeshLambertMaterial||r.isMeshBasicMaterial||r.isMeshStandardMaterial||r.isShaderMaterial)&&D.setValue(N,`isOrthographic`,e.isOrthographicCamera===!0),k!==e&&(k=e,T=!0,E=!0)}if(v.needsLights&&(y.state.directionalShadowMap.length>0&&D.setValue(N,`directionalShadowMap`,y.state.directionalShadowMap,Ee),y.state.spotShadowMap.length>0&&D.setValue(N,`spotShadowMap`,y.state.spotShadowMap,Ee),y.state.pointShadowMap.length>0&&D.setValue(N,`pointShadowMap`,y.state.pointShadowMap,Ee)),i.isSkinnedMesh){D.setOptional(N,i,`bindMatrix`),D.setOptional(N,i,`bindMatrixInverse`);let e=i.skeleton;e&&(e.boneTexture===null&&e.computeBoneTexture(),D.setValue(N,`boneTexture`,e.boneTexture,Ee))}i.isBatchedMesh&&(D.setOptional(N,i,`batchingTexture`),D.setValue(N,`batchingTexture`,i._matricesTexture,Ee),D.setOptional(N,i,`batchingIdTexture`),D.setValue(N,`batchingIdTexture`,i._indirectTexture,Ee),D.setOptional(N,i,`batchingColorTexture`),i._colorsTexture!==null&&D.setValue(N,`batchingColorTexture`,i._colorsTexture,Ee));let te=n.morphAttributes;if((te.position!==void 0||te.normal!==void 0||te.color!==void 0)&&Re.update(i,n,S),(T||v.receiveShadow!==i.receiveShadow)&&(v.receiveShadow=i.receiveShadow,D.setValue(N,`receiveShadow`,i.receiveShadow)),(r.isMeshStandardMaterial||r.isMeshLambertMaterial||r.isMeshPhongMaterial)&&r.envMap===null&&t.environment!==null&&(A.envMapIntensity.value=t.environmentIntensity),A.dfgLUT!==void 0&&(A.dfgLUT.value=Ef()),T&&(D.setValue(N,`toneMappingExposure`,w.toneMappingExposure),v.needsLights&&pt(A,E),a&&r.fog===!0&&Me.refreshFogUniforms(A,a),Me.refreshMaterialUniforms(A,r,ae,M,b.state.transmissionRenderTarget[e.id]),ad.upload(N,ut(v),A,Ee)),r.isShaderMaterial&&r.uniformsNeedUpdate===!0&&(ad.upload(N,ut(v),A,Ee),r.uniformsNeedUpdate=!1),r.isSpriteMaterial&&D.setValue(N,`center`,i.center),D.setValue(N,`modelViewMatrix`,i.modelViewMatrix),D.setValue(N,`normalMatrix`,i.normalMatrix),D.setValue(N,`modelMatrix`,i.matrixWorld),r.isShaderMaterial||r.isRawShaderMaterial){let e=r.uniformsGroups;for(let t=0,n=e.length;t<n;t++){let n=e[t];Ue.update(n,S),Ue.bind(n,S)}}return S}function pt(e,t){e.ambientLightColor.needsUpdate=t,e.lightProbe.needsUpdate=t,e.directionalLights.needsUpdate=t,e.directionalLightShadows.needsUpdate=t,e.pointLights.needsUpdate=t,e.pointLightShadows.needsUpdate=t,e.spotLights.needsUpdate=t,e.spotLightShadows.needsUpdate=t,e.rectAreaLights.needsUpdate=t,e.hemisphereLights.needsUpdate=t}function mt(e){return e.isMeshLambertMaterial||e.isMeshToonMaterial||e.isMeshPhongMaterial||e.isMeshStandardMaterial||e.isShadowMaterial||e.isShaderMaterial&&e.lights===!0}this.getActiveCubeFace=function(){return E},this.getActiveMipmapLevel=function(){return D},this.getRenderTarget=function(){return O},this.setRenderTargetTextures=function(e,t,n){let r=Te.get(e);r.__autoAllocateDepthBuffer=e.resolveDepthBuffer===!1,r.__autoAllocateDepthBuffer===!1&&(r.__useRenderToTexture=!1),Te.get(e.texture).__webglTexture=t,Te.get(e.depthTexture).__webglTexture=r.__autoAllocateDepthBuffer?void 0:n,r.__hasExternalTextures=!0},this.setRenderTargetFramebuffer=function(e,t){let n=Te.get(e);n.__webglFramebuffer=t,n.__useDefaultFramebuffer=t===void 0};let ht=N.createFramebuffer();this.setRenderTarget=function(e,t=0,n=0){O=e,E=t,D=n;let r=null,i=!1,a=!1;if(e){let o=Te.get(e);if(o.__useDefaultFramebuffer!==void 0){Ce.bindFramebuffer(N.FRAMEBUFFER,o.__webglFramebuffer),A.copy(e.viewport),te.copy(e.scissor),ne=e.scissorTest,Ce.viewport(A),Ce.scissor(te),Ce.setScissorTest(ne),ee=-1;return}else if(o.__webglFramebuffer===void 0)Ee.setupRenderTarget(e);else if(o.__hasExternalTextures)Ee.rebindTextures(e,Te.get(e.texture).__webglTexture,Te.get(e.depthTexture).__webglTexture);else if(e.depthBuffer){let t=e.depthTexture;if(o.__boundDepthTexture!==t){if(t!==null&&Te.has(t)&&(e.width!==t.image.width||e.height!==t.image.height))throw Error(`WebGLRenderTarget: Attached DepthTexture is initialized to the incorrect size.`);Ee.setupDepthRenderbuffer(e)}}let s=e.texture;(s.isData3DTexture||s.isDataArrayTexture||s.isCompressedArrayTexture)&&(a=!0);let c=Te.get(e).__webglFramebuffer;e.isWebGLCubeRenderTarget?(r=Array.isArray(c[t])?c[t][n]:c[t],i=!0):r=e.samples>0&&Ee.useMultisampledRTT(e)===!1?Te.get(e).__webglMultisampledFramebuffer:Array.isArray(c)?c[n]:c,A.copy(e.viewport),te.copy(e.scissor),ne=e.scissorTest}else A.copy(ce).multiplyScalar(ae).floor(),te.copy(le).multiplyScalar(ae).floor(),ne=ue;if(n!==0&&(r=ht),Ce.bindFramebuffer(N.FRAMEBUFFER,r)&&Ce.drawBuffers(e,r),Ce.viewport(A),Ce.scissor(te),Ce.setScissorTest(ne),i){let r=Te.get(e.texture);N.framebufferTexture2D(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_CUBE_MAP_POSITIVE_X+t,r.__webglTexture,n)}else if(a){let r=t;for(let t=0;t<e.textures.length;t++){let i=Te.get(e.textures[t]);N.framebufferTextureLayer(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0+t,i.__webglTexture,n,r)}}else if(e!==null&&n!==0){let t=Te.get(e.texture);N.framebufferTexture2D(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,t.__webglTexture,n)}ee=-1},this.readRenderTargetPixels=function(e,t,n,r,i,a,o,s=0){if(!(e&&e.isWebGLRenderTarget)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.`);return}let c=Te.get(e).__webglFramebuffer;if(e.isWebGLCubeRenderTarget&&o!==void 0&&(c=c[o]),c){Ce.bindFramebuffer(N.FRAMEBUFFER,c);try{let o=e.textures[s],c=o.format,l=o.type;if(e.textures.length>1&&N.readBuffer(N.COLOR_ATTACHMENT0+s),!Se.textureFormatReadable(c)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not in RGBA or implementation defined format.`);return}if(!Se.textureTypeReadable(l)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not in UnsignedByteType or implementation defined type.`);return}t>=0&&t<=e.width-r&&n>=0&&n<=e.height-i&&N.readPixels(t,n,r,i,Ve.convert(c),Ve.convert(l),a)}finally{let e=O===null?null:Te.get(O).__webglFramebuffer;Ce.bindFramebuffer(N.FRAMEBUFFER,e)}}},this.readRenderTargetPixelsAsync=async function(e,t,n,r,i,a,o,s=0){if(!(e&&e.isWebGLRenderTarget))throw Error(`THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.`);let c=Te.get(e).__webglFramebuffer;if(e.isWebGLCubeRenderTarget&&o!==void 0&&(c=c[o]),c)if(t>=0&&t<=e.width-r&&n>=0&&n<=e.height-i){Ce.bindFramebuffer(N.FRAMEBUFFER,c);let o=e.textures[s],l=o.format,u=o.type;if(e.textures.length>1&&N.readBuffer(N.COLOR_ATTACHMENT0+s),!Se.textureFormatReadable(l))throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: renderTarget is not in RGBA or implementation defined format.`);if(!Se.textureTypeReadable(u))throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: renderTarget is not in UnsignedByteType or implementation defined type.`);let d=N.createBuffer();N.bindBuffer(N.PIXEL_PACK_BUFFER,d),N.bufferData(N.PIXEL_PACK_BUFFER,a.byteLength,N.STREAM_READ),N.readPixels(t,n,r,i,Ve.convert(l),Ve.convert(u),0);let f=O===null?null:Te.get(O).__webglFramebuffer;Ce.bindFramebuffer(N.FRAMEBUFFER,f);let p=N.fenceSync(N.SYNC_GPU_COMMANDS_COMPLETE,0);return N.flush(),await ki(N,p,4),N.bindBuffer(N.PIXEL_PACK_BUFFER,d),N.getBufferSubData(N.PIXEL_PACK_BUFFER,0,a),N.deleteBuffer(d),N.deleteSync(p),a}else throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: requested read bounds are out of range.`)},this.copyFramebufferToTexture=function(e,t=null,n=0){let r=2**-n,i=Math.floor(e.image.width*r),a=Math.floor(e.image.height*r),o=t===null?0:t.x,s=t===null?0:t.y;Ee.setTexture2D(e,0),N.copyTexSubImage2D(N.TEXTURE_2D,n,0,0,o,s,i,a),Ce.unbindTexture()};let gt=N.createFramebuffer(),_t=N.createFramebuffer();this.copyTextureToTexture=function(e,t,n=null,r=null,i=0,a=0){let o,s,c,l,u,d,f,p,m,h=e.isCompressedTexture?e.mipmaps[a]:e.image;if(n!==null)o=n.max.x-n.min.x,s=n.max.y-n.min.y,c=n.isBox3?n.max.z-n.min.z:1,l=n.min.x,u=n.min.y,d=n.isBox3?n.min.z:0;else{let t=2**-i;o=Math.floor(h.width*t),s=Math.floor(h.height*t),c=e.isDataArrayTexture?h.depth:e.isData3DTexture?Math.floor(h.depth*t):1,l=0,u=0,d=0}r===null?(f=0,p=0,m=0):(f=r.x,p=r.y,m=r.z);let g=Ve.convert(t.format),_=Ve.convert(t.type),v;t.isData3DTexture?(Ee.setTexture3D(t,0),v=N.TEXTURE_3D):t.isDataArrayTexture||t.isCompressedArrayTexture?(Ee.setTexture2DArray(t,0),v=N.TEXTURE_2D_ARRAY):(Ee.setTexture2D(t,0),v=N.TEXTURE_2D),N.pixelStorei(N.UNPACK_FLIP_Y_WEBGL,t.flipY),N.pixelStorei(N.UNPACK_PREMULTIPLY_ALPHA_WEBGL,t.premultiplyAlpha),N.pixelStorei(N.UNPACK_ALIGNMENT,t.unpackAlignment);let y=N.getParameter(N.UNPACK_ROW_LENGTH),b=N.getParameter(N.UNPACK_IMAGE_HEIGHT),x=N.getParameter(N.UNPACK_SKIP_PIXELS),S=N.getParameter(N.UNPACK_SKIP_ROWS),C=N.getParameter(N.UNPACK_SKIP_IMAGES);N.pixelStorei(N.UNPACK_ROW_LENGTH,h.width),N.pixelStorei(N.UNPACK_IMAGE_HEIGHT,h.height),N.pixelStorei(N.UNPACK_SKIP_PIXELS,l),N.pixelStorei(N.UNPACK_SKIP_ROWS,u),N.pixelStorei(N.UNPACK_SKIP_IMAGES,d);let w=e.isDataArrayTexture||e.isData3DTexture,T=t.isDataArrayTexture||t.isData3DTexture;if(e.isDepthTexture){let n=Te.get(e),r=Te.get(t),h=Te.get(n.__renderTarget),g=Te.get(r.__renderTarget);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,h.__webglFramebuffer),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,g.__webglFramebuffer);for(let n=0;n<c;n++)w&&(N.framebufferTextureLayer(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,Te.get(e).__webglTexture,i,d+n),N.framebufferTextureLayer(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,Te.get(t).__webglTexture,a,m+n)),N.blitFramebuffer(l,u,o,s,f,p,o,s,N.DEPTH_BUFFER_BIT,N.NEAREST);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,null),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,null)}else if(i!==0||e.isRenderTargetTexture||Te.has(e)){let n=Te.get(e),r=Te.get(t);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,gt),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,_t);for(let e=0;e<c;e++)w?N.framebufferTextureLayer(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,n.__webglTexture,i,d+e):N.framebufferTexture2D(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,n.__webglTexture,i),T?N.framebufferTextureLayer(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,r.__webglTexture,a,m+e):N.framebufferTexture2D(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,r.__webglTexture,a),i===0?T?N.copyTexSubImage3D(v,a,f,p,m+e,l,u,o,s):N.copyTexSubImage2D(v,a,f,p,l,u,o,s):N.blitFramebuffer(l,u,o,s,f,p,o,s,N.COLOR_BUFFER_BIT,N.NEAREST);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,null),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,null)}else T?e.isDataTexture||e.isData3DTexture?N.texSubImage3D(v,a,f,p,m,o,s,c,g,_,h.data):t.isCompressedArrayTexture?N.compressedTexSubImage3D(v,a,f,p,m,o,s,c,g,h.data):N.texSubImage3D(v,a,f,p,m,o,s,c,g,_,h):e.isDataTexture?N.texSubImage2D(N.TEXTURE_2D,a,f,p,o,s,g,_,h.data):e.isCompressedTexture?N.compressedTexSubImage2D(N.TEXTURE_2D,a,f,p,h.width,h.height,g,h.data):N.texSubImage2D(N.TEXTURE_2D,a,f,p,o,s,g,_,h);N.pixelStorei(N.UNPACK_ROW_LENGTH,y),N.pixelStorei(N.UNPACK_IMAGE_HEIGHT,b),N.pixelStorei(N.UNPACK_SKIP_PIXELS,x),N.pixelStorei(N.UNPACK_SKIP_ROWS,S),N.pixelStorei(N.UNPACK_SKIP_IMAGES,C),a===0&&t.generateMipmaps&&N.generateMipmap(v),Ce.unbindTexture()},this.initRenderTarget=function(e){Te.get(e).__webglFramebuffer===void 0&&Ee.setupRenderTarget(e)},this.initTexture=function(e){e.isCubeTexture?Ee.setTextureCube(e,0):e.isData3DTexture?Ee.setTexture3D(e,0):e.isDataArrayTexture||e.isCompressedArrayTexture?Ee.setTexture2DArray(e,0):Ee.setTexture2D(e,0),Ce.unbindTexture()},this.resetState=function(){E=0,D=0,O=null,Ce.reset(),He.reset()},typeof __THREE_DEVTOOLS__<`u`&&__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent(`observe`,{detail:this}))}get coordinateSystem(){return _i}get outputColorSpace(){return this._outputColorSpace}set outputColorSpace(e){this._outputColorSpace=e;let t=this.getContext();t.drawingBufferColorSpace=ma._getDrawingBufferColorSpace(e),t.unpackColorSpace=ma._getUnpackColorSpace()}},Of={type:`change`},kf={type:`start`},Af={type:`end`},jf=new vs,Mf=new Rs,Nf=Math.cos(70*ia.DEG2RAD),Pf=new P,Ff=2*Math.PI,If={NONE:-1,ROTATE:0,DOLLY:1,PAN:2,TOUCH_ROTATE:3,TOUCH_PAN:4,TOUCH_DOLLY_PAN:5,TOUCH_DOLLY_ROTATE:6},Lf=1e-6,Rf=class extends ll{constructor(e,t=null){super(e,t),this.state=If.NONE,this.target=new P,this.cursor=new P,this.minDistance=0,this.maxDistance=1/0,this.minZoom=0,this.maxZoom=1/0,this.minTargetRadius=0,this.maxTargetRadius=1/0,this.minPolarAngle=0,this.maxPolarAngle=Math.PI,this.minAzimuthAngle=-1/0,this.maxAzimuthAngle=1/0,this.enableDamping=!1,this.dampingFactor=.05,this.enableZoom=!0,this.zoomSpeed=1,this.enableRotate=!0,this.rotateSpeed=1,this.keyRotateSpeed=1,this.enablePan=!0,this.panSpeed=1,this.screenSpacePanning=!0,this.keyPanSpeed=7,this.zoomToCursor=!1,this.autoRotate=!1,this.autoRotateSpeed=2,this.keys={LEFT:`ArrowLeft`,UP:`ArrowUp`,RIGHT:`ArrowRight`,BOTTOM:`ArrowDown`},this.mouseButtons={LEFT:Vn.ROTATE,MIDDLE:Vn.DOLLY,RIGHT:Vn.PAN},this.touches={ONE:Hn.ROTATE,TWO:Hn.DOLLY_PAN},this.target0=this.target.clone(),this.position0=this.object.position.clone(),this.zoom0=this.object.zoom,this._cursorStyle=`auto`,this._domElementKeyEvents=null,this._lastPosition=new P,this._lastQuaternion=new oa,this._lastTargetPosition=new P,this._quat=new oa().setFromUnitVectors(e.up,new P(0,1,0)),this._quatInverse=this._quat.clone().invert(),this._spherical=new sl,this._sphericalDelta=new sl,this._scale=1,this._panOffset=new P,this._rotateStart=new aa,this._rotateEnd=new aa,this._rotateDelta=new aa,this._panStart=new aa,this._panEnd=new aa,this._panDelta=new aa,this._dollyStart=new aa,this._dollyEnd=new aa,this._dollyDelta=new aa,this._dollyDirection=new P,this._mouse=new aa,this._performCursorZoom=!1,this._pointers=[],this._pointerPositions={},this._controlActive=!1,this._onPointerMove=Bf.bind(this),this._onPointerDown=zf.bind(this),this._onPointerUp=Vf.bind(this),this._onContextMenu=Jf.bind(this),this._onMouseWheel=Wf.bind(this),this._onKeyDown=Gf.bind(this),this._onTouchStart=Kf.bind(this),this._onTouchMove=qf.bind(this),this._onMouseDown=Hf.bind(this),this._onMouseMove=Uf.bind(this),this._interceptControlDown=Yf.bind(this),this._interceptControlUp=Xf.bind(this),this.domElement!==null&&this.connect(this.domElement),this.update()}set cursorStyle(e){this._cursorStyle=e,e===`grab`?this.domElement.style.cursor=`grab`:this.domElement.style.cursor=`auto`}get cursorStyle(){return this._cursorStyle}connect(e){super.connect(e),this.domElement.addEventListener(`pointerdown`,this._onPointerDown),this.domElement.addEventListener(`pointercancel`,this._onPointerUp),this.domElement.addEventListener(`contextmenu`,this._onContextMenu),this.domElement.addEventListener(`wheel`,this._onMouseWheel,{passive:!1}),this.domElement.getRootNode().addEventListener(`keydown`,this._interceptControlDown,{passive:!0,capture:!0}),this.domElement.style.touchAction=`none`}disconnect(){this.domElement.removeEventListener(`pointerdown`,this._onPointerDown),this.domElement.ownerDocument.removeEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.removeEventListener(`pointerup`,this._onPointerUp),this.domElement.removeEventListener(`pointercancel`,this._onPointerUp),this.domElement.removeEventListener(`wheel`,this._onMouseWheel),this.domElement.removeEventListener(`contextmenu`,this._onContextMenu),this.stopListenToKeyEvents(),this.domElement.getRootNode().removeEventListener(`keydown`,this._interceptControlDown,{capture:!0}),this.domElement.style.touchAction=`auto`}dispose(){this.disconnect()}getPolarAngle(){return this._spherical.phi}getAzimuthalAngle(){return this._spherical.theta}getDistance(){return this.object.position.distanceTo(this.target)}listenToKeyEvents(e){e.addEventListener(`keydown`,this._onKeyDown),this._domElementKeyEvents=e}stopListenToKeyEvents(){this._domElementKeyEvents!==null&&(this._domElementKeyEvents.removeEventListener(`keydown`,this._onKeyDown),this._domElementKeyEvents=null)}saveState(){this.target0.copy(this.target),this.position0.copy(this.object.position),this.zoom0=this.object.zoom}reset(){this.target.copy(this.target0),this.object.position.copy(this.position0),this.object.zoom=this.zoom0,this.object.updateProjectionMatrix(),this.dispatchEvent(Of),this.update(),this.state=If.NONE}pan(e,t){this._pan(e,t),this.update()}dollyIn(e){this._dollyIn(e),this.update()}dollyOut(e){this._dollyOut(e),this.update()}rotateLeft(e){this._rotateLeft(e),this.update()}rotateUp(e){this._rotateUp(e),this.update()}update(e=null){let t=this.object.position;Pf.copy(t).sub(this.target),Pf.applyQuaternion(this._quat),this._spherical.setFromVector3(Pf),this.autoRotate&&this.state===If.NONE&&this._rotateLeft(this._getAutoRotationAngle(e)),this.enableDamping?(this._spherical.theta+=this._sphericalDelta.theta*this.dampingFactor,this._spherical.phi+=this._sphericalDelta.phi*this.dampingFactor):(this._spherical.theta+=this._sphericalDelta.theta,this._spherical.phi+=this._sphericalDelta.phi);let n=this.minAzimuthAngle,r=this.maxAzimuthAngle;isFinite(n)&&isFinite(r)&&(n<-Math.PI?n+=Ff:n>Math.PI&&(n-=Ff),r<-Math.PI?r+=Ff:r>Math.PI&&(r-=Ff),n<=r?this._spherical.theta=Math.max(n,Math.min(r,this._spherical.theta)):this._spherical.theta=this._spherical.theta>(n+r)/2?Math.max(n,this._spherical.theta):Math.min(r,this._spherical.theta)),this._spherical.phi=Math.max(this.minPolarAngle,Math.min(this.maxPolarAngle,this._spherical.phi)),this._spherical.makeSafe(),this.enableDamping===!0?this.target.addScaledVector(this._panOffset,this.dampingFactor):this.target.add(this._panOffset),this.target.sub(this.cursor),this.target.clampLength(this.minTargetRadius,this.maxTargetRadius),this.target.add(this.cursor);let i=!1;if(this.zoomToCursor&&this._performCursorZoom||this.object.isOrthographicCamera)this._spherical.radius=this._clampDistance(this._spherical.radius);else{let e=this._spherical.radius;this._spherical.radius=this._clampDistance(this._spherical.radius*this._scale),i=e!=this._spherical.radius}if(Pf.setFromSpherical(this._spherical),Pf.applyQuaternion(this._quatInverse),t.copy(this.target).add(Pf),this.object.lookAt(this.target),this.enableDamping===!0?(this._sphericalDelta.theta*=1-this.dampingFactor,this._sphericalDelta.phi*=1-this.dampingFactor,this._panOffset.multiplyScalar(1-this.dampingFactor)):(this._sphericalDelta.set(0,0,0),this._panOffset.set(0,0,0)),this.zoomToCursor&&this._performCursorZoom){let e=null;if(this.object.isPerspectiveCamera){let t=Pf.length();e=this._clampDistance(t*this._scale);let n=t-e;this.object.position.addScaledVector(this._dollyDirection,n),this.object.updateMatrixWorld(),i=!!n}else if(this.object.isOrthographicCamera){let t=new P(this._mouse.x,this._mouse.y,0);t.unproject(this.object);let n=this.object.zoom;this.object.zoom=Math.max(this.minZoom,Math.min(this.maxZoom,this.object.zoom/this._scale)),this.object.updateProjectionMatrix(),i=n!==this.object.zoom;let r=new P(this._mouse.x,this._mouse.y,0);r.unproject(this.object),this.object.position.sub(r).add(t),this.object.updateMatrixWorld(),e=Pf.length()}else console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.`),this.zoomToCursor=!1;e!==null&&(this.screenSpacePanning?this.target.set(0,0,-1).transformDirection(this.object.matrix).multiplyScalar(e).add(this.object.position):(jf.origin.copy(this.object.position),jf.direction.set(0,0,-1).transformDirection(this.object.matrix),Math.abs(this.object.up.dot(jf.direction))<Nf?this.object.lookAt(this.target):(Mf.setFromNormalAndCoplanarPoint(this.object.up,this.target),jf.intersectPlane(Mf,this.target))))}else if(this.object.isOrthographicCamera){let e=this.object.zoom;this.object.zoom=Math.max(this.minZoom,Math.min(this.maxZoom,this.object.zoom/this._scale)),e!==this.object.zoom&&(this.object.updateProjectionMatrix(),i=!0)}return this._scale=1,this._performCursorZoom=!1,i||this._lastPosition.distanceToSquared(this.object.position)>Lf||8*(1-this._lastQuaternion.dot(this.object.quaternion))>Lf||this._lastTargetPosition.distanceToSquared(this.target)>Lf?(this.dispatchEvent(Of),this._lastPosition.copy(this.object.position),this._lastQuaternion.copy(this.object.quaternion),this._lastTargetPosition.copy(this.target),!0):!1}_getAutoRotationAngle(e){return e===null?Ff/60/60*this.autoRotateSpeed:Ff/60*this.autoRotateSpeed*e}_getZoomScale(e){let t=Math.abs(e*.01);return .95**(this.zoomSpeed*t)}_rotateLeft(e){this._sphericalDelta.theta-=e}_rotateUp(e){this._sphericalDelta.phi-=e}_panLeft(e,t){Pf.setFromMatrixColumn(t,0),Pf.multiplyScalar(-e),this._panOffset.add(Pf)}_panUp(e,t){this.screenSpacePanning===!0?Pf.setFromMatrixColumn(t,1):(Pf.setFromMatrixColumn(t,0),Pf.crossVectors(this.object.up,Pf)),Pf.multiplyScalar(e),this._panOffset.add(Pf)}_pan(e,t){let n=this.domElement;if(this.object.isPerspectiveCamera){let r=this.object.position;Pf.copy(r).sub(this.target);let i=Pf.length();i*=Math.tan(this.object.fov/2*Math.PI/180),this._panLeft(2*e*i/n.clientHeight,this.object.matrix),this._panUp(2*t*i/n.clientHeight,this.object.matrix)}else this.object.isOrthographicCamera?(this._panLeft(e*(this.object.right-this.object.left)/this.object.zoom/n.clientWidth,this.object.matrix),this._panUp(t*(this.object.top-this.object.bottom)/this.object.zoom/n.clientHeight,this.object.matrix)):(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.`),this.enablePan=!1)}_dollyOut(e){this.object.isPerspectiveCamera||this.object.isOrthographicCamera?this._scale/=e:(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`),this.enableZoom=!1)}_dollyIn(e){this.object.isPerspectiveCamera||this.object.isOrthographicCamera?this._scale*=e:(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`),this.enableZoom=!1)}_updateZoomParameters(e,t){if(!this.zoomToCursor)return;this._performCursorZoom=!0;let n=this.domElement.getBoundingClientRect(),r=e-n.left,i=t-n.top,a=n.width,o=n.height;this._mouse.x=r/a*2-1,this._mouse.y=-(i/o)*2+1,this._dollyDirection.set(this._mouse.x,this._mouse.y,1).unproject(this.object).sub(this.object.position).normalize()}_clampDistance(e){return Math.max(this.minDistance,Math.min(this.maxDistance,e))}_handleMouseDownRotate(e){this._rotateStart.set(e.clientX,e.clientY)}_handleMouseDownDolly(e){this._updateZoomParameters(e.clientX,e.clientX),this._dollyStart.set(e.clientX,e.clientY)}_handleMouseDownPan(e){this._panStart.set(e.clientX,e.clientY)}_handleMouseMoveRotate(e){this._rotateEnd.set(e.clientX,e.clientY),this._rotateDelta.subVectors(this._rotateEnd,this._rotateStart).multiplyScalar(this.rotateSpeed);let t=this.domElement;this._rotateLeft(Ff*this._rotateDelta.x/t.clientHeight),this._rotateUp(Ff*this._rotateDelta.y/t.clientHeight),this._rotateStart.copy(this._rotateEnd),this.update()}_handleMouseMoveDolly(e){this._dollyEnd.set(e.clientX,e.clientY),this._dollyDelta.subVectors(this._dollyEnd,this._dollyStart),this._dollyDelta.y>0?this._dollyOut(this._getZoomScale(this._dollyDelta.y)):this._dollyDelta.y<0&&this._dollyIn(this._getZoomScale(this._dollyDelta.y)),this._dollyStart.copy(this._dollyEnd),this.update()}_handleMouseMovePan(e){this._panEnd.set(e.clientX,e.clientY),this._panDelta.subVectors(this._panEnd,this._panStart).multiplyScalar(this.panSpeed),this._pan(this._panDelta.x,this._panDelta.y),this._panStart.copy(this._panEnd),this.update()}_handleMouseWheel(e){this._updateZoomParameters(e.clientX,e.clientY),e.deltaY<0?this._dollyIn(this._getZoomScale(e.deltaY)):e.deltaY>0&&this._dollyOut(this._getZoomScale(e.deltaY)),this.update()}_handleKeyDown(e){let t=!1;switch(e.code){case this.keys.UP:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateUp(Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(0,this.keyPanSpeed),t=!0;break;case this.keys.BOTTOM:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateUp(-Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(0,-this.keyPanSpeed),t=!0;break;case this.keys.LEFT:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateLeft(Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(this.keyPanSpeed,0),t=!0;break;case this.keys.RIGHT:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateLeft(-Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(-this.keyPanSpeed,0),t=!0;break}t&&(e.preventDefault(),this.update())}_handleTouchStartRotate(e){if(this._pointers.length===1)this._rotateStart.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._rotateStart.set(n,r)}}_handleTouchStartPan(e){if(this._pointers.length===1)this._panStart.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._panStart.set(n,r)}}_handleTouchStartDolly(e){let t=this._getSecondPointerPosition(e),n=e.pageX-t.x,r=e.pageY-t.y,i=Math.sqrt(n*n+r*r);this._dollyStart.set(0,i)}_handleTouchStartDollyPan(e){this.enableZoom&&this._handleTouchStartDolly(e),this.enablePan&&this._handleTouchStartPan(e)}_handleTouchStartDollyRotate(e){this.enableZoom&&this._handleTouchStartDolly(e),this.enableRotate&&this._handleTouchStartRotate(e)}_handleTouchMoveRotate(e){if(this._pointers.length==1)this._rotateEnd.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._rotateEnd.set(n,r)}this._rotateDelta.subVectors(this._rotateEnd,this._rotateStart).multiplyScalar(this.rotateSpeed);let t=this.domElement;this._rotateLeft(Ff*this._rotateDelta.x/t.clientHeight),this._rotateUp(Ff*this._rotateDelta.y/t.clientHeight),this._rotateStart.copy(this._rotateEnd)}_handleTouchMovePan(e){if(this._pointers.length===1)this._panEnd.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._panEnd.set(n,r)}this._panDelta.subVectors(this._panEnd,this._panStart).multiplyScalar(this.panSpeed),this._pan(this._panDelta.x,this._panDelta.y),this._panStart.copy(this._panEnd)}_handleTouchMoveDolly(e){let t=this._getSecondPointerPosition(e),n=e.pageX-t.x,r=e.pageY-t.y,i=Math.sqrt(n*n+r*r);this._dollyEnd.set(0,i),this._dollyDelta.set(0,(this._dollyEnd.y/this._dollyStart.y)**+this.zoomSpeed),this._dollyOut(this._dollyDelta.y),this._dollyStart.copy(this._dollyEnd);let a=(e.pageX+t.x)*.5,o=(e.pageY+t.y)*.5;this._updateZoomParameters(a,o)}_handleTouchMoveDollyPan(e){this.enableZoom&&this._handleTouchMoveDolly(e),this.enablePan&&this._handleTouchMovePan(e)}_handleTouchMoveDollyRotate(e){this.enableZoom&&this._handleTouchMoveDolly(e),this.enableRotate&&this._handleTouchMoveRotate(e)}_addPointer(e){this._pointers.push(e.pointerId)}_removePointer(e){delete this._pointerPositions[e.pointerId];for(let t=0;t<this._pointers.length;t++)if(this._pointers[t]==e.pointerId){this._pointers.splice(t,1);return}}_isTrackingPointer(e){for(let t=0;t<this._pointers.length;t++)if(this._pointers[t]==e.pointerId)return!0;return!1}_trackPointer(e){let t=this._pointerPositions[e.pointerId];t===void 0&&(t=new aa,this._pointerPositions[e.pointerId]=t),t.set(e.pageX,e.pageY)}_getSecondPointerPosition(e){let t=e.pointerId===this._pointers[0]?this._pointers[1]:this._pointers[0];return this._pointerPositions[t]}_customWheelEvent(e){let t=e.deltaMode,n={clientX:e.clientX,clientY:e.clientY,deltaY:e.deltaY};switch(t){case 1:n.deltaY*=16;break;case 2:n.deltaY*=100;break}return e.ctrlKey&&!this._controlActive&&(n.deltaY*=10),n}};function zf(e){this.enabled!==!1&&(this._pointers.length===0&&(this.domElement.setPointerCapture(e.pointerId),this.domElement.ownerDocument.addEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.addEventListener(`pointerup`,this._onPointerUp)),!this._isTrackingPointer(e)&&(this._addPointer(e),e.pointerType===`touch`?this._onTouchStart(e):this._onMouseDown(e),this._cursorStyle===`grab`&&(this.domElement.style.cursor=`grabbing`)))}function Bf(e){this.enabled!==!1&&(e.pointerType===`touch`?this._onTouchMove(e):this._onMouseMove(e))}function Vf(e){switch(this._removePointer(e),this._pointers.length){case 0:this.domElement.releasePointerCapture(e.pointerId),this.domElement.ownerDocument.removeEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.removeEventListener(`pointerup`,this._onPointerUp),this.dispatchEvent(Af),this.state=If.NONE,this._cursorStyle===`grab`&&(this.domElement.style.cursor=`grab`);break;case 1:let t=this._pointers[0],n=this._pointerPositions[t];this._onTouchStart({pointerId:t,pageX:n.x,pageY:n.y});break}}function Hf(e){let t;switch(e.button){case 0:t=this.mouseButtons.LEFT;break;case 1:t=this.mouseButtons.MIDDLE;break;case 2:t=this.mouseButtons.RIGHT;break;default:t=-1}switch(t){case Vn.DOLLY:if(this.enableZoom===!1)return;this._handleMouseDownDolly(e),this.state=If.DOLLY;break;case Vn.ROTATE:if(e.ctrlKey||e.metaKey||e.shiftKey){if(this.enablePan===!1)return;this._handleMouseDownPan(e),this.state=If.PAN}else{if(this.enableRotate===!1)return;this._handleMouseDownRotate(e),this.state=If.ROTATE}break;case Vn.PAN:if(e.ctrlKey||e.metaKey||e.shiftKey){if(this.enableRotate===!1)return;this._handleMouseDownRotate(e),this.state=If.ROTATE}else{if(this.enablePan===!1)return;this._handleMouseDownPan(e),this.state=If.PAN}break;default:this.state=If.NONE}this.state!==If.NONE&&this.dispatchEvent(kf)}function Uf(e){switch(this.state){case If.ROTATE:if(this.enableRotate===!1)return;this._handleMouseMoveRotate(e);break;case If.DOLLY:if(this.enableZoom===!1)return;this._handleMouseMoveDolly(e);break;case If.PAN:if(this.enablePan===!1)return;this._handleMouseMovePan(e);break}}function Wf(e){this.enabled===!1||this.enableZoom===!1||this.state!==If.NONE||(e.preventDefault(),this.dispatchEvent(kf),this._handleMouseWheel(this._customWheelEvent(e)),this.dispatchEvent(Af))}function Gf(e){this.enabled!==!1&&this._handleKeyDown(e)}function Kf(e){switch(this._trackPointer(e),this._pointers.length){case 1:switch(this.touches.ONE){case Hn.ROTATE:if(this.enableRotate===!1)return;this._handleTouchStartRotate(e),this.state=If.TOUCH_ROTATE;break;case Hn.PAN:if(this.enablePan===!1)return;this._handleTouchStartPan(e),this.state=If.TOUCH_PAN;break;default:this.state=If.NONE}break;case 2:switch(this.touches.TWO){case Hn.DOLLY_PAN:if(this.enableZoom===!1&&this.enablePan===!1)return;this._handleTouchStartDollyPan(e),this.state=If.TOUCH_DOLLY_PAN;break;case Hn.DOLLY_ROTATE:if(this.enableZoom===!1&&this.enableRotate===!1)return;this._handleTouchStartDollyRotate(e),this.state=If.TOUCH_DOLLY_ROTATE;break;default:this.state=If.NONE}break;default:this.state=If.NONE}this.state!==If.NONE&&this.dispatchEvent(kf)}function qf(e){switch(this._trackPointer(e),this.state){case If.TOUCH_ROTATE:if(this.enableRotate===!1)return;this._handleTouchMoveRotate(e),this.update();break;case If.TOUCH_PAN:if(this.enablePan===!1)return;this._handleTouchMovePan(e),this.update();break;case If.TOUCH_DOLLY_PAN:if(this.enableZoom===!1&&this.enablePan===!1)return;this._handleTouchMoveDollyPan(e),this.update();break;case If.TOUCH_DOLLY_ROTATE:if(this.enableZoom===!1&&this.enableRotate===!1)return;this._handleTouchMoveDollyRotate(e),this.update();break;default:this.state=If.NONE}}function Jf(e){this.enabled!==!1&&e.preventDefault()}function Yf(e){e.key===`Control`&&(this._controlActive=!0,this.domElement.getRootNode().addEventListener(`keyup`,this._interceptControlUp,{passive:!0,capture:!0}))}function Xf(e){e.key===`Control`&&(this._controlActive=!1,this.domElement.getRootNode().removeEventListener(`keyup`,this._interceptControlUp,{passive:!0,capture:!0}))}function Zf(e,t,n=10){return(0,v.useMemo)(()=>{if(!e||!t)return[];let[[r,i],[a,o],[s,c]]=t,l=i-r,u=o-a,d=c-s,f=Math.max(2,Math.round(n*l/10)),p=Math.max(2,Math.round(n*u/10)),m=Math.max(2,Math.round(n*d/10)),h=l/f,g=u/p,_=d/m,v=[];for(let t=0;t<=p;t++)for(let n=0;n<=m;n++){let i=a+t*g,o=s+n*_,c=[];for(let t=0;t<=f;t++){let[n,a,s]=e(r+t*h,i,o);c.push(new P(n,a,s))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`u`})}for(let t=0;t<=f;t++)for(let n=0;n<=m;n++){let i=r+t*h,o=s+n*_,c=[];for(let t=0;t<=p;t++){let[n,r,s]=e(i,a+t*g,o);c.push(new P(n,r,s))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`v`})}for(let t=0;t<=f;t++)for(let n=0;n<=p;n++){let i=r+t*h,o=a+n*g,c=[];for(let t=0;t<=m;t++){let[n,r,a]=e(i,o,s+t*_);c.push(new P(n,r,a))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`w`})}return v},[e,t,n])}var Qf=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),L=o(((e,t)=>{t.exports=Qf()}))();function $f({coordinate:e,ranges:t,resolution:n=10,lineColor:r=`#6366f1`,showAxes:i=!0,axisSize:a=5}){let o=(0,v.useRef)(null),s=(0,v.useMemo)(()=>t||e?.ranges||[[-5,5],[-5,5],[-5,5]],[t,e?.ranges]),c=e?.embedding,l=Zf(c,s,n);return(0,v.useEffect)(()=>{if(!o.current||!c)return;let e=o.current,t=new mo;t.background=new fo(15790320);let n=new Uc(75,e.clientWidth/e.clientHeight,.1,1e3);n.position.set(8,8,8),n.lookAt(0,0,0);let s=new Df({antialias:!0});s.setSize(e.clientWidth,e.clientHeight),s.setClearColor(15790320,1),e.appendChild(s.domElement);let u=new Rf(n,s.domElement);u.enableDamping=!0;let d=new Us({color:new fo(r)}),f=new io;if(l.forEach(({geometry:e})=>{let t=new Zs(e,d);f.add(t)}),i){let e=new cl(a);f.add(e)}t.add(f);let p=!0,m=()=>{p&&(requestAnimationFrame(m),u.update(),s.render(t,n))};m();let h=()=>{n.aspect=e.clientWidth/e.clientHeight,n.updateProjectionMatrix(),s.setSize(e.clientWidth,e.clientHeight)};return window.addEventListener(`resize`,h),()=>{p=!1,window.removeEventListener(`resize`,h),e.removeChild(s.domElement),s.dispose(),u.dispose(),l.forEach(({geometry:e})=>e.dispose()),d.dispose()}},[c,s,n,r,i,a,l]),(0,L.jsx)(`div`,{ref:o,style:{width:`100%`,height:`100%`}})}function ep(e,t){return e.map(e=>e.reduce((e,n,r)=>e+n*t[r],0))}function tp(e){let[t,n,r]=e[0],[i,a,o]=e[1],[s,c,l]=e[2],u=t*(a*l-o*c)-n*(i*l-o*s)+r*(i*c-a*s);if(Math.abs(u)<1e-10)return null;let d=1/u;return[[(a*l-o*c)*d,(r*c-n*l)*d,(n*o-r*a)*d],[(o*s-i*l)*d,(t*l-r*s)*d,(r*i-t*o)*d],[(i*c-a*s)*d,(n*s-t*c)*d,(t*a-n*i)*d]]}function np(e,t){return ep(e,t)}function rp(e,t){let n=np(e,t),r=0;for(let e=0;e<t.length;e++)r+=t[e]*n[e];return Math.sqrt(Math.max(0,r))}function ip(e,t,n,r=.001){let i=[...t],a=[...t];i[n]+=r,a[n]-=r;let o,s;try{o=e(...i),s=e(...a)}catch{return[[0,0,0],[0,0,0],[0,0,0]]}return!o||!s||!o[0]||!s[0]?[[0,0,0],[0,0,0],[0,0,0]]:o.map((e,t)=>e.map((e,n)=>(e-s[t][n])/(2*r)))}function ap(e,t,n){let r=[n[0]-t[0],n[1]-t[1],n[2]-t[2]];return rp(e((t[0]+n[0])/2,(t[1]+n[1])/2,(t[2]+n[2])/2),r)}function op(e,t,n=.1){if(t.length<2)return t;let r=[t[0]],i=0,a=t[0];for(let o=1;o<t.length;o++){let s=ap(e,a,t[o]);for(i+=s;i>=n;){let e=(n-(i-s))/s,c=[a[0]+e*(t[o][0]-a[0]),a[1]+e*(t[o][1]-a[1]),a[2]+e*(t[o][2]-a[2])];r.push(c),i-=n,a=c}a=t[o]}return r[r.length-1]!==t[t.length-1]&&r.push(t[t.length-1]),r}function sp(e,t){let n=e(...t);return{u:rp(n,[1,0,0]),v:rp(n,[0,1,0]),w:rp(n,[0,0,1])}}function cp({metric:e,ranges:t,resolution:n=10,lineColor:r=`#6366f1`,showAxes:i=!0,axisSize:a=5,metricAware:o=!0}){let s=(0,v.useRef)(null),c=(0,v.useMemo)(()=>t||e?.ranges||[[-5,5],[-5,5],[-5,5]],[t,e?.ranges]),l=e?.embedding,u=e?.spatial,d=(0,v.useMemo)(()=>{if(!l)return[];let[[e,t],[r,i],[a,s]]=c,d=t-e,f=i-r,p=s-a,m=Math.max(2,Math.round(n*d/10)),h=Math.max(2,Math.round(n*f/10)),g=Math.max(2,Math.round(n*p/10)),_=d/m,v=f/h,y=p/g,b=[],x=(()=>{if(!o||!u)return .1;let c=sp(u,[[(e+t)/2,(r+i)/2,(a+s)/2]][0]);return Math.min(c.u,c.v,c.w)/n*2})();for(let t=0;t<=h;t++)for(let n=0;n<=g;n++){let i=r+t*v,s=a+n*y,c=[];for(let t=0;t<=m;t++){let[n,r,a]=l(e+t*_,i,s);c.push(new P(n,r,a))}let d=c;if(o&&u&&x>0){let t=[];for(let n=0;n<=m;n++)t.push([e+n*_,i,s]);d=op(u,t,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`u`})}for(let t=0;t<=m;t++)for(let n=0;n<=g;n++){let i=e+t*_,s=a+n*y,c=[];for(let e=0;e<=h;e++){let[t,n,a]=l(i,r+e*v,s);c.push(new P(t,n,a))}let d=c;if(o&&u&&x>0){let e=[];for(let t=0;t<=h;t++)e.push([i,r+t*v,s]);d=op(u,e,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`v`})}for(let t=0;t<=m;t++)for(let n=0;n<=h;n++){let i=e+t*_,s=r+n*v,c=[];for(let e=0;e<=g;e++){let[t,n,r]=l(i,s,a+e*y);c.push(new P(t,n,r))}let d=c;if(o&&u&&x>0){let e=[];for(let t=0;t<=g;t++)e.push([i,s,a+t*y]);d=op(u,e,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`w`})}return b},[l,c,n,o,u]);return(0,v.useEffect)(()=>{if(!s.current||!l)return;let e=s.current,t=new mo;t.background=new fo(15790320);let n=new Uc(75,e.clientWidth/e.clientHeight,.1,1e3);n.position.set(8,8,8),n.lookAt(0,0,0);let o=new Df({antialias:!0});o.setSize(e.clientWidth,e.clientHeight),o.setClearColor(15790320,1),e.appendChild(o.domElement);let c=new Rf(n,o.domElement);c.enableDamping=!0;let u=new Us({color:new fo(r)}),f=new io;if(d.forEach(({geometry:e})=>{let t=new Zs(e,u);f.add(t)}),i){let e=new cl(a);f.add(e)}t.add(f);let p=!0,m=()=>{p&&(requestAnimationFrame(m),c.update(),o.render(t,n))};m();let h=()=>{n.aspect=e.clientWidth/e.clientHeight,n.updateProjectionMatrix(),o.setSize(e.clientWidth,e.clientHeight)};return window.addEventListener(`resize`,h),()=>{p=!1,window.removeEventListener(`resize`,h),e.removeChild(o.domElement),o.dispose(),c.dispose(),d.forEach(({geometry:e})=>e.dispose()),u.dispose()}},[l,c,n,r,i,a,d]),(0,L.jsx)(`div`,{ref:s,style:{width:`100%`,height:`100%`}})}function lp(e,t){let n;try{n=e(...t)}catch{return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]}if(!n||!n[0]||!n[0][0])return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]];let r=tp(n);if(!r)return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]];let i=[ip(e,t,0),ip(e,t,1),ip(e,t,2)],a=[];for(let e=0;e<3;e++){a[e]=[];for(let t=0;t<3;t++){a[e][t]=[];for(let n=0;n<3;n++){let o=0;for(let a=0;a<3;a++){let s=i[t][n][a],c=i[n][t][a],l=i[a][t][n];o+=r[e][a]*(s+c-l)}a[e][t][n]=o/2}}}return a}function up(e,t){let n=[0,0,0];for(let r=0;r<3;r++){let i=0;for(let n=0;n<3;n++)for(let a=0;a<3;a++)i+=e[r][n][a]*t[n]*t[a];n[r]=-i}return n}function dp(e,t,n,r=1e3,i=.01,a={}){let{minRadius:o=0,maxRadius:s=100,tolerance:c=1e-6}=a,l=[t],u=[...t],d=[...n];for(let t=0;t<r;t++){let t=up(lp(e,u),d),n=[...d],r=[...t],a=u.map((e,t)=>e+.5*i*n[t]),f=d.map((e,t)=>e+.5*i*r[t]),p=up(lp(e,a),f),m=[...f],h=[...p],g=u.map((e,t)=>e+.5*i*m[t]),_=d.map((e,t)=>e+.5*i*h[t]),v=up(lp(e,g),_),y=[..._],b=[...v],x=u.map((e,t)=>e+i*y[t]),S=d.map((e,t)=>e+i*b[t]),C=up(lp(e,x),S),w=[...S],T=[...C];for(let e=0;e<3;e++)u[e]+=i/6*(n[e]+2*m[e]+2*y[e]+w[e]),d[e]+=i/6*(r[e]+2*h[e]+2*b[e]+T[e]);l.push([...u]);let E=Math.sqrt(u[0]*u[0]+u[1]*u[1]+u[2]*u[2]);if(E<o||E>s||Math.sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2])<c)break}return l}function fp(e,t=`spherical`,n=0){let r=[];if(t===`radial`)for(let t=0;t<e;t++){let n=t/e*Math.PI*2;r.push([Math.cos(n),Math.sin(n),0])}else if(t===`spherical`){let t=Math.PI*(3-Math.sqrt(5));for(let n=0;n<e;n++){let i=1-n/(e-1)*2,a=Math.sqrt(1-i*i),o=t*n;r.push([a*Math.cos(o),i,a*Math.sin(o)])}}else if(t===`cone`)for(let t=0;t<e;t++){let i=t/e*Math.PI*2,a=Math.sin(n),o=Math.cos(n);r.push([a*Math.cos(i),o,a*Math.sin(i)])}return r}function pp(e,t,n,r=1e3,i=.01,a={}){return n.map(n=>{let o=Math.sqrt(n[0]**2+n[1]**2+n[2]**2);return dp(e,t,n.map(e=>e/o),r,i,a)})}function mp(e,t,n=12,r=`spherical`,i={}){let a=fp(n,r),o={maxSteps:2e3,dt:.005,minRadius:.1,maxRadius:50,...i};return pp(e,t,a.map(e=>e.map(e=>e*.1)),o.maxSteps,o.dt,o)}function hp(e,t,n=8,r=`radial`,i=.5,a={}){let o=fp(n,r),s={maxSteps:1e3,dt:.01,minRadius:.5,maxRadius:30,...a};return pp(e,t,o.map(e=>e.map(e=>e*i)),s.maxSteps,s.dt,s)}function gp({metric:e,geodesicType:t=`null`,origin:n=[5,Math.PI/2,0],nRays:r=12,pattern:i=`spherical`,speed:a=.5,maxSteps:o=1e3,lineColor:s=`#ef4444`,showAxes:c=!0,axisSize:l=5}){let u=(0,v.useRef)(null),d=e?.spatial,f=e?.embedding,p=(0,v.useMemo)(()=>{if(!d||!f)return[];let e;return e=t===`null`?mp(d,n,r,i,{maxSteps:o,minRadius:2.1,maxRadius:30}):hp(d,n,r,i,a,{maxSteps:o,minRadius:2.5,maxRadius:25}),e.map(e=>e.map(e=>{let[t,n,r]=f(...e);return new P(t,n,r)}))},[d,f,t,n,r,i,a,o]);return(0,v.useEffect)(()=>{if(!u.current||p.length===0)return;let t=u.current,r=new mo;r.background=new fo(15790320);let i=new Uc(75,t.clientWidth/t.clientHeight,.1,1e3);i.position.set(15,10,15),i.lookAt(0,0,0);let a=new Df({antialias:!0});a.setSize(t.clientWidth,t.clientHeight),a.setClearColor(15790320,1),t.appendChild(a.domElement);let o=new Rf(i,a.domElement);o.enableDamping=!0;let d=new Us({color:new fo(s),linewidth:2,transparent:!0,opacity:.8}),m=new io;p.forEach(e=>{if(e.length>1){let t=new Zs(new cs().setFromPoints(e),d);m.add(t)}}),r.add(m);let h=f(...n),g=new cc(.3,16,16),_=new ys({color:16777215}),v=new js(g,_);v.position.set(...h),r.add(v);let y,b,x,S;if(e.type===`curved`){y=new cc(.5,32,32),b=new ys({color:0,wireframe:!0});let e=new js(y,b);r.add(e),x=new cc(2,32,32),S=new ys({color:0,transparent:!0,opacity:.3});let t=new js(x,S);r.add(t)}if(c){let e=new cl(l);r.add(e)}let C=!0,w=()=>{C&&(requestAnimationFrame(w),o.update(),a.render(r,i))};w();let T=()=>{i.aspect=t.clientWidth/t.clientHeight,i.updateProjectionMatrix(),a.setSize(t.clientWidth,t.clientHeight)};return window.addEventListener(`resize`,T),()=>{C=!1,window.removeEventListener(`resize`,T),t.removeChild(a.domElement),a.dispose(),o.dispose(),m.children.forEach(e=>{e.geometry.dispose()}),d.dispose(),g.dispose(),_.dispose(),e.type===`curved`&&(y.dispose(),b.dispose(),x.dispose(),S.dispose())}},[p,f,e,s,c,l,n]),(0,L.jsx)(`div`,{ref:u,style:{width:`100%`,height:`100%`}})}var _p={name:`Cartesian`,description:`Standard rectangular coordinates (x, y, z)`,embedding:(e,t,n)=>[e,t,n],inverse:(e,t,n)=>[e,t,n],ranges:[[-5,5],[-5,5],[-5,5]],paramNames:[`x`,`y`,`z`],bounds:{x:{min:-10,max:10,default:[-5,5]},y:{min:-10,max:10,default:[-5,5]},z:{min:-10,max:10,default:[-5,5]}},boundsKeys:[`x`,`y`,`z`]},vp={name:`Cylindrical`,description:`Cylindrical coordinates (r, θ, z)`,embedding:(e,t,n)=>[e*Math.cos(t),e*Math.sin(t),n],inverse:(e,t,n)=>[Math.sqrt(e*e+t*t),Math.atan2(t,e),n],ranges:[[0,5],[0,2*Math.PI],[-3,3]],paramNames:[`r`,`θ`,`z`],bounds:{r:{min:0,max:10,default:[0,5]},theta:{min:0,max:2*Math.PI,default:[0,2*Math.PI]},z:{min:-10,max:10,default:[-3,3]}},boundsKeys:[`r`,`theta`,`z`]},yp={name:`Spherical`,description:`Spherical coordinates (r, θ, φ)`,embedding:(e,t,n)=>[e*Math.sin(t)*Math.cos(n),e*Math.sin(t)*Math.sin(n),e*Math.cos(t)],inverse:(e,t,n)=>{let r=Math.sqrt(e*e+t*t+n*n);return[r,r>0?Math.acos(n/r):0,Math.atan2(t,e)]},ranges:[[0,5],[0,Math.PI],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:0,max:10,default:[0,5]},theta:{min:0,max:Math.PI,default:[0,Math.PI]},phi:{min:0,max:2*Math.PI,default:[0,2*Math.PI]}},boundsKeys:[`r`,`theta`,`phi`]};function bp(e,t,n,r=0){let i=Math.exp(e),a=Math.cos(t),o=Math.sin(t),s=Math.cos(n),c=Math.sin(n),l=Math.cos(r),u=Math.sin(r);return[i*(o*s*l+a*c*u),i*(a*c*l-o*s*u),i*(a*s*u+o*c*l)]}var xp={name:`Quaternion (Q1)`,description:`Quaternion exponential e^z = e^ω·e^(θi)·e^(φj)·e^(ρk)`,embedding:(e,t,n)=>bp(e,t,n,0),inverse:(e,t,n)=>{let r=Math.sqrt(e*e+t*t+n*n);return[Math.log(Math.max(r,.001)),Math.atan2(e,n),Math.atan2(t,Math.sqrt(e*e+n*n))]},ranges:[[0,1],[-Math.PI/4,Math.PI/4],[-Math.PI/4,Math.PI/4]],paramNames:[`ω (real)`,`θ (i)`,`φ (j)`],bounds:{omega:{min:-3.14,max:3.14,default:[0,1]},theta:{min:-Math.PI,max:Math.PI,default:[-Math.PI/4,Math.PI/4]},phi:{min:-Math.PI,max:Math.PI,default:[-Math.PI/4,Math.PI/4]}},boundsKeys:[`omega`,`theta`,`phi`],hasRho:!1,rhoDefault:0};function Sp(e){return{cartesian:_p,cylindrical:vp,spherical:yp,quaternion:xp}[e]}var Cp={name:`Minkowski (Flat)`,description:`Flat Euclidean space - no curvature`,spatial:()=>[[1,0,0],[0,1,0],[0,0,1]],embedding:(e,t,n)=>[e,t,n],ranges:[[-5,5],[-5,5],[-5,5]],paramNames:[`x`,`y`,`z`],bounds:{x:{min:-10,max:10},y:{min:-10,max:10},z:{min:-10,max:10}},boundsKeys:[`x`,`y`,`z`],type:`flat`},wp={name:`Schwarzschild`,description:`Spacetime around a spherically symmetric mass (black hole)`,rs:2,spatial:(e,t=Math.PI/2,n=0)=>{let r=e*e,i=Math.sin(t);return e<=2?[[1,0,0],[0,r,0],[0,0,r*i*i]]:[[1/(1-2/e),0,0],[0,r,0],[0,0,r*i*i]]},embedding:(e,t,n)=>{let r=e*Math.sin(t)*Math.cos(n),i=e*Math.sin(t)*Math.sin(n),a;return a=e<=2?0:2*Math.sqrt(2*(e-2)),[r,i,a]},ranges:[[2.1,10],[Math.PI/2,Math.PI/2],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:2.1,max:15},theta:{min:0,max:Math.PI},phi:{min:0,max:2*Math.PI}},boundsKeys:[`r`,`theta`,`phi`],type:`curved`},Tp={name:`FLRW`,description:`Friedmann-Lemaître-Robertson-Walker (Expanding Universe)`,a:1,k:0,spatial:(e,t,n)=>{let r=e*e,i=Math.sin(t),a,o,s;return a=1,o=1*r,s=1*r*i*i,[[a,0,0],[0,o,0],[0,0,s]]},embedding:(e,t,n)=>{let r=1*e;return[r*Math.sin(t)*Math.cos(n),r*Math.sin(t)*Math.sin(n),r*Math.cos(t)]},ranges:[[0,5],[0,Math.PI],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:0,max:10},theta:{min:0,max:Math.PI},phi:{min:0,max:2*Math.PI}},boundsKeys:[`r`,`theta`,`phi`],type:`curved`};function Ep(e){return{minkowski:Cp,schwarzschild:wp,flrw:Tp}[e]}function Dp(){let[e,t]=(0,v.useState)(1),[n,r]=(0,v.useState)(`cartesian`),i=Sp(n)||_p,[a,o]=(0,v.useState)(`minkowski`),s=Ep(a)||Cp,[c,l]=(0,v.useState)(`schwarzschild`),u=Ep(c)||wp,[d,f]=(0,v.useState)(`null`),[p,m]=(0,v.useState)(16),[h,g]=(0,v.useState)(`spherical`),[_,y]=(0,v.useState)(.5),[b,x]=(0,v.useState)(()=>e===1?i.ranges:s.ranges),[S,C]=(0,v.useState)(10),[w,T]=(0,v.useState)(`#6366f1`),[E,D]=(0,v.useState)(!0),O=e=>{t(e),x(e===1?Sp(n)?.ranges||[[-5,5],[-5,5],[-5,5]]:Ep(a)?.ranges||[[-5,5],[-5,5],[-5,5]])},ee=e=>{let t=Sp(e);t&&x(t.ranges),r(e)},k=e=>{let t=Ep(e);t&&x(t.ranges),o(e)},A=(e,t)=>{x(n=>{let r=[...n];return r[e]=t,r})},te=e===1?i:s,ne=te.bounds||{},re=te.paramNames||[`u`,`v`,`w`],ie=te.boundsKeys||re,j=e=>ne[e]||{min:-10,max:10},M=j(ie[0]),ae=j(ie[1]),oe=j(ie[2]),se=M.min,ce=M.max,le=ae.min,ue=ae.max,de=oe.min,fe=oe.max,pe=!!ne[ie[0]],me=!!ne[ie[1]],he=!!ne[ie[2]];return(0,L.jsxs)(`div`,{className:`graph-page`,children:[(0,L.jsxs)(`aside`,{className:`graph-controls`,children:[(0,L.jsx)(`h3`,{children:`Grid Controls`}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Grid Level`,(0,L.jsxs)(`select`,{value:e,onChange:e=>O(parseInt(e.target.value)),children:[(0,L.jsx)(`option`,{value:1,children:`Level 1: Coordinate Grid`}),(0,L.jsx)(`option`,{value:2,children:`Level 2: Metric-Aware Grid`}),(0,L.jsx)(`option`,{value:3,children:`Level 3: Geodesic Grid`})]})]})}),e===1&&(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Coordinate System`,(0,L.jsxs)(`select`,{value:n,onChange:e=>ee(e.target.value),children:[(0,L.jsx)(`option`,{value:`cartesian`,children:`Cartesian (x, y, z)`}),(0,L.jsx)(`option`,{value:`cylindrical`,children:`Cylindrical (r, θ, z)`}),(0,L.jsx)(`option`,{value:`spherical`,children:`Spherical (r, θ, φ)`}),(0,L.jsx)(`option`,{value:`quaternion`,children:`Quaternion (ω, θ, φ)`})]})]})}),e===2&&(0,L.jsxs)(L.Fragment,{children:[(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric`,(0,L.jsxs)(`select`,{value:a,onChange:e=>k(e.target.value),children:[(0,L.jsx)(`option`,{value:`minkowski`,children:`Minkowski (Flat Space)`}),(0,L.jsx)(`option`,{value:`schwarzschild`,children:`Schwarzschild (Black Hole)`}),(0,L.jsx)(`option`,{value:`flrw`,children:`FLRW (Expanding Universe)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric-Aware Spacing`,(0,L.jsx)(`input`,{type:`checkbox`,checked:E,onChange:e=>D(e.target.checked)}),(0,L.jsx)(`span`,{style:{fontSize:`0.75rem`,color:`#64748b`},children:E?`On`:`Off`})]})})]}),e===3&&(0,L.jsxs)(L.Fragment,{children:[(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric`,(0,L.jsxs)(`select`,{value:c,onChange:e=>l(e.target.value),children:[(0,L.jsx)(`option`,{value:`schwarzschild`,children:`Schwarzschild (Black Hole)`}),(0,L.jsx)(`option`,{value:`flrw`,children:`FLRW (Expanding Universe)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Geodesic Type`,(0,L.jsxs)(`select`,{value:d,onChange:e=>f(e.target.value),children:[(0,L.jsx)(`option`,{value:`null`,children:`Null (Light Paths)`}),(0,L.jsx)(`option`,{value:`timelike`,children:`Timelike (Particles)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Number of Rays: `,p,(0,L.jsx)(`input`,{type:`range`,min:`4`,max:`32`,step:`1`,value:p,onChange:e=>m(parseInt(e.target.value))})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Pattern`,(0,L.jsxs)(`select`,{value:h,onChange:e=>g(e.target.value),children:[(0,L.jsx)(`option`,{value:`radial`,children:`Radial`}),(0,L.jsx)(`option`,{value:`spherical`,children:`Spherical`}),(0,L.jsx)(`option`,{value:`cone`,children:`Cone`})]})]})}),d===`timelike`&&(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Initial Speed: `,_.toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:`0.1`,max:`1`,step:`0.05`,value:_,onChange:e=>y(parseFloat(e.target.value))})]})}),(0,L.jsx)(`p`,{style:{fontSize:`0.75rem`,color:`#ef4444`,marginTop:`0.5rem`},children:d===`null`?`Visualizing light paths in curved spacetime`:`Visualizing particle trajectories`})]}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Resolution: `,S,(0,L.jsx)(`input`,{type:`range`,min:`1`,max:`20`,step:`1`,value:S,onChange:e=>C(parseInt(e.target.value))})]})}),pe&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[0],` Min: `,b[0][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:se,max:ce,step:`0.5`,value:b[0][0],onChange:e=>A(0,[parseFloat(e.target.value),b[0][1]])})]}),(0,L.jsxs)(`label`,{children:[re[0],` Max: `,b[0][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:se,max:ce,step:`0.5`,value:b[0][1],onChange:e=>A(0,[b[0][0],parseFloat(e.target.value)])})]})]}),me&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[1],` Min: `,b[1][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:le,max:ue,step:`0.5`,value:b[1][0],onChange:e=>A(1,[parseFloat(e.target.value),b[1][1]])})]}),(0,L.jsxs)(`label`,{children:[re[1],` Max: `,b[1][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:le,max:ue,step:`0.5`,value:b[1][1],onChange:e=>A(1,[b[1][0],parseFloat(e.target.value)])})]})]}),he&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[2],` Min: `,b[2][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:de,max:fe,step:`0.5`,value:b[2][0],onChange:e=>A(2,[parseFloat(e.target.value),b[2][1]])})]}),(0,L.jsxs)(`label`,{children:[re[2],` Max: `,b[2][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:de,max:fe,step:`0.5`,value:b[2][1],onChange:e=>A(2,[b[2][0],parseFloat(e.target.value)])})]})]}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Line Color`,(0,L.jsx)(`input`,{type:`color`,value:w,onChange:e=>T(e.target.value)})]})}),(0,L.jsx)(`p`,{style:{fontSize:`0.75rem`,color:`#64748b`,marginTop:`1rem`},children:te?.description})]}),(0,L.jsx)(`main`,{className:`graph-container`,children:e===1?(0,L.jsx)($f,{coordinate:i,ranges:b,resolution:S,lineColor:w}):e===2?(0,L.jsx)(cp,{metric:s,ranges:b,resolution:S,lineColor:w,metricAware:E}):(0,L.jsx)(gp,{metric:u,geodesicType:d,nRays:p,pattern:h,speed:_,lineColor:w})})]})}function Op({children:e}){let t=at(),n=nt(),[r,i]=(0,v.useState)(!1),[a,o]=(0,v.useState)(!1),s=(e,n)=>{n.preventDefault(),t(e),i(!1)},c=e=>e===`/`?n.pathname===`/`:n.pathname.startsWith(e),l=()=>n.pathname===`/viz`?`Interactive Visualization`:a?`Visualization`:n.pathname===`/`?`Overview`:n.pathname===`/chapters`?`Chapters`:n.pathname===`/appendices`?`Appendices`:n.pathname===`/visualizations`?`Visualizations`:n.pathname.startsWith(`/visualization/`)?`Visualization Documentation`:n.pathname.startsWith(`/appendix/`)?`Appendix`:n.pathname.startsWith(`/chapter/`)?`Chapter ${n.pathname.split(`/`).pop()}`:`MTW`;return a?(0,L.jsxs)(`div`,{className:`layout`,children:[r&&(0,L.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>i(!1)}),(0,L.jsxs)(`aside`,{className:`sidebar ${r?`sidebar-open`:``}`,children:[(0,L.jsxs)(`div`,{className:`sidebar-header`,children:[(0,L.jsx)(Cn,{to:`/`,children:(0,L.jsx)(`h2`,{children:`MTW`})}),(0,L.jsx)(`button`,{className:`sidebar-close`,onClick:()=>i(!1),"aria-label":`Close sidebar`,children:`×`})]}),(0,L.jsxs)(`nav`,{className:`sidebar-nav`,children:[(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/`)?`active`:``}`,onClick:e=>s(`/`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Dashboard`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/chapters`)?`active`:``}`,onClick:e=>s(`/chapters`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Chapters`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/visualizations`)?`active`:``}`,onClick:e=>s(`/visualizations`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Visualizations`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/appendices`)?`active`:``}`,onClick:e=>s(`/appendices`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Appendices`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item active`,onClick:e=>{e.preventDefault(),o(!1)},children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Viz (Interactive)`})})]})]}),(0,L.jsxs)(`main`,{className:`main-content`,children:[(0,L.jsxs)(`header`,{className:`top-header`,children:[(0,L.jsx)(`button`,{className:`menu-toggle`,onClick:()=>i(!0),"aria-label":`Open menu`,children:`☰`}),(0,L.jsx)(`h1`,{children:l()})]}),(0,L.jsx)(`div`,{className:`page-content`,children:(0,L.jsx)(Dp,{})})]})]}):(0,L.jsxs)(`div`,{className:`layout`,children:[r&&(0,L.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>i(!1)}),(0,L.jsxs)(`aside`,{className:`sidebar ${r?`sidebar-open`:``}`,children:[(0,L.jsxs)(`div`,{className:`sidebar-header`,children:[(0,L.jsx)(Cn,{to:`/`,children:(0,L.jsx)(`h2`,{children:`MTW`})}),(0,L.jsx)(`button`,{className:`sidebar-close`,onClick:()=>i(!1),"aria-label":`Close sidebar`,children:`×`})]}),(0,L.jsxs)(`nav`,{className:`sidebar-nav`,children:[(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/`)?`active`:``}`,onClick:e=>s(`/`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Dashboard`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/chapters`)?`active`:``}`,onClick:e=>s(`/chapters`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Chapters`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/visualizations`)?`active`:``}`,onClick:e=>s(`/visualizations`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Visualizations`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/viz`)?`active`:``}`,onClick:e=>s(`/viz`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Interactive Viz`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/appendices`)?`active`:``}`,onClick:e=>s(`/appendices`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Appendices`})})]})]}),(0,L.jsxs)(`main`,{className:`main-content`,children:[(0,L.jsxs)(`header`,{className:`top-header`,children:[(0,L.jsx)(`button`,{className:`menu-toggle`,onClick:()=>i(!0),"aria-label":`Open menu`,children:`☰`}),(0,L.jsx)(`h1`,{children:l()})]}),(0,L.jsx)(`div`,{className:`page-content`,children:e})]})]})}function kp(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`dashboard-content`,children:[(0,L.jsxs)(`section`,{className:`card welcome-card`,children:[(0,L.jsx)(`h2`,{children:`MTW Problem Solver`}),(0,L.jsxs)(`p`,{children:[`Visualize and solve problems from `,(0,L.jsx)(`em`,{children:`Gravitation`}),` by Misner, Thorne, and Wheeler`]})]}),(0,L.jsxs)(`section`,{className:`card`,children:[(0,L.jsx)(`h3`,{children:`Chapters`}),(0,L.jsx)(`div`,{className:`chapters-overview`,children:[{number:1,title:`Geometrodynamics in Brief`,exercises:3,topics:[`Curvature`,`Geodesics`,`Tidal Forces`,`Kepler Density`],status:`complete`},{number:2,title:`Foundations of Special Relativity`,exercises:7,topics:[`Vectors`,`1-Forms`,`Metric Tensor`,`Lorentz Transforms`],status:`complete`},{number:3,title:`The Electromagnetic Field`,exercises:18,topics:[`Lorentz Force`,`Faraday Tensor`,`Maxwell Equations`,`Stress-Energy`],status:`complete`},{number:4,title:`Electromagnetism and Differential Forms`,exercises:12,topics:[`Exterior Calculus`,`Differential Forms`,`Hodge Dual`,`Geometric Maxwell`],status:`complete`},{number:5,title:`Stress-Energy Tensor and Conservation Laws`,exercises:6,topics:[`Stress-Energy Tensor`,`Perfect Fluids`,`Conservation Laws`,`Angular Momentum`],status:`complete`}].map(t=>(0,L.jsxs)(`div`,{className:`chapter-overview-item`,onClick:()=>e(`/chapter/${t.number}`),children:[(0,L.jsxs)(`div`,{className:`chapter-badge`,children:[`Ch `,t.number]}),(0,L.jsxs)(`div`,{className:`chapter-info`,children:[(0,L.jsx)(`h4`,{children:t.title}),(0,L.jsx)(`p`,{className:`chapter-topics`,children:t.topics.join(` • `)}),(0,L.jsxs)(`span`,{className:`chapter-exercises`,children:[t.exercises,` exercises solved`]})]}),(0,L.jsx)(`div`,{className:`chapter-status complete`,children:`✓`})]},t.number))})]}),(0,L.jsxs)(`section`,{className:`card`,children:[(0,L.jsx)(`h3`,{children:`Visualizations`}),(0,L.jsx)(`div`,{className:`viz-grid`,children:[{name:`Level 1: Coordinate Grid`,description:`Simple embedding - map parameter space to 3D`,systems:[`Cartesian`,`Cylindrical`,`Spherical`,`Quaternion`]},{name:`Level 2: Metric-Aware Grid`,description:`Proper distances in curved spacetime`,systems:[`Schwarzschild`,`FLRW`,`Minkowski`]},{name:`Level 3: Geodesic Grid`,description:`True geodesics - light and particle paths`,systems:[`Null Geodesics`,`Timelike Geodesics`,`Light Bending`]}].map(t=>(0,L.jsxs)(`div`,{className:`viz-card`,onClick:()=>e(`/viz`),children:[(0,L.jsx)(`div`,{className:`viz-icon`,children:`🔮`}),(0,L.jsx)(`h4`,{children:t.name}),(0,L.jsx)(`p`,{children:t.description}),(0,L.jsx)(`div`,{className:`viz-systems`,children:t.systems.map(e=>(0,L.jsx)(`span`,{className:`viz-tag`,children:e},e))})]},t.name))}),(0,L.jsx)(`button`,{className:`view-all-viz`,onClick:()=>e(`/visualizations`),children:`View Documentation →`})]}),(0,L.jsxs)(`section`,{className:`stats-grid`,children:[(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/chapters`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`📖`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`5`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Chapters`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/chapters`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`✏️`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`46`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Exercises Solved`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/visualizations`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`🔮`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`3`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Visualization Levels`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/appendices`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`📚`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`5`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Appendices`})]})]})]})]})})}function Ap(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapters-list`,children:[(0,L.jsx)(`h1`,{children:`Chapters`}),(0,L.jsx)(`p`,{className:`chapters-intro`,children:`Select a chapter to view exercises and solutions`}),(0,L.jsxs)(`div`,{className:`chapter-cards`,children:[(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/1`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`Chapter 1`}),(0,L.jsx)(`h3`,{children:`Geometrodynamics in Brief`}),(0,L.jsx)(`p`,{children:`Gaussian curvature, geodesics, and tidal forces`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]}),(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/2`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`Chapter 2`}),(0,L.jsx)(`h3`,{children:`Foundations of Special Relativity`}),(0,L.jsx)(`p`,{children:`4-momentum, Lorentz transformations, and temperature gradients`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]}),(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/3`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`Chapter 3`}),(0,L.jsx)(`h3`,{children:`The Electromagnetic Field`}),(0,L.jsx)(`p`,{children:`Lorentz force, Faraday tensor, and Maxwell's equations`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]}),(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/4`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`Chapter 4`}),(0,L.jsx)(`h3`,{children:`Electromagnetism and Differential Forms`}),(0,L.jsx)(`p`,{children:`Exterior calculus, Faraday 2-form, and geometric Maxwell equations`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]}),(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/5`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`Chapter 5`}),(0,L.jsx)(`h3`,{children:`Stress-Energy Tensor and Conservation Laws`}),(0,L.jsx)(`p`,{children:`Energy density, momentum flux, perfect fluids, and angular momentum`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]})]}),(0,L.jsx)(`h2`,{style:{marginTop:`2rem`,marginBottom:`1rem`},children:`Appendices`}),(0,L.jsx)(`p`,{className:`chapters-intro`,children:`Supplementary mathematical reference materials`}),(0,L.jsx)(`div`,{className:`chapter-cards`,children:(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/appendices`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`All Appendices`}),(0,L.jsx)(`h3`,{children:`Mathematical Reference Collection`}),(0,L.jsx)(`p`,{children:`Quaternions, differential geometry, special relativity, and tensor calculus`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Browse appendices →`})]})})]})})}function jp(e){let t=[],n=String(e||``),r=n.indexOf(`,`),i=0,a=!1;for(;!a;){r===-1&&(r=n.length,a=!0);let e=n.slice(i,r).trim();(e||!a)&&t.push(e),i=r+1,r=n.indexOf(`,`,i)}return t}function Mp(e,t){let n=t||{};return(e[e.length-1]===``?[...e,``]:e).join((n.padRight?` `:``)+`,`+(n.padLeft===!1?``:` `)).trim()}var Np=/^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u,Pp=/^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u,Fp={};function Ip(e,t){return((t||Fp).jsx?Pp:Np).test(e)}var Lp=/[ \t\n\f\r]/g;function Rp(e){return typeof e==`object`?e.type===`text`?zp(e.value):!1:zp(e)}function zp(e){return e.replace(Lp,``)===``}var Bp=class{constructor(e,t,n){this.normal=t,this.property=e,n&&(this.space=n)}};Bp.prototype.normal={},Bp.prototype.property={},Bp.prototype.space=void 0;function Vp(e,t){let n={},r={};for(let t of e)Object.assign(n,t.property),Object.assign(r,t.normal);return new Bp(n,r,t)}function Hp(e){return e.toLowerCase()}var Up=class{constructor(e,t){this.attribute=t,this.property=e}};Up.prototype.attribute=``,Up.prototype.booleanish=!1,Up.prototype.boolean=!1,Up.prototype.commaOrSpaceSeparated=!1,Up.prototype.commaSeparated=!1,Up.prototype.defined=!1,Up.prototype.mustUseProperty=!1,Up.prototype.number=!1,Up.prototype.overloadedBoolean=!1,Up.prototype.property=``,Up.prototype.spaceSeparated=!1,Up.prototype.space=void 0;var Wp=s({boolean:()=>Kp,booleanish:()=>qp,commaOrSpaceSeparated:()=>Zp,commaSeparated:()=>Xp,number:()=>R,overloadedBoolean:()=>Jp,spaceSeparated:()=>Yp}),Gp=0,Kp=Qp(),qp=Qp(),Jp=Qp(),R=Qp(),Yp=Qp(),Xp=Qp(),Zp=Qp();function Qp(){return 2**++Gp}var $p=Object.keys(Wp),em=class extends Up{constructor(e,t,n,r){let i=-1;if(super(e,t),tm(this,`space`,r),typeof n==`number`)for(;++i<$p.length;){let e=$p[i];tm(this,$p[i],(n&Wp[e])===Wp[e])}}};em.prototype.defined=!0;function tm(e,t,n){n&&(e[t]=n)}function nm(e){let t={},n={};for(let[r,i]of Object.entries(e.properties)){let a=new em(r,e.transform(e.attributes||{},r),i,e.space);e.mustUseProperty&&e.mustUseProperty.includes(r)&&(a.mustUseProperty=!0),t[r]=a,n[Hp(r)]=r,n[Hp(a.attribute)]=r}return new Bp(t,n,e.space)}var rm=nm({properties:{ariaActiveDescendant:null,ariaAtomic:qp,ariaAutoComplete:null,ariaBusy:qp,ariaChecked:qp,ariaColCount:R,ariaColIndex:R,ariaColSpan:R,ariaControls:Yp,ariaCurrent:null,ariaDescribedBy:Yp,ariaDetails:null,ariaDisabled:qp,ariaDropEffect:Yp,ariaErrorMessage:null,ariaExpanded:qp,ariaFlowTo:Yp,ariaGrabbed:qp,ariaHasPopup:null,ariaHidden:qp,ariaInvalid:null,ariaKeyShortcuts:null,ariaLabel:null,ariaLabelledBy:Yp,ariaLevel:R,ariaLive:null,ariaModal:qp,ariaMultiLine:qp,ariaMultiSelectable:qp,ariaOrientation:null,ariaOwns:Yp,ariaPlaceholder:null,ariaPosInSet:R,ariaPressed:qp,ariaReadOnly:qp,ariaRelevant:null,ariaRequired:qp,ariaRoleDescription:Yp,ariaRowCount:R,ariaRowIndex:R,ariaRowSpan:R,ariaSelected:qp,ariaSetSize:R,ariaSort:null,ariaValueMax:R,ariaValueMin:R,ariaValueNow:R,ariaValueText:null,role:null},transform(e,t){return t===`role`?t:`aria-`+t.slice(4).toLowerCase()}});function im(e,t){return t in e?e[t]:t}function am(e,t){return im(e,t.toLowerCase())}var om=nm({attributes:{acceptcharset:`accept-charset`,classname:`class`,htmlfor:`for`,httpequiv:`http-equiv`},mustUseProperty:[`checked`,`multiple`,`muted`,`selected`],properties:{abbr:null,accept:Xp,acceptCharset:Yp,accessKey:Yp,action:null,allow:null,allowFullScreen:Kp,allowPaymentRequest:Kp,allowUserMedia:Kp,alt:null,as:null,async:Kp,autoCapitalize:null,autoComplete:Yp,autoFocus:Kp,autoPlay:Kp,blocking:Yp,capture:null,charSet:null,checked:Kp,cite:null,className:Yp,cols:R,colSpan:null,content:null,contentEditable:qp,controls:Kp,controlsList:Yp,coords:R|Xp,crossOrigin:null,data:null,dateTime:null,decoding:null,default:Kp,defer:Kp,dir:null,dirName:null,disabled:Kp,download:Jp,draggable:qp,encType:null,enterKeyHint:null,fetchPriority:null,form:null,formAction:null,formEncType:null,formMethod:null,formNoValidate:Kp,formTarget:null,headers:Yp,height:R,hidden:Jp,high:R,href:null,hrefLang:null,htmlFor:Yp,httpEquiv:Yp,id:null,imageSizes:null,imageSrcSet:null,inert:Kp,inputMode:null,integrity:null,is:null,isMap:Kp,itemId:null,itemProp:Yp,itemRef:Yp,itemScope:Kp,itemType:Yp,kind:null,label:null,lang:null,language:null,list:null,loading:null,loop:Kp,low:R,manifest:null,max:null,maxLength:R,media:null,method:null,min:null,minLength:R,multiple:Kp,muted:Kp,name:null,nonce:null,noModule:Kp,noValidate:Kp,onAbort:null,onAfterPrint:null,onAuxClick:null,onBeforeMatch:null,onBeforePrint:null,onBeforeToggle:null,onBeforeUnload:null,onBlur:null,onCancel:null,onCanPlay:null,onCanPlayThrough:null,onChange:null,onClick:null,onClose:null,onContextLost:null,onContextMenu:null,onContextRestored:null,onCopy:null,onCueChange:null,onCut:null,onDblClick:null,onDrag:null,onDragEnd:null,onDragEnter:null,onDragExit:null,onDragLeave:null,onDragOver:null,onDragStart:null,onDrop:null,onDurationChange:null,onEmptied:null,onEnded:null,onError:null,onFocus:null,onFormData:null,onHashChange:null,onInput:null,onInvalid:null,onKeyDown:null,onKeyPress:null,onKeyUp:null,onLanguageChange:null,onLoad:null,onLoadedData:null,onLoadedMetadata:null,onLoadEnd:null,onLoadStart:null,onMessage:null,onMessageError:null,onMouseDown:null,onMouseEnter:null,onMouseLeave:null,onMouseMove:null,onMouseOut:null,onMouseOver:null,onMouseUp:null,onOffline:null,onOnline:null,onPageHide:null,onPageShow:null,onPaste:null,onPause:null,onPlay:null,onPlaying:null,onPopState:null,onProgress:null,onRateChange:null,onRejectionHandled:null,onReset:null,onResize:null,onScroll:null,onScrollEnd:null,onSecurityPolicyViolation:null,onSeeked:null,onSeeking:null,onSelect:null,onSlotChange:null,onStalled:null,onStorage:null,onSubmit:null,onSuspend:null,onTimeUpdate:null,onToggle:null,onUnhandledRejection:null,onUnload:null,onVolumeChange:null,onWaiting:null,onWheel:null,open:Kp,optimum:R,pattern:null,ping:Yp,placeholder:null,playsInline:Kp,popover:null,popoverTarget:null,popoverTargetAction:null,poster:null,preload:null,readOnly:Kp,referrerPolicy:null,rel:Yp,required:Kp,reversed:Kp,rows:R,rowSpan:R,sandbox:Yp,scope:null,scoped:Kp,seamless:Kp,selected:Kp,shadowRootClonable:Kp,shadowRootDelegatesFocus:Kp,shadowRootMode:null,shape:null,size:R,sizes:null,slot:null,span:R,spellCheck:qp,src:null,srcDoc:null,srcLang:null,srcSet:null,start:R,step:null,style:null,tabIndex:R,target:null,title:null,translate:null,type:null,typeMustMatch:Kp,useMap:null,value:qp,width:R,wrap:null,writingSuggestions:null,align:null,aLink:null,archive:Yp,axis:null,background:null,bgColor:null,border:R,borderColor:null,bottomMargin:R,cellPadding:null,cellSpacing:null,char:null,charOff:null,classId:null,clear:null,code:null,codeBase:null,codeType:null,color:null,compact:Kp,declare:Kp,event:null,face:null,frame:null,frameBorder:null,hSpace:R,leftMargin:R,link:null,longDesc:null,lowSrc:null,marginHeight:R,marginWidth:R,noResize:Kp,noHref:Kp,noShade:Kp,noWrap:Kp,object:null,profile:null,prompt:null,rev:null,rightMargin:R,rules:null,scheme:null,scrolling:qp,standby:null,summary:null,text:null,topMargin:R,valueType:null,version:null,vAlign:null,vLink:null,vSpace:R,allowTransparency:null,autoCorrect:null,autoSave:null,disablePictureInPicture:Kp,disableRemotePlayback:Kp,prefix:null,property:null,results:R,security:null,unselectable:null},space:`html`,transform:am}),sm=nm({attributes:{accentHeight:`accent-height`,alignmentBaseline:`alignment-baseline`,arabicForm:`arabic-form`,baselineShift:`baseline-shift`,capHeight:`cap-height`,className:`class`,clipPath:`clip-path`,clipRule:`clip-rule`,colorInterpolation:`color-interpolation`,colorInterpolationFilters:`color-interpolation-filters`,colorProfile:`color-profile`,colorRendering:`color-rendering`,crossOrigin:`crossorigin`,dataType:`datatype`,dominantBaseline:`dominant-baseline`,enableBackground:`enable-background`,fillOpacity:`fill-opacity`,fillRule:`fill-rule`,floodColor:`flood-color`,floodOpacity:`flood-opacity`,fontFamily:`font-family`,fontSize:`font-size`,fontSizeAdjust:`font-size-adjust`,fontStretch:`font-stretch`,fontStyle:`font-style`,fontVariant:`font-variant`,fontWeight:`font-weight`,glyphName:`glyph-name`,glyphOrientationHorizontal:`glyph-orientation-horizontal`,glyphOrientationVertical:`glyph-orientation-vertical`,hrefLang:`hreflang`,horizAdvX:`horiz-adv-x`,horizOriginX:`horiz-origin-x`,horizOriginY:`horiz-origin-y`,imageRendering:`image-rendering`,letterSpacing:`letter-spacing`,lightingColor:`lighting-color`,markerEnd:`marker-end`,markerMid:`marker-mid`,markerStart:`marker-start`,navDown:`nav-down`,navDownLeft:`nav-down-left`,navDownRight:`nav-down-right`,navLeft:`nav-left`,navNext:`nav-next`,navPrev:`nav-prev`,navRight:`nav-right`,navUp:`nav-up`,navUpLeft:`nav-up-left`,navUpRight:`nav-up-right`,onAbort:`onabort`,onActivate:`onactivate`,onAfterPrint:`onafterprint`,onBeforePrint:`onbeforeprint`,onBegin:`onbegin`,onCancel:`oncancel`,onCanPlay:`oncanplay`,onCanPlayThrough:`oncanplaythrough`,onChange:`onchange`,onClick:`onclick`,onClose:`onclose`,onCopy:`oncopy`,onCueChange:`oncuechange`,onCut:`oncut`,onDblClick:`ondblclick`,onDrag:`ondrag`,onDragEnd:`ondragend`,onDragEnter:`ondragenter`,onDragExit:`ondragexit`,onDragLeave:`ondragleave`,onDragOver:`ondragover`,onDragStart:`ondragstart`,onDrop:`ondrop`,onDurationChange:`ondurationchange`,onEmptied:`onemptied`,onEnd:`onend`,onEnded:`onended`,onError:`onerror`,onFocus:`onfocus`,onFocusIn:`onfocusin`,onFocusOut:`onfocusout`,onHashChange:`onhashchange`,onInput:`oninput`,onInvalid:`oninvalid`,onKeyDown:`onkeydown`,onKeyPress:`onkeypress`,onKeyUp:`onkeyup`,onLoad:`onload`,onLoadedData:`onloadeddata`,onLoadedMetadata:`onloadedmetadata`,onLoadStart:`onloadstart`,onMessage:`onmessage`,onMouseDown:`onmousedown`,onMouseEnter:`onmouseenter`,onMouseLeave:`onmouseleave`,onMouseMove:`onmousemove`,onMouseOut:`onmouseout`,onMouseOver:`onmouseover`,onMouseUp:`onmouseup`,onMouseWheel:`onmousewheel`,onOffline:`onoffline`,onOnline:`ononline`,onPageHide:`onpagehide`,onPageShow:`onpageshow`,onPaste:`onpaste`,onPause:`onpause`,onPlay:`onplay`,onPlaying:`onplaying`,onPopState:`onpopstate`,onProgress:`onprogress`,onRateChange:`onratechange`,onRepeat:`onrepeat`,onReset:`onreset`,onResize:`onresize`,onScroll:`onscroll`,onSeeked:`onseeked`,onSeeking:`onseeking`,onSelect:`onselect`,onShow:`onshow`,onStalled:`onstalled`,onStorage:`onstorage`,onSubmit:`onsubmit`,onSuspend:`onsuspend`,onTimeUpdate:`ontimeupdate`,onToggle:`ontoggle`,onUnload:`onunload`,onVolumeChange:`onvolumechange`,onWaiting:`onwaiting`,onZoom:`onzoom`,overlinePosition:`overline-position`,overlineThickness:`overline-thickness`,paintOrder:`paint-order`,panose1:`panose-1`,pointerEvents:`pointer-events`,referrerPolicy:`referrerpolicy`,renderingIntent:`rendering-intent`,shapeRendering:`shape-rendering`,stopColor:`stop-color`,stopOpacity:`stop-opacity`,strikethroughPosition:`strikethrough-position`,strikethroughThickness:`strikethrough-thickness`,strokeDashArray:`stroke-dasharray`,strokeDashOffset:`stroke-dashoffset`,strokeLineCap:`stroke-linecap`,strokeLineJoin:`stroke-linejoin`,strokeMiterLimit:`stroke-miterlimit`,strokeOpacity:`stroke-opacity`,strokeWidth:`stroke-width`,tabIndex:`tabindex`,textAnchor:`text-anchor`,textDecoration:`text-decoration`,textRendering:`text-rendering`,transformOrigin:`transform-origin`,typeOf:`typeof`,underlinePosition:`underline-position`,underlineThickness:`underline-thickness`,unicodeBidi:`unicode-bidi`,unicodeRange:`unicode-range`,unitsPerEm:`units-per-em`,vAlphabetic:`v-alphabetic`,vHanging:`v-hanging`,vIdeographic:`v-ideographic`,vMathematical:`v-mathematical`,vectorEffect:`vector-effect`,vertAdvY:`vert-adv-y`,vertOriginX:`vert-origin-x`,vertOriginY:`vert-origin-y`,wordSpacing:`word-spacing`,writingMode:`writing-mode`,xHeight:`x-height`,playbackOrder:`playbackorder`,timelineBegin:`timelinebegin`},properties:{about:Zp,accentHeight:R,accumulate:null,additive:null,alignmentBaseline:null,alphabetic:R,amplitude:R,arabicForm:null,ascent:R,attributeName:null,attributeType:null,azimuth:R,bandwidth:null,baselineShift:null,baseFrequency:null,baseProfile:null,bbox:null,begin:null,bias:R,by:null,calcMode:null,capHeight:R,className:Yp,clip:null,clipPath:null,clipPathUnits:null,clipRule:null,color:null,colorInterpolation:null,colorInterpolationFilters:null,colorProfile:null,colorRendering:null,content:null,contentScriptType:null,contentStyleType:null,crossOrigin:null,cursor:null,cx:null,cy:null,d:null,dataType:null,defaultAction:null,descent:R,diffuseConstant:R,direction:null,display:null,dur:null,divisor:R,dominantBaseline:null,download:Kp,dx:null,dy:null,edgeMode:null,editable:null,elevation:R,enableBackground:null,end:null,event:null,exponent:R,externalResourcesRequired:null,fill:null,fillOpacity:R,fillRule:null,filter:null,filterRes:null,filterUnits:null,floodColor:null,floodOpacity:null,focusable:null,focusHighlight:null,fontFamily:null,fontSize:null,fontSizeAdjust:null,fontStretch:null,fontStyle:null,fontVariant:null,fontWeight:null,format:null,fr:null,from:null,fx:null,fy:null,g1:Xp,g2:Xp,glyphName:Xp,glyphOrientationHorizontal:null,glyphOrientationVertical:null,glyphRef:null,gradientTransform:null,gradientUnits:null,handler:null,hanging:R,hatchContentUnits:null,hatchUnits:null,height:null,href:null,hrefLang:null,horizAdvX:R,horizOriginX:R,horizOriginY:R,id:null,ideographic:R,imageRendering:null,initialVisibility:null,in:null,in2:null,intercept:R,k:R,k1:R,k2:R,k3:R,k4:R,kernelMatrix:Zp,kernelUnitLength:null,keyPoints:null,keySplines:null,keyTimes:null,kerning:null,lang:null,lengthAdjust:null,letterSpacing:null,lightingColor:null,limitingConeAngle:R,local:null,markerEnd:null,markerMid:null,markerStart:null,markerHeight:null,markerUnits:null,markerWidth:null,mask:null,maskContentUnits:null,maskUnits:null,mathematical:null,max:null,media:null,mediaCharacterEncoding:null,mediaContentEncodings:null,mediaSize:R,mediaTime:null,method:null,min:null,mode:null,name:null,navDown:null,navDownLeft:null,navDownRight:null,navLeft:null,navNext:null,navPrev:null,navRight:null,navUp:null,navUpLeft:null,navUpRight:null,numOctaves:null,observer:null,offset:null,onAbort:null,onActivate:null,onAfterPrint:null,onBeforePrint:null,onBegin:null,onCancel:null,onCanPlay:null,onCanPlayThrough:null,onChange:null,onClick:null,onClose:null,onCopy:null,onCueChange:null,onCut:null,onDblClick:null,onDrag:null,onDragEnd:null,onDragEnter:null,onDragExit:null,onDragLeave:null,onDragOver:null,onDragStart:null,onDrop:null,onDurationChange:null,onEmptied:null,onEnd:null,onEnded:null,onError:null,onFocus:null,onFocusIn:null,onFocusOut:null,onHashChange:null,onInput:null,onInvalid:null,onKeyDown:null,onKeyPress:null,onKeyUp:null,onLoad:null,onLoadedData:null,onLoadedMetadata:null,onLoadStart:null,onMessage:null,onMouseDown:null,onMouseEnter:null,onMouseLeave:null,onMouseMove:null,onMouseOut:null,onMouseOver:null,onMouseUp:null,onMouseWheel:null,onOffline:null,onOnline:null,onPageHide:null,onPageShow:null,onPaste:null,onPause:null,onPlay:null,onPlaying:null,onPopState:null,onProgress:null,onRateChange:null,onRepeat:null,onReset:null,onResize:null,onScroll:null,onSeeked:null,onSeeking:null,onSelect:null,onShow:null,onStalled:null,onStorage:null,onSubmit:null,onSuspend:null,onTimeUpdate:null,onToggle:null,onUnload:null,onVolumeChange:null,onWaiting:null,onZoom:null,opacity:null,operator:null,order:null,orient:null,orientation:null,origin:null,overflow:null,overlay:null,overlinePosition:R,overlineThickness:R,paintOrder:null,panose1:null,path:null,pathLength:R,patternContentUnits:null,patternTransform:null,patternUnits:null,phase:null,ping:Yp,pitch:null,playbackOrder:null,pointerEvents:null,points:null,pointsAtX:R,pointsAtY:R,pointsAtZ:R,preserveAlpha:null,preserveAspectRatio:null,primitiveUnits:null,propagate:null,property:Zp,r:null,radius:null,referrerPolicy:null,refX:null,refY:null,rel:Zp,rev:Zp,renderingIntent:null,repeatCount:null,repeatDur:null,requiredExtensions:Zp,requiredFeatures:Zp,requiredFonts:Zp,requiredFormats:Zp,resource:null,restart:null,result:null,rotate:null,rx:null,ry:null,scale:null,seed:null,shapeRendering:null,side:null,slope:null,snapshotTime:null,specularConstant:R,specularExponent:R,spreadMethod:null,spacing:null,startOffset:null,stdDeviation:null,stemh:null,stemv:null,stitchTiles:null,stopColor:null,stopOpacity:null,strikethroughPosition:R,strikethroughThickness:R,string:null,stroke:null,strokeDashArray:Zp,strokeDashOffset:null,strokeLineCap:null,strokeLineJoin:null,strokeMiterLimit:R,strokeOpacity:R,strokeWidth:null,style:null,surfaceScale:R,syncBehavior:null,syncBehaviorDefault:null,syncMaster:null,syncTolerance:null,syncToleranceDefault:null,systemLanguage:Zp,tabIndex:R,tableValues:null,target:null,targetX:R,targetY:R,textAnchor:null,textDecoration:null,textRendering:null,textLength:null,timelineBegin:null,title:null,transformBehavior:null,type:null,typeOf:Zp,to:null,transform:null,transformOrigin:null,u1:null,u2:null,underlinePosition:R,underlineThickness:R,unicode:null,unicodeBidi:null,unicodeRange:null,unitsPerEm:R,values:null,vAlphabetic:R,vMathematical:R,vectorEffect:null,vHanging:R,vIdeographic:R,version:null,vertAdvY:R,vertOriginX:R,vertOriginY:R,viewBox:null,viewTarget:null,visibility:null,width:null,widths:null,wordSpacing:null,writingMode:null,x:null,x1:null,x2:null,xChannelSelector:null,xHeight:R,y:null,y1:null,y2:null,yChannelSelector:null,z:null,zoomAndPan:null},space:`svg`,transform:im}),cm=nm({properties:{xLinkActuate:null,xLinkArcRole:null,xLinkHref:null,xLinkRole:null,xLinkShow:null,xLinkTitle:null,xLinkType:null},space:`xlink`,transform(e,t){return`xlink:`+t.slice(5).toLowerCase()}}),lm=nm({attributes:{xmlnsxlink:`xmlns:xlink`},properties:{xmlnsXLink:null,xmlns:null},space:`xmlns`,transform:am}),um=nm({properties:{xmlBase:null,xmlLang:null,xmlSpace:null},space:`xml`,transform(e,t){return`xml:`+t.slice(3).toLowerCase()}}),dm={classId:`classID`,dataType:`datatype`,itemId:`itemID`,strokeDashArray:`strokeDasharray`,strokeDashOffset:`strokeDashoffset`,strokeLineCap:`strokeLinecap`,strokeLineJoin:`strokeLinejoin`,strokeMiterLimit:`strokeMiterlimit`,typeOf:`typeof`,xLinkActuate:`xlinkActuate`,xLinkArcRole:`xlinkArcrole`,xLinkHref:`xlinkHref`,xLinkRole:`xlinkRole`,xLinkShow:`xlinkShow`,xLinkTitle:`xlinkTitle`,xLinkType:`xlinkType`,xmlnsXLink:`xmlnsXlink`},fm=/[A-Z]/g,pm=/-[a-z]/g,mm=/^data[-\w.:]+$/i;function hm(e,t){let n=Hp(t),r=t,i=Up;if(n in e.normal)return e.property[e.normal[n]];if(n.length>4&&n.slice(0,4)===`data`&&mm.test(t)){if(t.charAt(4)===`-`){let e=t.slice(5).replace(pm,_m);r=`data`+e.charAt(0).toUpperCase()+e.slice(1)}else{let e=t.slice(4);if(!pm.test(e)){let n=e.replace(fm,gm);n.charAt(0)!==`-`&&(n=`-`+n),t=`data`+n}}i=em}return new i(r,t)}function gm(e){return`-`+e.toLowerCase()}function _m(e){return e.charAt(1).toUpperCase()}var vm=Vp([rm,om,cm,lm,um],`html`),ym=Vp([rm,sm,cm,lm,um],`svg`);function bm(e){let t=String(e||``).trim();return t?t.split(/[ \t\n\r\f]+/g):[]}function xm(e){return e.join(` `).trim()}var Sm=o(((e,t)=>{var n=/\/\*[^*]*\*+([^/*][^*]*\*+)*\//g,r=/\n/g,i=/^\s*/,a=/^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/,o=/^:\s*/,s=/^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/,c=/^[;\s]*/,l=/^\s+|\s+$/g,u=`
+}`,vf=class{constructor(){this.texture=null,this.mesh=null,this.depthNear=0,this.depthFar=0}init(e,t){if(this.texture===null){let n=new ac(e.texture);(e.depthNear!==t.depthNear||e.depthFar!==t.depthFar)&&(this.depthNear=e.depthNear,this.depthFar=e.depthFar),this.texture=n}}getMesh(e){if(this.texture!==null&&this.mesh===null){let t=e.cameras[0].viewport,n=new gc({vertexShader:gf,fragmentShader:_f,uniforms:{depthColor:{value:this.texture},depthWidth:{value:t.z},depthHeight:{value:t.w}}});this.mesh=new js(new sc(20,20),n)}return this.mesh}reset(){this.texture=null,this.mesh=null}getDepthTexture(){return this.texture}},yf=class extends ji{constructor(e,t){super();let n=this,r=null,i=1,a=null,o=`local-floor`,s=1,c=null,l=null,u=null,d=null,f=null,p=null,m=typeof XRWebGLBinding<`u`,h=new vf,g={},_=t.getContextAttributes(),v=null,y=null,b=[],x=[],S=new aa,C=null,w=new Uc;w.viewport=new Ta;let T=new Uc;T.viewport=new Ta;let E=[w,T],D=new Jc,O=null,ee=null;this.cameraAutoUpdate=!0,this.enabled=!1,this.isPresenting=!1,this.getController=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getTargetRaySpace()},this.getControllerGrip=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getGripSpace()},this.getHand=function(e){let t=b[e];return t===void 0&&(t=new oo,b[e]=t),t.getHandSpace()};function k(e){let t=x.indexOf(e.inputSource);if(t===-1)return;let n=b[t];n!==void 0&&(n.update(e.inputSource,e.frame,c||a),n.dispatchEvent({type:e.type,data:e.inputSource}))}function A(){r.removeEventListener(`select`,k),r.removeEventListener(`selectstart`,k),r.removeEventListener(`selectend`,k),r.removeEventListener(`squeeze`,k),r.removeEventListener(`squeezestart`,k),r.removeEventListener(`squeezeend`,k),r.removeEventListener(`end`,A),r.removeEventListener(`inputsourceschange`,te);for(let e=0;e<b.length;e++){let t=x[e];t!==null&&(x[e]=null,b[e].disconnect(t))}O=null,ee=null,h.reset();for(let e in g)delete g[e];e.setRenderTarget(v),f=null,d=null,u=null,r=null,y=null,se.stop(),n.isPresenting=!1,e.setPixelRatio(C),e.setSize(S.width,S.height,!1),n.dispatchEvent({type:`sessionend`})}this.setFramebufferScaleFactor=function(e){i=e,n.isPresenting===!0&&Ei(`WebXRManager: Cannot change framebuffer scale while presenting.`)},this.setReferenceSpaceType=function(e){o=e,n.isPresenting===!0&&Ei(`WebXRManager: Cannot change reference space type while presenting.`)},this.getReferenceSpace=function(){return c||a},this.setReferenceSpace=function(e){c=e},this.getBaseLayer=function(){return d===null?f:d},this.getBinding=function(){return u===null&&m&&(u=new XRWebGLBinding(r,t)),u},this.getFrame=function(){return p},this.getSession=function(){return r},this.setSession=async function(l){if(r=l,r!==null){if(v=e.getRenderTarget(),r.addEventListener(`select`,k),r.addEventListener(`selectstart`,k),r.addEventListener(`selectend`,k),r.addEventListener(`squeeze`,k),r.addEventListener(`squeezestart`,k),r.addEventListener(`squeezeend`,k),r.addEventListener(`end`,A),r.addEventListener(`inputsourceschange`,te),_.xrCompatible!==!0&&await t.makeXRCompatible(),C=e.getPixelRatio(),e.getSize(S),m&&`createProjectionLayer`in XRWebGLBinding.prototype){let n=null,a=null,o=null;_.depth&&(o=_.stencil?t.DEPTH24_STENCIL8:t.DEPTH_COMPONENT24,n=_.stencil?hr:mr,a=_.stencil?cr:rr);let s={colorFormat:t.RGBA8,depthFormat:o,scaleFactor:i};u=this.getBinding(),d=u.createProjectionLayer(s),r.updateRenderState({layers:[d]}),e.setPixelRatio(1),e.setSize(d.textureWidth,d.textureHeight,!1),y=new Da(d.textureWidth,d.textureHeight,{format:pr,type:Qn,depthTexture:new rc(d.textureWidth,d.textureHeight,a,void 0,void 0,void 0,void 0,void 0,void 0,n),stencilBuffer:_.stencil,colorSpace:e.outputColorSpace,samples:_.antialias?4:0,resolveDepthBuffer:d.ignoreDepthValues===!1,resolveStencilBuffer:d.ignoreDepthValues===!1})}else{let n={antialias:_.antialias,alpha:!0,depth:_.depth,stencil:_.stencil,framebufferScaleFactor:i};f=new XRWebGLLayer(r,t,n),r.updateRenderState({baseLayer:f}),e.setPixelRatio(1),e.setSize(f.framebufferWidth,f.framebufferHeight,!1),y=new Da(f.framebufferWidth,f.framebufferHeight,{format:pr,type:Qn,colorSpace:e.outputColorSpace,stencilBuffer:_.stencil,resolveDepthBuffer:f.ignoreDepthValues===!1,resolveStencilBuffer:f.ignoreDepthValues===!1})}y.isXRRenderTarget=!0,this.setFoveation(s),c=null,a=await r.requestReferenceSpace(o),se.setContext(r),se.start(),n.isPresenting=!0,n.dispatchEvent({type:`sessionstart`})}},this.getEnvironmentBlendMode=function(){if(r!==null)return r.environmentBlendMode},this.getDepthTexture=function(){return h.getDepthTexture()};function te(e){for(let t=0;t<e.removed.length;t++){let n=e.removed[t],r=x.indexOf(n);r>=0&&(x[r]=null,b[r].disconnect(n))}for(let t=0;t<e.added.length;t++){let n=e.added[t],r=x.indexOf(n);if(r===-1){for(let e=0;e<b.length;e++)if(e>=x.length){x.push(n),r=e;break}else if(x[e]===null){x[e]=n,r=e;break}if(r===-1)break}let i=b[r];i&&i.connect(n)}}let ne=new P,re=new P;function ie(e,t,n){ne.setFromMatrixPosition(t.matrixWorld),re.setFromMatrixPosition(n.matrixWorld);let r=ne.distanceTo(re),i=t.projectionMatrix.elements,a=n.projectionMatrix.elements,o=i[14]/(i[10]-1),s=i[14]/(i[10]+1),c=(i[9]+1)/i[5],l=(i[9]-1)/i[5],u=(i[8]-1)/i[0],d=(a[8]+1)/a[0],f=o*u,p=o*d,m=r/(-u+d),h=m*-u;if(t.matrixWorld.decompose(e.position,e.quaternion,e.scale),e.translateX(h),e.translateZ(m),e.matrixWorld.compose(e.position,e.quaternion,e.scale),e.matrixWorldInverse.copy(e.matrixWorld).invert(),i[10]===-1)e.projectionMatrix.copy(t.projectionMatrix),e.projectionMatrixInverse.copy(t.projectionMatrixInverse);else{let t=o+m,n=s+m,i=f-h,a=p+(r-h),u=c*s/n*t,d=l*s/n*t;e.projectionMatrix.makePerspective(i,a,u,d,t,n),e.projectionMatrixInverse.copy(e.projectionMatrix).invert()}}function j(e,t){t===null?e.matrixWorld.copy(e.matrix):e.matrixWorld.multiplyMatrices(t.matrixWorld,e.matrix),e.matrixWorldInverse.copy(e.matrixWorld).invert()}this.updateCamera=function(e){if(r===null)return;let t=e.near,n=e.far;h.texture!==null&&(h.depthNear>0&&(t=h.depthNear),h.depthFar>0&&(n=h.depthFar)),D.near=T.near=w.near=t,D.far=T.far=w.far=n,(O!==D.near||ee!==D.far)&&(r.updateRenderState({depthNear:D.near,depthFar:D.far}),O=D.near,ee=D.far),D.layers.mask=e.layers.mask|6,w.layers.mask=D.layers.mask&-5,T.layers.mask=D.layers.mask&-3;let i=e.parent,a=D.cameras;j(D,i);for(let e=0;e<a.length;e++)j(a[e],i);a.length===2?ie(D,w,T):D.projectionMatrix.copy(w.projectionMatrix),M(e,D,i)};function M(e,t,n){n===null?e.matrix.copy(t.matrixWorld):(e.matrix.copy(n.matrixWorld),e.matrix.invert(),e.matrix.multiply(t.matrixWorld)),e.matrix.decompose(e.position,e.quaternion,e.scale),e.updateMatrixWorld(!0),e.projectionMatrix.copy(t.projectionMatrix),e.projectionMatrixInverse.copy(t.projectionMatrixInverse),e.isPerspectiveCamera&&(e.fov=Fi*2*Math.atan(1/e.projectionMatrix.elements[5]),e.zoom=1)}this.getCamera=function(){return D},this.getFoveation=function(){if(!(d===null&&f===null))return s},this.setFoveation=function(e){s=e,d!==null&&(d.fixedFoveation=e),f!==null&&f.fixedFoveation!==void 0&&(f.fixedFoveation=e)},this.hasDepthSensing=function(){return h.texture!==null},this.getDepthSensingMesh=function(){return h.getMesh(D)},this.getCameraTexture=function(e){return g[e]};let ae=null;function oe(t,i){if(l=i.getViewerPose(c||a),p=i,l!==null){let t=l.views;f!==null&&(e.setRenderTargetFramebuffer(y,f.framebuffer),e.setRenderTarget(y));let i=!1;t.length!==D.cameras.length&&(D.cameras.length=0,i=!0);for(let n=0;n<t.length;n++){let r=t[n],a=null;if(f!==null)a=f.getViewport(r);else{let t=u.getViewSubImage(d,r);a=t.viewport,n===0&&(e.setRenderTargetTextures(y,t.colorTexture,t.depthStencilTexture),e.setRenderTarget(y))}let o=E[n];o===void 0&&(o=new Uc,o.layers.enable(n),o.viewport=new Ta,E[n]=o),o.matrix.fromArray(r.transform.matrix),o.matrix.decompose(o.position,o.quaternion,o.scale),o.projectionMatrix.fromArray(r.projectionMatrix),o.projectionMatrixInverse.copy(o.projectionMatrix).invert(),o.viewport.set(a.x,a.y,a.width,a.height),n===0&&(D.matrix.copy(o.matrix),D.matrix.decompose(D.position,D.quaternion,D.scale)),i===!0&&D.cameras.push(o)}let a=r.enabledFeatures;if(a&&a.includes(`depth-sensing`)&&r.depthUsage==`gpu-optimized`&&m){u=n.getBinding();let e=u.getDepthInformation(t[0]);e&&e.isValid&&e.texture&&h.init(e,r.renderState)}if(a&&a.includes(`camera-access`)&&m){e.state.unbindTexture(),u=n.getBinding();for(let e=0;e<t.length;e++){let n=t[e].camera;if(n){let e=g[n];e||(e=new ac,g[n]=e);let t=u.getCameraImage(n);e.sourceTexture=t}}}}for(let e=0;e<b.length;e++){let t=x[e],n=b[e];t!==null&&n!==void 0&&n.update(t,i,c||a)}ae&&ae(t,i),i.detectedPlanes&&n.dispatchEvent({type:`planesdetected`,data:i}),p=null}let se=new fl;se.setAnimationLoop(oe),this.setAnimationLoop=function(e){ae=e},this.dispose=function(){}}},bf=new Ba,xf=new Aa;function Sf(e,t){function n(e,t){e.matrixAutoUpdate===!0&&e.updateMatrix(),t.value.copy(e.matrix)}function r(t,n){n.color.getRGB(t.fogColor.value,fc(e)),n.isFog?(t.fogNear.value=n.near,t.fogFar.value=n.far):n.isFogExp2&&(t.fogDensity.value=n.density)}function i(e,t,n,r,i){t.isMeshBasicMaterial?a(e,t):t.isMeshLambertMaterial?(a(e,t),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)):t.isMeshToonMaterial?(a(e,t),d(e,t)):t.isMeshPhongMaterial?(a(e,t),u(e,t),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)):t.isMeshStandardMaterial?(a(e,t),f(e,t),t.isMeshPhysicalMaterial&&p(e,t,i)):t.isMeshMatcapMaterial?(a(e,t),m(e,t)):t.isMeshDepthMaterial?a(e,t):t.isMeshDistanceMaterial?(a(e,t),h(e,t)):t.isMeshNormalMaterial?a(e,t):t.isLineBasicMaterial?(o(e,t),t.isLineDashedMaterial&&s(e,t)):t.isPointsMaterial?c(e,t,n,r):t.isSpriteMaterial?l(e,t):t.isShadowMaterial?(e.color.value.copy(t.color),e.opacity.value=t.opacity):t.isShaderMaterial&&(t.uniformsNeedUpdate=!1)}function a(e,r){e.opacity.value=r.opacity,r.color&&e.diffuse.value.copy(r.color),r.emissive&&e.emissive.value.copy(r.emissive).multiplyScalar(r.emissiveIntensity),r.map&&(e.map.value=r.map,n(r.map,e.mapTransform)),r.alphaMap&&(e.alphaMap.value=r.alphaMap,n(r.alphaMap,e.alphaMapTransform)),r.bumpMap&&(e.bumpMap.value=r.bumpMap,n(r.bumpMap,e.bumpMapTransform),e.bumpScale.value=r.bumpScale,r.side===1&&(e.bumpScale.value*=-1)),r.normalMap&&(e.normalMap.value=r.normalMap,n(r.normalMap,e.normalMapTransform),e.normalScale.value.copy(r.normalScale),r.side===1&&e.normalScale.value.negate()),r.displacementMap&&(e.displacementMap.value=r.displacementMap,n(r.displacementMap,e.displacementMapTransform),e.displacementScale.value=r.displacementScale,e.displacementBias.value=r.displacementBias),r.emissiveMap&&(e.emissiveMap.value=r.emissiveMap,n(r.emissiveMap,e.emissiveMapTransform)),r.specularMap&&(e.specularMap.value=r.specularMap,n(r.specularMap,e.specularMapTransform)),r.alphaTest>0&&(e.alphaTest.value=r.alphaTest);let i=t.get(r),a=i.envMap,o=i.envMapRotation;a&&(e.envMap.value=a,bf.copy(o),bf.x*=-1,bf.y*=-1,bf.z*=-1,a.isCubeTexture&&a.isRenderTargetTexture===!1&&(bf.y*=-1,bf.z*=-1),e.envMapRotation.value.setFromMatrix4(xf.makeRotationFromEuler(bf)),e.flipEnvMap.value=a.isCubeTexture&&a.isRenderTargetTexture===!1?-1:1,e.reflectivity.value=r.reflectivity,e.ior.value=r.ior,e.refractionRatio.value=r.refractionRatio),r.lightMap&&(e.lightMap.value=r.lightMap,e.lightMapIntensity.value=r.lightMapIntensity,n(r.lightMap,e.lightMapTransform)),r.aoMap&&(e.aoMap.value=r.aoMap,e.aoMapIntensity.value=r.aoMapIntensity,n(r.aoMap,e.aoMapTransform))}function o(e,t){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,t.map&&(e.map.value=t.map,n(t.map,e.mapTransform))}function s(e,t){e.dashSize.value=t.dashSize,e.totalSize.value=t.dashSize+t.gapSize,e.scale.value=t.scale}function c(e,t,r,i){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,e.size.value=t.size*r,e.scale.value=i*.5,t.map&&(e.map.value=t.map,n(t.map,e.uvTransform)),t.alphaMap&&(e.alphaMap.value=t.alphaMap,n(t.alphaMap,e.alphaMapTransform)),t.alphaTest>0&&(e.alphaTest.value=t.alphaTest)}function l(e,t){e.diffuse.value.copy(t.color),e.opacity.value=t.opacity,e.rotation.value=t.rotation,t.map&&(e.map.value=t.map,n(t.map,e.mapTransform)),t.alphaMap&&(e.alphaMap.value=t.alphaMap,n(t.alphaMap,e.alphaMapTransform)),t.alphaTest>0&&(e.alphaTest.value=t.alphaTest)}function u(e,t){e.specular.value.copy(t.specular),e.shininess.value=Math.max(t.shininess,1e-4)}function d(e,t){t.gradientMap&&(e.gradientMap.value=t.gradientMap)}function f(e,t){e.metalness.value=t.metalness,t.metalnessMap&&(e.metalnessMap.value=t.metalnessMap,n(t.metalnessMap,e.metalnessMapTransform)),e.roughness.value=t.roughness,t.roughnessMap&&(e.roughnessMap.value=t.roughnessMap,n(t.roughnessMap,e.roughnessMapTransform)),t.envMap&&(e.envMapIntensity.value=t.envMapIntensity)}function p(e,t,r){e.ior.value=t.ior,t.sheen>0&&(e.sheenColor.value.copy(t.sheenColor).multiplyScalar(t.sheen),e.sheenRoughness.value=t.sheenRoughness,t.sheenColorMap&&(e.sheenColorMap.value=t.sheenColorMap,n(t.sheenColorMap,e.sheenColorMapTransform)),t.sheenRoughnessMap&&(e.sheenRoughnessMap.value=t.sheenRoughnessMap,n(t.sheenRoughnessMap,e.sheenRoughnessMapTransform))),t.clearcoat>0&&(e.clearcoat.value=t.clearcoat,e.clearcoatRoughness.value=t.clearcoatRoughness,t.clearcoatMap&&(e.clearcoatMap.value=t.clearcoatMap,n(t.clearcoatMap,e.clearcoatMapTransform)),t.clearcoatRoughnessMap&&(e.clearcoatRoughnessMap.value=t.clearcoatRoughnessMap,n(t.clearcoatRoughnessMap,e.clearcoatRoughnessMapTransform)),t.clearcoatNormalMap&&(e.clearcoatNormalMap.value=t.clearcoatNormalMap,n(t.clearcoatNormalMap,e.clearcoatNormalMapTransform),e.clearcoatNormalScale.value.copy(t.clearcoatNormalScale),t.side===1&&e.clearcoatNormalScale.value.negate())),t.dispersion>0&&(e.dispersion.value=t.dispersion),t.iridescence>0&&(e.iridescence.value=t.iridescence,e.iridescenceIOR.value=t.iridescenceIOR,e.iridescenceThicknessMinimum.value=t.iridescenceThicknessRange[0],e.iridescenceThicknessMaximum.value=t.iridescenceThicknessRange[1],t.iridescenceMap&&(e.iridescenceMap.value=t.iridescenceMap,n(t.iridescenceMap,e.iridescenceMapTransform)),t.iridescenceThicknessMap&&(e.iridescenceThicknessMap.value=t.iridescenceThicknessMap,n(t.iridescenceThicknessMap,e.iridescenceThicknessMapTransform))),t.transmission>0&&(e.transmission.value=t.transmission,e.transmissionSamplerMap.value=r.texture,e.transmissionSamplerSize.value.set(r.width,r.height),t.transmissionMap&&(e.transmissionMap.value=t.transmissionMap,n(t.transmissionMap,e.transmissionMapTransform)),e.thickness.value=t.thickness,t.thicknessMap&&(e.thicknessMap.value=t.thicknessMap,n(t.thicknessMap,e.thicknessMapTransform)),e.attenuationDistance.value=t.attenuationDistance,e.attenuationColor.value.copy(t.attenuationColor)),t.anisotropy>0&&(e.anisotropyVector.value.set(t.anisotropy*Math.cos(t.anisotropyRotation),t.anisotropy*Math.sin(t.anisotropyRotation)),t.anisotropyMap&&(e.anisotropyMap.value=t.anisotropyMap,n(t.anisotropyMap,e.anisotropyMapTransform))),e.specularIntensity.value=t.specularIntensity,e.specularColor.value.copy(t.specularColor),t.specularColorMap&&(e.specularColorMap.value=t.specularColorMap,n(t.specularColorMap,e.specularColorMapTransform)),t.specularIntensityMap&&(e.specularIntensityMap.value=t.specularIntensityMap,n(t.specularIntensityMap,e.specularIntensityMapTransform))}function m(e,t){t.matcap&&(e.matcap.value=t.matcap)}function h(e,n){let r=t.get(n).light;e.referencePosition.value.setFromMatrixPosition(r.matrixWorld),e.nearDistance.value=r.shadow.camera.near,e.farDistance.value=r.shadow.camera.far}return{refreshFogUniforms:r,refreshMaterialUniforms:i}}function Cf(e,t,n,r){let i={},a={},o=[],s=e.getParameter(e.MAX_UNIFORM_BUFFER_BINDINGS);function c(e,t){let n=t.program;r.uniformBlockBinding(e,n)}function l(e,n){let o=i[e.id];o===void 0&&(m(e),o=u(e),i[e.id]=o,e.addEventListener(`dispose`,g));let s=n.program;r.updateUBOMapping(e,s);let c=t.render.frame;a[e.id]!==c&&(f(e),a[e.id]=c)}function u(t){let n=d();t.__bindingPointIndex=n;let r=e.createBuffer(),i=t.__size,a=t.usage;return e.bindBuffer(e.UNIFORM_BUFFER,r),e.bufferData(e.UNIFORM_BUFFER,i,a),e.bindBuffer(e.UNIFORM_BUFFER,null),e.bindBufferBase(e.UNIFORM_BUFFER,n,r),r}function d(){for(let e=0;e<s;e++)if(o.indexOf(e)===-1)return o.push(e),e;return Di(`WebGLRenderer: Maximum number of simultaneously usable uniforms groups reached.`),0}function f(t){let n=i[t.id],r=t.uniforms,a=t.__cache;e.bindBuffer(e.UNIFORM_BUFFER,n);for(let t=0,n=r.length;t<n;t++){let n=Array.isArray(r[t])?r[t]:[r[t]];for(let r=0,i=n.length;r<i;r++){let i=n[r];if(p(i,t,r,a)===!0){let t=i.__offset,n=Array.isArray(i.value)?i.value:[i.value],r=0;for(let a=0;a<n.length;a++){let o=n[a],s=h(o);typeof o==`number`||typeof o==`boolean`?(i.__data[0]=o,e.bufferSubData(e.UNIFORM_BUFFER,t+r,i.__data)):o.isMatrix3?(i.__data[0]=o.elements[0],i.__data[1]=o.elements[1],i.__data[2]=o.elements[2],i.__data[3]=0,i.__data[4]=o.elements[3],i.__data[5]=o.elements[4],i.__data[6]=o.elements[5],i.__data[7]=0,i.__data[8]=o.elements[6],i.__data[9]=o.elements[7],i.__data[10]=o.elements[8],i.__data[11]=0):(o.toArray(i.__data,r),r+=s.storage/Float32Array.BYTES_PER_ELEMENT)}e.bufferSubData(e.UNIFORM_BUFFER,t,i.__data)}}}e.bindBuffer(e.UNIFORM_BUFFER,null)}function p(e,t,n,r){let i=e.value,a=t+`_`+n;if(r[a]===void 0)return typeof i==`number`||typeof i==`boolean`?r[a]=i:r[a]=i.clone(),!0;{let e=r[a];if(typeof i==`number`||typeof i==`boolean`){if(e!==i)return r[a]=i,!0}else if(e.equals(i)===!1)return e.copy(i),!0}return!1}function m(e){let t=e.uniforms,n=0;for(let e=0,r=t.length;e<r;e++){let r=Array.isArray(t[e])?t[e]:[t[e]];for(let e=0,t=r.length;e<t;e++){let t=r[e],i=Array.isArray(t.value)?t.value:[t.value];for(let e=0,r=i.length;e<r;e++){let r=i[e],a=h(r),o=n%16,s=o%a.boundary,c=o+s;n+=s,c!==0&&16-c<a.storage&&(n+=16-c),t.__data=new Float32Array(a.storage/Float32Array.BYTES_PER_ELEMENT),t.__offset=n,n+=a.storage}}}let r=n%16;return r>0&&(n+=16-r),e.__size=n,e.__cache={},this}function h(e){let t={boundary:0,storage:0};return typeof e==`number`||typeof e==`boolean`?(t.boundary=4,t.storage=4):e.isVector2?(t.boundary=8,t.storage=8):e.isVector3||e.isColor?(t.boundary=16,t.storage=12):e.isVector4?(t.boundary=16,t.storage=16):e.isMatrix3?(t.boundary=48,t.storage=48):e.isMatrix4?(t.boundary=64,t.storage=64):e.isTexture?Ei(`WebGLRenderer: Texture samplers can not be part of an uniforms group.`):Ei(`WebGLRenderer: Unsupported uniform value type.`,e),t}function g(t){let n=t.target;n.removeEventListener(`dispose`,g);let r=o.indexOf(n.__bindingPointIndex);o.splice(r,1),e.deleteBuffer(i[n.id]),delete i[n.id],delete a[n.id]}function _(){for(let t in i)e.deleteBuffer(i[t]);o=[],i={},a={}}return{bind:c,update:l,dispose:_}}var wf=new Uint16Array([12469,15057,12620,14925,13266,14620,13807,14376,14323,13990,14545,13625,14713,13328,14840,12882,14931,12528,14996,12233,15039,11829,15066,11525,15080,11295,15085,10976,15082,10705,15073,10495,13880,14564,13898,14542,13977,14430,14158,14124,14393,13732,14556,13410,14702,12996,14814,12596,14891,12291,14937,11834,14957,11489,14958,11194,14943,10803,14921,10506,14893,10278,14858,9960,14484,14039,14487,14025,14499,13941,14524,13740,14574,13468,14654,13106,14743,12678,14818,12344,14867,11893,14889,11509,14893,11180,14881,10751,14852,10428,14812,10128,14765,9754,14712,9466,14764,13480,14764,13475,14766,13440,14766,13347,14769,13070,14786,12713,14816,12387,14844,11957,14860,11549,14868,11215,14855,10751,14825,10403,14782,10044,14729,9651,14666,9352,14599,9029,14967,12835,14966,12831,14963,12804,14954,12723,14936,12564,14917,12347,14900,11958,14886,11569,14878,11247,14859,10765,14828,10401,14784,10011,14727,9600,14660,9289,14586,8893,14508,8533,15111,12234,15110,12234,15104,12216,15092,12156,15067,12010,15028,11776,14981,11500,14942,11205,14902,10752,14861,10393,14812,9991,14752,9570,14682,9252,14603,8808,14519,8445,14431,8145,15209,11449,15208,11451,15202,11451,15190,11438,15163,11384,15117,11274,15055,10979,14994,10648,14932,10343,14871,9936,14803,9532,14729,9218,14645,8742,14556,8381,14461,8020,14365,7603,15273,10603,15272,10607,15267,10619,15256,10631,15231,10614,15182,10535,15118,10389,15042,10167,14963,9787,14883,9447,14800,9115,14710,8665,14615,8318,14514,7911,14411,7507,14279,7198,15314,9675,15313,9683,15309,9712,15298,9759,15277,9797,15229,9773,15166,9668,15084,9487,14995,9274,14898,8910,14800,8539,14697,8234,14590,7790,14479,7409,14367,7067,14178,6621,15337,8619,15337,8631,15333,8677,15325,8769,15305,8871,15264,8940,15202,8909,15119,8775,15022,8565,14916,8328,14804,8009,14688,7614,14569,7287,14448,6888,14321,6483,14088,6171,15350,7402,15350,7419,15347,7480,15340,7613,15322,7804,15287,7973,15229,8057,15148,8012,15046,7846,14933,7611,14810,7357,14682,7069,14552,6656,14421,6316,14251,5948,14007,5528,15356,5942,15356,5977,15353,6119,15348,6294,15332,6551,15302,6824,15249,7044,15171,7122,15070,7050,14949,6861,14818,6611,14679,6349,14538,6067,14398,5651,14189,5311,13935,4958,15359,4123,15359,4153,15356,4296,15353,4646,15338,5160,15311,5508,15263,5829,15188,6042,15088,6094,14966,6001,14826,5796,14678,5543,14527,5287,14377,4985,14133,4586,13869,4257,15360,1563,15360,1642,15358,2076,15354,2636,15341,3350,15317,4019,15273,4429,15203,4732,15105,4911,14981,4932,14836,4818,14679,4621,14517,4386,14359,4156,14083,3795,13808,3437,15360,122,15360,137,15358,285,15355,636,15344,1274,15322,2177,15281,2765,15215,3223,15120,3451,14995,3569,14846,3567,14681,3466,14511,3305,14344,3121,14037,2800,13753,2467,15360,0,15360,1,15359,21,15355,89,15346,253,15325,479,15287,796,15225,1148,15133,1492,15008,1749,14856,1882,14685,1886,14506,1783,14324,1608,13996,1398,13702,1183]),Tf=null;function Ef(){return Tf===null&&(Tf=new Ps(wf,16,16,vr,ar),Tf.name=`DFG_LUT`,Tf.minFilter=Yn,Tf.magFilter=Yn,Tf.wrapS=Wn,Tf.wrapT=Wn,Tf.generateMipmaps=!1,Tf.needsUpdate=!0),Tf}var Df=class{constructor(e={}){let{canvas:t=xi(),context:n=null,depth:r=!0,stencil:i=!1,alpha:a=!1,antialias:o=!1,premultipliedAlpha:s=!0,preserveDrawingBuffer:c=!1,powerPreference:l=`default`,failIfMajorPerformanceCaveat:u=!1,reversedDepthBuffer:d=!1,outputBufferType:f=Qn}=e;this.isWebGLRenderer=!0;let p;if(n!==null){if(typeof WebGLRenderingContext<`u`&&n instanceof WebGLRenderingContext)throw Error(`THREE.WebGLRenderer: WebGL 1 is not supported since r163.`);p=n.getContextAttributes().alpha}else p=a;let m=f,h=new Set([br,yr,_r]),g=new Set([Qn,rr,tr,cr,or,sr]),_=new Uint32Array(4),v=new Int32Array(4),y=null,b=null,x=[],S=[],C=null;this.domElement=t,this.debug={checkShaderErrors:!0,onShaderError:null},this.autoClear=!0,this.autoClearColor=!0,this.autoClearDepth=!0,this.autoClearStencil=!0,this.sortObjects=!0,this.clippingPlanes=[],this.localClippingEnabled=!1,this.toneMapping=0,this.toneMappingExposure=1,this.transmissionResolutionScale=1;let w=this,T=!1;this._outputColorSpace=di;let E=0,D=0,O=null,ee=-1,k=null,A=new Ta,te=new Ta,ne=null,re=new fo(0),ie=0,j=t.width,M=t.height,ae=1,oe=null,se=null,ce=new Ta(0,0,j,M),le=new Ta(0,0,j,M),ue=!1,de=new Hs,fe=!1,pe=!1,me=new Aa,he=new P,ge=new Ta,_e={background:null,fog:null,environment:null,overrideMaterial:null,isScene:!0},ve=!1;function ye(){return O===null?ae:1}let N=n;function be(e,n){return t.getContext(e,n)}try{let e={alpha:!0,depth:r,stencil:i,antialias:o,premultipliedAlpha:s,preserveDrawingBuffer:c,powerPreference:l,failIfMajorPerformanceCaveat:u};if(`setAttribute`in t&&t.setAttribute(`data-engine`,`three.js r183`),t.addEventListener(`webglcontextlost`,Ke,!1),t.addEventListener(`webglcontextrestored`,qe,!1),t.addEventListener(`webglcontextcreationerror`,Je,!1),N===null){let t=`webgl2`;if(N=be(t,e),N===null)throw be(t)?Error(`Error creating WebGL context with your selected attributes.`):Error(`Error creating WebGL context.`)}}catch(e){throw Di(`WebGLRenderer: `+e.message),e}let xe,Se,Ce,we,Te,Ee,De,Oe,ke,Ae,je,Me,Ne,Pe,Fe,Ie,Le,Re,ze,Be,Ve,He,Ue;function We(){xe=new Gl(N),xe.init(),Ve=new hf(N,xe),Se=new xl(N,xe,e,Ve),Ce=new pf(N,xe),Se.reversedDepthBuffer&&d&&Ce.buffers.depth.setReversed(!0),we=new Jl(N),Te=new Kd,Ee=new mf(N,xe,Ce,Te,Se,Ve,we),De=new Wl(w),Oe=new pl(N),He=new yl(N,Oe),ke=new Kl(N,Oe,we,He),Ae=new Xl(N,ke,Oe,He,we),Re=new Yl(N,Se,Ee),Fe=new Sl(Te),je=new Gd(w,De,xe,Se,He,Fe),Me=new Sf(w,Te),Ne=new Xd,Pe=new rf(xe),Le=new vl(w,De,Ce,Ae,p,s),Ie=new ff(w,Ae,Se),Ue=new Cf(N,we,Se,Ce),ze=new bl(N,xe,we),Be=new ql(N,xe,we),we.programs=je.programs,w.capabilities=Se,w.extensions=xe,w.properties=Te,w.renderLists=Ne,w.shadowMap=Ie,w.state=Ce,w.info=we}We(),m!==1009&&(C=new Ql(m,t.width,t.height,r,i));let Ge=new yf(w,N);this.xr=Ge,this.getContext=function(){return N},this.getContextAttributes=function(){return N.getContextAttributes()},this.forceContextLoss=function(){let e=xe.get(`WEBGL_lose_context`);e&&e.loseContext()},this.forceContextRestore=function(){let e=xe.get(`WEBGL_lose_context`);e&&e.restoreContext()},this.getPixelRatio=function(){return ae},this.setPixelRatio=function(e){e!==void 0&&(ae=e,this.setSize(j,M,!1))},this.getSize=function(e){return e.set(j,M)},this.setSize=function(e,n,r=!0){if(Ge.isPresenting){Ei(`WebGLRenderer: Can't change size while VR device is presenting.`);return}j=e,M=n,t.width=Math.floor(e*ae),t.height=Math.floor(n*ae),r===!0&&(t.style.width=e+`px`,t.style.height=n+`px`),C!==null&&C.setSize(t.width,t.height),this.setViewport(0,0,e,n)},this.getDrawingBufferSize=function(e){return e.set(j*ae,M*ae).floor()},this.setDrawingBufferSize=function(e,n,r){j=e,M=n,ae=r,t.width=Math.floor(e*r),t.height=Math.floor(n*r),this.setViewport(0,0,e,n)},this.setEffects=function(e){if(m===1009){console.error(`THREE.WebGLRenderer: setEffects() requires outputBufferType set to HalfFloatType or FloatType.`);return}if(e){for(let t=0;t<e.length;t++)if(e[t].isOutputPass===!0){console.warn(`THREE.WebGLRenderer: OutputPass is not needed in setEffects(). Tone mapping and color space conversion are applied automatically.`);break}}C.setEffects(e||[])},this.getCurrentViewport=function(e){return e.copy(A)},this.getViewport=function(e){return e.copy(ce)},this.setViewport=function(e,t,n,r){e.isVector4?ce.set(e.x,e.y,e.z,e.w):ce.set(e,t,n,r),Ce.viewport(A.copy(ce).multiplyScalar(ae).round())},this.getScissor=function(e){return e.copy(le)},this.setScissor=function(e,t,n,r){e.isVector4?le.set(e.x,e.y,e.z,e.w):le.set(e,t,n,r),Ce.scissor(te.copy(le).multiplyScalar(ae).round())},this.getScissorTest=function(){return ue},this.setScissorTest=function(e){Ce.setScissorTest(ue=e)},this.setOpaqueSort=function(e){oe=e},this.setTransparentSort=function(e){se=e},this.getClearColor=function(e){return e.copy(Le.getClearColor())},this.setClearColor=function(){Le.setClearColor(...arguments)},this.getClearAlpha=function(){return Le.getClearAlpha()},this.setClearAlpha=function(){Le.setClearAlpha(...arguments)},this.clear=function(e=!0,t=!0,n=!0){let r=0;if(e){let e=!1;if(O!==null){let t=O.texture.format;e=h.has(t)}if(e){let e=O.texture.type,t=g.has(e),n=Le.getClearColor(),r=Le.getClearAlpha(),i=n.r,a=n.g,o=n.b;t?(_[0]=i,_[1]=a,_[2]=o,_[3]=r,N.clearBufferuiv(N.COLOR,0,_)):(v[0]=i,v[1]=a,v[2]=o,v[3]=r,N.clearBufferiv(N.COLOR,0,v))}else r|=N.COLOR_BUFFER_BIT}t&&(r|=N.DEPTH_BUFFER_BIT),n&&(r|=N.STENCIL_BUFFER_BIT,this.state.buffers.stencil.setMask(4294967295)),r!==0&&N.clear(r)},this.clearColor=function(){this.clear(!0,!1,!1)},this.clearDepth=function(){this.clear(!1,!0,!1)},this.clearStencil=function(){this.clear(!1,!1,!0)},this.dispose=function(){t.removeEventListener(`webglcontextlost`,Ke,!1),t.removeEventListener(`webglcontextrestored`,qe,!1),t.removeEventListener(`webglcontextcreationerror`,Je,!1),Le.dispose(),Ne.dispose(),Pe.dispose(),Te.dispose(),De.dispose(),Ae.dispose(),He.dispose(),Ue.dispose(),je.dispose(),Ge.dispose(),Ge.removeEventListener(`sessionstart`,tt),Ge.removeEventListener(`sessionend`,nt),rt.stop()};function Ke(e){e.preventDefault(),wi(`WebGLRenderer: Context Lost.`),T=!0}function qe(){wi(`WebGLRenderer: Context Restored.`),T=!1;let e=we.autoReset,t=Ie.enabled,n=Ie.autoUpdate,r=Ie.needsUpdate,i=Ie.type;We(),we.autoReset=e,Ie.enabled=t,Ie.autoUpdate=n,Ie.needsUpdate=r,Ie.type=i}function Je(e){Di(`WebGLRenderer: A WebGL context could not be created. Reason: `,e.statusMessage)}function Ye(e){let t=e.target;t.removeEventListener(`dispose`,Ye),Xe(t)}function Xe(e){Ze(e),Te.remove(e)}function Ze(e){let t=Te.get(e).programs;t!==void 0&&(t.forEach(function(e){je.releaseProgram(e)}),e.isShaderMaterial&&je.releaseShaderCache(e))}this.renderBufferDirect=function(e,t,n,r,i,a){t===null&&(t=_e);let o=i.isMesh&&i.matrixWorld.determinant()<0,s=ft(e,t,n,r,i);Ce.setMaterial(r,o);let c=n.index,l=1;if(r.wireframe===!0){if(c=ke.getWireframeAttribute(n),c===void 0)return;l=2}let u=n.drawRange,d=n.attributes.position,f=u.start*l,p=(u.start+u.count)*l;a!==null&&(f=Math.max(f,a.start*l),p=Math.min(p,(a.start+a.count)*l)),c===null?d!=null&&(f=Math.max(f,0),p=Math.min(p,d.count)):(f=Math.max(f,0),p=Math.min(p,c.count));let m=p-f;if(m<0||m===1/0)return;He.setup(i,r,s,n,c);let h,g=ze;if(c!==null&&(h=Oe.get(c),g=Be,g.setIndex(h)),i.isMesh)r.wireframe===!0?(Ce.setLineWidth(r.wireframeLinewidth*ye()),g.setMode(N.LINES)):g.setMode(N.TRIANGLES);else if(i.isLine){let e=r.linewidth;e===void 0&&(e=1),Ce.setLineWidth(e*ye()),i.isLineSegments?g.setMode(N.LINES):i.isLineLoop?g.setMode(N.LINE_LOOP):g.setMode(N.LINE_STRIP)}else i.isPoints?g.setMode(N.POINTS):i.isSprite&&g.setMode(N.TRIANGLES);if(i.isBatchedMesh)if(i._multiDrawInstances!==null)Oi(`WebGLRenderer: renderMultiDrawInstances has been deprecated and will be removed in r184. Append to renderMultiDraw arguments and use indirection.`),g.renderMultiDrawInstances(i._multiDrawStarts,i._multiDrawCounts,i._multiDrawCount,i._multiDrawInstances);else if(xe.get(`WEBGL_multi_draw`))g.renderMultiDraw(i._multiDrawStarts,i._multiDrawCounts,i._multiDrawCount);else{let e=i._multiDrawStarts,t=i._multiDrawCounts,n=i._multiDrawCount,a=c?Oe.get(c).bytesPerElement:1,o=Te.get(r).currentProgram.getUniforms();for(let r=0;r<n;r++)o.setValue(N,`_gl_DrawID`,r),g.render(e[r]/a,t[r])}else if(i.isInstancedMesh)g.renderInstances(f,m,i.count);else if(n.isInstancedBufferGeometry){let e=n._maxInstanceCount===void 0?1/0:n._maxInstanceCount,t=Math.min(n.instanceCount,e);g.renderInstances(f,m,t)}else g.render(f,m)};function Qe(e,t,n){e.transparent===!0&&e.side===2&&e.forceSinglePass===!1?(e.side=1,e.needsUpdate=!0,lt(e,t,n),e.side=0,e.needsUpdate=!0,lt(e,t,n),e.side=2):lt(e,t,n)}this.compile=function(e,t,n=null){n===null&&(n=e),b=Pe.get(n),b.init(t),S.push(b),n.traverseVisible(function(e){e.isLight&&e.layers.test(t.layers)&&(b.pushLight(e),e.castShadow&&b.pushShadow(e))}),e!==n&&e.traverseVisible(function(e){e.isLight&&e.layers.test(t.layers)&&(b.pushLight(e),e.castShadow&&b.pushShadow(e))}),b.setupLights();let r=new Set;return e.traverse(function(e){if(!(e.isMesh||e.isPoints||e.isLine||e.isSprite))return;let t=e.material;if(t)if(Array.isArray(t))for(let i=0;i<t.length;i++){let a=t[i];Qe(a,n,e),r.add(a)}else Qe(t,n,e),r.add(t)}),b=S.pop(),r},this.compileAsync=function(e,t,n=null){let r=this.compile(e,t,n);return new Promise(t=>{function n(){if(r.forEach(function(e){Te.get(e).currentProgram.isReady()&&r.delete(e)}),r.size===0){t(e);return}setTimeout(n,10)}xe.get(`KHR_parallel_shader_compile`)===null?setTimeout(n,10):n()})};let $e=null;function et(e){$e&&$e(e)}function tt(){rt.stop()}function nt(){rt.start()}let rt=new fl;rt.setAnimationLoop(et),typeof self<`u`&&rt.setContext(self),this.setAnimationLoop=function(e){$e=e,Ge.setAnimationLoop(e),e===null?rt.stop():rt.start()},Ge.addEventListener(`sessionstart`,tt),Ge.addEventListener(`sessionend`,nt),this.render=function(e,t){if(t!==void 0&&t.isCamera!==!0){Di(`WebGLRenderer.render: camera is not an instance of THREE.Camera.`);return}if(T===!0)return;let n=Ge.enabled===!0&&Ge.isPresenting===!0,r=C!==null&&(O===null||n)&&C.begin(w,O);if(e.matrixWorldAutoUpdate===!0&&e.updateMatrixWorld(),t.parent===null&&t.matrixWorldAutoUpdate===!0&&t.updateMatrixWorld(),Ge.enabled===!0&&Ge.isPresenting===!0&&(C===null||C.isCompositing()===!1)&&(Ge.cameraAutoUpdate===!0&&Ge.updateCamera(t),t=Ge.getCamera()),e.isScene===!0&&e.onBeforeRender(w,e,t,O),b=Pe.get(e,S.length),b.init(t),S.push(b),me.multiplyMatrices(t.projectionMatrix,t.matrixWorldInverse),de.setFromProjectionMatrix(me,_i,t.reversedDepth),pe=this.localClippingEnabled,fe=Fe.init(this.clippingPlanes,pe),y=Ne.get(e,x.length),y.init(),x.push(y),Ge.enabled===!0&&Ge.isPresenting===!0){let e=w.xr.getDepthSensingMesh();e!==null&&it(e,t,-1/0,w.sortObjects)}it(e,t,0,w.sortObjects),y.finish(),w.sortObjects===!0&&y.sort(oe,se),ve=Ge.enabled===!1||Ge.isPresenting===!1||Ge.hasDepthSensing()===!1,ve&&Le.addToRenderList(y,e),this.info.render.frame++,fe===!0&&Fe.beginShadows();let i=b.state.shadowsArray;if(Ie.render(i,e,t),fe===!0&&Fe.endShadows(),this.info.autoReset===!0&&this.info.reset(),(r&&C.hasRenderPass())===!1){let n=y.opaque,r=y.transmissive;if(b.setupLights(),t.isArrayCamera){let i=t.cameras;if(r.length>0)for(let t=0,a=i.length;t<a;t++){let a=i[t];ot(n,r,e,a)}ve&&Le.render(e);for(let t=0,n=i.length;t<n;t++){let n=i[t];at(y,e,n,n.viewport)}}else r.length>0&&ot(n,r,e,t),ve&&Le.render(e),at(y,e,t)}O!==null&&D===0&&(Ee.updateMultisampleRenderTarget(O),Ee.updateRenderTargetMipmap(O)),r&&C.end(w),e.isScene===!0&&e.onAfterRender(w,e,t),He.resetDefaultState(),ee=-1,k=null,S.pop(),S.length>0?(b=S[S.length-1],fe===!0&&Fe.setGlobalState(w.clippingPlanes,b.state.camera)):b=null,x.pop(),y=x.length>0?x[x.length-1]:null};function it(e,t,n,r){if(e.visible===!1)return;if(e.layers.test(t.layers)){if(e.isGroup)n=e.renderOrder;else if(e.isLOD)e.autoUpdate===!0&&e.update(t);else if(e.isLight)b.pushLight(e),e.castShadow&&b.pushShadow(e);else if(e.isSprite){if(!e.frustumCulled||de.intersectsSprite(e)){r&&ge.setFromMatrixPosition(e.matrixWorld).applyMatrix4(me);let t=Ae.update(e),i=e.material;i.visible&&y.push(e,t,i,n,ge.z,null)}}else if((e.isMesh||e.isLine||e.isPoints)&&(!e.frustumCulled||de.intersectsObject(e))){let t=Ae.update(e),i=e.material;if(r&&(e.boundingSphere===void 0?(t.boundingSphere===null&&t.computeBoundingSphere(),ge.copy(t.boundingSphere.center)):(e.boundingSphere===null&&e.computeBoundingSphere(),ge.copy(e.boundingSphere.center)),ge.applyMatrix4(e.matrixWorld).applyMatrix4(me)),Array.isArray(i)){let r=t.groups;for(let a=0,o=r.length;a<o;a++){let o=r[a],s=i[o.materialIndex];s&&s.visible&&y.push(e,t,s,n,ge.z,o)}}else i.visible&&y.push(e,t,i,n,ge.z,null)}}let i=e.children;for(let e=0,a=i.length;e<a;e++)it(i[e],t,n,r)}function at(e,t,n,r){let{opaque:i,transmissive:a,transparent:o}=e;b.setupLightsView(n),fe===!0&&Fe.setGlobalState(w.clippingPlanes,n),r&&Ce.viewport(A.copy(r)),i.length>0&&st(i,t,n),a.length>0&&st(a,t,n),o.length>0&&st(o,t,n),Ce.buffers.depth.setTest(!0),Ce.buffers.depth.setMask(!0),Ce.buffers.color.setMask(!0),Ce.setPolygonOffset(!1)}function ot(e,t,n,r){if((n.isScene===!0?n.overrideMaterial:null)!==null)return;if(b.state.transmissionRenderTarget[r.id]===void 0){let e=xe.has(`EXT_color_buffer_half_float`)||xe.has(`EXT_color_buffer_float`);b.state.transmissionRenderTarget[r.id]=new Da(1,1,{generateMipmaps:!0,type:e?ar:Qn,minFilter:Zn,samples:Math.max(4,Se.samples),stencilBuffer:i,resolveDepthBuffer:!1,resolveStencilBuffer:!1,colorSpace:ma.workingColorSpace})}let a=b.state.transmissionRenderTarget[r.id],o=r.viewport||A;a.setSize(o.z*w.transmissionResolutionScale,o.w*w.transmissionResolutionScale);let s=w.getRenderTarget(),c=w.getActiveCubeFace(),l=w.getActiveMipmapLevel();w.setRenderTarget(a),w.getClearColor(re),ie=w.getClearAlpha(),ie<1&&w.setClearColor(16777215,.5),w.clear(),ve&&Le.render(n);let u=w.toneMapping;w.toneMapping=0;let d=r.viewport;if(r.viewport!==void 0&&(r.viewport=void 0),b.setupLightsView(r),fe===!0&&Fe.setGlobalState(w.clippingPlanes,r),st(e,n,r),Ee.updateMultisampleRenderTarget(a),Ee.updateRenderTargetMipmap(a),xe.has(`WEBGL_multisampled_render_to_texture`)===!1){let e=!1;for(let i=0,a=t.length;i<a;i++){let{object:a,geometry:o,material:s,group:c}=t[i];if(s.side===2&&a.layers.test(r.layers)){let t=s.side;s.side=1,s.needsUpdate=!0,ct(a,n,r,o,s,c),s.side=t,s.needsUpdate=!0,e=!0}}e===!0&&(Ee.updateMultisampleRenderTarget(a),Ee.updateRenderTargetMipmap(a))}w.setRenderTarget(s,c,l),w.setClearColor(re,ie),d!==void 0&&(r.viewport=d),w.toneMapping=u}function st(e,t,n){let r=t.isScene===!0?t.overrideMaterial:null;for(let i=0,a=e.length;i<a;i++){let a=e[i],{object:o,geometry:s,group:c}=a,l=a.material;l.allowOverride===!0&&r!==null&&(l=r),o.layers.test(n.layers)&&ct(o,t,n,s,l,c)}}function ct(e,t,n,r,i,a){e.onBeforeRender(w,t,n,r,i,a),e.modelViewMatrix.multiplyMatrices(n.matrixWorldInverse,e.matrixWorld),e.normalMatrix.getNormalMatrix(e.modelViewMatrix),i.onBeforeRender(w,t,n,r,e,a),i.transparent===!0&&i.side===2&&i.forceSinglePass===!1?(i.side=1,i.needsUpdate=!0,w.renderBufferDirect(n,t,r,i,e,a),i.side=0,i.needsUpdate=!0,w.renderBufferDirect(n,t,r,i,e,a),i.side=2):w.renderBufferDirect(n,t,r,i,e,a),e.onAfterRender(w,t,n,r,i,a)}function lt(e,t,n){t.isScene!==!0&&(t=_e);let r=Te.get(e),i=b.state.lights,a=b.state.shadowsArray,o=i.state.version,s=je.getParameters(e,i.state,a,t,n),c=je.getProgramCacheKey(s),l=r.programs;r.environment=e.isMeshStandardMaterial||e.isMeshLambertMaterial||e.isMeshPhongMaterial?t.environment:null,r.fog=t.fog;let u=e.isMeshStandardMaterial||e.isMeshLambertMaterial&&!e.envMap||e.isMeshPhongMaterial&&!e.envMap;r.envMap=De.get(e.envMap||r.environment,u),r.envMapRotation=r.environment!==null&&e.envMap===null?t.environmentRotation:e.envMapRotation,l===void 0&&(e.addEventListener(`dispose`,Ye),l=new Map,r.programs=l);let d=l.get(c);if(d!==void 0){if(r.currentProgram===d&&r.lightsStateVersion===o)return dt(e,s),d}else s.uniforms=je.getUniforms(e),e.onBeforeCompile(s,w),d=je.acquireProgram(s,c),l.set(c,d),r.uniforms=s.uniforms;let f=r.uniforms;return(!e.isShaderMaterial&&!e.isRawShaderMaterial||e.clipping===!0)&&(f.clippingPlanes=Fe.uniform),dt(e,s),r.needsLights=mt(e),r.lightsStateVersion=o,r.needsLights&&(f.ambientLightColor.value=i.state.ambient,f.lightProbe.value=i.state.probe,f.directionalLights.value=i.state.directional,f.directionalLightShadows.value=i.state.directionalShadow,f.spotLights.value=i.state.spot,f.spotLightShadows.value=i.state.spotShadow,f.rectAreaLights.value=i.state.rectArea,f.ltc_1.value=i.state.rectAreaLTC1,f.ltc_2.value=i.state.rectAreaLTC2,f.pointLights.value=i.state.point,f.pointLightShadows.value=i.state.pointShadow,f.hemisphereLights.value=i.state.hemi,f.directionalShadowMatrix.value=i.state.directionalShadowMatrix,f.spotLightMatrix.value=i.state.spotLightMatrix,f.spotLightMap.value=i.state.spotLightMap,f.pointShadowMatrix.value=i.state.pointShadowMatrix),r.currentProgram=d,r.uniformsList=null,d}function ut(e){if(e.uniformsList===null){let t=e.currentProgram.getUniforms();e.uniformsList=ad.seqWithValue(t.seq,e.uniforms)}return e.uniformsList}function dt(e,t){let n=Te.get(e);n.outputColorSpace=t.outputColorSpace,n.batching=t.batching,n.batchingColor=t.batchingColor,n.instancing=t.instancing,n.instancingColor=t.instancingColor,n.instancingMorph=t.instancingMorph,n.skinning=t.skinning,n.morphTargets=t.morphTargets,n.morphNormals=t.morphNormals,n.morphColors=t.morphColors,n.morphTargetsCount=t.morphTargetsCount,n.numClippingPlanes=t.numClippingPlanes,n.numIntersection=t.numClipIntersection,n.vertexAlphas=t.vertexAlphas,n.vertexTangents=t.vertexTangents,n.toneMapping=t.toneMapping}function ft(e,t,n,r,i){t.isScene!==!0&&(t=_e),Ee.resetTextureUnits();let a=t.fog,o=r.isMeshStandardMaterial||r.isMeshLambertMaterial||r.isMeshPhongMaterial?t.environment:null,s=O===null?w.outputColorSpace:O.isXRRenderTarget===!0?O.texture.colorSpace:fi,c=r.isMeshStandardMaterial||r.isMeshLambertMaterial&&!r.envMap||r.isMeshPhongMaterial&&!r.envMap,l=De.get(r.envMap||o,c),u=r.vertexColors===!0&&!!n.attributes.color&&n.attributes.color.itemSize===4,d=!!n.attributes.tangent&&(!!r.normalMap||r.anisotropy>0),f=!!n.morphAttributes.position,p=!!n.morphAttributes.normal,m=!!n.morphAttributes.color,h=0;r.toneMapped&&(O===null||O.isXRRenderTarget===!0)&&(h=w.toneMapping);let g=n.morphAttributes.position||n.morphAttributes.normal||n.morphAttributes.color,_=g===void 0?0:g.length,v=Te.get(r),y=b.state.lights;if(fe===!0&&(pe===!0||e!==k)){let t=e===k&&r.id===ee;Fe.setState(r,e,t)}let x=!1;r.version===v.__version?v.needsLights&&v.lightsStateVersion!==y.state.version?x=!0:v.outputColorSpace===s?i.isBatchedMesh&&v.batching===!1||!i.isBatchedMesh&&v.batching===!0||i.isBatchedMesh&&v.batchingColor===!0&&i.colorTexture===null||i.isBatchedMesh&&v.batchingColor===!1&&i.colorTexture!==null||i.isInstancedMesh&&v.instancing===!1||!i.isInstancedMesh&&v.instancing===!0||i.isSkinnedMesh&&v.skinning===!1||!i.isSkinnedMesh&&v.skinning===!0||i.isInstancedMesh&&v.instancingColor===!0&&i.instanceColor===null||i.isInstancedMesh&&v.instancingColor===!1&&i.instanceColor!==null||i.isInstancedMesh&&v.instancingMorph===!0&&i.morphTexture===null||i.isInstancedMesh&&v.instancingMorph===!1&&i.morphTexture!==null?x=!0:v.envMap===l?r.fog===!0&&v.fog!==a||v.numClippingPlanes!==void 0&&(v.numClippingPlanes!==Fe.numPlanes||v.numIntersection!==Fe.numIntersection)?x=!0:v.vertexAlphas===u&&v.vertexTangents===d&&v.morphTargets===f&&v.morphNormals===p&&v.morphColors===m&&v.toneMapping===h?v.morphTargetsCount!==_&&(x=!0):x=!0:x=!0:x=!0:(x=!0,v.__version=r.version);let S=v.currentProgram;x===!0&&(S=lt(r,t,i));let C=!1,T=!1,E=!1,D=S.getUniforms(),A=v.uniforms;if(Ce.useProgram(S.program)&&(C=!0,T=!0,E=!0),r.id!==ee&&(ee=r.id,T=!0),C||k!==e){Ce.buffers.depth.getReversed()&&e.reversedDepth!==!0&&(e._reversedDepth=!0,e.updateProjectionMatrix()),D.setValue(N,`projectionMatrix`,e.projectionMatrix),D.setValue(N,`viewMatrix`,e.matrixWorldInverse);let t=D.map.cameraPosition;t!==void 0&&t.setValue(N,he.setFromMatrixPosition(e.matrixWorld)),Se.logarithmicDepthBuffer&&D.setValue(N,`logDepthBufFC`,2/(Math.log(e.far+1)/Math.LN2)),(r.isMeshPhongMaterial||r.isMeshToonMaterial||r.isMeshLambertMaterial||r.isMeshBasicMaterial||r.isMeshStandardMaterial||r.isShaderMaterial)&&D.setValue(N,`isOrthographic`,e.isOrthographicCamera===!0),k!==e&&(k=e,T=!0,E=!0)}if(v.needsLights&&(y.state.directionalShadowMap.length>0&&D.setValue(N,`directionalShadowMap`,y.state.directionalShadowMap,Ee),y.state.spotShadowMap.length>0&&D.setValue(N,`spotShadowMap`,y.state.spotShadowMap,Ee),y.state.pointShadowMap.length>0&&D.setValue(N,`pointShadowMap`,y.state.pointShadowMap,Ee)),i.isSkinnedMesh){D.setOptional(N,i,`bindMatrix`),D.setOptional(N,i,`bindMatrixInverse`);let e=i.skeleton;e&&(e.boneTexture===null&&e.computeBoneTexture(),D.setValue(N,`boneTexture`,e.boneTexture,Ee))}i.isBatchedMesh&&(D.setOptional(N,i,`batchingTexture`),D.setValue(N,`batchingTexture`,i._matricesTexture,Ee),D.setOptional(N,i,`batchingIdTexture`),D.setValue(N,`batchingIdTexture`,i._indirectTexture,Ee),D.setOptional(N,i,`batchingColorTexture`),i._colorsTexture!==null&&D.setValue(N,`batchingColorTexture`,i._colorsTexture,Ee));let te=n.morphAttributes;if((te.position!==void 0||te.normal!==void 0||te.color!==void 0)&&Re.update(i,n,S),(T||v.receiveShadow!==i.receiveShadow)&&(v.receiveShadow=i.receiveShadow,D.setValue(N,`receiveShadow`,i.receiveShadow)),(r.isMeshStandardMaterial||r.isMeshLambertMaterial||r.isMeshPhongMaterial)&&r.envMap===null&&t.environment!==null&&(A.envMapIntensity.value=t.environmentIntensity),A.dfgLUT!==void 0&&(A.dfgLUT.value=Ef()),T&&(D.setValue(N,`toneMappingExposure`,w.toneMappingExposure),v.needsLights&&pt(A,E),a&&r.fog===!0&&Me.refreshFogUniforms(A,a),Me.refreshMaterialUniforms(A,r,ae,M,b.state.transmissionRenderTarget[e.id]),ad.upload(N,ut(v),A,Ee)),r.isShaderMaterial&&r.uniformsNeedUpdate===!0&&(ad.upload(N,ut(v),A,Ee),r.uniformsNeedUpdate=!1),r.isSpriteMaterial&&D.setValue(N,`center`,i.center),D.setValue(N,`modelViewMatrix`,i.modelViewMatrix),D.setValue(N,`normalMatrix`,i.normalMatrix),D.setValue(N,`modelMatrix`,i.matrixWorld),r.isShaderMaterial||r.isRawShaderMaterial){let e=r.uniformsGroups;for(let t=0,n=e.length;t<n;t++){let n=e[t];Ue.update(n,S),Ue.bind(n,S)}}return S}function pt(e,t){e.ambientLightColor.needsUpdate=t,e.lightProbe.needsUpdate=t,e.directionalLights.needsUpdate=t,e.directionalLightShadows.needsUpdate=t,e.pointLights.needsUpdate=t,e.pointLightShadows.needsUpdate=t,e.spotLights.needsUpdate=t,e.spotLightShadows.needsUpdate=t,e.rectAreaLights.needsUpdate=t,e.hemisphereLights.needsUpdate=t}function mt(e){return e.isMeshLambertMaterial||e.isMeshToonMaterial||e.isMeshPhongMaterial||e.isMeshStandardMaterial||e.isShadowMaterial||e.isShaderMaterial&&e.lights===!0}this.getActiveCubeFace=function(){return E},this.getActiveMipmapLevel=function(){return D},this.getRenderTarget=function(){return O},this.setRenderTargetTextures=function(e,t,n){let r=Te.get(e);r.__autoAllocateDepthBuffer=e.resolveDepthBuffer===!1,r.__autoAllocateDepthBuffer===!1&&(r.__useRenderToTexture=!1),Te.get(e.texture).__webglTexture=t,Te.get(e.depthTexture).__webglTexture=r.__autoAllocateDepthBuffer?void 0:n,r.__hasExternalTextures=!0},this.setRenderTargetFramebuffer=function(e,t){let n=Te.get(e);n.__webglFramebuffer=t,n.__useDefaultFramebuffer=t===void 0};let ht=N.createFramebuffer();this.setRenderTarget=function(e,t=0,n=0){O=e,E=t,D=n;let r=null,i=!1,a=!1;if(e){let o=Te.get(e);if(o.__useDefaultFramebuffer!==void 0){Ce.bindFramebuffer(N.FRAMEBUFFER,o.__webglFramebuffer),A.copy(e.viewport),te.copy(e.scissor),ne=e.scissorTest,Ce.viewport(A),Ce.scissor(te),Ce.setScissorTest(ne),ee=-1;return}else if(o.__webglFramebuffer===void 0)Ee.setupRenderTarget(e);else if(o.__hasExternalTextures)Ee.rebindTextures(e,Te.get(e.texture).__webglTexture,Te.get(e.depthTexture).__webglTexture);else if(e.depthBuffer){let t=e.depthTexture;if(o.__boundDepthTexture!==t){if(t!==null&&Te.has(t)&&(e.width!==t.image.width||e.height!==t.image.height))throw Error(`WebGLRenderTarget: Attached DepthTexture is initialized to the incorrect size.`);Ee.setupDepthRenderbuffer(e)}}let s=e.texture;(s.isData3DTexture||s.isDataArrayTexture||s.isCompressedArrayTexture)&&(a=!0);let c=Te.get(e).__webglFramebuffer;e.isWebGLCubeRenderTarget?(r=Array.isArray(c[t])?c[t][n]:c[t],i=!0):r=e.samples>0&&Ee.useMultisampledRTT(e)===!1?Te.get(e).__webglMultisampledFramebuffer:Array.isArray(c)?c[n]:c,A.copy(e.viewport),te.copy(e.scissor),ne=e.scissorTest}else A.copy(ce).multiplyScalar(ae).floor(),te.copy(le).multiplyScalar(ae).floor(),ne=ue;if(n!==0&&(r=ht),Ce.bindFramebuffer(N.FRAMEBUFFER,r)&&Ce.drawBuffers(e,r),Ce.viewport(A),Ce.scissor(te),Ce.setScissorTest(ne),i){let r=Te.get(e.texture);N.framebufferTexture2D(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_CUBE_MAP_POSITIVE_X+t,r.__webglTexture,n)}else if(a){let r=t;for(let t=0;t<e.textures.length;t++){let i=Te.get(e.textures[t]);N.framebufferTextureLayer(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0+t,i.__webglTexture,n,r)}}else if(e!==null&&n!==0){let t=Te.get(e.texture);N.framebufferTexture2D(N.FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,t.__webglTexture,n)}ee=-1},this.readRenderTargetPixels=function(e,t,n,r,i,a,o,s=0){if(!(e&&e.isWebGLRenderTarget)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.`);return}let c=Te.get(e).__webglFramebuffer;if(e.isWebGLCubeRenderTarget&&o!==void 0&&(c=c[o]),c){Ce.bindFramebuffer(N.FRAMEBUFFER,c);try{let o=e.textures[s],c=o.format,l=o.type;if(e.textures.length>1&&N.readBuffer(N.COLOR_ATTACHMENT0+s),!Se.textureFormatReadable(c)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not in RGBA or implementation defined format.`);return}if(!Se.textureTypeReadable(l)){Di(`WebGLRenderer.readRenderTargetPixels: renderTarget is not in UnsignedByteType or implementation defined type.`);return}t>=0&&t<=e.width-r&&n>=0&&n<=e.height-i&&N.readPixels(t,n,r,i,Ve.convert(c),Ve.convert(l),a)}finally{let e=O===null?null:Te.get(O).__webglFramebuffer;Ce.bindFramebuffer(N.FRAMEBUFFER,e)}}},this.readRenderTargetPixelsAsync=async function(e,t,n,r,i,a,o,s=0){if(!(e&&e.isWebGLRenderTarget))throw Error(`THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.`);let c=Te.get(e).__webglFramebuffer;if(e.isWebGLCubeRenderTarget&&o!==void 0&&(c=c[o]),c)if(t>=0&&t<=e.width-r&&n>=0&&n<=e.height-i){Ce.bindFramebuffer(N.FRAMEBUFFER,c);let o=e.textures[s],l=o.format,u=o.type;if(e.textures.length>1&&N.readBuffer(N.COLOR_ATTACHMENT0+s),!Se.textureFormatReadable(l))throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: renderTarget is not in RGBA or implementation defined format.`);if(!Se.textureTypeReadable(u))throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: renderTarget is not in UnsignedByteType or implementation defined type.`);let d=N.createBuffer();N.bindBuffer(N.PIXEL_PACK_BUFFER,d),N.bufferData(N.PIXEL_PACK_BUFFER,a.byteLength,N.STREAM_READ),N.readPixels(t,n,r,i,Ve.convert(l),Ve.convert(u),0);let f=O===null?null:Te.get(O).__webglFramebuffer;Ce.bindFramebuffer(N.FRAMEBUFFER,f);let p=N.fenceSync(N.SYNC_GPU_COMMANDS_COMPLETE,0);return N.flush(),await ki(N,p,4),N.bindBuffer(N.PIXEL_PACK_BUFFER,d),N.getBufferSubData(N.PIXEL_PACK_BUFFER,0,a),N.deleteBuffer(d),N.deleteSync(p),a}else throw Error(`THREE.WebGLRenderer.readRenderTargetPixelsAsync: requested read bounds are out of range.`)},this.copyFramebufferToTexture=function(e,t=null,n=0){let r=2**-n,i=Math.floor(e.image.width*r),a=Math.floor(e.image.height*r),o=t===null?0:t.x,s=t===null?0:t.y;Ee.setTexture2D(e,0),N.copyTexSubImage2D(N.TEXTURE_2D,n,0,0,o,s,i,a),Ce.unbindTexture()};let gt=N.createFramebuffer(),_t=N.createFramebuffer();this.copyTextureToTexture=function(e,t,n=null,r=null,i=0,a=0){let o,s,c,l,u,d,f,p,m,h=e.isCompressedTexture?e.mipmaps[a]:e.image;if(n!==null)o=n.max.x-n.min.x,s=n.max.y-n.min.y,c=n.isBox3?n.max.z-n.min.z:1,l=n.min.x,u=n.min.y,d=n.isBox3?n.min.z:0;else{let t=2**-i;o=Math.floor(h.width*t),s=Math.floor(h.height*t),c=e.isDataArrayTexture?h.depth:e.isData3DTexture?Math.floor(h.depth*t):1,l=0,u=0,d=0}r===null?(f=0,p=0,m=0):(f=r.x,p=r.y,m=r.z);let g=Ve.convert(t.format),_=Ve.convert(t.type),v;t.isData3DTexture?(Ee.setTexture3D(t,0),v=N.TEXTURE_3D):t.isDataArrayTexture||t.isCompressedArrayTexture?(Ee.setTexture2DArray(t,0),v=N.TEXTURE_2D_ARRAY):(Ee.setTexture2D(t,0),v=N.TEXTURE_2D),N.pixelStorei(N.UNPACK_FLIP_Y_WEBGL,t.flipY),N.pixelStorei(N.UNPACK_PREMULTIPLY_ALPHA_WEBGL,t.premultiplyAlpha),N.pixelStorei(N.UNPACK_ALIGNMENT,t.unpackAlignment);let y=N.getParameter(N.UNPACK_ROW_LENGTH),b=N.getParameter(N.UNPACK_IMAGE_HEIGHT),x=N.getParameter(N.UNPACK_SKIP_PIXELS),S=N.getParameter(N.UNPACK_SKIP_ROWS),C=N.getParameter(N.UNPACK_SKIP_IMAGES);N.pixelStorei(N.UNPACK_ROW_LENGTH,h.width),N.pixelStorei(N.UNPACK_IMAGE_HEIGHT,h.height),N.pixelStorei(N.UNPACK_SKIP_PIXELS,l),N.pixelStorei(N.UNPACK_SKIP_ROWS,u),N.pixelStorei(N.UNPACK_SKIP_IMAGES,d);let w=e.isDataArrayTexture||e.isData3DTexture,T=t.isDataArrayTexture||t.isData3DTexture;if(e.isDepthTexture){let n=Te.get(e),r=Te.get(t),h=Te.get(n.__renderTarget),g=Te.get(r.__renderTarget);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,h.__webglFramebuffer),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,g.__webglFramebuffer);for(let n=0;n<c;n++)w&&(N.framebufferTextureLayer(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,Te.get(e).__webglTexture,i,d+n),N.framebufferTextureLayer(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,Te.get(t).__webglTexture,a,m+n)),N.blitFramebuffer(l,u,o,s,f,p,o,s,N.DEPTH_BUFFER_BIT,N.NEAREST);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,null),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,null)}else if(i!==0||e.isRenderTargetTexture||Te.has(e)){let n=Te.get(e),r=Te.get(t);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,gt),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,_t);for(let e=0;e<c;e++)w?N.framebufferTextureLayer(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,n.__webglTexture,i,d+e):N.framebufferTexture2D(N.READ_FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,n.__webglTexture,i),T?N.framebufferTextureLayer(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,r.__webglTexture,a,m+e):N.framebufferTexture2D(N.DRAW_FRAMEBUFFER,N.COLOR_ATTACHMENT0,N.TEXTURE_2D,r.__webglTexture,a),i===0?T?N.copyTexSubImage3D(v,a,f,p,m+e,l,u,o,s):N.copyTexSubImage2D(v,a,f,p,l,u,o,s):N.blitFramebuffer(l,u,o,s,f,p,o,s,N.COLOR_BUFFER_BIT,N.NEAREST);Ce.bindFramebuffer(N.READ_FRAMEBUFFER,null),Ce.bindFramebuffer(N.DRAW_FRAMEBUFFER,null)}else T?e.isDataTexture||e.isData3DTexture?N.texSubImage3D(v,a,f,p,m,o,s,c,g,_,h.data):t.isCompressedArrayTexture?N.compressedTexSubImage3D(v,a,f,p,m,o,s,c,g,h.data):N.texSubImage3D(v,a,f,p,m,o,s,c,g,_,h):e.isDataTexture?N.texSubImage2D(N.TEXTURE_2D,a,f,p,o,s,g,_,h.data):e.isCompressedTexture?N.compressedTexSubImage2D(N.TEXTURE_2D,a,f,p,h.width,h.height,g,h.data):N.texSubImage2D(N.TEXTURE_2D,a,f,p,o,s,g,_,h);N.pixelStorei(N.UNPACK_ROW_LENGTH,y),N.pixelStorei(N.UNPACK_IMAGE_HEIGHT,b),N.pixelStorei(N.UNPACK_SKIP_PIXELS,x),N.pixelStorei(N.UNPACK_SKIP_ROWS,S),N.pixelStorei(N.UNPACK_SKIP_IMAGES,C),a===0&&t.generateMipmaps&&N.generateMipmap(v),Ce.unbindTexture()},this.initRenderTarget=function(e){Te.get(e).__webglFramebuffer===void 0&&Ee.setupRenderTarget(e)},this.initTexture=function(e){e.isCubeTexture?Ee.setTextureCube(e,0):e.isData3DTexture?Ee.setTexture3D(e,0):e.isDataArrayTexture||e.isCompressedArrayTexture?Ee.setTexture2DArray(e,0):Ee.setTexture2D(e,0),Ce.unbindTexture()},this.resetState=function(){E=0,D=0,O=null,Ce.reset(),He.reset()},typeof __THREE_DEVTOOLS__<`u`&&__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent(`observe`,{detail:this}))}get coordinateSystem(){return _i}get outputColorSpace(){return this._outputColorSpace}set outputColorSpace(e){this._outputColorSpace=e;let t=this.getContext();t.drawingBufferColorSpace=ma._getDrawingBufferColorSpace(e),t.unpackColorSpace=ma._getUnpackColorSpace()}},Of={type:`change`},kf={type:`start`},Af={type:`end`},jf=new vs,Mf=new Rs,Nf=Math.cos(70*ia.DEG2RAD),Pf=new P,Ff=2*Math.PI,If={NONE:-1,ROTATE:0,DOLLY:1,PAN:2,TOUCH_ROTATE:3,TOUCH_PAN:4,TOUCH_DOLLY_PAN:5,TOUCH_DOLLY_ROTATE:6},Lf=1e-6,Rf=class extends ll{constructor(e,t=null){super(e,t),this.state=If.NONE,this.target=new P,this.cursor=new P,this.minDistance=0,this.maxDistance=1/0,this.minZoom=0,this.maxZoom=1/0,this.minTargetRadius=0,this.maxTargetRadius=1/0,this.minPolarAngle=0,this.maxPolarAngle=Math.PI,this.minAzimuthAngle=-1/0,this.maxAzimuthAngle=1/0,this.enableDamping=!1,this.dampingFactor=.05,this.enableZoom=!0,this.zoomSpeed=1,this.enableRotate=!0,this.rotateSpeed=1,this.keyRotateSpeed=1,this.enablePan=!0,this.panSpeed=1,this.screenSpacePanning=!0,this.keyPanSpeed=7,this.zoomToCursor=!1,this.autoRotate=!1,this.autoRotateSpeed=2,this.keys={LEFT:`ArrowLeft`,UP:`ArrowUp`,RIGHT:`ArrowRight`,BOTTOM:`ArrowDown`},this.mouseButtons={LEFT:Vn.ROTATE,MIDDLE:Vn.DOLLY,RIGHT:Vn.PAN},this.touches={ONE:Hn.ROTATE,TWO:Hn.DOLLY_PAN},this.target0=this.target.clone(),this.position0=this.object.position.clone(),this.zoom0=this.object.zoom,this._cursorStyle=`auto`,this._domElementKeyEvents=null,this._lastPosition=new P,this._lastQuaternion=new oa,this._lastTargetPosition=new P,this._quat=new oa().setFromUnitVectors(e.up,new P(0,1,0)),this._quatInverse=this._quat.clone().invert(),this._spherical=new sl,this._sphericalDelta=new sl,this._scale=1,this._panOffset=new P,this._rotateStart=new aa,this._rotateEnd=new aa,this._rotateDelta=new aa,this._panStart=new aa,this._panEnd=new aa,this._panDelta=new aa,this._dollyStart=new aa,this._dollyEnd=new aa,this._dollyDelta=new aa,this._dollyDirection=new P,this._mouse=new aa,this._performCursorZoom=!1,this._pointers=[],this._pointerPositions={},this._controlActive=!1,this._onPointerMove=Bf.bind(this),this._onPointerDown=zf.bind(this),this._onPointerUp=Vf.bind(this),this._onContextMenu=Jf.bind(this),this._onMouseWheel=Wf.bind(this),this._onKeyDown=Gf.bind(this),this._onTouchStart=Kf.bind(this),this._onTouchMove=qf.bind(this),this._onMouseDown=Hf.bind(this),this._onMouseMove=Uf.bind(this),this._interceptControlDown=Yf.bind(this),this._interceptControlUp=Xf.bind(this),this.domElement!==null&&this.connect(this.domElement),this.update()}set cursorStyle(e){this._cursorStyle=e,e===`grab`?this.domElement.style.cursor=`grab`:this.domElement.style.cursor=`auto`}get cursorStyle(){return this._cursorStyle}connect(e){super.connect(e),this.domElement.addEventListener(`pointerdown`,this._onPointerDown),this.domElement.addEventListener(`pointercancel`,this._onPointerUp),this.domElement.addEventListener(`contextmenu`,this._onContextMenu),this.domElement.addEventListener(`wheel`,this._onMouseWheel,{passive:!1}),this.domElement.getRootNode().addEventListener(`keydown`,this._interceptControlDown,{passive:!0,capture:!0}),this.domElement.style.touchAction=`none`}disconnect(){this.domElement.removeEventListener(`pointerdown`,this._onPointerDown),this.domElement.ownerDocument.removeEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.removeEventListener(`pointerup`,this._onPointerUp),this.domElement.removeEventListener(`pointercancel`,this._onPointerUp),this.domElement.removeEventListener(`wheel`,this._onMouseWheel),this.domElement.removeEventListener(`contextmenu`,this._onContextMenu),this.stopListenToKeyEvents(),this.domElement.getRootNode().removeEventListener(`keydown`,this._interceptControlDown,{capture:!0}),this.domElement.style.touchAction=`auto`}dispose(){this.disconnect()}getPolarAngle(){return this._spherical.phi}getAzimuthalAngle(){return this._spherical.theta}getDistance(){return this.object.position.distanceTo(this.target)}listenToKeyEvents(e){e.addEventListener(`keydown`,this._onKeyDown),this._domElementKeyEvents=e}stopListenToKeyEvents(){this._domElementKeyEvents!==null&&(this._domElementKeyEvents.removeEventListener(`keydown`,this._onKeyDown),this._domElementKeyEvents=null)}saveState(){this.target0.copy(this.target),this.position0.copy(this.object.position),this.zoom0=this.object.zoom}reset(){this.target.copy(this.target0),this.object.position.copy(this.position0),this.object.zoom=this.zoom0,this.object.updateProjectionMatrix(),this.dispatchEvent(Of),this.update(),this.state=If.NONE}pan(e,t){this._pan(e,t),this.update()}dollyIn(e){this._dollyIn(e),this.update()}dollyOut(e){this._dollyOut(e),this.update()}rotateLeft(e){this._rotateLeft(e),this.update()}rotateUp(e){this._rotateUp(e),this.update()}update(e=null){let t=this.object.position;Pf.copy(t).sub(this.target),Pf.applyQuaternion(this._quat),this._spherical.setFromVector3(Pf),this.autoRotate&&this.state===If.NONE&&this._rotateLeft(this._getAutoRotationAngle(e)),this.enableDamping?(this._spherical.theta+=this._sphericalDelta.theta*this.dampingFactor,this._spherical.phi+=this._sphericalDelta.phi*this.dampingFactor):(this._spherical.theta+=this._sphericalDelta.theta,this._spherical.phi+=this._sphericalDelta.phi);let n=this.minAzimuthAngle,r=this.maxAzimuthAngle;isFinite(n)&&isFinite(r)&&(n<-Math.PI?n+=Ff:n>Math.PI&&(n-=Ff),r<-Math.PI?r+=Ff:r>Math.PI&&(r-=Ff),n<=r?this._spherical.theta=Math.max(n,Math.min(r,this._spherical.theta)):this._spherical.theta=this._spherical.theta>(n+r)/2?Math.max(n,this._spherical.theta):Math.min(r,this._spherical.theta)),this._spherical.phi=Math.max(this.minPolarAngle,Math.min(this.maxPolarAngle,this._spherical.phi)),this._spherical.makeSafe(),this.enableDamping===!0?this.target.addScaledVector(this._panOffset,this.dampingFactor):this.target.add(this._panOffset),this.target.sub(this.cursor),this.target.clampLength(this.minTargetRadius,this.maxTargetRadius),this.target.add(this.cursor);let i=!1;if(this.zoomToCursor&&this._performCursorZoom||this.object.isOrthographicCamera)this._spherical.radius=this._clampDistance(this._spherical.radius);else{let e=this._spherical.radius;this._spherical.radius=this._clampDistance(this._spherical.radius*this._scale),i=e!=this._spherical.radius}if(Pf.setFromSpherical(this._spherical),Pf.applyQuaternion(this._quatInverse),t.copy(this.target).add(Pf),this.object.lookAt(this.target),this.enableDamping===!0?(this._sphericalDelta.theta*=1-this.dampingFactor,this._sphericalDelta.phi*=1-this.dampingFactor,this._panOffset.multiplyScalar(1-this.dampingFactor)):(this._sphericalDelta.set(0,0,0),this._panOffset.set(0,0,0)),this.zoomToCursor&&this._performCursorZoom){let e=null;if(this.object.isPerspectiveCamera){let t=Pf.length();e=this._clampDistance(t*this._scale);let n=t-e;this.object.position.addScaledVector(this._dollyDirection,n),this.object.updateMatrixWorld(),i=!!n}else if(this.object.isOrthographicCamera){let t=new P(this._mouse.x,this._mouse.y,0);t.unproject(this.object);let n=this.object.zoom;this.object.zoom=Math.max(this.minZoom,Math.min(this.maxZoom,this.object.zoom/this._scale)),this.object.updateProjectionMatrix(),i=n!==this.object.zoom;let r=new P(this._mouse.x,this._mouse.y,0);r.unproject(this.object),this.object.position.sub(r).add(t),this.object.updateMatrixWorld(),e=Pf.length()}else console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.`),this.zoomToCursor=!1;e!==null&&(this.screenSpacePanning?this.target.set(0,0,-1).transformDirection(this.object.matrix).multiplyScalar(e).add(this.object.position):(jf.origin.copy(this.object.position),jf.direction.set(0,0,-1).transformDirection(this.object.matrix),Math.abs(this.object.up.dot(jf.direction))<Nf?this.object.lookAt(this.target):(Mf.setFromNormalAndCoplanarPoint(this.object.up,this.target),jf.intersectPlane(Mf,this.target))))}else if(this.object.isOrthographicCamera){let e=this.object.zoom;this.object.zoom=Math.max(this.minZoom,Math.min(this.maxZoom,this.object.zoom/this._scale)),e!==this.object.zoom&&(this.object.updateProjectionMatrix(),i=!0)}return this._scale=1,this._performCursorZoom=!1,i||this._lastPosition.distanceToSquared(this.object.position)>Lf||8*(1-this._lastQuaternion.dot(this.object.quaternion))>Lf||this._lastTargetPosition.distanceToSquared(this.target)>Lf?(this.dispatchEvent(Of),this._lastPosition.copy(this.object.position),this._lastQuaternion.copy(this.object.quaternion),this._lastTargetPosition.copy(this.target),!0):!1}_getAutoRotationAngle(e){return e===null?Ff/60/60*this.autoRotateSpeed:Ff/60*this.autoRotateSpeed*e}_getZoomScale(e){let t=Math.abs(e*.01);return .95**(this.zoomSpeed*t)}_rotateLeft(e){this._sphericalDelta.theta-=e}_rotateUp(e){this._sphericalDelta.phi-=e}_panLeft(e,t){Pf.setFromMatrixColumn(t,0),Pf.multiplyScalar(-e),this._panOffset.add(Pf)}_panUp(e,t){this.screenSpacePanning===!0?Pf.setFromMatrixColumn(t,1):(Pf.setFromMatrixColumn(t,0),Pf.crossVectors(this.object.up,Pf)),Pf.multiplyScalar(e),this._panOffset.add(Pf)}_pan(e,t){let n=this.domElement;if(this.object.isPerspectiveCamera){let r=this.object.position;Pf.copy(r).sub(this.target);let i=Pf.length();i*=Math.tan(this.object.fov/2*Math.PI/180),this._panLeft(2*e*i/n.clientHeight,this.object.matrix),this._panUp(2*t*i/n.clientHeight,this.object.matrix)}else this.object.isOrthographicCamera?(this._panLeft(e*(this.object.right-this.object.left)/this.object.zoom/n.clientWidth,this.object.matrix),this._panUp(t*(this.object.top-this.object.bottom)/this.object.zoom/n.clientHeight,this.object.matrix)):(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.`),this.enablePan=!1)}_dollyOut(e){this.object.isPerspectiveCamera||this.object.isOrthographicCamera?this._scale/=e:(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`),this.enableZoom=!1)}_dollyIn(e){this.object.isPerspectiveCamera||this.object.isOrthographicCamera?this._scale*=e:(console.warn(`WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`),this.enableZoom=!1)}_updateZoomParameters(e,t){if(!this.zoomToCursor)return;this._performCursorZoom=!0;let n=this.domElement.getBoundingClientRect(),r=e-n.left,i=t-n.top,a=n.width,o=n.height;this._mouse.x=r/a*2-1,this._mouse.y=-(i/o)*2+1,this._dollyDirection.set(this._mouse.x,this._mouse.y,1).unproject(this.object).sub(this.object.position).normalize()}_clampDistance(e){return Math.max(this.minDistance,Math.min(this.maxDistance,e))}_handleMouseDownRotate(e){this._rotateStart.set(e.clientX,e.clientY)}_handleMouseDownDolly(e){this._updateZoomParameters(e.clientX,e.clientX),this._dollyStart.set(e.clientX,e.clientY)}_handleMouseDownPan(e){this._panStart.set(e.clientX,e.clientY)}_handleMouseMoveRotate(e){this._rotateEnd.set(e.clientX,e.clientY),this._rotateDelta.subVectors(this._rotateEnd,this._rotateStart).multiplyScalar(this.rotateSpeed);let t=this.domElement;this._rotateLeft(Ff*this._rotateDelta.x/t.clientHeight),this._rotateUp(Ff*this._rotateDelta.y/t.clientHeight),this._rotateStart.copy(this._rotateEnd),this.update()}_handleMouseMoveDolly(e){this._dollyEnd.set(e.clientX,e.clientY),this._dollyDelta.subVectors(this._dollyEnd,this._dollyStart),this._dollyDelta.y>0?this._dollyOut(this._getZoomScale(this._dollyDelta.y)):this._dollyDelta.y<0&&this._dollyIn(this._getZoomScale(this._dollyDelta.y)),this._dollyStart.copy(this._dollyEnd),this.update()}_handleMouseMovePan(e){this._panEnd.set(e.clientX,e.clientY),this._panDelta.subVectors(this._panEnd,this._panStart).multiplyScalar(this.panSpeed),this._pan(this._panDelta.x,this._panDelta.y),this._panStart.copy(this._panEnd),this.update()}_handleMouseWheel(e){this._updateZoomParameters(e.clientX,e.clientY),e.deltaY<0?this._dollyIn(this._getZoomScale(e.deltaY)):e.deltaY>0&&this._dollyOut(this._getZoomScale(e.deltaY)),this.update()}_handleKeyDown(e){let t=!1;switch(e.code){case this.keys.UP:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateUp(Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(0,this.keyPanSpeed),t=!0;break;case this.keys.BOTTOM:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateUp(-Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(0,-this.keyPanSpeed),t=!0;break;case this.keys.LEFT:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateLeft(Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(this.keyPanSpeed,0),t=!0;break;case this.keys.RIGHT:e.ctrlKey||e.metaKey||e.shiftKey?this.enableRotate&&this._rotateLeft(-Ff*this.keyRotateSpeed/this.domElement.clientHeight):this.enablePan&&this._pan(-this.keyPanSpeed,0),t=!0;break}t&&(e.preventDefault(),this.update())}_handleTouchStartRotate(e){if(this._pointers.length===1)this._rotateStart.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._rotateStart.set(n,r)}}_handleTouchStartPan(e){if(this._pointers.length===1)this._panStart.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._panStart.set(n,r)}}_handleTouchStartDolly(e){let t=this._getSecondPointerPosition(e),n=e.pageX-t.x,r=e.pageY-t.y,i=Math.sqrt(n*n+r*r);this._dollyStart.set(0,i)}_handleTouchStartDollyPan(e){this.enableZoom&&this._handleTouchStartDolly(e),this.enablePan&&this._handleTouchStartPan(e)}_handleTouchStartDollyRotate(e){this.enableZoom&&this._handleTouchStartDolly(e),this.enableRotate&&this._handleTouchStartRotate(e)}_handleTouchMoveRotate(e){if(this._pointers.length==1)this._rotateEnd.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._rotateEnd.set(n,r)}this._rotateDelta.subVectors(this._rotateEnd,this._rotateStart).multiplyScalar(this.rotateSpeed);let t=this.domElement;this._rotateLeft(Ff*this._rotateDelta.x/t.clientHeight),this._rotateUp(Ff*this._rotateDelta.y/t.clientHeight),this._rotateStart.copy(this._rotateEnd)}_handleTouchMovePan(e){if(this._pointers.length===1)this._panEnd.set(e.pageX,e.pageY);else{let t=this._getSecondPointerPosition(e),n=.5*(e.pageX+t.x),r=.5*(e.pageY+t.y);this._panEnd.set(n,r)}this._panDelta.subVectors(this._panEnd,this._panStart).multiplyScalar(this.panSpeed),this._pan(this._panDelta.x,this._panDelta.y),this._panStart.copy(this._panEnd)}_handleTouchMoveDolly(e){let t=this._getSecondPointerPosition(e),n=e.pageX-t.x,r=e.pageY-t.y,i=Math.sqrt(n*n+r*r);this._dollyEnd.set(0,i),this._dollyDelta.set(0,(this._dollyEnd.y/this._dollyStart.y)**+this.zoomSpeed),this._dollyOut(this._dollyDelta.y),this._dollyStart.copy(this._dollyEnd);let a=(e.pageX+t.x)*.5,o=(e.pageY+t.y)*.5;this._updateZoomParameters(a,o)}_handleTouchMoveDollyPan(e){this.enableZoom&&this._handleTouchMoveDolly(e),this.enablePan&&this._handleTouchMovePan(e)}_handleTouchMoveDollyRotate(e){this.enableZoom&&this._handleTouchMoveDolly(e),this.enableRotate&&this._handleTouchMoveRotate(e)}_addPointer(e){this._pointers.push(e.pointerId)}_removePointer(e){delete this._pointerPositions[e.pointerId];for(let t=0;t<this._pointers.length;t++)if(this._pointers[t]==e.pointerId){this._pointers.splice(t,1);return}}_isTrackingPointer(e){for(let t=0;t<this._pointers.length;t++)if(this._pointers[t]==e.pointerId)return!0;return!1}_trackPointer(e){let t=this._pointerPositions[e.pointerId];t===void 0&&(t=new aa,this._pointerPositions[e.pointerId]=t),t.set(e.pageX,e.pageY)}_getSecondPointerPosition(e){let t=e.pointerId===this._pointers[0]?this._pointers[1]:this._pointers[0];return this._pointerPositions[t]}_customWheelEvent(e){let t=e.deltaMode,n={clientX:e.clientX,clientY:e.clientY,deltaY:e.deltaY};switch(t){case 1:n.deltaY*=16;break;case 2:n.deltaY*=100;break}return e.ctrlKey&&!this._controlActive&&(n.deltaY*=10),n}};function zf(e){this.enabled!==!1&&(this._pointers.length===0&&(this.domElement.setPointerCapture(e.pointerId),this.domElement.ownerDocument.addEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.addEventListener(`pointerup`,this._onPointerUp)),!this._isTrackingPointer(e)&&(this._addPointer(e),e.pointerType===`touch`?this._onTouchStart(e):this._onMouseDown(e),this._cursorStyle===`grab`&&(this.domElement.style.cursor=`grabbing`)))}function Bf(e){this.enabled!==!1&&(e.pointerType===`touch`?this._onTouchMove(e):this._onMouseMove(e))}function Vf(e){switch(this._removePointer(e),this._pointers.length){case 0:this.domElement.releasePointerCapture(e.pointerId),this.domElement.ownerDocument.removeEventListener(`pointermove`,this._onPointerMove),this.domElement.ownerDocument.removeEventListener(`pointerup`,this._onPointerUp),this.dispatchEvent(Af),this.state=If.NONE,this._cursorStyle===`grab`&&(this.domElement.style.cursor=`grab`);break;case 1:let t=this._pointers[0],n=this._pointerPositions[t];this._onTouchStart({pointerId:t,pageX:n.x,pageY:n.y});break}}function Hf(e){let t;switch(e.button){case 0:t=this.mouseButtons.LEFT;break;case 1:t=this.mouseButtons.MIDDLE;break;case 2:t=this.mouseButtons.RIGHT;break;default:t=-1}switch(t){case Vn.DOLLY:if(this.enableZoom===!1)return;this._handleMouseDownDolly(e),this.state=If.DOLLY;break;case Vn.ROTATE:if(e.ctrlKey||e.metaKey||e.shiftKey){if(this.enablePan===!1)return;this._handleMouseDownPan(e),this.state=If.PAN}else{if(this.enableRotate===!1)return;this._handleMouseDownRotate(e),this.state=If.ROTATE}break;case Vn.PAN:if(e.ctrlKey||e.metaKey||e.shiftKey){if(this.enableRotate===!1)return;this._handleMouseDownRotate(e),this.state=If.ROTATE}else{if(this.enablePan===!1)return;this._handleMouseDownPan(e),this.state=If.PAN}break;default:this.state=If.NONE}this.state!==If.NONE&&this.dispatchEvent(kf)}function Uf(e){switch(this.state){case If.ROTATE:if(this.enableRotate===!1)return;this._handleMouseMoveRotate(e);break;case If.DOLLY:if(this.enableZoom===!1)return;this._handleMouseMoveDolly(e);break;case If.PAN:if(this.enablePan===!1)return;this._handleMouseMovePan(e);break}}function Wf(e){this.enabled===!1||this.enableZoom===!1||this.state!==If.NONE||(e.preventDefault(),this.dispatchEvent(kf),this._handleMouseWheel(this._customWheelEvent(e)),this.dispatchEvent(Af))}function Gf(e){this.enabled!==!1&&this._handleKeyDown(e)}function Kf(e){switch(this._trackPointer(e),this._pointers.length){case 1:switch(this.touches.ONE){case Hn.ROTATE:if(this.enableRotate===!1)return;this._handleTouchStartRotate(e),this.state=If.TOUCH_ROTATE;break;case Hn.PAN:if(this.enablePan===!1)return;this._handleTouchStartPan(e),this.state=If.TOUCH_PAN;break;default:this.state=If.NONE}break;case 2:switch(this.touches.TWO){case Hn.DOLLY_PAN:if(this.enableZoom===!1&&this.enablePan===!1)return;this._handleTouchStartDollyPan(e),this.state=If.TOUCH_DOLLY_PAN;break;case Hn.DOLLY_ROTATE:if(this.enableZoom===!1&&this.enableRotate===!1)return;this._handleTouchStartDollyRotate(e),this.state=If.TOUCH_DOLLY_ROTATE;break;default:this.state=If.NONE}break;default:this.state=If.NONE}this.state!==If.NONE&&this.dispatchEvent(kf)}function qf(e){switch(this._trackPointer(e),this.state){case If.TOUCH_ROTATE:if(this.enableRotate===!1)return;this._handleTouchMoveRotate(e),this.update();break;case If.TOUCH_PAN:if(this.enablePan===!1)return;this._handleTouchMovePan(e),this.update();break;case If.TOUCH_DOLLY_PAN:if(this.enableZoom===!1&&this.enablePan===!1)return;this._handleTouchMoveDollyPan(e),this.update();break;case If.TOUCH_DOLLY_ROTATE:if(this.enableZoom===!1&&this.enableRotate===!1)return;this._handleTouchMoveDollyRotate(e),this.update();break;default:this.state=If.NONE}}function Jf(e){this.enabled!==!1&&e.preventDefault()}function Yf(e){e.key===`Control`&&(this._controlActive=!0,this.domElement.getRootNode().addEventListener(`keyup`,this._interceptControlUp,{passive:!0,capture:!0}))}function Xf(e){e.key===`Control`&&(this._controlActive=!1,this.domElement.getRootNode().removeEventListener(`keyup`,this._interceptControlUp,{passive:!0,capture:!0}))}function Zf(e,t,n=10){return(0,v.useMemo)(()=>{if(!e||!t)return[];let[[r,i],[a,o],[s,c]]=t,l=i-r,u=o-a,d=c-s,f=Math.max(2,Math.round(n*l/10)),p=Math.max(2,Math.round(n*u/10)),m=Math.max(2,Math.round(n*d/10)),h=l/f,g=u/p,_=d/m,v=[];for(let t=0;t<=p;t++)for(let n=0;n<=m;n++){let i=a+t*g,o=s+n*_,c=[];for(let t=0;t<=f;t++){let[n,a,s]=e(r+t*h,i,o);c.push(new P(n,a,s))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`u`})}for(let t=0;t<=f;t++)for(let n=0;n<=m;n++){let i=r+t*h,o=s+n*_,c=[];for(let t=0;t<=p;t++){let[n,r,s]=e(i,a+t*g,o);c.push(new P(n,r,s))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`v`})}for(let t=0;t<=f;t++)for(let n=0;n<=p;n++){let i=r+t*h,o=a+n*g,c=[];for(let t=0;t<=m;t++){let[n,r,a]=e(i,o,s+t*_);c.push(new P(n,r,a))}c.length>1&&v.push({geometry:new cs().setFromPoints(c),type:`w`})}return v},[e,t,n])}var Qf=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),L=o(((e,t)=>{t.exports=Qf()}))();function $f({coordinate:e,ranges:t,resolution:n=10,lineColor:r=`#6366f1`,showAxes:i=!0,axisSize:a=5}){let o=(0,v.useRef)(null),s=(0,v.useMemo)(()=>t||e?.ranges||[[-5,5],[-5,5],[-5,5]],[t,e?.ranges]),c=e?.embedding,l=Zf(c,s,n);return(0,v.useEffect)(()=>{if(!o.current||!c)return;let e=o.current,t=new mo;t.background=new fo(15790320);let n=new Uc(75,e.clientWidth/e.clientHeight,.1,1e3);n.position.set(8,8,8),n.lookAt(0,0,0);let s=new Df({antialias:!0});s.setSize(e.clientWidth,e.clientHeight),s.setClearColor(15790320,1),e.appendChild(s.domElement);let u=new Rf(n,s.domElement);u.enableDamping=!0;let d=new Us({color:new fo(r)}),f=new io;if(l.forEach(({geometry:e})=>{let t=new Zs(e,d);f.add(t)}),i){let e=new cl(a);f.add(e)}t.add(f);let p=!0,m=()=>{p&&(requestAnimationFrame(m),u.update(),s.render(t,n))};m();let h=()=>{n.aspect=e.clientWidth/e.clientHeight,n.updateProjectionMatrix(),s.setSize(e.clientWidth,e.clientHeight)};return window.addEventListener(`resize`,h),()=>{p=!1,window.removeEventListener(`resize`,h),e.removeChild(s.domElement),s.dispose(),u.dispose(),l.forEach(({geometry:e})=>e.dispose()),d.dispose()}},[c,s,n,r,i,a,l]),(0,L.jsx)(`div`,{ref:o,style:{width:`100%`,height:`100%`}})}function ep(e,t){return e.map(e=>e.reduce((e,n,r)=>e+n*t[r],0))}function tp(e){let[t,n,r]=e[0],[i,a,o]=e[1],[s,c,l]=e[2],u=t*(a*l-o*c)-n*(i*l-o*s)+r*(i*c-a*s);if(Math.abs(u)<1e-10)return null;let d=1/u;return[[(a*l-o*c)*d,(r*c-n*l)*d,(n*o-r*a)*d],[(o*s-i*l)*d,(t*l-r*s)*d,(r*i-t*o)*d],[(i*c-a*s)*d,(n*s-t*c)*d,(t*a-n*i)*d]]}function np(e,t){return ep(e,t)}function rp(e,t){let n=np(e,t),r=0;for(let e=0;e<t.length;e++)r+=t[e]*n[e];return Math.sqrt(Math.max(0,r))}function ip(e,t,n,r=.001){let i=[...t],a=[...t];i[n]+=r,a[n]-=r;let o,s;try{o=e(...i),s=e(...a)}catch{return[[0,0,0],[0,0,0],[0,0,0]]}return!o||!s||!o[0]||!s[0]?[[0,0,0],[0,0,0],[0,0,0]]:o.map((e,t)=>e.map((e,n)=>(e-s[t][n])/(2*r)))}function ap(e,t,n){let r=[n[0]-t[0],n[1]-t[1],n[2]-t[2]];return rp(e((t[0]+n[0])/2,(t[1]+n[1])/2,(t[2]+n[2])/2),r)}function op(e,t,n=.1){if(t.length<2)return t;let r=[t[0]],i=0,a=t[0];for(let o=1;o<t.length;o++){let s=ap(e,a,t[o]);for(i+=s;i>=n;){let e=(n-(i-s))/s,c=[a[0]+e*(t[o][0]-a[0]),a[1]+e*(t[o][1]-a[1]),a[2]+e*(t[o][2]-a[2])];r.push(c),i-=n,a=c}a=t[o]}return r[r.length-1]!==t[t.length-1]&&r.push(t[t.length-1]),r}function sp(e,t){let n=e(...t);return{u:rp(n,[1,0,0]),v:rp(n,[0,1,0]),w:rp(n,[0,0,1])}}function cp({metric:e,ranges:t,resolution:n=10,lineColor:r=`#6366f1`,showAxes:i=!0,axisSize:a=5,metricAware:o=!0}){let s=(0,v.useRef)(null),c=(0,v.useMemo)(()=>t||e?.ranges||[[-5,5],[-5,5],[-5,5]],[t,e?.ranges]),l=e?.embedding,u=e?.spatial,d=(0,v.useMemo)(()=>{if(!l)return[];let[[e,t],[r,i],[a,s]]=c,d=t-e,f=i-r,p=s-a,m=Math.max(2,Math.round(n*d/10)),h=Math.max(2,Math.round(n*f/10)),g=Math.max(2,Math.round(n*p/10)),_=d/m,v=f/h,y=p/g,b=[],x=(()=>{if(!o||!u)return .1;let c=sp(u,[[(e+t)/2,(r+i)/2,(a+s)/2]][0]);return Math.min(c.u,c.v,c.w)/n*2})();for(let t=0;t<=h;t++)for(let n=0;n<=g;n++){let i=r+t*v,s=a+n*y,c=[];for(let t=0;t<=m;t++){let[n,r,a]=l(e+t*_,i,s);c.push(new P(n,r,a))}let d=c;if(o&&u&&x>0){let t=[];for(let n=0;n<=m;n++)t.push([e+n*_,i,s]);d=op(u,t,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`u`})}for(let t=0;t<=m;t++)for(let n=0;n<=g;n++){let i=e+t*_,s=a+n*y,c=[];for(let e=0;e<=h;e++){let[t,n,a]=l(i,r+e*v,s);c.push(new P(t,n,a))}let d=c;if(o&&u&&x>0){let e=[];for(let t=0;t<=h;t++)e.push([i,r+t*v,s]);d=op(u,e,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`v`})}for(let t=0;t<=m;t++)for(let n=0;n<=h;n++){let i=e+t*_,s=r+n*v,c=[];for(let e=0;e<=g;e++){let[t,n,r]=l(i,s,a+e*y);c.push(new P(t,n,r))}let d=c;if(o&&u&&x>0){let e=[];for(let t=0;t<=g;t++)e.push([i,s,a+t*y]);d=op(u,e,x).map(([e,t,n])=>{let[r,i,a]=l(e,t,n);return new P(r,i,a)})}d.length>1&&b.push({geometry:new cs().setFromPoints(d),type:`w`})}return b},[l,c,n,o,u]);return(0,v.useEffect)(()=>{if(!s.current||!l)return;let e=s.current,t=new mo;t.background=new fo(15790320);let n=new Uc(75,e.clientWidth/e.clientHeight,.1,1e3);n.position.set(8,8,8),n.lookAt(0,0,0);let o=new Df({antialias:!0});o.setSize(e.clientWidth,e.clientHeight),o.setClearColor(15790320,1),e.appendChild(o.domElement);let c=new Rf(n,o.domElement);c.enableDamping=!0;let u=new Us({color:new fo(r)}),f=new io;if(d.forEach(({geometry:e})=>{let t=new Zs(e,u);f.add(t)}),i){let e=new cl(a);f.add(e)}t.add(f);let p=!0,m=()=>{p&&(requestAnimationFrame(m),c.update(),o.render(t,n))};m();let h=()=>{n.aspect=e.clientWidth/e.clientHeight,n.updateProjectionMatrix(),o.setSize(e.clientWidth,e.clientHeight)};return window.addEventListener(`resize`,h),()=>{p=!1,window.removeEventListener(`resize`,h),e.removeChild(o.domElement),o.dispose(),c.dispose(),d.forEach(({geometry:e})=>e.dispose()),u.dispose()}},[l,c,n,r,i,a,d]),(0,L.jsx)(`div`,{ref:s,style:{width:`100%`,height:`100%`}})}function lp(e,t){let n;try{n=e(...t)}catch{return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]}if(!n||!n[0]||!n[0][0])return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]];let r=tp(n);if(!r)return[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]];let i=[ip(e,t,0),ip(e,t,1),ip(e,t,2)],a=[];for(let e=0;e<3;e++){a[e]=[];for(let t=0;t<3;t++){a[e][t]=[];for(let n=0;n<3;n++){let o=0;for(let a=0;a<3;a++){let s=i[t][n][a],c=i[n][t][a],l=i[a][t][n];o+=r[e][a]*(s+c-l)}a[e][t][n]=o/2}}}return a}function up(e,t){let n=[0,0,0];for(let r=0;r<3;r++){let i=0;for(let n=0;n<3;n++)for(let a=0;a<3;a++)i+=e[r][n][a]*t[n]*t[a];n[r]=-i}return n}function dp(e,t,n,r=1e3,i=.01,a={}){let{minRadius:o=0,maxRadius:s=100,tolerance:c=1e-6}=a,l=[t],u=[...t],d=[...n];for(let t=0;t<r;t++){let t=up(lp(e,u),d),n=[...d],r=[...t],a=u.map((e,t)=>e+.5*i*n[t]),f=d.map((e,t)=>e+.5*i*r[t]),p=up(lp(e,a),f),m=[...f],h=[...p],g=u.map((e,t)=>e+.5*i*m[t]),_=d.map((e,t)=>e+.5*i*h[t]),v=up(lp(e,g),_),y=[..._],b=[...v],x=u.map((e,t)=>e+i*y[t]),S=d.map((e,t)=>e+i*b[t]),C=up(lp(e,x),S),w=[...S],T=[...C];for(let e=0;e<3;e++)u[e]+=i/6*(n[e]+2*m[e]+2*y[e]+w[e]),d[e]+=i/6*(r[e]+2*h[e]+2*b[e]+T[e]);l.push([...u]);let E=Math.sqrt(u[0]*u[0]+u[1]*u[1]+u[2]*u[2]);if(E<o||E>s||Math.sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2])<c)break}return l}function fp(e,t=`spherical`,n=0){let r=[];if(t===`radial`)for(let t=0;t<e;t++){let n=t/e*Math.PI*2;r.push([Math.cos(n),Math.sin(n),0])}else if(t===`spherical`){let t=Math.PI*(3-Math.sqrt(5));for(let n=0;n<e;n++){let i=1-n/(e-1)*2,a=Math.sqrt(1-i*i),o=t*n;r.push([a*Math.cos(o),i,a*Math.sin(o)])}}else if(t===`cone`)for(let t=0;t<e;t++){let i=t/e*Math.PI*2,a=Math.sin(n),o=Math.cos(n);r.push([a*Math.cos(i),o,a*Math.sin(i)])}return r}function pp(e,t,n,r=1e3,i=.01,a={}){return n.map(n=>{let o=Math.sqrt(n[0]**2+n[1]**2+n[2]**2);return dp(e,t,n.map(e=>e/o),r,i,a)})}function mp(e,t,n=12,r=`spherical`,i={}){let a=fp(n,r),o={maxSteps:2e3,dt:.005,minRadius:.1,maxRadius:50,...i};return pp(e,t,a.map(e=>e.map(e=>e*.1)),o.maxSteps,o.dt,o)}function hp(e,t,n=8,r=`radial`,i=.5,a={}){let o=fp(n,r),s={maxSteps:1e3,dt:.01,minRadius:.5,maxRadius:30,...a};return pp(e,t,o.map(e=>e.map(e=>e*i)),s.maxSteps,s.dt,s)}function gp({metric:e,geodesicType:t=`null`,origin:n,nRays:r=12,pattern:i=`spherical`,speed:a=.5,maxSteps:o=1e3,lineColor:s=`#ef4444`,showAxes:c=!0,axisSize:l=5}){let u=(0,v.useRef)(null),d=e?.spatial,f=e?.embedding,p=(0,v.useMemo)(()=>n||(e?.type===`curved`?t===`timelike`?[8,Math.PI/2,0]:[15,Math.PI/2,0]:[5,Math.PI/2,0]),[n,e?.type,t]),m=(0,v.useMemo)(()=>{if(!d||!f)return[];let e;return e=t===`null`?mp(d,p,r,i,{maxSteps:o,minRadius:2.1,maxRadius:30}):hp(d,p,r,i,a,{maxSteps:o,minRadius:2.5,maxRadius:25}),e.map(e=>e.map(e=>{let[t,n,r]=f(...e);return new P(t,n,r)}))},[d,f,t,p,r,i,a,o]);return(0,v.useEffect)(()=>{if(!u.current||m.length===0)return;let t=u.current,n=new mo;n.background=new fo(15790320);let r=new Uc(75,t.clientWidth/t.clientHeight,.1,1e3);r.position.set(15,10,15),r.lookAt(0,0,0);let i=new Df({antialias:!0});i.setSize(t.clientWidth,t.clientHeight),i.setClearColor(15790320,1),t.appendChild(i.domElement);let a=new Rf(r,i.domElement);a.enableDamping=!0;let o=new Us({color:new fo(s),linewidth:2,transparent:!0,opacity:.8}),d=new io;m.forEach(e=>{if(e.length>1){let t=new Zs(new cs().setFromPoints(e),o);d.add(t)}}),n.add(d);let h=f(...p),g=new cc(.3,16,16),_=new ys({color:16777215}),v=new js(g,_);v.position.set(...h),n.add(v);let y,b,x,S;if(e.type===`curved`){y=new cc(.5,32,32),b=new ys({color:0,wireframe:!0});let e=new js(y,b);n.add(e),x=new cc(2,32,32),S=new ys({color:0,transparent:!0,opacity:.3});let t=new js(x,S);n.add(t)}if(c){let e=new cl(l);n.add(e)}let C=!0,w=()=>{C&&(requestAnimationFrame(w),a.update(),i.render(n,r))};w();let T=()=>{r.aspect=t.clientWidth/t.clientHeight,r.updateProjectionMatrix(),i.setSize(t.clientWidth,t.clientHeight)};return window.addEventListener(`resize`,T),()=>{C=!1,window.removeEventListener(`resize`,T),t.removeChild(i.domElement),i.dispose(),a.dispose(),d.children.forEach(e=>{e.geometry.dispose()}),o.dispose(),g.dispose(),_.dispose(),e.type===`curved`&&(y.dispose(),b.dispose(),x.dispose(),S.dispose())}},[m,f,e,s,c,l,p]),(0,L.jsx)(`div`,{ref:u,style:{width:`100%`,height:`100%`}})}var _p={name:`Cartesian`,description:`Standard rectangular coordinates (x, y, z)`,embedding:(e,t,n)=>[e,t,n],inverse:(e,t,n)=>[e,t,n],ranges:[[-5,5],[-5,5],[-5,5]],paramNames:[`x`,`y`,`z`],bounds:{x:{min:-10,max:10,default:[-5,5]},y:{min:-10,max:10,default:[-5,5]},z:{min:-10,max:10,default:[-5,5]}},boundsKeys:[`x`,`y`,`z`]},vp={name:`Cylindrical`,description:`Cylindrical coordinates (r, θ, z)`,embedding:(e,t,n)=>[e*Math.cos(t),e*Math.sin(t),n],inverse:(e,t,n)=>[Math.sqrt(e*e+t*t),Math.atan2(t,e),n],ranges:[[0,5],[0,2*Math.PI],[-3,3]],paramNames:[`r`,`θ`,`z`],bounds:{r:{min:0,max:10,default:[0,5]},theta:{min:0,max:2*Math.PI,default:[0,2*Math.PI]},z:{min:-10,max:10,default:[-3,3]}},boundsKeys:[`r`,`theta`,`z`]},yp={name:`Spherical`,description:`Spherical coordinates (r, θ, φ)`,embedding:(e,t,n)=>[e*Math.sin(t)*Math.cos(n),e*Math.sin(t)*Math.sin(n),e*Math.cos(t)],inverse:(e,t,n)=>{let r=Math.sqrt(e*e+t*t+n*n);return[r,r>0?Math.acos(n/r):0,Math.atan2(t,e)]},ranges:[[0,5],[0,Math.PI],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:0,max:10,default:[0,5]},theta:{min:0,max:Math.PI,default:[0,Math.PI]},phi:{min:0,max:2*Math.PI,default:[0,2*Math.PI]}},boundsKeys:[`r`,`theta`,`phi`]};function bp(e,t,n,r=0){let i=Math.exp(e),a=Math.cos(t),o=Math.sin(t),s=Math.cos(n),c=Math.sin(n),l=Math.cos(r),u=Math.sin(r);return[i*(o*s*l+a*c*u),i*(a*c*l-o*s*u),i*(a*s*u+o*c*l)]}var xp={name:`Quaternion (Q1)`,description:`Quaternion exponential e^z = e^ω·e^(θi)·e^(φj)·e^(ρk)`,embedding:(e,t,n)=>bp(e,t,n,0),inverse:(e,t,n)=>{let r=Math.sqrt(e*e+t*t+n*n);return[Math.log(Math.max(r,.001)),Math.atan2(e,n),Math.atan2(t,Math.sqrt(e*e+n*n))]},ranges:[[0,1],[-Math.PI/4,Math.PI/4],[-Math.PI/4,Math.PI/4]],paramNames:[`ω (real)`,`θ (i)`,`φ (j)`],bounds:{omega:{min:-3.14,max:3.14,default:[0,1]},theta:{min:-Math.PI,max:Math.PI,default:[-Math.PI/4,Math.PI/4]},phi:{min:-Math.PI,max:Math.PI,default:[-Math.PI/4,Math.PI/4]}},boundsKeys:[`omega`,`theta`,`phi`],hasRho:!1,rhoDefault:0};function Sp(e){return{cartesian:_p,cylindrical:vp,spherical:yp,quaternion:xp}[e]}var Cp={name:`Minkowski (Flat)`,description:`Flat Euclidean space - no curvature`,spatial:()=>[[1,0,0],[0,1,0],[0,0,1]],embedding:(e,t,n)=>[e,t,n],ranges:[[-5,5],[-5,5],[-5,5]],paramNames:[`x`,`y`,`z`],bounds:{x:{min:-10,max:10},y:{min:-10,max:10},z:{min:-10,max:10}},boundsKeys:[`x`,`y`,`z`],type:`flat`},wp={name:`Schwarzschild`,description:`Spacetime around a spherically symmetric mass (black hole)`,rs:2,spatial:(e,t=Math.PI/2,n=0)=>{let r=e*e,i=Math.sin(t);return e<=2?[[1,0,0],[0,r,0],[0,0,r*i*i]]:[[1/(1-2/e),0,0],[0,r,0],[0,0,r*i*i]]},embedding:(e,t,n)=>{let r=e*Math.sin(t)*Math.cos(n),i=e*Math.sin(t)*Math.sin(n),a;return a=e<=2?0:2*Math.sqrt(2*(e-2)),[r,i,a]},ranges:[[2.1,10],[Math.PI/2,Math.PI/2],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:2.1,max:15},theta:{min:0,max:Math.PI},phi:{min:0,max:2*Math.PI}},boundsKeys:[`r`,`theta`,`phi`],type:`curved`},Tp={name:`FLRW`,description:`Friedmann-Lemaître-Robertson-Walker (Expanding Universe)`,a:1,k:0,spatial:(e,t,n)=>{let r=e*e,i=Math.sin(t),a,o,s;return a=1,o=1*r,s=1*r*i*i,[[a,0,0],[0,o,0],[0,0,s]]},embedding:(e,t,n)=>{let r=1*e;return[r*Math.sin(t)*Math.cos(n),r*Math.sin(t)*Math.sin(n),r*Math.cos(t)]},ranges:[[0,5],[0,Math.PI],[0,2*Math.PI]],paramNames:[`r`,`θ`,`φ`],bounds:{r:{min:0,max:10},theta:{min:0,max:Math.PI},phi:{min:0,max:2*Math.PI}},boundsKeys:[`r`,`theta`,`phi`],type:`curved`};function Ep(e){return{minkowski:Cp,schwarzschild:wp,flrw:Tp}[e]}function Dp(){let[e,t]=(0,v.useState)(1),[n,r]=(0,v.useState)(`cartesian`),i=Sp(n)||_p,[a,o]=(0,v.useState)(`minkowski`),s=Ep(a)||Cp,[c,l]=(0,v.useState)(`schwarzschild`),u=Ep(c)||wp,[d,f]=(0,v.useState)(`null`),[p,m]=(0,v.useState)(16),[h,g]=(0,v.useState)(`radial`),[_,y]=(0,v.useState)(.5),[b,x]=(0,v.useState)(()=>e===1?i.ranges:s.ranges),[S,C]=(0,v.useState)(10),[w,T]=(0,v.useState)(`#6366f1`),[E,D]=(0,v.useState)(!0),O=e=>{t(e),x(e===1?Sp(n)?.ranges||[[-5,5],[-5,5],[-5,5]]:Ep(a)?.ranges||[[-5,5],[-5,5],[-5,5]])},ee=e=>{let t=Sp(e);t&&x(t.ranges),r(e)},k=e=>{let t=Ep(e);t&&x(t.ranges),o(e)},A=(e,t)=>{x(n=>{let r=[...n];return r[e]=t,r})},te=e===1?i:s,ne=te.bounds||{},re=te.paramNames||[`u`,`v`,`w`],ie=te.boundsKeys||re,j=e=>ne[e]||{min:-10,max:10},M=j(ie[0]),ae=j(ie[1]),oe=j(ie[2]),se=M.min,ce=M.max,le=ae.min,ue=ae.max,de=oe.min,fe=oe.max,pe=!!ne[ie[0]],me=!!ne[ie[1]],he=!!ne[ie[2]];return(0,L.jsxs)(`div`,{className:`graph-page`,children:[(0,L.jsxs)(`aside`,{className:`graph-controls`,children:[(0,L.jsx)(`h3`,{children:`Grid Controls`}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Grid Level`,(0,L.jsxs)(`select`,{value:e,onChange:e=>O(parseInt(e.target.value)),children:[(0,L.jsx)(`option`,{value:1,children:`Level 1: Coordinate Grid`}),(0,L.jsx)(`option`,{value:2,children:`Level 2: Metric-Aware Grid`}),(0,L.jsx)(`option`,{value:3,children:`Level 3: Geodesic Grid`})]})]})}),e===1&&(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Coordinate System`,(0,L.jsxs)(`select`,{value:n,onChange:e=>ee(e.target.value),children:[(0,L.jsx)(`option`,{value:`cartesian`,children:`Cartesian (x, y, z)`}),(0,L.jsx)(`option`,{value:`cylindrical`,children:`Cylindrical (r, θ, z)`}),(0,L.jsx)(`option`,{value:`spherical`,children:`Spherical (r, θ, φ)`}),(0,L.jsx)(`option`,{value:`quaternion`,children:`Quaternion (ω, θ, φ)`})]})]})}),e===2&&(0,L.jsxs)(L.Fragment,{children:[(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric`,(0,L.jsxs)(`select`,{value:a,onChange:e=>k(e.target.value),children:[(0,L.jsx)(`option`,{value:`minkowski`,children:`Minkowski (Flat Space)`}),(0,L.jsx)(`option`,{value:`schwarzschild`,children:`Schwarzschild (Black Hole)`}),(0,L.jsx)(`option`,{value:`flrw`,children:`FLRW (Expanding Universe)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric-Aware Spacing`,(0,L.jsx)(`input`,{type:`checkbox`,checked:E,onChange:e=>D(e.target.checked)}),(0,L.jsx)(`span`,{style:{fontSize:`0.75rem`,color:`#64748b`},children:E?`On`:`Off`})]})})]}),e===3&&(0,L.jsxs)(L.Fragment,{children:[(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Metric`,(0,L.jsxs)(`select`,{value:c,onChange:e=>l(e.target.value),children:[(0,L.jsx)(`option`,{value:`schwarzschild`,children:`Schwarzschild (Black Hole)`}),(0,L.jsx)(`option`,{value:`flrw`,children:`FLRW (Expanding Universe)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Geodesic Type`,(0,L.jsxs)(`select`,{value:d,onChange:e=>f(e.target.value),children:[(0,L.jsx)(`option`,{value:`null`,children:`Null (Light Paths)`}),(0,L.jsx)(`option`,{value:`timelike`,children:`Timelike (Particles)`})]})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Number of Rays: `,p,(0,L.jsx)(`input`,{type:`range`,min:`4`,max:`32`,step:`1`,value:p,onChange:e=>m(parseInt(e.target.value))})]})}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Pattern`,(0,L.jsxs)(`select`,{value:h,onChange:e=>g(e.target.value),children:[(0,L.jsx)(`option`,{value:`radial`,children:`Radial`}),(0,L.jsx)(`option`,{value:`spherical`,children:`Spherical`}),(0,L.jsx)(`option`,{value:`cone`,children:`Cone`})]})]})}),d===`timelike`&&(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Initial Speed: `,_.toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:`0.1`,max:`1`,step:`0.05`,value:_,onChange:e=>y(parseFloat(e.target.value))})]})}),(0,L.jsx)(`p`,{style:{fontSize:`0.75rem`,color:`#ef4444`,marginTop:`0.5rem`},children:d===`null`?`Visualizing light paths in curved spacetime`:`Visualizing particle trajectories`})]}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Resolution: `,S,(0,L.jsx)(`input`,{type:`range`,min:`1`,max:`40`,step:`1`,value:S,onChange:e=>C(parseInt(e.target.value))})]})}),pe&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[0],` Min: `,b[0][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:se,max:ce,step:`0.5`,value:b[0][0],onChange:e=>A(0,[parseFloat(e.target.value),b[0][1]])})]}),(0,L.jsxs)(`label`,{children:[re[0],` Max: `,b[0][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:se,max:ce,step:`0.5`,value:b[0][1],onChange:e=>A(0,[b[0][0],parseFloat(e.target.value)])})]})]}),me&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[1],` Min: `,b[1][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:le,max:ue,step:`0.5`,value:b[1][0],onChange:e=>A(1,[parseFloat(e.target.value),b[1][1]])})]}),(0,L.jsxs)(`label`,{children:[re[1],` Max: `,b[1][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:le,max:ue,step:`0.5`,value:b[1][1],onChange:e=>A(1,[b[1][0],parseFloat(e.target.value)])})]})]}),he&&(0,L.jsxs)(`div`,{className:`control-group`,children:[(0,L.jsxs)(`label`,{children:[re[2],` Min: `,b[2][0].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:de,max:fe,step:`0.5`,value:b[2][0],onChange:e=>A(2,[parseFloat(e.target.value),b[2][1]])})]}),(0,L.jsxs)(`label`,{children:[re[2],` Max: `,b[2][1].toFixed(2),(0,L.jsx)(`input`,{type:`range`,min:de,max:fe,step:`0.5`,value:b[2][1],onChange:e=>A(2,[b[2][0],parseFloat(e.target.value)])})]})]}),(0,L.jsx)(`div`,{className:`control-group`,children:(0,L.jsxs)(`label`,{children:[`Line Color`,(0,L.jsx)(`input`,{type:`color`,value:w,onChange:e=>T(e.target.value)})]})}),(0,L.jsx)(`p`,{style:{fontSize:`0.75rem`,color:`#64748b`,marginTop:`1rem`},children:te?.description})]}),(0,L.jsx)(`main`,{className:`graph-container`,children:e===1?(0,L.jsx)($f,{coordinate:i,ranges:b,resolution:S,lineColor:w}):e===2?(0,L.jsx)(cp,{metric:s,ranges:b,resolution:S,lineColor:w,metricAware:E}):(0,L.jsx)(gp,{metric:u,geodesicType:d,nRays:p,pattern:h,speed:_,lineColor:w})})]})}function Op({children:e}){let t=at(),n=nt(),[r,i]=(0,v.useState)(!1),[a,o]=(0,v.useState)(!1),s=(e,n)=>{n.preventDefault(),t(e),i(!1)},c=e=>e===`/`?n.pathname===`/`:n.pathname.startsWith(e),l=()=>n.pathname===`/viz`?`Interactive Visualization`:a?`Visualization`:n.pathname===`/`?`Overview`:n.pathname===`/chapters`?`Chapters`:n.pathname===`/appendices`?`Appendices`:n.pathname===`/visualizations`?`Visualizations`:n.pathname.startsWith(`/visualization/`)?`Visualization Documentation`:n.pathname.startsWith(`/appendix/`)?`Appendix`:n.pathname.startsWith(`/chapter/`)?`Chapter ${n.pathname.split(`/`).pop()}`:`MTW`;return a?(0,L.jsxs)(`div`,{className:`layout`,children:[r&&(0,L.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>i(!1)}),(0,L.jsxs)(`aside`,{className:`sidebar ${r?`sidebar-open`:``}`,children:[(0,L.jsxs)(`div`,{className:`sidebar-header`,children:[(0,L.jsx)(Cn,{to:`/`,children:(0,L.jsx)(`h2`,{children:`MTW`})}),(0,L.jsx)(`button`,{className:`sidebar-close`,onClick:()=>i(!1),"aria-label":`Close sidebar`,children:`×`})]}),(0,L.jsxs)(`nav`,{className:`sidebar-nav`,children:[(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/`)?`active`:``}`,onClick:e=>s(`/`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Dashboard`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/chapters`)?`active`:``}`,onClick:e=>s(`/chapters`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Chapters`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/visualizations`)?`active`:``}`,onClick:e=>s(`/visualizations`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Visualizations`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/appendices`)?`active`:``}`,onClick:e=>s(`/appendices`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Appendices`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item active`,onClick:e=>{e.preventDefault(),o(!1)},children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Viz (Interactive)`})})]})]}),(0,L.jsxs)(`main`,{className:`main-content`,children:[(0,L.jsxs)(`header`,{className:`top-header`,children:[(0,L.jsx)(`button`,{className:`menu-toggle`,onClick:()=>i(!0),"aria-label":`Open menu`,children:`☰`}),(0,L.jsx)(`h1`,{children:l()})]}),(0,L.jsx)(`div`,{className:`page-content`,children:(0,L.jsx)(Dp,{})})]})]}):(0,L.jsxs)(`div`,{className:`layout`,children:[r&&(0,L.jsx)(`div`,{className:`sidebar-overlay`,onClick:()=>i(!1)}),(0,L.jsxs)(`aside`,{className:`sidebar ${r?`sidebar-open`:``}`,children:[(0,L.jsxs)(`div`,{className:`sidebar-header`,children:[(0,L.jsx)(Cn,{to:`/`,children:(0,L.jsx)(`h2`,{children:`MTW`})}),(0,L.jsx)(`button`,{className:`sidebar-close`,onClick:()=>i(!1),"aria-label":`Close sidebar`,children:`×`})]}),(0,L.jsxs)(`nav`,{className:`sidebar-nav`,children:[(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/`)?`active`:``}`,onClick:e=>s(`/`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Dashboard`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/chapters`)?`active`:``}`,onClick:e=>s(`/chapters`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Chapters`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/visualizations`)?`active`:``}`,onClick:e=>s(`/visualizations`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Visualizations`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/viz`)?`active`:``}`,onClick:e=>s(`/viz`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Interactive Viz`})}),(0,L.jsx)(`a`,{href:`#`,className:`nav-item ${c(`/appendices`)?`active`:``}`,onClick:e=>s(`/appendices`,e),children:(0,L.jsx)(`span`,{className:`nav-label`,children:`Appendices`})})]})]}),(0,L.jsxs)(`main`,{className:`main-content`,children:[(0,L.jsxs)(`header`,{className:`top-header`,children:[(0,L.jsx)(`button`,{className:`menu-toggle`,onClick:()=>i(!0),"aria-label":`Open menu`,children:`☰`}),(0,L.jsx)(`h1`,{children:l()})]}),(0,L.jsx)(`div`,{className:`page-content`,children:e})]})]})}function kp(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`dashboard-content`,children:[(0,L.jsxs)(`section`,{className:`card welcome-card`,children:[(0,L.jsx)(`h2`,{children:`MTW Problem Solver`}),(0,L.jsxs)(`p`,{children:[`Visualize and solve problems from `,(0,L.jsx)(`em`,{children:`Gravitation`}),` by Misner, Thorne, and Wheeler`]})]}),(0,L.jsxs)(`section`,{className:`card`,children:[(0,L.jsx)(`h3`,{children:`Chapters`}),(0,L.jsx)(`div`,{className:`chapters-overview`,children:[{number:1,title:`Geometrodynamics in Brief`,exercises:3,topics:[`Curvature`,`Geodesics`,`Tidal Forces`,`Kepler Density`],status:`complete`},{number:2,title:`Foundations of Special Relativity`,exercises:7,topics:[`Vectors`,`1-Forms`,`Metric Tensor`,`Lorentz Transforms`],status:`complete`},{number:3,title:`The Electromagnetic Field`,exercises:18,topics:[`Lorentz Force`,`Faraday Tensor`,`Maxwell Equations`,`Stress-Energy`],status:`complete`},{number:4,title:`Electromagnetism and Differential Forms`,exercises:12,topics:[`Exterior Calculus`,`Differential Forms`,`Hodge Dual`,`Geometric Maxwell`],status:`complete`},{number:5,title:`Stress-Energy Tensor and Conservation Laws`,exercises:6,topics:[`Stress-Energy Tensor`,`Perfect Fluids`,`Conservation Laws`,`Angular Momentum`],status:`complete`},{number:6,title:`Accelerated Observers`,exercises:9,topics:[`Uniform Acceleration`,`Tetrads`,`Rindler Coordinates`,`Fermi-Walker Transport`],status:`complete`},{number:7,title:`Incompatibility of Gravity and Special Relativity`,exercises:3,topics:[`Scalar Gravity`,`Tensor Gravity`,`Redshift`,`Equivalence Principle`],status:`complete`},{number:8,title:`Differential Geometry: An Overview`,exercises:2,topics:[`Tangent Vectors`,`Commutators`,`Dual Bases`,`Rotation Groups`],status:`complete`},{number:9,title:`Differential Topology`,exercises:14,topics:[`Tangent Spaces`,`Lie Derivatives`,`Commutators`,`SO(3)`],status:`complete`},{number:10,title:`Affine Geometry`,exercises:17,topics:[`Geodesics`,`Parallel Transport`,`Covariant Derivative`,`Connection Coefficients`],status:`complete`}].map(t=>(0,L.jsxs)(`div`,{className:`chapter-overview-item`,onClick:()=>e(`/chapter/${t.number}`),children:[(0,L.jsxs)(`div`,{className:`chapter-badge`,children:[`Ch `,t.number]}),(0,L.jsxs)(`div`,{className:`chapter-info`,children:[(0,L.jsx)(`h4`,{children:t.title}),(0,L.jsx)(`p`,{className:`chapter-topics`,children:t.topics.join(` • `)}),(0,L.jsxs)(`span`,{className:`chapter-exercises`,children:[t.exercises,` exercises solved`]})]}),(0,L.jsx)(`div`,{className:`chapter-status ${t.status}`,children:`✓`})]},t.number))})]}),(0,L.jsxs)(`section`,{className:`card`,children:[(0,L.jsx)(`h3`,{children:`Visualizations`}),(0,L.jsx)(`div`,{className:`viz-grid`,children:[{name:`Level 1: Coordinate Grid`,description:`Simple embedding - map parameter space to 3D`,systems:[`Cartesian`,`Cylindrical`,`Spherical`,`Quaternion`]},{name:`Level 2: Metric-Aware Grid`,description:`Proper distances in curved spacetime`,systems:[`Schwarzschild`,`FLRW`,`Minkowski`]},{name:`Level 3: Geodesic Grid`,description:`True geodesics - light and particle paths`,systems:[`Null Geodesics`,`Timelike Geodesics`,`Light Bending`]}].map(t=>(0,L.jsxs)(`div`,{className:`viz-card`,onClick:()=>e(`/viz`),children:[(0,L.jsx)(`div`,{className:`viz-icon`,children:`🔮`}),(0,L.jsx)(`h4`,{children:t.name}),(0,L.jsx)(`p`,{children:t.description}),(0,L.jsx)(`div`,{className:`viz-systems`,children:t.systems.map(e=>(0,L.jsx)(`span`,{className:`viz-tag`,children:e},e))})]},t.name))}),(0,L.jsx)(`button`,{className:`view-all-viz`,onClick:()=>e(`/visualizations`),children:`View Documentation →`})]}),(0,L.jsxs)(`section`,{className:`stats-grid`,children:[(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/chapters`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`📖`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`10`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Chapters`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/chapters`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`✏️`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`91`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Exercises Solved`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/visualizations`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`🔮`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`3`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Visualization Levels`})]})]}),(0,L.jsxs)(`div`,{className:`stat-card`,onClick:()=>e(`/appendices`),children:[(0,L.jsx)(`div`,{className:`stat-icon`,children:`📚`}),(0,L.jsxs)(`div`,{className:`stat-info`,children:[(0,L.jsx)(`span`,{className:`stat-value`,children:`5`}),(0,L.jsx)(`span`,{className:`stat-label`,children:`Appendices`})]})]})]})]})})}function Ap(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapters-list`,children:[(0,L.jsx)(`h1`,{children:`Chapters`}),(0,L.jsx)(`p`,{className:`chapters-intro`,children:`Select a chapter to view exercises and solutions`}),(0,L.jsx)(`div`,{className:`chapter-cards`,children:[{number:1,title:`Geometrodynamics in Brief`,description:`Gaussian curvature, geodesics, and tidal forces`},{number:2,title:`Foundations of Special Relativity`,description:`Vectors, 1-forms, metric tensor, and Lorentz transforms`},{number:3,title:`The Electromagnetic Field`,description:`Lorentz force, Faraday tensor, and Maxwell equations`},{number:4,title:`Electromagnetism and Differential Forms`,description:`Exterior calculus, Faraday 2-form, and geometric Maxwell equations`},{number:5,title:`Stress-Energy Tensor and Conservation Laws`,description:`Energy density, momentum flux, perfect fluids, and angular momentum`},{number:6,title:`Accelerated Observers`,description:`Uniform acceleration, tetrads, and Fermi-Walker transport`},{number:7,title:`Incompatibility of Gravity and Special Relativity`,description:`Scalar, vector, and tensor gravity plus gravitational redshift`},{number:8,title:`Differential Geometry: An Overview`,description:`Tangent vectors, bases, commutators, and geometry language`},{number:9,title:`Differential Topology`,description:`Tangent spaces, vector fields, and coordinate-free structure`},{number:10,title:`Affine Geometry`,description:`Geodesics, parallel transport, and covariant derivatives`}].map(t=>(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/chapter/${t.number}`),children:[(0,L.jsxs)(`div`,{className:`chapter-number`,children:[`Chapter `,t.number]}),(0,L.jsx)(`h3`,{children:t.title}),(0,L.jsx)(`p`,{children:t.description}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read exercises →`})]},t.number))}),(0,L.jsx)(`h2`,{style:{marginTop:`2rem`,marginBottom:`1rem`},children:`Appendices`}),(0,L.jsx)(`p`,{className:`chapters-intro`,children:`Supplementary mathematical reference materials`}),(0,L.jsx)(`div`,{className:`chapter-cards`,children:(0,L.jsxs)(`div`,{className:`chapter-card`,onClick:()=>e(`/appendices`),children:[(0,L.jsx)(`div`,{className:`chapter-number`,children:`All Appendices`}),(0,L.jsx)(`h3`,{children:`Mathematical Reference Collection`}),(0,L.jsx)(`p`,{children:`Quaternions, differential geometry, special relativity, and tensor calculus`}),(0,L.jsx)(`span`,{className:`read-more`,children:`Browse appendices →`})]})})]})})}function jp(e){let t=[],n=String(e||``),r=n.indexOf(`,`),i=0,a=!1;for(;!a;){r===-1&&(r=n.length,a=!0);let e=n.slice(i,r).trim();(e||!a)&&t.push(e),i=r+1,r=n.indexOf(`,`,i)}return t}function Mp(e,t){let n=t||{};return(e[e.length-1]===``?[...e,``]:e).join((n.padRight?` `:``)+`,`+(n.padLeft===!1?``:` `)).trim()}var Np=/^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u,Pp=/^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u,Fp={};function Ip(e,t){return((t||Fp).jsx?Pp:Np).test(e)}var Lp=/[ \t\n\f\r]/g;function Rp(e){return typeof e==`object`?e.type===`text`?zp(e.value):!1:zp(e)}function zp(e){return e.replace(Lp,``)===``}var Bp=class{constructor(e,t,n){this.normal=t,this.property=e,n&&(this.space=n)}};Bp.prototype.normal={},Bp.prototype.property={},Bp.prototype.space=void 0;function Vp(e,t){let n={},r={};for(let t of e)Object.assign(n,t.property),Object.assign(r,t.normal);return new Bp(n,r,t)}function Hp(e){return e.toLowerCase()}var Up=class{constructor(e,t){this.attribute=t,this.property=e}};Up.prototype.attribute=``,Up.prototype.booleanish=!1,Up.prototype.boolean=!1,Up.prototype.commaOrSpaceSeparated=!1,Up.prototype.commaSeparated=!1,Up.prototype.defined=!1,Up.prototype.mustUseProperty=!1,Up.prototype.number=!1,Up.prototype.overloadedBoolean=!1,Up.prototype.property=``,Up.prototype.spaceSeparated=!1,Up.prototype.space=void 0;var Wp=s({boolean:()=>Kp,booleanish:()=>qp,commaOrSpaceSeparated:()=>Zp,commaSeparated:()=>Xp,number:()=>R,overloadedBoolean:()=>Jp,spaceSeparated:()=>Yp}),Gp=0,Kp=Qp(),qp=Qp(),Jp=Qp(),R=Qp(),Yp=Qp(),Xp=Qp(),Zp=Qp();function Qp(){return 2**++Gp}var $p=Object.keys(Wp),em=class extends Up{constructor(e,t,n,r){let i=-1;if(super(e,t),tm(this,`space`,r),typeof n==`number`)for(;++i<$p.length;){let e=$p[i];tm(this,$p[i],(n&Wp[e])===Wp[e])}}};em.prototype.defined=!0;function tm(e,t,n){n&&(e[t]=n)}function nm(e){let t={},n={};for(let[r,i]of Object.entries(e.properties)){let a=new em(r,e.transform(e.attributes||{},r),i,e.space);e.mustUseProperty&&e.mustUseProperty.includes(r)&&(a.mustUseProperty=!0),t[r]=a,n[Hp(r)]=r,n[Hp(a.attribute)]=r}return new Bp(t,n,e.space)}var rm=nm({properties:{ariaActiveDescendant:null,ariaAtomic:qp,ariaAutoComplete:null,ariaBusy:qp,ariaChecked:qp,ariaColCount:R,ariaColIndex:R,ariaColSpan:R,ariaControls:Yp,ariaCurrent:null,ariaDescribedBy:Yp,ariaDetails:null,ariaDisabled:qp,ariaDropEffect:Yp,ariaErrorMessage:null,ariaExpanded:qp,ariaFlowTo:Yp,ariaGrabbed:qp,ariaHasPopup:null,ariaHidden:qp,ariaInvalid:null,ariaKeyShortcuts:null,ariaLabel:null,ariaLabelledBy:Yp,ariaLevel:R,ariaLive:null,ariaModal:qp,ariaMultiLine:qp,ariaMultiSelectable:qp,ariaOrientation:null,ariaOwns:Yp,ariaPlaceholder:null,ariaPosInSet:R,ariaPressed:qp,ariaReadOnly:qp,ariaRelevant:null,ariaRequired:qp,ariaRoleDescription:Yp,ariaRowCount:R,ariaRowIndex:R,ariaRowSpan:R,ariaSelected:qp,ariaSetSize:R,ariaSort:null,ariaValueMax:R,ariaValueMin:R,ariaValueNow:R,ariaValueText:null,role:null},transform(e,t){return t===`role`?t:`aria-`+t.slice(4).toLowerCase()}});function im(e,t){return t in e?e[t]:t}function am(e,t){return im(e,t.toLowerCase())}var om=nm({attributes:{acceptcharset:`accept-charset`,classname:`class`,htmlfor:`for`,httpequiv:`http-equiv`},mustUseProperty:[`checked`,`multiple`,`muted`,`selected`],properties:{abbr:null,accept:Xp,acceptCharset:Yp,accessKey:Yp,action:null,allow:null,allowFullScreen:Kp,allowPaymentRequest:Kp,allowUserMedia:Kp,alt:null,as:null,async:Kp,autoCapitalize:null,autoComplete:Yp,autoFocus:Kp,autoPlay:Kp,blocking:Yp,capture:null,charSet:null,checked:Kp,cite:null,className:Yp,cols:R,colSpan:null,content:null,contentEditable:qp,controls:Kp,controlsList:Yp,coords:R|Xp,crossOrigin:null,data:null,dateTime:null,decoding:null,default:Kp,defer:Kp,dir:null,dirName:null,disabled:Kp,download:Jp,draggable:qp,encType:null,enterKeyHint:null,fetchPriority:null,form:null,formAction:null,formEncType:null,formMethod:null,formNoValidate:Kp,formTarget:null,headers:Yp,height:R,hidden:Jp,high:R,href:null,hrefLang:null,htmlFor:Yp,httpEquiv:Yp,id:null,imageSizes:null,imageSrcSet:null,inert:Kp,inputMode:null,integrity:null,is:null,isMap:Kp,itemId:null,itemProp:Yp,itemRef:Yp,itemScope:Kp,itemType:Yp,kind:null,label:null,lang:null,language:null,list:null,loading:null,loop:Kp,low:R,manifest:null,max:null,maxLength:R,media:null,method:null,min:null,minLength:R,multiple:Kp,muted:Kp,name:null,nonce:null,noModule:Kp,noValidate:Kp,onAbort:null,onAfterPrint:null,onAuxClick:null,onBeforeMatch:null,onBeforePrint:null,onBeforeToggle:null,onBeforeUnload:null,onBlur:null,onCancel:null,onCanPlay:null,onCanPlayThrough:null,onChange:null,onClick:null,onClose:null,onContextLost:null,onContextMenu:null,onContextRestored:null,onCopy:null,onCueChange:null,onCut:null,onDblClick:null,onDrag:null,onDragEnd:null,onDragEnter:null,onDragExit:null,onDragLeave:null,onDragOver:null,onDragStart:null,onDrop:null,onDurationChange:null,onEmptied:null,onEnded:null,onError:null,onFocus:null,onFormData:null,onHashChange:null,onInput:null,onInvalid:null,onKeyDown:null,onKeyPress:null,onKeyUp:null,onLanguageChange:null,onLoad:null,onLoadedData:null,onLoadedMetadata:null,onLoadEnd:null,onLoadStart:null,onMessage:null,onMessageError:null,onMouseDown:null,onMouseEnter:null,onMouseLeave:null,onMouseMove:null,onMouseOut:null,onMouseOver:null,onMouseUp:null,onOffline:null,onOnline:null,onPageHide:null,onPageShow:null,onPaste:null,onPause:null,onPlay:null,onPlaying:null,onPopState:null,onProgress:null,onRateChange:null,onRejectionHandled:null,onReset:null,onResize:null,onScroll:null,onScrollEnd:null,onSecurityPolicyViolation:null,onSeeked:null,onSeeking:null,onSelect:null,onSlotChange:null,onStalled:null,onStorage:null,onSubmit:null,onSuspend:null,onTimeUpdate:null,onToggle:null,onUnhandledRejection:null,onUnload:null,onVolumeChange:null,onWaiting:null,onWheel:null,open:Kp,optimum:R,pattern:null,ping:Yp,placeholder:null,playsInline:Kp,popover:null,popoverTarget:null,popoverTargetAction:null,poster:null,preload:null,readOnly:Kp,referrerPolicy:null,rel:Yp,required:Kp,reversed:Kp,rows:R,rowSpan:R,sandbox:Yp,scope:null,scoped:Kp,seamless:Kp,selected:Kp,shadowRootClonable:Kp,shadowRootDelegatesFocus:Kp,shadowRootMode:null,shape:null,size:R,sizes:null,slot:null,span:R,spellCheck:qp,src:null,srcDoc:null,srcLang:null,srcSet:null,start:R,step:null,style:null,tabIndex:R,target:null,title:null,translate:null,type:null,typeMustMatch:Kp,useMap:null,value:qp,width:R,wrap:null,writingSuggestions:null,align:null,aLink:null,archive:Yp,axis:null,background:null,bgColor:null,border:R,borderColor:null,bottomMargin:R,cellPadding:null,cellSpacing:null,char:null,charOff:null,classId:null,clear:null,code:null,codeBase:null,codeType:null,color:null,compact:Kp,declare:Kp,event:null,face:null,frame:null,frameBorder:null,hSpace:R,leftMargin:R,link:null,longDesc:null,lowSrc:null,marginHeight:R,marginWidth:R,noResize:Kp,noHref:Kp,noShade:Kp,noWrap:Kp,object:null,profile:null,prompt:null,rev:null,rightMargin:R,rules:null,scheme:null,scrolling:qp,standby:null,summary:null,text:null,topMargin:R,valueType:null,version:null,vAlign:null,vLink:null,vSpace:R,allowTransparency:null,autoCorrect:null,autoSave:null,disablePictureInPicture:Kp,disableRemotePlayback:Kp,prefix:null,property:null,results:R,security:null,unselectable:null},space:`html`,transform:am}),sm=nm({attributes:{accentHeight:`accent-height`,alignmentBaseline:`alignment-baseline`,arabicForm:`arabic-form`,baselineShift:`baseline-shift`,capHeight:`cap-height`,className:`class`,clipPath:`clip-path`,clipRule:`clip-rule`,colorInterpolation:`color-interpolation`,colorInterpolationFilters:`color-interpolation-filters`,colorProfile:`color-profile`,colorRendering:`color-rendering`,crossOrigin:`crossorigin`,dataType:`datatype`,dominantBaseline:`dominant-baseline`,enableBackground:`enable-background`,fillOpacity:`fill-opacity`,fillRule:`fill-rule`,floodColor:`flood-color`,floodOpacity:`flood-opacity`,fontFamily:`font-family`,fontSize:`font-size`,fontSizeAdjust:`font-size-adjust`,fontStretch:`font-stretch`,fontStyle:`font-style`,fontVariant:`font-variant`,fontWeight:`font-weight`,glyphName:`glyph-name`,glyphOrientationHorizontal:`glyph-orientation-horizontal`,glyphOrientationVertical:`glyph-orientation-vertical`,hrefLang:`hreflang`,horizAdvX:`horiz-adv-x`,horizOriginX:`horiz-origin-x`,horizOriginY:`horiz-origin-y`,imageRendering:`image-rendering`,letterSpacing:`letter-spacing`,lightingColor:`lighting-color`,markerEnd:`marker-end`,markerMid:`marker-mid`,markerStart:`marker-start`,navDown:`nav-down`,navDownLeft:`nav-down-left`,navDownRight:`nav-down-right`,navLeft:`nav-left`,navNext:`nav-next`,navPrev:`nav-prev`,navRight:`nav-right`,navUp:`nav-up`,navUpLeft:`nav-up-left`,navUpRight:`nav-up-right`,onAbort:`onabort`,onActivate:`onactivate`,onAfterPrint:`onafterprint`,onBeforePrint:`onbeforeprint`,onBegin:`onbegin`,onCancel:`oncancel`,onCanPlay:`oncanplay`,onCanPlayThrough:`oncanplaythrough`,onChange:`onchange`,onClick:`onclick`,onClose:`onclose`,onCopy:`oncopy`,onCueChange:`oncuechange`,onCut:`oncut`,onDblClick:`ondblclick`,onDrag:`ondrag`,onDragEnd:`ondragend`,onDragEnter:`ondragenter`,onDragExit:`ondragexit`,onDragLeave:`ondragleave`,onDragOver:`ondragover`,onDragStart:`ondragstart`,onDrop:`ondrop`,onDurationChange:`ondurationchange`,onEmptied:`onemptied`,onEnd:`onend`,onEnded:`onended`,onError:`onerror`,onFocus:`onfocus`,onFocusIn:`onfocusin`,onFocusOut:`onfocusout`,onHashChange:`onhashchange`,onInput:`oninput`,onInvalid:`oninvalid`,onKeyDown:`onkeydown`,onKeyPress:`onkeypress`,onKeyUp:`onkeyup`,onLoad:`onload`,onLoadedData:`onloadeddata`,onLoadedMetadata:`onloadedmetadata`,onLoadStart:`onloadstart`,onMessage:`onmessage`,onMouseDown:`onmousedown`,onMouseEnter:`onmouseenter`,onMouseLeave:`onmouseleave`,onMouseMove:`onmousemove`,onMouseOut:`onmouseout`,onMouseOver:`onmouseover`,onMouseUp:`onmouseup`,onMouseWheel:`onmousewheel`,onOffline:`onoffline`,onOnline:`ononline`,onPageHide:`onpagehide`,onPageShow:`onpageshow`,onPaste:`onpaste`,onPause:`onpause`,onPlay:`onplay`,onPlaying:`onplaying`,onPopState:`onpopstate`,onProgress:`onprogress`,onRateChange:`onratechange`,onRepeat:`onrepeat`,onReset:`onreset`,onResize:`onresize`,onScroll:`onscroll`,onSeeked:`onseeked`,onSeeking:`onseeking`,onSelect:`onselect`,onShow:`onshow`,onStalled:`onstalled`,onStorage:`onstorage`,onSubmit:`onsubmit`,onSuspend:`onsuspend`,onTimeUpdate:`ontimeupdate`,onToggle:`ontoggle`,onUnload:`onunload`,onVolumeChange:`onvolumechange`,onWaiting:`onwaiting`,onZoom:`onzoom`,overlinePosition:`overline-position`,overlineThickness:`overline-thickness`,paintOrder:`paint-order`,panose1:`panose-1`,pointerEvents:`pointer-events`,referrerPolicy:`referrerpolicy`,renderingIntent:`rendering-intent`,shapeRendering:`shape-rendering`,stopColor:`stop-color`,stopOpacity:`stop-opacity`,strikethroughPosition:`strikethrough-position`,strikethroughThickness:`strikethrough-thickness`,strokeDashArray:`stroke-dasharray`,strokeDashOffset:`stroke-dashoffset`,strokeLineCap:`stroke-linecap`,strokeLineJoin:`stroke-linejoin`,strokeMiterLimit:`stroke-miterlimit`,strokeOpacity:`stroke-opacity`,strokeWidth:`stroke-width`,tabIndex:`tabindex`,textAnchor:`text-anchor`,textDecoration:`text-decoration`,textRendering:`text-rendering`,transformOrigin:`transform-origin`,typeOf:`typeof`,underlinePosition:`underline-position`,underlineThickness:`underline-thickness`,unicodeBidi:`unicode-bidi`,unicodeRange:`unicode-range`,unitsPerEm:`units-per-em`,vAlphabetic:`v-alphabetic`,vHanging:`v-hanging`,vIdeographic:`v-ideographic`,vMathematical:`v-mathematical`,vectorEffect:`vector-effect`,vertAdvY:`vert-adv-y`,vertOriginX:`vert-origin-x`,vertOriginY:`vert-origin-y`,wordSpacing:`word-spacing`,writingMode:`writing-mode`,xHeight:`x-height`,playbackOrder:`playbackorder`,timelineBegin:`timelinebegin`},properties:{about:Zp,accentHeight:R,accumulate:null,additive:null,alignmentBaseline:null,alphabetic:R,amplitude:R,arabicForm:null,ascent:R,attributeName:null,attributeType:null,azimuth:R,bandwidth:null,baselineShift:null,baseFrequency:null,baseProfile:null,bbox:null,begin:null,bias:R,by:null,calcMode:null,capHeight:R,className:Yp,clip:null,clipPath:null,clipPathUnits:null,clipRule:null,color:null,colorInterpolation:null,colorInterpolationFilters:null,colorProfile:null,colorRendering:null,content:null,contentScriptType:null,contentStyleType:null,crossOrigin:null,cursor:null,cx:null,cy:null,d:null,dataType:null,defaultAction:null,descent:R,diffuseConstant:R,direction:null,display:null,dur:null,divisor:R,dominantBaseline:null,download:Kp,dx:null,dy:null,edgeMode:null,editable:null,elevation:R,enableBackground:null,end:null,event:null,exponent:R,externalResourcesRequired:null,fill:null,fillOpacity:R,fillRule:null,filter:null,filterRes:null,filterUnits:null,floodColor:null,floodOpacity:null,focusable:null,focusHighlight:null,fontFamily:null,fontSize:null,fontSizeAdjust:null,fontStretch:null,fontStyle:null,fontVariant:null,fontWeight:null,format:null,fr:null,from:null,fx:null,fy:null,g1:Xp,g2:Xp,glyphName:Xp,glyphOrientationHorizontal:null,glyphOrientationVertical:null,glyphRef:null,gradientTransform:null,gradientUnits:null,handler:null,hanging:R,hatchContentUnits:null,hatchUnits:null,height:null,href:null,hrefLang:null,horizAdvX:R,horizOriginX:R,horizOriginY:R,id:null,ideographic:R,imageRendering:null,initialVisibility:null,in:null,in2:null,intercept:R,k:R,k1:R,k2:R,k3:R,k4:R,kernelMatrix:Zp,kernelUnitLength:null,keyPoints:null,keySplines:null,keyTimes:null,kerning:null,lang:null,lengthAdjust:null,letterSpacing:null,lightingColor:null,limitingConeAngle:R,local:null,markerEnd:null,markerMid:null,markerStart:null,markerHeight:null,markerUnits:null,markerWidth:null,mask:null,maskContentUnits:null,maskUnits:null,mathematical:null,max:null,media:null,mediaCharacterEncoding:null,mediaContentEncodings:null,mediaSize:R,mediaTime:null,method:null,min:null,mode:null,name:null,navDown:null,navDownLeft:null,navDownRight:null,navLeft:null,navNext:null,navPrev:null,navRight:null,navUp:null,navUpLeft:null,navUpRight:null,numOctaves:null,observer:null,offset:null,onAbort:null,onActivate:null,onAfterPrint:null,onBeforePrint:null,onBegin:null,onCancel:null,onCanPlay:null,onCanPlayThrough:null,onChange:null,onClick:null,onClose:null,onCopy:null,onCueChange:null,onCut:null,onDblClick:null,onDrag:null,onDragEnd:null,onDragEnter:null,onDragExit:null,onDragLeave:null,onDragOver:null,onDragStart:null,onDrop:null,onDurationChange:null,onEmptied:null,onEnd:null,onEnded:null,onError:null,onFocus:null,onFocusIn:null,onFocusOut:null,onHashChange:null,onInput:null,onInvalid:null,onKeyDown:null,onKeyPress:null,onKeyUp:null,onLoad:null,onLoadedData:null,onLoadedMetadata:null,onLoadStart:null,onMessage:null,onMouseDown:null,onMouseEnter:null,onMouseLeave:null,onMouseMove:null,onMouseOut:null,onMouseOver:null,onMouseUp:null,onMouseWheel:null,onOffline:null,onOnline:null,onPageHide:null,onPageShow:null,onPaste:null,onPause:null,onPlay:null,onPlaying:null,onPopState:null,onProgress:null,onRateChange:null,onRepeat:null,onReset:null,onResize:null,onScroll:null,onSeeked:null,onSeeking:null,onSelect:null,onShow:null,onStalled:null,onStorage:null,onSubmit:null,onSuspend:null,onTimeUpdate:null,onToggle:null,onUnload:null,onVolumeChange:null,onWaiting:null,onZoom:null,opacity:null,operator:null,order:null,orient:null,orientation:null,origin:null,overflow:null,overlay:null,overlinePosition:R,overlineThickness:R,paintOrder:null,panose1:null,path:null,pathLength:R,patternContentUnits:null,patternTransform:null,patternUnits:null,phase:null,ping:Yp,pitch:null,playbackOrder:null,pointerEvents:null,points:null,pointsAtX:R,pointsAtY:R,pointsAtZ:R,preserveAlpha:null,preserveAspectRatio:null,primitiveUnits:null,propagate:null,property:Zp,r:null,radius:null,referrerPolicy:null,refX:null,refY:null,rel:Zp,rev:Zp,renderingIntent:null,repeatCount:null,repeatDur:null,requiredExtensions:Zp,requiredFeatures:Zp,requiredFonts:Zp,requiredFormats:Zp,resource:null,restart:null,result:null,rotate:null,rx:null,ry:null,scale:null,seed:null,shapeRendering:null,side:null,slope:null,snapshotTime:null,specularConstant:R,specularExponent:R,spreadMethod:null,spacing:null,startOffset:null,stdDeviation:null,stemh:null,stemv:null,stitchTiles:null,stopColor:null,stopOpacity:null,strikethroughPosition:R,strikethroughThickness:R,string:null,stroke:null,strokeDashArray:Zp,strokeDashOffset:null,strokeLineCap:null,strokeLineJoin:null,strokeMiterLimit:R,strokeOpacity:R,strokeWidth:null,style:null,surfaceScale:R,syncBehavior:null,syncBehaviorDefault:null,syncMaster:null,syncTolerance:null,syncToleranceDefault:null,systemLanguage:Zp,tabIndex:R,tableValues:null,target:null,targetX:R,targetY:R,textAnchor:null,textDecoration:null,textRendering:null,textLength:null,timelineBegin:null,title:null,transformBehavior:null,type:null,typeOf:Zp,to:null,transform:null,transformOrigin:null,u1:null,u2:null,underlinePosition:R,underlineThickness:R,unicode:null,unicodeBidi:null,unicodeRange:null,unitsPerEm:R,values:null,vAlphabetic:R,vMathematical:R,vectorEffect:null,vHanging:R,vIdeographic:R,version:null,vertAdvY:R,vertOriginX:R,vertOriginY:R,viewBox:null,viewTarget:null,visibility:null,width:null,widths:null,wordSpacing:null,writingMode:null,x:null,x1:null,x2:null,xChannelSelector:null,xHeight:R,y:null,y1:null,y2:null,yChannelSelector:null,z:null,zoomAndPan:null},space:`svg`,transform:im}),cm=nm({properties:{xLinkActuate:null,xLinkArcRole:null,xLinkHref:null,xLinkRole:null,xLinkShow:null,xLinkTitle:null,xLinkType:null},space:`xlink`,transform(e,t){return`xlink:`+t.slice(5).toLowerCase()}}),lm=nm({attributes:{xmlnsxlink:`xmlns:xlink`},properties:{xmlnsXLink:null,xmlns:null},space:`xmlns`,transform:am}),um=nm({properties:{xmlBase:null,xmlLang:null,xmlSpace:null},space:`xml`,transform(e,t){return`xml:`+t.slice(3).toLowerCase()}}),dm={classId:`classID`,dataType:`datatype`,itemId:`itemID`,strokeDashArray:`strokeDasharray`,strokeDashOffset:`strokeDashoffset`,strokeLineCap:`strokeLinecap`,strokeLineJoin:`strokeLinejoin`,strokeMiterLimit:`strokeMiterlimit`,typeOf:`typeof`,xLinkActuate:`xlinkActuate`,xLinkArcRole:`xlinkArcrole`,xLinkHref:`xlinkHref`,xLinkRole:`xlinkRole`,xLinkShow:`xlinkShow`,xLinkTitle:`xlinkTitle`,xLinkType:`xlinkType`,xmlnsXLink:`xmlnsXlink`},fm=/[A-Z]/g,pm=/-[a-z]/g,mm=/^data[-\w.:]+$/i;function hm(e,t){let n=Hp(t),r=t,i=Up;if(n in e.normal)return e.property[e.normal[n]];if(n.length>4&&n.slice(0,4)===`data`&&mm.test(t)){if(t.charAt(4)===`-`){let e=t.slice(5).replace(pm,_m);r=`data`+e.charAt(0).toUpperCase()+e.slice(1)}else{let e=t.slice(4);if(!pm.test(e)){let n=e.replace(fm,gm);n.charAt(0)!==`-`&&(n=`-`+n),t=`data`+n}}i=em}return new i(r,t)}function gm(e){return`-`+e.toLowerCase()}function _m(e){return e.charAt(1).toUpperCase()}var vm=Vp([rm,om,cm,lm,um],`html`),ym=Vp([rm,sm,cm,lm,um],`svg`);function bm(e){let t=String(e||``).trim();return t?t.split(/[ \t\n\r\f]+/g):[]}function xm(e){return e.join(` `).trim()}var Sm=o(((e,t)=>{var n=/\/\*[^*]*\*+([^/*][^*]*\*+)*\//g,r=/\n/g,i=/^\s*/,a=/^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/,o=/^:\s*/,s=/^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/,c=/^[;\s]*/,l=/^\s+|\s+$/g,u=`
 `,d=`/`,f=`*`,p=``,m=`comment`,h=`declaration`;function g(e,t){if(typeof e!=`string`)throw TypeError(`First argument must be a string`);if(!e)return[];t||={};var l=1,g=1;function v(e){var t=e.match(r);t&&(l+=t.length);var n=e.lastIndexOf(u);g=~n?e.length-n:g+e.length}function y(){var e={line:l,column:g};return function(t){return t.position=new b(e),C(),t}}function b(e){this.start=e,this.end={line:l,column:g},this.source=t.source}b.prototype.content=e;function x(n){var r=Error(t.source+`:`+l+`:`+g+`: `+n);if(r.reason=n,r.filename=t.source,r.line=l,r.column=g,r.source=e,!t.silent)throw r}function S(t){var n=t.exec(e);if(n){var r=n[0];return v(r),e=e.slice(r.length),n}}function C(){S(i)}function w(e){var t;for(e||=[];t=T();)t!==!1&&e.push(t);return e}function T(){var t=y();if(!(d!=e.charAt(0)||f!=e.charAt(1))){for(var n=2;p!=e.charAt(n)&&(f!=e.charAt(n)||d!=e.charAt(n+1));)++n;if(n+=2,p===e.charAt(n-1))return x(`End of comment missing`);var r=e.slice(2,n-2);return g+=2,v(r),e=e.slice(n),g+=2,t({type:m,comment:r})}}function E(){var e=y(),t=S(a);if(t){if(T(),!S(o))return x(`property missing ':'`);var r=S(s),i=e({type:h,property:_(t[0].replace(n,p)),value:r?_(r[0].replace(n,p)):p});return S(c),i}}function D(){var e=[];w(e);for(var t;t=E();)t!==!1&&(e.push(t),w(e));return e}return C(),D()}function _(e){return e?e.replace(l,p):p}t.exports=g})),Cm=o((e=>{var t=e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(e,`__esModule`,{value:!0}),e.default=r;var n=t(Sm());function r(e,t){let r=null;if(!e||typeof e!=`string`)return r;let i=(0,n.default)(e),a=typeof t==`function`;return i.forEach(e=>{if(e.type!==`declaration`)return;let{property:n,value:i}=e;a?t(n,i,e):i&&(r||={},r[n]=i)}),r}})),wm=o((e=>{Object.defineProperty(e,`__esModule`,{value:!0}),e.camelCase=void 0;var t=/^--[a-zA-Z0-9_-]+$/,n=/-([a-z])/g,r=/^[^-]+$/,i=/^-(webkit|moz|ms|o|khtml)-/,a=/^-(ms)-/,o=function(e){return!e||r.test(e)||t.test(e)},s=function(e,t){return t.toUpperCase()},c=function(e,t){return`${t}-`};e.camelCase=function(e,t){return t===void 0&&(t={}),o(e)?e:(e=e.toLowerCase(),e=t.reactCompat?e.replace(a,c):e.replace(i,c),e.replace(n,s))}})),Tm=o(((e,t)=>{var n=(e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}})(Cm()),r=wm();function i(e,t){var i={};return!e||typeof e!=`string`||(0,n.default)(e,function(e,n){e&&n&&(i[(0,r.camelCase)(e,t)]=n)}),i}i.default=i,t.exports=i})),Em=Om(`end`),Dm=Om(`start`);function Om(e){return t;function t(t){let n=t&&t.position&&t.position[e]||{};if(typeof n.line==`number`&&n.line>0&&typeof n.column==`number`&&n.column>0)return{line:n.line,column:n.column,offset:typeof n.offset==`number`&&n.offset>-1?n.offset:void 0}}}function km(e){let t=Dm(e),n=Em(e);if(t&&n)return{start:t,end:n}}function Am(e){return!e||typeof e!=`object`?``:`position`in e||`type`in e?Mm(e.position):`start`in e||`end`in e?Mm(e):`line`in e||`column`in e?jm(e):``}function jm(e){return Nm(e&&e.line)+`:`+Nm(e&&e.column)}function Mm(e){return jm(e&&e.start)+`-`+jm(e&&e.end)}function Nm(e){return e&&typeof e==`number`?e:1}var Pm=class extends Error{constructor(e,t,n){super(),typeof t==`string`&&(n=t,t=void 0);let r=``,i={},a=!1;if(t&&(i=`line`in t&&`column`in t||`start`in t&&`end`in t?{place:t}:`type`in t?{ancestors:[t],place:t.position}:{...t}),typeof e==`string`?r=e:!i.cause&&e&&(a=!0,r=e.message,i.cause=e),!i.ruleId&&!i.source&&typeof n==`string`){let e=n.indexOf(`:`);e===-1?i.ruleId=n:(i.source=n.slice(0,e),i.ruleId=n.slice(e+1))}if(!i.place&&i.ancestors&&i.ancestors){let e=i.ancestors[i.ancestors.length-1];e&&(i.place=e.position)}let o=i.place&&`start`in i.place?i.place.start:i.place;this.ancestors=i.ancestors||void 0,this.cause=i.cause||void 0,this.column=o?o.column:void 0,this.fatal=void 0,this.file=``,this.message=r,this.line=o?o.line:void 0,this.name=Am(i.place)||`1:1`,this.place=i.place||void 0,this.reason=this.message,this.ruleId=i.ruleId||void 0,this.source=i.source||void 0,this.stack=a&&i.cause&&typeof i.cause.stack==`string`?i.cause.stack:``,this.actual=void 0,this.expected=void 0,this.note=void 0,this.url=void 0}};Pm.prototype.file=``,Pm.prototype.name=``,Pm.prototype.reason=``,Pm.prototype.message=``,Pm.prototype.stack=``,Pm.prototype.column=void 0,Pm.prototype.line=void 0,Pm.prototype.ancestors=void 0,Pm.prototype.cause=void 0,Pm.prototype.fatal=void 0,Pm.prototype.place=void 0,Pm.prototype.ruleId=void 0,Pm.prototype.source=void 0;var Fm=l(Tm(),1),Im={}.hasOwnProperty,Lm=new Map,Rm=/[A-Z]/g,zm=new Set([`table`,`tbody`,`thead`,`tfoot`,`tr`]),Bm=new Set([`td`,`th`]),Vm=`https://github.com/syntax-tree/hast-util-to-jsx-runtime`;function Hm(e,t){if(!t||t.Fragment===void 0)throw TypeError("Expected `Fragment` in options");let n=t.filePath||void 0,r;if(t.development){if(typeof t.jsxDEV!=`function`)throw TypeError("Expected `jsxDEV` in options when `development: true`");r=$m(n,t.jsxDEV)}else{if(typeof t.jsx!=`function`)throw TypeError("Expected `jsx` in production options");if(typeof t.jsxs!=`function`)throw TypeError("Expected `jsxs` in production options");r=Qm(n,t.jsx,t.jsxs)}let i={Fragment:t.Fragment,ancestors:[],components:t.components||{},create:r,elementAttributeNameCase:t.elementAttributeNameCase||`react`,evaluater:t.createEvaluater?t.createEvaluater():void 0,filePath:n,ignoreInvalidStyle:t.ignoreInvalidStyle||!1,passKeys:t.passKeys!==!1,passNode:t.passNode||!1,schema:t.space===`svg`?ym:vm,stylePropertyNameCase:t.stylePropertyNameCase||`dom`,tableCellAlignToStyle:t.tableCellAlignToStyle!==!1},a=Um(i,e,void 0);return a&&typeof a!=`string`?a:i.create(e,i.Fragment,{children:a||void 0},void 0)}function Um(e,t,n){if(t.type===`element`)return Wm(e,t,n);if(t.type===`mdxFlowExpression`||t.type===`mdxTextExpression`)return Gm(e,t);if(t.type===`mdxJsxFlowElement`||t.type===`mdxJsxTextElement`)return qm(e,t,n);if(t.type===`mdxjsEsm`)return Km(e,t);if(t.type===`root`)return Jm(e,t,n);if(t.type===`text`)return Ym(e,t)}function Wm(e,t,n){let r=e.schema,i=r;t.tagName.toLowerCase()===`svg`&&r.space===`html`&&(i=ym,e.schema=i),e.ancestors.push(t);let a=ah(e,t.tagName,!1),o=eh(e,t),s=nh(e,t);return zm.has(t.tagName)&&(s=s.filter(function(e){return typeof e==`string`?!Rp(e):!0})),Xm(e,o,a,t),Zm(o,s),e.ancestors.pop(),e.schema=r,e.create(t,a,o,n)}function Gm(e,t){if(t.data&&t.data.estree&&e.evaluater){let n=t.data.estree.body[0];return n.type,e.evaluater.evaluateExpression(n.expression)}oh(e,t.position)}function Km(e,t){if(t.data&&t.data.estree&&e.evaluater)return e.evaluater.evaluateProgram(t.data.estree);oh(e,t.position)}function qm(e,t,n){let r=e.schema,i=r;t.name===`svg`&&r.space===`html`&&(i=ym,e.schema=i),e.ancestors.push(t);let a=t.name===null?e.Fragment:ah(e,t.name,!0),o=th(e,t),s=nh(e,t);return Xm(e,o,a,t),Zm(o,s),e.ancestors.pop(),e.schema=r,e.create(t,a,o,n)}function Jm(e,t,n){let r={};return Zm(r,nh(e,t)),e.create(t,e.Fragment,r,n)}function Ym(e,t){return t.value}function Xm(e,t,n,r){typeof n!=`string`&&n!==e.Fragment&&e.passNode&&(t.node=r)}function Zm(e,t){if(t.length>0){let n=t.length>1?t:t[0];n&&(e.children=n)}}function Qm(e,t,n){return r;function r(e,r,i,a){let o=Array.isArray(i.children)?n:t;return a?o(r,i,a):o(r,i)}}function $m(e,t){return n;function n(n,r,i,a){let o=Array.isArray(i.children),s=Dm(n);return t(r,i,a,o,{columnNumber:s?s.column-1:void 0,fileName:e,lineNumber:s?s.line:void 0},void 0)}}function eh(e,t){let n={},r,i;for(i in t.properties)if(i!==`children`&&Im.call(t.properties,i)){let a=rh(e,i,t.properties[i]);if(a){let[i,o]=a;e.tableCellAlignToStyle&&i===`align`&&typeof o==`string`&&Bm.has(t.tagName)?r=o:n[i]=o}}if(r){let t=n.style||={};t[e.stylePropertyNameCase===`css`?`text-align`:`textAlign`]=r}return n}function th(e,t){let n={};for(let r of t.attributes)if(r.type===`mdxJsxExpressionAttribute`)if(r.data&&r.data.estree&&e.evaluater){let t=r.data.estree.body[0];t.type;let i=t.expression;i.type;let a=i.properties[0];a.type,Object.assign(n,e.evaluater.evaluateExpression(a.argument))}else oh(e,t.position);else{let i=r.name,a;if(r.value&&typeof r.value==`object`)if(r.value.data&&r.value.data.estree&&e.evaluater){let t=r.value.data.estree.body[0];t.type,a=e.evaluater.evaluateExpression(t.expression)}else oh(e,t.position);else a=r.value===null?!0:r.value;n[i]=a}return n}function nh(e,t){let n=[],r=-1,i=e.passKeys?new Map:Lm;for(;++r<t.children.length;){let a=t.children[r],o;if(e.passKeys){let e=a.type===`element`?a.tagName:a.type===`mdxJsxFlowElement`||a.type===`mdxJsxTextElement`?a.name:void 0;if(e){let t=i.get(e)||0;o=e+`-`+t,i.set(e,t+1)}}let s=Um(e,a,o);s!==void 0&&n.push(s)}return n}function rh(e,t,n){let r=hm(e.schema,t);if(!(n==null||typeof n==`number`&&Number.isNaN(n))){if(Array.isArray(n)&&(n=r.commaSeparated?Mp(n):xm(n)),r.property===`style`){let t=typeof n==`object`?n:ih(e,String(n));return e.stylePropertyNameCase===`css`&&(t=sh(t)),[`style`,t]}return[e.elementAttributeNameCase===`react`&&r.space?dm[r.property]||r.property:r.attribute,n]}}function ih(e,t){try{return(0,Fm.default)(t,{reactCompat:!0})}catch(t){if(e.ignoreInvalidStyle)return{};let n=t,r=new Pm("Cannot parse `style` attribute",{ancestors:e.ancestors,cause:n,ruleId:`style`,source:`hast-util-to-jsx-runtime`});throw r.file=e.filePath||void 0,r.url=Vm+`#cannot-parse-style-attribute`,r}}function ah(e,t,n){let r;if(!n)r={type:`Literal`,value:t};else if(t.includes(`.`)){let e=t.split(`.`),n=-1,i;for(;++n<e.length;){let t=Ip(e[n])?{type:`Identifier`,name:e[n]}:{type:`Literal`,value:e[n]};i=i?{type:`MemberExpression`,object:i,property:t,computed:!!(n&&t.type===`Literal`),optional:!1}:t}r=i}else r=Ip(t)&&!/^[a-z]/.test(t)?{type:`Identifier`,name:t}:{type:`Literal`,value:t};if(r.type===`Literal`){let t=r.value;return Im.call(e.components,t)?e.components[t]:t}if(e.evaluater)return e.evaluater.evaluateExpression(r);oh(e)}function oh(e,t){let n=new Pm("Cannot handle MDX estrees without `createEvaluater`",{ancestors:e.ancestors,place:t,ruleId:`mdx-estree`,source:`hast-util-to-jsx-runtime`});throw n.file=e.filePath||void 0,n.url=Vm+`#cannot-handle-mdx-estrees-without-createevaluater`,n}function sh(e){let t={},n;for(n in e)Im.call(e,n)&&(t[ch(n)]=e[n]);return t}function ch(e){let t=e.replace(Rm,lh);return t.slice(0,3)===`ms-`&&(t=`-`+t),t}function lh(e){return`-`+e.toLowerCase()}var uh={action:[`form`],cite:[`blockquote`,`del`,`ins`,`q`],data:[`object`],formAction:[`button`,`input`],href:[`a`,`area`,`base`,`link`],icon:[`menuitem`],itemId:null,manifest:[`html`],ping:[`a`,`area`],poster:[`video`],src:[`audio`,`embed`,`iframe`,`img`,`input`,`script`,`source`,`track`,`video`]},dh={};function fh(e,t){let n=t||dh;return ph(e,typeof n.includeImageAlt==`boolean`?n.includeImageAlt:!0,typeof n.includeHtml==`boolean`?n.includeHtml:!0)}function ph(e,t,n){if(hh(e)){if(`value`in e)return e.type===`html`&&!n?``:e.value;if(t&&`alt`in e&&e.alt)return e.alt;if(`children`in e)return mh(e.children,t,n)}return Array.isArray(e)?mh(e,t,n):``}function mh(e,t,n){let r=[],i=-1;for(;++i<e.length;)r[i]=ph(e[i],t,n);return r.join(``)}function hh(e){return!!(e&&typeof e==`object`)}var gh=document.createElement(`i`);function _h(e){let t=`&`+e+`;`;gh.innerHTML=t;let n=gh.textContent;return n.charCodeAt(n.length-1)===59&&e!==`semi`||n===t?!1:n}function vh(e,t,n,r){let i=e.length,a=0,o;if(t=t<0?-t>i?0:i+t:t>i?i:t,n=n>0?n:0,r.length<1e4)o=Array.from(r),o.unshift(t,n),e.splice(...o);else for(n&&e.splice(t,n);a<r.length;)o=r.slice(a,a+1e4),o.unshift(t,0),e.splice(...o),a+=1e4,t+=1e4}function yh(e,t){return e.length>0?(vh(e,e.length,0,t),e):t}var bh={}.hasOwnProperty;function xh(e){let t={},n=-1;for(;++n<e.length;)Sh(t,e[n]);return t}function Sh(e,t){let n;for(n in t){let r=(bh.call(e,n)?e[n]:void 0)||(e[n]={}),i=t[n],a;if(i)for(a in i){bh.call(r,a)||(r[a]=[]);let e=i[a];Ch(r[a],Array.isArray(e)?e:e?[e]:[])}}}function Ch(e,t){let n=-1,r=[];for(;++n<t.length;)(t[n].add===`after`?e:r).push(t[n]);vh(e,0,0,r)}function wh(e,t){let n=Number.parseInt(e,t);return n<9||n===11||n>13&&n<32||n>126&&n<160||n>55295&&n<57344||n>64975&&n<65008||(n&65535)==65535||(n&65535)==65534||n>1114111?`�`:String.fromCodePoint(n)}function Th(e){return e.replace(/[\t\n\r ]+/g,` `).replace(/^ | $/g,``).toLowerCase().toUpperCase()}var Eh=Lh(/[A-Za-z]/),Dh=Lh(/[\dA-Za-z]/),Oh=Lh(/[#-'*+\--9=?A-Z^-~]/);function kh(e){return e!==null&&(e<32||e===127)}var Ah=Lh(/\d/),jh=Lh(/[\dA-Fa-f]/),Mh=Lh(/[!-/:-@[-`{-~]/);function z(e){return e!==null&&e<-2}function Nh(e){return e!==null&&(e<0||e===32)}function Ph(e){return e===-2||e===-1||e===32}var Fh=Lh(/\p{P}|\p{S}/u),Ih=Lh(/\s/);function Lh(e){return t;function t(t){return t!==null&&t>-1&&e.test(String.fromCharCode(t))}}function Rh(e){let t=[],n=-1,r=0,i=0;for(;++n<e.length;){let a=e.charCodeAt(n),o=``;if(a===37&&Dh(e.charCodeAt(n+1))&&Dh(e.charCodeAt(n+2)))i=2;else if(a<128)/[!#$&-;=?-Z_a-z~]/.test(String.fromCharCode(a))||(o=String.fromCharCode(a));else if(a>55295&&a<57344){let t=e.charCodeAt(n+1);a<56320&&t>56319&&t<57344?(o=String.fromCharCode(a,t),i=1):o=`�`}else o=String.fromCharCode(a);o&&=(t.push(e.slice(r,n),encodeURIComponent(o)),r=n+i+1,``),i&&=(n+=i,0)}return t.join(``)+e.slice(r)}function zh(e,t,n,r){let i=r?r-1:1/0,a=0;return o;function o(r){return Ph(r)?(e.enter(n),s(r)):t(r)}function s(r){return Ph(r)&&a++<i?(e.consume(r),s):(e.exit(n),t(r))}}var Bh={tokenize:Vh};function Vh(e){let t=e.attempt(this.parser.constructs.contentInitial,r,i),n;return t;function r(n){if(n===null){e.consume(n);return}return e.enter(`lineEnding`),e.consume(n),e.exit(`lineEnding`),zh(e,t,`linePrefix`)}function i(t){return e.enter(`paragraph`),a(t)}function a(t){let r=e.enter(`chunkText`,{contentType:`text`,previous:n});return n&&(n.next=r),n=r,o(t)}function o(t){if(t===null){e.exit(`chunkText`),e.exit(`paragraph`),e.consume(t);return}return z(t)?(e.consume(t),e.exit(`chunkText`),a):(e.consume(t),o)}}var Hh={tokenize:Wh},Uh={tokenize:Gh};function Wh(e){let t=this,n=[],r=0,i,a,o;return s;function s(i){if(r<n.length){let a=n[r];return t.containerState=a[1],e.attempt(a[0].continuation,c,l)(i)}return l(i)}function c(e){if(r++,t.containerState._closeFlow){t.containerState._closeFlow=void 0,i&&v();let n=t.events.length,a=n,o;for(;a--;)if(t.events[a][0]===`exit`&&t.events[a][1].type===`chunkFlow`){o=t.events[a][1].end;break}_(r);let s=n;for(;s<t.events.length;)t.events[s][1].end={...o},s++;return vh(t.events,a+1,0,t.events.slice(n)),t.events.length=s,l(e)}return s(e)}function l(a){if(r===n.length){if(!i)return f(a);if(i.currentConstruct&&i.currentConstruct.concrete)return m(a);t.interrupt=!!(i.currentConstruct&&!i._gfmTableDynamicInterruptHack)}return t.containerState={},e.check(Uh,u,d)(a)}function u(e){return i&&v(),_(r),f(e)}function d(e){return t.parser.lazy[t.now().line]=r!==n.length,o=t.now().offset,m(e)}function f(n){return t.containerState={},e.attempt(Uh,p,m)(n)}function p(e){return r++,n.push([t.currentConstruct,t.containerState]),f(e)}function m(n){if(n===null){i&&v(),_(0),e.consume(n);return}return i||=t.parser.flow(t.now()),e.enter(`chunkFlow`,{_tokenizer:i,contentType:`flow`,previous:a}),h(n)}function h(n){if(n===null){g(e.exit(`chunkFlow`),!0),_(0),e.consume(n);return}return z(n)?(e.consume(n),g(e.exit(`chunkFlow`)),r=0,t.interrupt=void 0,s):(e.consume(n),h)}function g(e,n){let s=t.sliceStream(e);if(n&&s.push(null),e.previous=a,a&&(a.next=e),a=e,i.defineSkip(e.start),i.write(s),t.parser.lazy[e.start.line]){let e=i.events.length;for(;e--;)if(i.events[e][1].start.offset<o&&(!i.events[e][1].end||i.events[e][1].end.offset>o))return;let n=t.events.length,a=n,s,c;for(;a--;)if(t.events[a][0]===`exit`&&t.events[a][1].type===`chunkFlow`){if(s){c=t.events[a][1].end;break}s=!0}for(_(r),e=n;e<t.events.length;)t.events[e][1].end={...c},e++;vh(t.events,a+1,0,t.events.slice(n)),t.events.length=e}}function _(r){let i=n.length;for(;i-- >r;){let r=n[i];t.containerState=r[1],r[0].exit.call(t,e)}n.length=r}function v(){i.write([null]),a=void 0,i=void 0,t.containerState._closeFlow=void 0}}function Gh(e,t,n){return zh(e,e.attempt(this.parser.constructs.document,t,n),`linePrefix`,this.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)}function Kh(e){if(e===null||Nh(e)||Ih(e))return 1;if(Fh(e))return 2}function qh(e,t,n){let r=[],i=-1;for(;++i<e.length;){let a=e[i].resolveAll;a&&!r.includes(a)&&(t=a(t,n),r.push(a))}return t}var Jh={name:`attention`,resolveAll:Yh,tokenize:Xh};function Yh(e,t){let n=-1,r,i,a,o,s,c,l,u;for(;++n<e.length;)if(e[n][0]===`enter`&&e[n][1].type===`attentionSequence`&&e[n][1]._close){for(r=n;r--;)if(e[r][0]===`exit`&&e[r][1].type===`attentionSequence`&&e[r][1]._open&&t.sliceSerialize(e[r][1]).charCodeAt(0)===t.sliceSerialize(e[n][1]).charCodeAt(0)){if((e[r][1]._close||e[n][1]._open)&&(e[n][1].end.offset-e[n][1].start.offset)%3&&!((e[r][1].end.offset-e[r][1].start.offset+e[n][1].end.offset-e[n][1].start.offset)%3))continue;c=e[r][1].end.offset-e[r][1].start.offset>1&&e[n][1].end.offset-e[n][1].start.offset>1?2:1;let d={...e[r][1].end},f={...e[n][1].start};Zh(d,-c),Zh(f,c),o={type:c>1?`strongSequence`:`emphasisSequence`,start:d,end:{...e[r][1].end}},s={type:c>1?`strongSequence`:`emphasisSequence`,start:{...e[n][1].start},end:f},a={type:c>1?`strongText`:`emphasisText`,start:{...e[r][1].end},end:{...e[n][1].start}},i={type:c>1?`strong`:`emphasis`,start:{...o.start},end:{...s.end}},e[r][1].end={...o.start},e[n][1].start={...s.end},l=[],e[r][1].end.offset-e[r][1].start.offset&&(l=yh(l,[[`enter`,e[r][1],t],[`exit`,e[r][1],t]])),l=yh(l,[[`enter`,i,t],[`enter`,o,t],[`exit`,o,t],[`enter`,a,t]]),l=yh(l,qh(t.parser.constructs.insideSpan.null,e.slice(r+1,n),t)),l=yh(l,[[`exit`,a,t],[`enter`,s,t],[`exit`,s,t],[`exit`,i,t]]),e[n][1].end.offset-e[n][1].start.offset?(u=2,l=yh(l,[[`enter`,e[n][1],t],[`exit`,e[n][1],t]])):u=0,vh(e,r-1,n-r+3,l),n=r+l.length-u-2;break}}for(n=-1;++n<e.length;)e[n][1].type===`attentionSequence`&&(e[n][1].type=`data`);return e}function Xh(e,t){let n=this.parser.constructs.attentionMarkers.null,r=this.previous,i=Kh(r),a;return o;function o(t){return a=t,e.enter(`attentionSequence`),s(t)}function s(o){if(o===a)return e.consume(o),s;let c=e.exit(`attentionSequence`),l=Kh(o),u=!l||l===2&&i||n.includes(o),d=!i||i===2&&l||n.includes(r);return c._open=!!(a===42?u:u&&(i||!d)),c._close=!!(a===42?d:d&&(l||!u)),t(o)}}function Zh(e,t){e.column+=t,e.offset+=t,e._bufferIndex+=t}var Qh={name:`autolink`,tokenize:$h};function $h(e,t,n){let r=0;return i;function i(t){return e.enter(`autolink`),e.enter(`autolinkMarker`),e.consume(t),e.exit(`autolinkMarker`),e.enter(`autolinkProtocol`),a}function a(t){return Eh(t)?(e.consume(t),o):t===64?n(t):l(t)}function o(e){return e===43||e===45||e===46||Dh(e)?(r=1,s(e)):l(e)}function s(t){return t===58?(e.consume(t),r=0,c):(t===43||t===45||t===46||Dh(t))&&r++<32?(e.consume(t),s):(r=0,l(t))}function c(r){return r===62?(e.exit(`autolinkProtocol`),e.enter(`autolinkMarker`),e.consume(r),e.exit(`autolinkMarker`),e.exit(`autolink`),t):r===null||r===32||r===60||kh(r)?n(r):(e.consume(r),c)}function l(t){return t===64?(e.consume(t),u):Oh(t)?(e.consume(t),l):n(t)}function u(e){return Dh(e)?d(e):n(e)}function d(n){return n===46?(e.consume(n),r=0,u):n===62?(e.exit(`autolinkProtocol`).type=`autolinkEmail`,e.enter(`autolinkMarker`),e.consume(n),e.exit(`autolinkMarker`),e.exit(`autolink`),t):f(n)}function f(t){if((t===45||Dh(t))&&r++<63){let n=t===45?f:d;return e.consume(t),n}return n(t)}}var eg={partial:!0,tokenize:tg};function tg(e,t,n){return r;function r(t){return Ph(t)?zh(e,i,`linePrefix`)(t):i(t)}function i(e){return e===null||z(e)?t(e):n(e)}}var ng={continuation:{tokenize:ig},exit:ag,name:`blockQuote`,tokenize:rg};function rg(e,t,n){let r=this;return i;function i(t){if(t===62){let n=r.containerState;return n.open||=(e.enter(`blockQuote`,{_container:!0}),!0),e.enter(`blockQuotePrefix`),e.enter(`blockQuoteMarker`),e.consume(t),e.exit(`blockQuoteMarker`),a}return n(t)}function a(n){return Ph(n)?(e.enter(`blockQuotePrefixWhitespace`),e.consume(n),e.exit(`blockQuotePrefixWhitespace`),e.exit(`blockQuotePrefix`),t):(e.exit(`blockQuotePrefix`),t(n))}}function ig(e,t,n){let r=this;return i;function i(t){return Ph(t)?zh(e,a,`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(t):a(t)}function a(r){return e.attempt(ng,t,n)(r)}}function ag(e){e.exit(`blockQuote`)}var og={name:`characterEscape`,tokenize:sg};function sg(e,t,n){return r;function r(t){return e.enter(`characterEscape`),e.enter(`escapeMarker`),e.consume(t),e.exit(`escapeMarker`),i}function i(r){return Mh(r)?(e.enter(`characterEscapeValue`),e.consume(r),e.exit(`characterEscapeValue`),e.exit(`characterEscape`),t):n(r)}}var cg={name:`characterReference`,tokenize:lg};function lg(e,t,n){let r=this,i=0,a,o;return s;function s(t){return e.enter(`characterReference`),e.enter(`characterReferenceMarker`),e.consume(t),e.exit(`characterReferenceMarker`),c}function c(t){return t===35?(e.enter(`characterReferenceMarkerNumeric`),e.consume(t),e.exit(`characterReferenceMarkerNumeric`),l):(e.enter(`characterReferenceValue`),a=31,o=Dh,u(t))}function l(t){return t===88||t===120?(e.enter(`characterReferenceMarkerHexadecimal`),e.consume(t),e.exit(`characterReferenceMarkerHexadecimal`),e.enter(`characterReferenceValue`),a=6,o=jh,u):(e.enter(`characterReferenceValue`),a=7,o=Ah,u(t))}function u(s){if(s===59&&i){let i=e.exit(`characterReferenceValue`);return o===Dh&&!_h(r.sliceSerialize(i))?n(s):(e.enter(`characterReferenceMarker`),e.consume(s),e.exit(`characterReferenceMarker`),e.exit(`characterReference`),t)}return o(s)&&i++<a?(e.consume(s),u):n(s)}}var ug={partial:!0,tokenize:pg},dg={concrete:!0,name:`codeFenced`,tokenize:fg};function fg(e,t,n){let r=this,i={partial:!0,tokenize:x},a=0,o=0,s;return c;function c(e){return l(e)}function l(t){let n=r.events[r.events.length-1];return a=n&&n[1].type===`linePrefix`?n[2].sliceSerialize(n[1],!0).length:0,s=t,e.enter(`codeFenced`),e.enter(`codeFencedFence`),e.enter(`codeFencedFenceSequence`),u(t)}function u(t){return t===s?(o++,e.consume(t),u):o<3?n(t):(e.exit(`codeFencedFenceSequence`),Ph(t)?zh(e,d,`whitespace`)(t):d(t))}function d(n){return n===null||z(n)?(e.exit(`codeFencedFence`),r.interrupt?t(n):e.check(ug,h,b)(n)):(e.enter(`codeFencedFenceInfo`),e.enter(`chunkString`,{contentType:`string`}),f(n))}function f(t){return t===null||z(t)?(e.exit(`chunkString`),e.exit(`codeFencedFenceInfo`),d(t)):Ph(t)?(e.exit(`chunkString`),e.exit(`codeFencedFenceInfo`),zh(e,p,`whitespace`)(t)):t===96&&t===s?n(t):(e.consume(t),f)}function p(t){return t===null||z(t)?d(t):(e.enter(`codeFencedFenceMeta`),e.enter(`chunkString`,{contentType:`string`}),m(t))}function m(t){return t===null||z(t)?(e.exit(`chunkString`),e.exit(`codeFencedFenceMeta`),d(t)):t===96&&t===s?n(t):(e.consume(t),m)}function h(t){return e.attempt(i,b,g)(t)}function g(t){return e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),_}function _(t){return a>0&&Ph(t)?zh(e,v,`linePrefix`,a+1)(t):v(t)}function v(t){return t===null||z(t)?e.check(ug,h,b)(t):(e.enter(`codeFlowValue`),y(t))}function y(t){return t===null||z(t)?(e.exit(`codeFlowValue`),v(t)):(e.consume(t),y)}function b(n){return e.exit(`codeFenced`),t(n)}function x(e,t,n){let i=0;return a;function a(t){return e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),c}function c(t){return e.enter(`codeFencedFence`),Ph(t)?zh(e,l,`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(t):l(t)}function l(t){return t===s?(e.enter(`codeFencedFenceSequence`),u(t)):n(t)}function u(t){return t===s?(i++,e.consume(t),u):i>=o?(e.exit(`codeFencedFenceSequence`),Ph(t)?zh(e,d,`whitespace`)(t):d(t)):n(t)}function d(r){return r===null||z(r)?(e.exit(`codeFencedFence`),t(r)):n(r)}}}function pg(e,t,n){let r=this;return i;function i(t){return t===null?n(t):(e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),a)}function a(e){return r.parser.lazy[r.now().line]?n(e):t(e)}}var mg={name:`codeIndented`,tokenize:gg},hg={partial:!0,tokenize:_g};function gg(e,t,n){let r=this;return i;function i(t){return e.enter(`codeIndented`),zh(e,a,`linePrefix`,5)(t)}function a(e){let t=r.events[r.events.length-1];return t&&t[1].type===`linePrefix`&&t[2].sliceSerialize(t[1],!0).length>=4?o(e):n(e)}function o(t){return t===null?c(t):z(t)?e.attempt(hg,o,c)(t):(e.enter(`codeFlowValue`),s(t))}function s(t){return t===null||z(t)?(e.exit(`codeFlowValue`),o(t)):(e.consume(t),s)}function c(n){return e.exit(`codeIndented`),t(n)}}function _g(e,t,n){let r=this;return i;function i(t){return r.parser.lazy[r.now().line]?n(t):z(t)?(e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),i):zh(e,a,`linePrefix`,5)(t)}function a(e){let a=r.events[r.events.length-1];return a&&a[1].type===`linePrefix`&&a[2].sliceSerialize(a[1],!0).length>=4?t(e):z(e)?i(e):n(e)}}var vg={name:`codeText`,previous:bg,resolve:yg,tokenize:xg};function yg(e){let t=e.length-4,n=3,r,i;if((e[n][1].type===`lineEnding`||e[n][1].type===`space`)&&(e[t][1].type===`lineEnding`||e[t][1].type===`space`)){for(r=n;++r<t;)if(e[r][1].type===`codeTextData`){e[n][1].type=`codeTextPadding`,e[t][1].type=`codeTextPadding`,n+=2,t-=2;break}}for(r=n-1,t++;++r<=t;)i===void 0?r!==t&&e[r][1].type!==`lineEnding`&&(i=r):(r===t||e[r][1].type===`lineEnding`)&&(e[i][1].type=`codeTextData`,r!==i+2&&(e[i][1].end=e[r-1][1].end,e.splice(i+2,r-i-2),t-=r-i-2,r=i+2),i=void 0);return e}function bg(e){return e!==96||this.events[this.events.length-1][1].type===`characterEscape`}function xg(e,t,n){let r=0,i,a;return o;function o(t){return e.enter(`codeText`),e.enter(`codeTextSequence`),s(t)}function s(t){return t===96?(e.consume(t),r++,s):(e.exit(`codeTextSequence`),c(t))}function c(t){return t===null?n(t):t===32?(e.enter(`space`),e.consume(t),e.exit(`space`),c):t===96?(a=e.enter(`codeTextSequence`),i=0,u(t)):z(t)?(e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),c):(e.enter(`codeTextData`),l(t))}function l(t){return t===null||t===32||t===96||z(t)?(e.exit(`codeTextData`),c(t)):(e.consume(t),l)}function u(n){return n===96?(e.consume(n),i++,u):i===r?(e.exit(`codeTextSequence`),e.exit(`codeText`),t(n)):(a.type=`codeTextData`,l(n))}}var Sg=class{constructor(e){this.left=e?[...e]:[],this.right=[]}get(e){if(e<0||e>=this.left.length+this.right.length)throw RangeError("Cannot access index `"+e+"` in a splice buffer of size `"+(this.left.length+this.right.length)+"`");return e<this.left.length?this.left[e]:this.right[this.right.length-e+this.left.length-1]}get length(){return this.left.length+this.right.length}shift(){return this.setCursor(0),this.right.pop()}slice(e,t){let n=t??1/0;return n<this.left.length?this.left.slice(e,n):e>this.left.length?this.right.slice(this.right.length-n+this.left.length,this.right.length-e+this.left.length).reverse():this.left.slice(e).concat(this.right.slice(this.right.length-n+this.left.length).reverse())}splice(e,t,n){let r=t||0;this.setCursor(Math.trunc(e));let i=this.right.splice(this.right.length-r,1/0);return n&&Cg(this.left,n),i.reverse()}pop(){return this.setCursor(1/0),this.left.pop()}push(e){this.setCursor(1/0),this.left.push(e)}pushMany(e){this.setCursor(1/0),Cg(this.left,e)}unshift(e){this.setCursor(0),this.right.push(e)}unshiftMany(e){this.setCursor(0),Cg(this.right,e.reverse())}setCursor(e){if(!(e===this.left.length||e>this.left.length&&this.right.length===0||e<0&&this.left.length===0))if(e<this.left.length){let t=this.left.splice(e,1/0);Cg(this.right,t.reverse())}else{let t=this.right.splice(this.left.length+this.right.length-e,1/0);Cg(this.left,t.reverse())}}};function Cg(e,t){let n=0;if(t.length<1e4)e.push(...t);else for(;n<t.length;)e.push(...t.slice(n,n+1e4)),n+=1e4}function wg(e){let t={},n=-1,r,i,a,o,s,c,l,u=new Sg(e);for(;++n<u.length;){for(;n in t;)n=t[n];if(r=u.get(n),n&&r[1].type===`chunkFlow`&&u.get(n-1)[1].type===`listItemPrefix`&&(c=r[1]._tokenizer.events,a=0,a<c.length&&c[a][1].type===`lineEndingBlank`&&(a+=2),a<c.length&&c[a][1].type===`content`))for(;++a<c.length&&c[a][1].type!==`content`;)c[a][1].type===`chunkText`&&(c[a][1]._isInFirstContentOfListItem=!0,a++);if(r[0]===`enter`)r[1].contentType&&(Object.assign(t,Tg(u,n)),n=t[n],l=!0);else if(r[1]._container){for(a=n,i=void 0;a--;)if(o=u.get(a),o[1].type===`lineEnding`||o[1].type===`lineEndingBlank`)o[0]===`enter`&&(i&&(u.get(i)[1].type=`lineEndingBlank`),o[1].type=`lineEnding`,i=a);else if(!(o[1].type===`linePrefix`||o[1].type===`listItemIndent`))break;i&&(r[1].end={...u.get(i)[1].start},s=u.slice(i,n),s.unshift(r),u.splice(i,n-i+1,s))}}return vh(e,0,1/0,u.slice(0)),!l}function Tg(e,t){let n=e.get(t)[1],r=e.get(t)[2],i=t-1,a=[],o=n._tokenizer;o||(o=r.parser[n.contentType](n.start),n._contentTypeTextTrailing&&(o._contentTypeTextTrailing=!0));let s=o.events,c=[],l={},u,d,f=-1,p=n,m=0,h=0,g=[h];for(;p;){for(;e.get(++i)[1]!==p;);a.push(i),p._tokenizer||(u=r.sliceStream(p),p.next||u.push(null),d&&o.defineSkip(p.start),p._isInFirstContentOfListItem&&(o._gfmTasklistFirstContentOfListItem=!0),o.write(u),p._isInFirstContentOfListItem&&(o._gfmTasklistFirstContentOfListItem=void 0)),d=p,p=p.next}for(p=n;++f<s.length;)s[f][0]===`exit`&&s[f-1][0]===`enter`&&s[f][1].type===s[f-1][1].type&&s[f][1].start.line!==s[f][1].end.line&&(h=f+1,g.push(h),p._tokenizer=void 0,p.previous=void 0,p=p.next);for(o.events=[],p?(p._tokenizer=void 0,p.previous=void 0):g.pop(),f=g.length;f--;){let t=s.slice(g[f],g[f+1]),n=a.pop();c.push([n,n+t.length-1]),e.splice(n,2,t)}for(c.reverse(),f=-1;++f<c.length;)l[m+c[f][0]]=m+c[f][1],m+=c[f][1]-c[f][0]-1;return l}var Eg={resolve:Og,tokenize:kg},Dg={partial:!0,tokenize:Ag};function Og(e){return wg(e),e}function kg(e,t){let n;return r;function r(t){return e.enter(`content`),n=e.enter(`chunkContent`,{contentType:`content`}),i(t)}function i(t){return t===null?a(t):z(t)?e.check(Dg,o,a)(t):(e.consume(t),i)}function a(n){return e.exit(`chunkContent`),e.exit(`content`),t(n)}function o(t){return e.consume(t),e.exit(`chunkContent`),n.next=e.enter(`chunkContent`,{contentType:`content`,previous:n}),n=n.next,i}}function Ag(e,t,n){let r=this;return i;function i(t){return e.exit(`chunkContent`),e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),zh(e,a,`linePrefix`)}function a(i){if(i===null||z(i))return n(i);let a=r.events[r.events.length-1];return!r.parser.constructs.disable.null.includes(`codeIndented`)&&a&&a[1].type===`linePrefix`&&a[2].sliceSerialize(a[1],!0).length>=4?t(i):e.interrupt(r.parser.constructs.flow,n,t)(i)}}function jg(e,t,n,r,i,a,o,s,c){let l=c||1/0,u=0;return d;function d(t){return t===60?(e.enter(r),e.enter(i),e.enter(a),e.consume(t),e.exit(a),f):t===null||t===32||t===41||kh(t)?n(t):(e.enter(r),e.enter(o),e.enter(s),e.enter(`chunkString`,{contentType:`string`}),h(t))}function f(n){return n===62?(e.enter(a),e.consume(n),e.exit(a),e.exit(i),e.exit(r),t):(e.enter(s),e.enter(`chunkString`,{contentType:`string`}),p(n))}function p(t){return t===62?(e.exit(`chunkString`),e.exit(s),f(t)):t===null||t===60||z(t)?n(t):(e.consume(t),t===92?m:p)}function m(t){return t===60||t===62||t===92?(e.consume(t),p):p(t)}function h(i){return!u&&(i===null||i===41||Nh(i))?(e.exit(`chunkString`),e.exit(s),e.exit(o),e.exit(r),t(i)):u<l&&i===40?(e.consume(i),u++,h):i===41?(e.consume(i),u--,h):i===null||i===32||i===40||kh(i)?n(i):(e.consume(i),i===92?g:h)}function g(t){return t===40||t===41||t===92?(e.consume(t),h):h(t)}}function Mg(e,t,n,r,i,a){let o=this,s=0,c;return l;function l(t){return e.enter(r),e.enter(i),e.consume(t),e.exit(i),e.enter(a),u}function u(l){return s>999||l===null||l===91||l===93&&!c||l===94&&!s&&`_hiddenFootnoteSupport`in o.parser.constructs?n(l):l===93?(e.exit(a),e.enter(i),e.consume(l),e.exit(i),e.exit(r),t):z(l)?(e.enter(`lineEnding`),e.consume(l),e.exit(`lineEnding`),u):(e.enter(`chunkString`,{contentType:`string`}),d(l))}function d(t){return t===null||t===91||t===93||z(t)||s++>999?(e.exit(`chunkString`),u(t)):(e.consume(t),c||=!Ph(t),t===92?f:d)}function f(t){return t===91||t===92||t===93?(e.consume(t),s++,d):d(t)}}function Ng(e,t,n,r,i,a){let o;return s;function s(t){return t===34||t===39||t===40?(e.enter(r),e.enter(i),e.consume(t),e.exit(i),o=t===40?41:t,c):n(t)}function c(n){return n===o?(e.enter(i),e.consume(n),e.exit(i),e.exit(r),t):(e.enter(a),l(n))}function l(t){return t===o?(e.exit(a),c(o)):t===null?n(t):z(t)?(e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),zh(e,l,`linePrefix`)):(e.enter(`chunkString`,{contentType:`string`}),u(t))}function u(t){return t===o||t===null||z(t)?(e.exit(`chunkString`),l(t)):(e.consume(t),t===92?d:u)}function d(t){return t===o||t===92?(e.consume(t),u):u(t)}}function Pg(e,t){let n;return r;function r(i){return z(i)?(e.enter(`lineEnding`),e.consume(i),e.exit(`lineEnding`),n=!0,r):Ph(i)?zh(e,r,n?`linePrefix`:`lineSuffix`)(i):t(i)}}var Fg={name:`definition`,tokenize:Lg},Ig={partial:!0,tokenize:Rg};function Lg(e,t,n){let r=this,i;return a;function a(t){return e.enter(`definition`),o(t)}function o(t){return Mg.call(r,e,s,n,`definitionLabel`,`definitionLabelMarker`,`definitionLabelString`)(t)}function s(t){return i=Th(r.sliceSerialize(r.events[r.events.length-1][1]).slice(1,-1)),t===58?(e.enter(`definitionMarker`),e.consume(t),e.exit(`definitionMarker`),c):n(t)}function c(t){return Nh(t)?Pg(e,l)(t):l(t)}function l(t){return jg(e,u,n,`definitionDestination`,`definitionDestinationLiteral`,`definitionDestinationLiteralMarker`,`definitionDestinationRaw`,`definitionDestinationString`)(t)}function u(t){return e.attempt(Ig,d,d)(t)}function d(t){return Ph(t)?zh(e,f,`whitespace`)(t):f(t)}function f(a){return a===null||z(a)?(e.exit(`definition`),r.parser.defined.push(i),t(a)):n(a)}}function Rg(e,t,n){return r;function r(t){return Nh(t)?Pg(e,i)(t):n(t)}function i(t){return Ng(e,a,n,`definitionTitle`,`definitionTitleMarker`,`definitionTitleString`)(t)}function a(t){return Ph(t)?zh(e,o,`whitespace`)(t):o(t)}function o(e){return e===null||z(e)?t(e):n(e)}}var zg={name:`hardBreakEscape`,tokenize:Bg};function Bg(e,t,n){return r;function r(t){return e.enter(`hardBreakEscape`),e.consume(t),i}function i(r){return z(r)?(e.exit(`hardBreakEscape`),t(r)):n(r)}}var Vg={name:`headingAtx`,resolve:Hg,tokenize:Ug};function Hg(e,t){let n=e.length-2,r=3,i,a;return e[r][1].type===`whitespace`&&(r+=2),n-2>r&&e[n][1].type===`whitespace`&&(n-=2),e[n][1].type===`atxHeadingSequence`&&(r===n-1||n-4>r&&e[n-2][1].type===`whitespace`)&&(n-=r+1===n?2:4),n>r&&(i={type:`atxHeadingText`,start:e[r][1].start,end:e[n][1].end},a={type:`chunkText`,start:e[r][1].start,end:e[n][1].end,contentType:`text`},vh(e,r,n-r+1,[[`enter`,i,t],[`enter`,a,t],[`exit`,a,t],[`exit`,i,t]])),e}function Ug(e,t,n){let r=0;return i;function i(t){return e.enter(`atxHeading`),a(t)}function a(t){return e.enter(`atxHeadingSequence`),o(t)}function o(t){return t===35&&r++<6?(e.consume(t),o):t===null||Nh(t)?(e.exit(`atxHeadingSequence`),s(t)):n(t)}function s(n){return n===35?(e.enter(`atxHeadingSequence`),c(n)):n===null||z(n)?(e.exit(`atxHeading`),t(n)):Ph(n)?zh(e,s,`whitespace`)(n):(e.enter(`atxHeadingText`),l(n))}function c(t){return t===35?(e.consume(t),c):(e.exit(`atxHeadingSequence`),s(t))}function l(t){return t===null||t===35||Nh(t)?(e.exit(`atxHeadingText`),s(t)):(e.consume(t),l)}}var Wg=`address.article.aside.base.basefont.blockquote.body.caption.center.col.colgroup.dd.details.dialog.dir.div.dl.dt.fieldset.figcaption.figure.footer.form.frame.frameset.h1.h2.h3.h4.h5.h6.head.header.hr.html.iframe.legend.li.link.main.menu.menuitem.nav.noframes.ol.optgroup.option.p.param.search.section.summary.table.tbody.td.tfoot.th.thead.title.tr.track.ul`.split(`.`),Gg=[`pre`,`script`,`style`,`textarea`],Kg={concrete:!0,name:`htmlFlow`,resolveTo:Yg,tokenize:Xg},qg={partial:!0,tokenize:Qg},Jg={partial:!0,tokenize:Zg};function Yg(e){let t=e.length;for(;t--&&!(e[t][0]===`enter`&&e[t][1].type===`htmlFlow`););return t>1&&e[t-2][1].type===`linePrefix`&&(e[t][1].start=e[t-2][1].start,e[t+1][1].start=e[t-2][1].start,e.splice(t-2,2)),e}function Xg(e,t,n){let r=this,i,a,o,s,c;return l;function l(e){return u(e)}function u(t){return e.enter(`htmlFlow`),e.enter(`htmlFlowData`),e.consume(t),d}function d(s){return s===33?(e.consume(s),f):s===47?(e.consume(s),a=!0,h):s===63?(e.consume(s),i=3,r.interrupt?t:j):Eh(s)?(e.consume(s),o=String.fromCharCode(s),g):n(s)}function f(a){return a===45?(e.consume(a),i=2,p):a===91?(e.consume(a),i=5,s=0,m):Eh(a)?(e.consume(a),i=4,r.interrupt?t:j):n(a)}function p(i){return i===45?(e.consume(i),r.interrupt?t:j):n(i)}function m(i){return i===`CDATA[`.charCodeAt(s++)?(e.consume(i),s===6?r.interrupt?t:O:m):n(i)}function h(t){return Eh(t)?(e.consume(t),o=String.fromCharCode(t),g):n(t)}function g(s){if(s===null||s===47||s===62||Nh(s)){let c=s===47,l=o.toLowerCase();return!c&&!a&&Gg.includes(l)?(i=1,r.interrupt?t(s):O(s)):Wg.includes(o.toLowerCase())?(i=6,c?(e.consume(s),_):r.interrupt?t(s):O(s)):(i=7,r.interrupt&&!r.parser.lazy[r.now().line]?n(s):a?v(s):y(s))}return s===45||Dh(s)?(e.consume(s),o+=String.fromCharCode(s),g):n(s)}function _(i){return i===62?(e.consume(i),r.interrupt?t:O):n(i)}function v(t){return Ph(t)?(e.consume(t),v):E(t)}function y(t){return t===47?(e.consume(t),E):t===58||t===95||Eh(t)?(e.consume(t),b):Ph(t)?(e.consume(t),y):E(t)}function b(t){return t===45||t===46||t===58||t===95||Dh(t)?(e.consume(t),b):x(t)}function x(t){return t===61?(e.consume(t),S):Ph(t)?(e.consume(t),x):y(t)}function S(t){return t===null||t===60||t===61||t===62||t===96?n(t):t===34||t===39?(e.consume(t),c=t,C):Ph(t)?(e.consume(t),S):w(t)}function C(t){return t===c?(e.consume(t),c=null,T):t===null||z(t)?n(t):(e.consume(t),C)}function w(t){return t===null||t===34||t===39||t===47||t===60||t===61||t===62||t===96||Nh(t)?x(t):(e.consume(t),w)}function T(e){return e===47||e===62||Ph(e)?y(e):n(e)}function E(t){return t===62?(e.consume(t),D):n(t)}function D(t){return t===null||z(t)?O(t):Ph(t)?(e.consume(t),D):n(t)}function O(t){return t===45&&i===2?(e.consume(t),te):t===60&&i===1?(e.consume(t),ne):t===62&&i===4?(e.consume(t),M):t===63&&i===3?(e.consume(t),j):t===93&&i===5?(e.consume(t),ie):z(t)&&(i===6||i===7)?(e.exit(`htmlFlowData`),e.check(qg,ae,ee)(t)):t===null||z(t)?(e.exit(`htmlFlowData`),ee(t)):(e.consume(t),O)}function ee(t){return e.check(Jg,k,ae)(t)}function k(t){return e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),A}function A(t){return t===null||z(t)?ee(t):(e.enter(`htmlFlowData`),O(t))}function te(t){return t===45?(e.consume(t),j):O(t)}function ne(t){return t===47?(e.consume(t),o=``,re):O(t)}function re(t){if(t===62){let n=o.toLowerCase();return Gg.includes(n)?(e.consume(t),M):O(t)}return Eh(t)&&o.length<8?(e.consume(t),o+=String.fromCharCode(t),re):O(t)}function ie(t){return t===93?(e.consume(t),j):O(t)}function j(t){return t===62?(e.consume(t),M):t===45&&i===2?(e.consume(t),j):O(t)}function M(t){return t===null||z(t)?(e.exit(`htmlFlowData`),ae(t)):(e.consume(t),M)}function ae(n){return e.exit(`htmlFlow`),t(n)}}function Zg(e,t,n){let r=this;return i;function i(t){return z(t)?(e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),a):n(t)}function a(e){return r.parser.lazy[r.now().line]?n(e):t(e)}}function Qg(e,t,n){return r;function r(r){return e.enter(`lineEnding`),e.consume(r),e.exit(`lineEnding`),e.attempt(eg,t,n)}}var $g={name:`htmlText`,tokenize:e_};function e_(e,t,n){let r=this,i,a,o;return s;function s(t){return e.enter(`htmlText`),e.enter(`htmlTextData`),e.consume(t),c}function c(t){return t===33?(e.consume(t),l):t===47?(e.consume(t),x):t===63?(e.consume(t),y):Eh(t)?(e.consume(t),w):n(t)}function l(t){return t===45?(e.consume(t),u):t===91?(e.consume(t),a=0,m):Eh(t)?(e.consume(t),v):n(t)}function u(t){return t===45?(e.consume(t),p):n(t)}function d(t){return t===null?n(t):t===45?(e.consume(t),f):z(t)?(o=d,ne(t)):(e.consume(t),d)}function f(t){return t===45?(e.consume(t),p):d(t)}function p(e){return e===62?te(e):e===45?f(e):d(e)}function m(t){return t===`CDATA[`.charCodeAt(a++)?(e.consume(t),a===6?h:m):n(t)}function h(t){return t===null?n(t):t===93?(e.consume(t),g):z(t)?(o=h,ne(t)):(e.consume(t),h)}function g(t){return t===93?(e.consume(t),_):h(t)}function _(t){return t===62?te(t):t===93?(e.consume(t),_):h(t)}function v(t){return t===null||t===62?te(t):z(t)?(o=v,ne(t)):(e.consume(t),v)}function y(t){return t===null?n(t):t===63?(e.consume(t),b):z(t)?(o=y,ne(t)):(e.consume(t),y)}function b(e){return e===62?te(e):y(e)}function x(t){return Eh(t)?(e.consume(t),S):n(t)}function S(t){return t===45||Dh(t)?(e.consume(t),S):C(t)}function C(t){return z(t)?(o=C,ne(t)):Ph(t)?(e.consume(t),C):te(t)}function w(t){return t===45||Dh(t)?(e.consume(t),w):t===47||t===62||Nh(t)?T(t):n(t)}function T(t){return t===47?(e.consume(t),te):t===58||t===95||Eh(t)?(e.consume(t),E):z(t)?(o=T,ne(t)):Ph(t)?(e.consume(t),T):te(t)}function E(t){return t===45||t===46||t===58||t===95||Dh(t)?(e.consume(t),E):D(t)}function D(t){return t===61?(e.consume(t),O):z(t)?(o=D,ne(t)):Ph(t)?(e.consume(t),D):T(t)}function O(t){return t===null||t===60||t===61||t===62||t===96?n(t):t===34||t===39?(e.consume(t),i=t,ee):z(t)?(o=O,ne(t)):Ph(t)?(e.consume(t),O):(e.consume(t),k)}function ee(t){return t===i?(e.consume(t),i=void 0,A):t===null?n(t):z(t)?(o=ee,ne(t)):(e.consume(t),ee)}function k(t){return t===null||t===34||t===39||t===60||t===61||t===96?n(t):t===47||t===62||Nh(t)?T(t):(e.consume(t),k)}function A(e){return e===47||e===62||Nh(e)?T(e):n(e)}function te(r){return r===62?(e.consume(r),e.exit(`htmlTextData`),e.exit(`htmlText`),t):n(r)}function ne(t){return e.exit(`htmlTextData`),e.enter(`lineEnding`),e.consume(t),e.exit(`lineEnding`),re}function re(t){return Ph(t)?zh(e,ie,`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(t):ie(t)}function ie(t){return e.enter(`htmlTextData`),o(t)}}var t_={name:`labelEnd`,resolveAll:a_,resolveTo:o_,tokenize:s_},n_={tokenize:c_},r_={tokenize:l_},i_={tokenize:u_};function a_(e){let t=-1,n=[];for(;++t<e.length;){let r=e[t][1];if(n.push(e[t]),r.type===`labelImage`||r.type===`labelLink`||r.type===`labelEnd`){let e=r.type===`labelImage`?4:2;r.type=`data`,t+=e}}return e.length!==n.length&&vh(e,0,e.length,n),e}function o_(e,t){let n=e.length,r=0,i,a,o,s;for(;n--;)if(i=e[n][1],a){if(i.type===`link`||i.type===`labelLink`&&i._inactive)break;e[n][0]===`enter`&&i.type===`labelLink`&&(i._inactive=!0)}else if(o){if(e[n][0]===`enter`&&(i.type===`labelImage`||i.type===`labelLink`)&&!i._balanced&&(a=n,i.type!==`labelLink`)){r=2;break}}else i.type===`labelEnd`&&(o=n);let c={type:e[a][1].type===`labelLink`?`link`:`image`,start:{...e[a][1].start},end:{...e[e.length-1][1].end}},l={type:`label`,start:{...e[a][1].start},end:{...e[o][1].end}},u={type:`labelText`,start:{...e[a+r+2][1].end},end:{...e[o-2][1].start}};return s=[[`enter`,c,t],[`enter`,l,t]],s=yh(s,e.slice(a+1,a+r+3)),s=yh(s,[[`enter`,u,t]]),s=yh(s,qh(t.parser.constructs.insideSpan.null,e.slice(a+r+4,o-3),t)),s=yh(s,[[`exit`,u,t],e[o-2],e[o-1],[`exit`,l,t]]),s=yh(s,e.slice(o+1)),s=yh(s,[[`exit`,c,t]]),vh(e,a,e.length,s),e}function s_(e,t,n){let r=this,i=r.events.length,a,o;for(;i--;)if((r.events[i][1].type===`labelImage`||r.events[i][1].type===`labelLink`)&&!r.events[i][1]._balanced){a=r.events[i][1];break}return s;function s(t){return a?a._inactive?d(t):(o=r.parser.defined.includes(Th(r.sliceSerialize({start:a.end,end:r.now()}))),e.enter(`labelEnd`),e.enter(`labelMarker`),e.consume(t),e.exit(`labelMarker`),e.exit(`labelEnd`),c):n(t)}function c(t){return t===40?e.attempt(n_,u,o?u:d)(t):t===91?e.attempt(r_,u,o?l:d)(t):o?u(t):d(t)}function l(t){return e.attempt(i_,u,d)(t)}function u(e){return t(e)}function d(e){return a._balanced=!0,n(e)}}function c_(e,t,n){return r;function r(t){return e.enter(`resource`),e.enter(`resourceMarker`),e.consume(t),e.exit(`resourceMarker`),i}function i(t){return Nh(t)?Pg(e,a)(t):a(t)}function a(t){return t===41?u(t):jg(e,o,s,`resourceDestination`,`resourceDestinationLiteral`,`resourceDestinationLiteralMarker`,`resourceDestinationRaw`,`resourceDestinationString`,32)(t)}function o(t){return Nh(t)?Pg(e,c)(t):u(t)}function s(e){return n(e)}function c(t){return t===34||t===39||t===40?Ng(e,l,n,`resourceTitle`,`resourceTitleMarker`,`resourceTitleString`)(t):u(t)}function l(t){return Nh(t)?Pg(e,u)(t):u(t)}function u(r){return r===41?(e.enter(`resourceMarker`),e.consume(r),e.exit(`resourceMarker`),e.exit(`resource`),t):n(r)}}function l_(e,t,n){let r=this;return i;function i(t){return Mg.call(r,e,a,o,`reference`,`referenceMarker`,`referenceString`)(t)}function a(e){return r.parser.defined.includes(Th(r.sliceSerialize(r.events[r.events.length-1][1]).slice(1,-1)))?t(e):n(e)}function o(e){return n(e)}}function u_(e,t,n){return r;function r(t){return e.enter(`reference`),e.enter(`referenceMarker`),e.consume(t),e.exit(`referenceMarker`),i}function i(r){return r===93?(e.enter(`referenceMarker`),e.consume(r),e.exit(`referenceMarker`),e.exit(`reference`),t):n(r)}}var d_={name:`labelStartImage`,resolveAll:t_.resolveAll,tokenize:f_};function f_(e,t,n){let r=this;return i;function i(t){return e.enter(`labelImage`),e.enter(`labelImageMarker`),e.consume(t),e.exit(`labelImageMarker`),a}function a(t){return t===91?(e.enter(`labelMarker`),e.consume(t),e.exit(`labelMarker`),e.exit(`labelImage`),o):n(t)}function o(e){return e===94&&`_hiddenFootnoteSupport`in r.parser.constructs?n(e):t(e)}}var p_={name:`labelStartLink`,resolveAll:t_.resolveAll,tokenize:m_};function m_(e,t,n){let r=this;return i;function i(t){return e.enter(`labelLink`),e.enter(`labelMarker`),e.consume(t),e.exit(`labelMarker`),e.exit(`labelLink`),a}function a(e){return e===94&&`_hiddenFootnoteSupport`in r.parser.constructs?n(e):t(e)}}var h_={name:`lineEnding`,tokenize:g_};function g_(e,t){return n;function n(n){return e.enter(`lineEnding`),e.consume(n),e.exit(`lineEnding`),zh(e,t,`linePrefix`)}}var __={name:`thematicBreak`,tokenize:v_};function v_(e,t,n){let r=0,i;return a;function a(t){return e.enter(`thematicBreak`),o(t)}function o(e){return i=e,s(e)}function s(a){return a===i?(e.enter(`thematicBreakSequence`),c(a)):r>=3&&(a===null||z(a))?(e.exit(`thematicBreak`),t(a)):n(a)}function c(t){return t===i?(e.consume(t),r++,c):(e.exit(`thematicBreakSequence`),Ph(t)?zh(e,s,`whitespace`)(t):s(t))}}var y_={continuation:{tokenize:C_},exit:T_,name:`list`,tokenize:S_},b_={partial:!0,tokenize:E_},x_={partial:!0,tokenize:w_};function S_(e,t,n){let r=this,i=r.events[r.events.length-1],a=i&&i[1].type===`linePrefix`?i[2].sliceSerialize(i[1],!0).length:0,o=0;return s;function s(t){let i=r.containerState.type||(t===42||t===43||t===45?`listUnordered`:`listOrdered`);if(i===`listUnordered`?!r.containerState.marker||t===r.containerState.marker:Ah(t)){if(r.containerState.type||(r.containerState.type=i,e.enter(i,{_container:!0})),i===`listUnordered`)return e.enter(`listItemPrefix`),t===42||t===45?e.check(__,n,l)(t):l(t);if(!r.interrupt||t===49)return e.enter(`listItemPrefix`),e.enter(`listItemValue`),c(t)}return n(t)}function c(t){return Ah(t)&&++o<10?(e.consume(t),c):(!r.interrupt||o<2)&&(r.containerState.marker?t===r.containerState.marker:t===41||t===46)?(e.exit(`listItemValue`),l(t)):n(t)}function l(t){return e.enter(`listItemMarker`),e.consume(t),e.exit(`listItemMarker`),r.containerState.marker=r.containerState.marker||t,e.check(eg,r.interrupt?n:u,e.attempt(b_,f,d))}function u(e){return r.containerState.initialBlankLine=!0,a++,f(e)}function d(t){return Ph(t)?(e.enter(`listItemPrefixWhitespace`),e.consume(t),e.exit(`listItemPrefixWhitespace`),f):n(t)}function f(n){return r.containerState.size=a+r.sliceSerialize(e.exit(`listItemPrefix`),!0).length,t(n)}}function C_(e,t,n){let r=this;return r.containerState._closeFlow=void 0,e.check(eg,i,a);function i(n){return r.containerState.furtherBlankLines=r.containerState.furtherBlankLines||r.containerState.initialBlankLine,zh(e,t,`listItemIndent`,r.containerState.size+1)(n)}function a(n){return r.containerState.furtherBlankLines||!Ph(n)?(r.containerState.furtherBlankLines=void 0,r.containerState.initialBlankLine=void 0,o(n)):(r.containerState.furtherBlankLines=void 0,r.containerState.initialBlankLine=void 0,e.attempt(x_,t,o)(n))}function o(i){return r.containerState._closeFlow=!0,r.interrupt=void 0,zh(e,e.attempt(y_,t,n),`linePrefix`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:4)(i)}}function w_(e,t,n){let r=this;return zh(e,i,`listItemIndent`,r.containerState.size+1);function i(e){let i=r.events[r.events.length-1];return i&&i[1].type===`listItemIndent`&&i[2].sliceSerialize(i[1],!0).length===r.containerState.size?t(e):n(e)}}function T_(e){e.exit(this.containerState.type)}function E_(e,t,n){let r=this;return zh(e,i,`listItemPrefixWhitespace`,r.parser.constructs.disable.null.includes(`codeIndented`)?void 0:5);function i(e){let i=r.events[r.events.length-1];return!Ph(e)&&i&&i[1].type===`listItemPrefixWhitespace`?t(e):n(e)}}var D_={name:`setextUnderline`,resolveTo:O_,tokenize:k_};function O_(e,t){let n=e.length,r,i,a;for(;n--;)if(e[n][0]===`enter`){if(e[n][1].type===`content`){r=n;break}e[n][1].type===`paragraph`&&(i=n)}else e[n][1].type===`content`&&e.splice(n,1),!a&&e[n][1].type===`definition`&&(a=n);let o={type:`setextHeading`,start:{...e[r][1].start},end:{...e[e.length-1][1].end}};return e[i][1].type=`setextHeadingText`,a?(e.splice(i,0,[`enter`,o,t]),e.splice(a+1,0,[`exit`,e[r][1],t]),e[r][1].end={...e[a][1].end}):e[r][1]=o,e.push([`exit`,o,t]),e}function k_(e,t,n){let r=this,i;return a;function a(t){let a=r.events.length,s;for(;a--;)if(r.events[a][1].type!==`lineEnding`&&r.events[a][1].type!==`linePrefix`&&r.events[a][1].type!==`content`){s=r.events[a][1].type===`paragraph`;break}return!r.parser.lazy[r.now().line]&&(r.interrupt||s)?(e.enter(`setextHeadingLine`),i=t,o(t)):n(t)}function o(t){return e.enter(`setextHeadingLineSequence`),s(t)}function s(t){return t===i?(e.consume(t),s):(e.exit(`setextHeadingLineSequence`),Ph(t)?zh(e,c,`lineSuffix`)(t):c(t))}function c(r){return r===null||z(r)?(e.exit(`setextHeadingLine`),t(r)):n(r)}}var A_={tokenize:j_};function j_(e){let t=this,n=e.attempt(eg,r,e.attempt(this.parser.constructs.flowInitial,i,zh(e,e.attempt(this.parser.constructs.flow,i,e.attempt(Eg,i)),`linePrefix`)));return n;function r(r){if(r===null){e.consume(r);return}return e.enter(`lineEndingBlank`),e.consume(r),e.exit(`lineEndingBlank`),t.currentConstruct=void 0,n}function i(r){if(r===null){e.consume(r);return}return e.enter(`lineEnding`),e.consume(r),e.exit(`lineEnding`),t.currentConstruct=void 0,n}}var M_={resolveAll:I_()},N_=F_(`string`),P_=F_(`text`);function F_(e){return{resolveAll:I_(e===`text`?L_:void 0),tokenize:t};function t(t){let n=this,r=this.parser.constructs[e],i=t.attempt(r,a,o);return a;function a(e){return c(e)?i(e):o(e)}function o(e){if(e===null){t.consume(e);return}return t.enter(`data`),t.consume(e),s}function s(e){return c(e)?(t.exit(`data`),i(e)):(t.consume(e),s)}function c(e){if(e===null)return!0;let t=r[e],i=-1;if(t)for(;++i<t.length;){let e=t[i];if(!e.previous||e.previous.call(n,n.previous))return!0}return!1}}}function I_(e){return t;function t(t,n){let r=-1,i;for(;++r<=t.length;)i===void 0?t[r]&&t[r][1].type===`data`&&(i=r,r++):(!t[r]||t[r][1].type!==`data`)&&(r!==i+2&&(t[i][1].end=t[r-1][1].end,t.splice(i+2,r-i-2),r=i+2),i=void 0);return e?e(t,n):t}}function L_(e,t){let n=0;for(;++n<=e.length;)if((n===e.length||e[n][1].type===`lineEnding`)&&e[n-1][1].type===`data`){let r=e[n-1][1],i=t.sliceStream(r),a=i.length,o=-1,s=0,c;for(;a--;){let e=i[a];if(typeof e==`string`){for(o=e.length;e.charCodeAt(o-1)===32;)s++,o--;if(o)break;o=-1}else if(e===-2)c=!0,s++;else if(e!==-1){a++;break}}if(t._contentTypeTextTrailing&&n===e.length&&(s=0),s){let i={type:n===e.length||c||s<2?`lineSuffix`:`hardBreakTrailing`,start:{_bufferIndex:a?o:r.start._bufferIndex+o,_index:r.start._index+a,line:r.end.line,column:r.end.column-s,offset:r.end.offset-s},end:{...r.end}};r.end={...i.start},r.start.offset===r.end.offset?Object.assign(r,i):(e.splice(n,0,[`enter`,i,t],[`exit`,i,t]),n+=2)}n++}return e}var R_=s({attentionMarkers:()=>K_,contentInitial:()=>B_,disable:()=>q_,document:()=>z_,flow:()=>H_,flowInitial:()=>V_,insideSpan:()=>G_,string:()=>U_,text:()=>W_}),z_={42:y_,43:y_,45:y_,48:y_,49:y_,50:y_,51:y_,52:y_,53:y_,54:y_,55:y_,56:y_,57:y_,62:ng},B_={91:Fg},V_={[-2]:mg,[-1]:mg,32:mg},H_={35:Vg,42:__,45:[D_,__],60:Kg,61:D_,95:__,96:dg,126:dg},U_={38:cg,92:og},W_={[-5]:h_,[-4]:h_,[-3]:h_,33:d_,38:cg,42:Jh,60:[Qh,$g],91:p_,92:[zg,og],93:t_,95:Jh,96:vg},G_={null:[Jh,M_]},K_={null:[42,95]},q_={null:[]};function J_(e,t,n){let r={_bufferIndex:-1,_index:0,line:n&&n.line||1,column:n&&n.column||1,offset:n&&n.offset||0},i={},a=[],o=[],s=[],c={attempt:C(x),check:C(S),consume:v,enter:y,exit:b,interrupt:C(S,{interrupt:!0})},l={code:null,containerState:{},defineSkip:h,events:[],now:m,parser:e,previous:null,sliceSerialize:f,sliceStream:p,write:d},u=t.tokenize.call(l,c);return t.resolveAll&&a.push(t),l;function d(e){return o=yh(o,e),g(),o[o.length-1]===null?(w(t,0),l.events=qh(a,l.events,l),l.events):[]}function f(e,t){return X_(p(e),t)}function p(e){return Y_(o,e)}function m(){let{_bufferIndex:e,_index:t,line:n,column:i,offset:a}=r;return{_bufferIndex:e,_index:t,line:n,column:i,offset:a}}function h(e){i[e.line]=e.column,E()}function g(){let e;for(;r._index<o.length;){let t=o[r._index];if(typeof t==`string`)for(e=r._index,r._bufferIndex<0&&(r._bufferIndex=0);r._index===e&&r._bufferIndex<t.length;)_(t.charCodeAt(r._bufferIndex));else _(t)}}function _(e){u=u(e)}function v(e){z(e)?(r.line++,r.column=1,r.offset+=e===-3?2:1,E()):e!==-1&&(r.column++,r.offset++),r._bufferIndex<0?r._index++:(r._bufferIndex++,r._bufferIndex===o[r._index].length&&(r._bufferIndex=-1,r._index++)),l.previous=e}function y(e,t){let n=t||{};return n.type=e,n.start=m(),l.events.push([`enter`,n,l]),s.push(n),n}function b(e){let t=s.pop();return t.end=m(),l.events.push([`exit`,t,l]),t}function x(e,t){w(e,t.from)}function S(e,t){t.restore()}function C(e,t){return n;function n(n,r,i){let a,o,s,u;return Array.isArray(n)?f(n):`tokenize`in n?f([n]):d(n);function d(e){return t;function t(t){let n=t!==null&&e[t],r=t!==null&&e.null;return f([...Array.isArray(n)?n:n?[n]:[],...Array.isArray(r)?r:r?[r]:[]])(t)}}function f(e){return a=e,o=0,e.length===0?i:p(e[o])}function p(e){return n;function n(n){return u=T(),s=e,e.partial||(l.currentConstruct=e),e.name&&l.parser.constructs.disable.null.includes(e.name)?h(n):e.tokenize.call(t?Object.assign(Object.create(l),t):l,c,m,h)(n)}}function m(t){return e(s,u),r}function h(e){return u.restore(),++o<a.length?p(a[o]):i}}}function w(e,t){e.resolveAll&&!a.includes(e)&&a.push(e),e.resolve&&vh(l.events,t,l.events.length-t,e.resolve(l.events.slice(t),l)),e.resolveTo&&(l.events=e.resolveTo(l.events,l))}function T(){let e=m(),t=l.previous,n=l.currentConstruct,i=l.events.length,a=Array.from(s);return{from:i,restore:o};function o(){r=e,l.previous=t,l.currentConstruct=n,l.events.length=i,s=a,E()}}function E(){r.line in i&&r.column<2&&(r.column=i[r.line],r.offset+=i[r.line]-1)}}function Y_(e,t){let n=t.start._index,r=t.start._bufferIndex,i=t.end._index,a=t.end._bufferIndex,o;if(n===i)o=[e[n].slice(r,a)];else{if(o=e.slice(n,i),r>-1){let e=o[0];typeof e==`string`?o[0]=e.slice(r):o.shift()}a>0&&o.push(e[i].slice(0,a))}return o}function X_(e,t){let n=-1,r=[],i;for(;++n<e.length;){let a=e[n],o;if(typeof a==`string`)o=a;else switch(a){case-5:o=`\r`;break;case-4:o=`
 `;break;case-3:o=`\r
 `;break;case-2:o=t?` `:`	`;break;case-1:if(!t&&i)continue;o=` `;break;default:o=String.fromCharCode(a)}i=a===-2,r.push(o)}return r.join(``)}function Z_(e){let t={constructs:xh([R_,...(e||{}).extensions||[]]),content:n(Bh),defined:[],document:n(Hh),flow:n(A_),lazy:{},string:n(N_),text:n(P_)};return t;function n(e){return n;function n(n){return J_(t,e,n)}}}function Q_(e){for(;!wg(e););return e}var $_=/[\0\t\n\r]/g;function ev(){let e=1,t=``,n=!0,r;return i;function i(i,a,o){let s=[],c,l,u,d,f;for(i=t+(typeof i==`string`?i.toString():new TextDecoder(a||void 0).decode(i)),u=0,t=``,n&&=(i.charCodeAt(0)===65279&&u++,void 0);u<i.length;){if($_.lastIndex=u,c=$_.exec(i),d=c&&c.index!==void 0?c.index:i.length,f=i.charCodeAt(d),!c){t=i.slice(u);break}if(f===10&&u===d&&r)s.push(-3),r=void 0;else switch(r&&=(s.push(-5),void 0),u<d&&(s.push(i.slice(u,d)),e+=d-u),f){case 0:s.push(65533),e++;break;case 9:for(l=Math.ceil(e/4)*4,s.push(-2);e++<l;)s.push(-1);break;case 10:s.push(-4),e=1;break;default:r=!0,e=1}u=d+1}return o&&(r&&s.push(-5),t&&s.push(t),s.push(null)),s}}var tv=/\\([!-/:-@[-`{-~])|&(#(?:\d{1,7}|x[\da-f]{1,6})|[\da-z]{1,31});/gi;function nv(e){return e.replace(tv,rv)}function rv(e,t,n){if(t)return t;if(n.charCodeAt(0)===35){let e=n.charCodeAt(1),t=e===120||e===88;return wh(n.slice(t?2:1),t?16:10)}return _h(n)||e}var iv={}.hasOwnProperty;function av(e,t,n){return t&&typeof t==`object`&&(n=t,t=void 0),ov(n)(Q_(Z_(n).document().write(ev()(e,t,!0))))}function ov(e){let t={transforms:[],canContainEols:[`emphasis`,`fragment`,`heading`,`paragraph`,`strong`],enter:{autolink:a(xe),autolinkProtocol:T,autolinkEmail:T,atxHeading:a(ve),blockQuote:a(pe),characterEscape:T,characterReference:T,codeFenced:a(me),codeFencedFenceInfo:o,codeFencedFenceMeta:o,codeIndented:a(me,o),codeText:a(he,o),codeTextData:T,data:T,codeFlowValue:T,definition:a(ge),definitionDestinationString:o,definitionLabelString:o,definitionTitleString:o,emphasis:a(_e),hardBreakEscape:a(ye),hardBreakTrailing:a(ye),htmlFlow:a(N,o),htmlFlowData:T,htmlText:a(N,o),htmlTextData:T,image:a(be),label:o,link:a(xe),listItem:a(Ce),listItemValue:f,listOrdered:a(Se,d),listUnordered:a(Se),paragraph:a(we),reference:oe,referenceString:o,resourceDestinationString:o,resourceTitleString:o,setextHeading:a(ve),strong:a(Te),thematicBreak:a(De)},exit:{atxHeading:c(),atxHeadingSequence:x,autolink:c(),autolinkEmail:fe,autolinkProtocol:de,blockQuote:c(),characterEscapeValue:E,characterReferenceMarkerHexadecimal:ce,characterReferenceMarkerNumeric:ce,characterReferenceValue:le,characterReference:ue,codeFenced:c(g),codeFencedFence:h,codeFencedFenceInfo:p,codeFencedFenceMeta:m,codeFlowValue:E,codeIndented:c(_),codeText:c(A),codeTextData:E,data:E,definition:c(),definitionDestinationString:b,definitionLabelString:v,definitionTitleString:y,emphasis:c(),hardBreakEscape:c(O),hardBreakTrailing:c(O),htmlFlow:c(ee),htmlFlowData:E,htmlText:c(k),htmlTextData:E,image:c(ne),label:ie,labelText:re,lineEnding:D,link:c(te),listItem:c(),listOrdered:c(),listUnordered:c(),paragraph:c(),referenceString:se,resourceDestinationString:j,resourceTitleString:M,resource:ae,setextHeading:c(w),setextHeadingLineSequence:C,setextHeadingText:S,strong:c(),thematicBreak:c()}};cv(t,(e||{}).mdastExtensions||[]);let n={};return r;function r(e){let r={type:`root`,children:[]},a={stack:[r],tokenStack:[],config:t,enter:s,exit:l,buffer:o,resume:u,data:n},c=[],d=-1;for(;++d<e.length;)(e[d][1].type===`listOrdered`||e[d][1].type===`listUnordered`)&&(e[d][0]===`enter`?c.push(d):d=i(e,c.pop(),d));for(d=-1;++d<e.length;){let n=t[e[d][0]];iv.call(n,e[d][1].type)&&n[e[d][1].type].call(Object.assign({sliceSerialize:e[d][2].sliceSerialize},a),e[d][1])}if(a.tokenStack.length>0){let e=a.tokenStack[a.tokenStack.length-1];(e[1]||uv).call(a,void 0,e[0])}for(r.position={start:sv(e.length>0?e[0][1].start:{line:1,column:1,offset:0}),end:sv(e.length>0?e[e.length-2][1].end:{line:1,column:1,offset:0})},d=-1;++d<t.transforms.length;)r=t.transforms[d](r)||r;return r}function i(e,t,n){let r=t-1,i=-1,a=!1,o,s,c,l;for(;++r<=n;){let t=e[r];switch(t[1].type){case`listUnordered`:case`listOrdered`:case`blockQuote`:t[0]===`enter`?i++:i--,l=void 0;break;case`lineEndingBlank`:t[0]===`enter`&&(o&&!l&&!i&&!c&&(c=r),l=void 0);break;case`linePrefix`:case`listItemValue`:case`listItemMarker`:case`listItemPrefix`:case`listItemPrefixWhitespace`:break;default:l=void 0}if(!i&&t[0]===`enter`&&t[1].type===`listItemPrefix`||i===-1&&t[0]===`exit`&&(t[1].type===`listUnordered`||t[1].type===`listOrdered`)){if(o){let i=r;for(s=void 0;i--;){let t=e[i];if(t[1].type===`lineEnding`||t[1].type===`lineEndingBlank`){if(t[0]===`exit`)continue;s&&(e[s][1].type=`lineEndingBlank`,a=!0),t[1].type=`lineEnding`,s=i}else if(!(t[1].type===`linePrefix`||t[1].type===`blockQuotePrefix`||t[1].type===`blockQuotePrefixWhitespace`||t[1].type===`blockQuoteMarker`||t[1].type===`listItemIndent`))break}c&&(!s||c<s)&&(o._spread=!0),o.end=Object.assign({},s?e[s][1].start:t[1].end),e.splice(s||r,0,[`exit`,o,t[2]]),r++,n++}if(t[1].type===`listItemPrefix`){let i={type:`listItem`,_spread:!1,start:Object.assign({},t[1].start),end:void 0};o=i,e.splice(r,0,[`enter`,i,t[2]]),r++,n++,c=void 0,l=!0}}}return e[t][1]._spread=a,n}function a(e,t){return n;function n(n){s.call(this,e(n),n),t&&t.call(this,n)}}function o(){this.stack.push({type:`fragment`,children:[]})}function s(e,t,n){this.stack[this.stack.length-1].children.push(e),this.stack.push(e),this.tokenStack.push([t,n||void 0]),e.position={start:sv(t.start),end:void 0}}function c(e){return t;function t(t){e&&e.call(this,t),l.call(this,t)}}function l(e,t){let n=this.stack.pop(),r=this.tokenStack.pop();if(r)r[0].type!==e.type&&(t?t.call(this,e,r[0]):(r[1]||uv).call(this,e,r[0]));else throw Error("Cannot close `"+e.type+"` ("+Am({start:e.start,end:e.end})+`): it’s not open`);n.position.end=sv(e.end)}function u(){return fh(this.stack.pop())}function d(){this.data.expectingFirstListItemValue=!0}function f(e){if(this.data.expectingFirstListItemValue){let t=this.stack[this.stack.length-2];t.start=Number.parseInt(this.sliceSerialize(e),10),this.data.expectingFirstListItemValue=void 0}}function p(){let e=this.resume(),t=this.stack[this.stack.length-1];t.lang=e}function m(){let e=this.resume(),t=this.stack[this.stack.length-1];t.meta=e}function h(){this.data.flowCodeInside||(this.buffer(),this.data.flowCodeInside=!0)}function g(){let e=this.resume(),t=this.stack[this.stack.length-1];t.value=e.replace(/^(\r?\n|\r)|(\r?\n|\r)$/g,``),this.data.flowCodeInside=void 0}function _(){let e=this.resume(),t=this.stack[this.stack.length-1];t.value=e.replace(/(\r?\n|\r)$/g,``)}function v(e){let t=this.resume(),n=this.stack[this.stack.length-1];n.label=t,n.identifier=Th(this.sliceSerialize(e)).toLowerCase()}function y(){let e=this.resume(),t=this.stack[this.stack.length-1];t.title=e}function b(){let e=this.resume(),t=this.stack[this.stack.length-1];t.url=e}function x(e){let t=this.stack[this.stack.length-1];t.depth||=this.sliceSerialize(e).length}function S(){this.data.setextHeadingSlurpLineEnding=!0}function C(e){let t=this.stack[this.stack.length-1];t.depth=this.sliceSerialize(e).codePointAt(0)===61?1:2}function w(){this.data.setextHeadingSlurpLineEnding=void 0}function T(e){let t=this.stack[this.stack.length-1].children,n=t[t.length-1];(!n||n.type!==`text`)&&(n=Ee(),n.position={start:sv(e.start),end:void 0},t.push(n)),this.stack.push(n)}function E(e){let t=this.stack.pop();t.value+=this.sliceSerialize(e),t.position.end=sv(e.end)}function D(e){let n=this.stack[this.stack.length-1];if(this.data.atHardBreak){let t=n.children[n.children.length-1];t.position.end=sv(e.end),this.data.atHardBreak=void 0;return}!this.data.setextHeadingSlurpLineEnding&&t.canContainEols.includes(n.type)&&(T.call(this,e),E.call(this,e))}function O(){this.data.atHardBreak=!0}function ee(){let e=this.resume(),t=this.stack[this.stack.length-1];t.value=e}function k(){let e=this.resume(),t=this.stack[this.stack.length-1];t.value=e}function A(){let e=this.resume(),t=this.stack[this.stack.length-1];t.value=e}function te(){let e=this.stack[this.stack.length-1];if(this.data.inReference){let t=this.data.referenceType||`shortcut`;e.type+=`Reference`,e.referenceType=t,delete e.url,delete e.title}else delete e.identifier,delete e.label;this.data.referenceType=void 0}function ne(){let e=this.stack[this.stack.length-1];if(this.data.inReference){let t=this.data.referenceType||`shortcut`;e.type+=`Reference`,e.referenceType=t,delete e.url,delete e.title}else delete e.identifier,delete e.label;this.data.referenceType=void 0}function re(e){let t=this.sliceSerialize(e),n=this.stack[this.stack.length-2];n.label=nv(t),n.identifier=Th(t).toLowerCase()}function ie(){let e=this.stack[this.stack.length-1],t=this.resume(),n=this.stack[this.stack.length-1];this.data.inReference=!0,n.type===`link`?n.children=e.children:n.alt=t}function j(){let e=this.resume(),t=this.stack[this.stack.length-1];t.url=e}function M(){let e=this.resume(),t=this.stack[this.stack.length-1];t.title=e}function ae(){this.data.inReference=void 0}function oe(){this.data.referenceType=`collapsed`}function se(e){let t=this.resume(),n=this.stack[this.stack.length-1];n.label=t,n.identifier=Th(this.sliceSerialize(e)).toLowerCase(),this.data.referenceType=`full`}function ce(e){this.data.characterReferenceType=e.type}function le(e){let t=this.sliceSerialize(e),n=this.data.characterReferenceType,r;n?(r=wh(t,n===`characterReferenceMarkerNumeric`?10:16),this.data.characterReferenceType=void 0):r=_h(t);let i=this.stack[this.stack.length-1];i.value+=r}function ue(e){let t=this.stack.pop();t.position.end=sv(e.end)}function de(e){E.call(this,e);let t=this.stack[this.stack.length-1];t.url=this.sliceSerialize(e)}function fe(e){E.call(this,e);let t=this.stack[this.stack.length-1];t.url=`mailto:`+this.sliceSerialize(e)}function pe(){return{type:`blockquote`,children:[]}}function me(){return{type:`code`,lang:null,meta:null,value:``}}function he(){return{type:`inlineCode`,value:``}}function ge(){return{type:`definition`,identifier:``,label:null,title:null,url:``}}function _e(){return{type:`emphasis`,children:[]}}function ve(){return{type:`heading`,depth:0,children:[]}}function ye(){return{type:`break`}}function N(){return{type:`html`,value:``}}function be(){return{type:`image`,title:null,url:``,alt:null}}function xe(){return{type:`link`,title:null,url:``,children:[]}}function Se(e){return{type:`list`,ordered:e.type===`listOrdered`,start:null,spread:e._spread,children:[]}}function Ce(e){return{type:`listItem`,spread:e._spread,checked:null,children:[]}}function we(){return{type:`paragraph`,children:[]}}function Te(){return{type:`strong`,children:[]}}function Ee(){return{type:`text`,value:``}}function De(){return{type:`thematicBreak`}}}function sv(e){return{line:e.line,column:e.column,offset:e.offset}}function cv(e,t){let n=-1;for(;++n<t.length;){let r=t[n];Array.isArray(r)?cv(e,r):lv(e,r)}}function lv(e,t){let n;for(n in t)if(iv.call(t,n))switch(n){case`canContainEols`:{let r=t[n];r&&e[n].push(...r);break}case`transforms`:{let r=t[n];r&&e[n].push(...r);break}case`enter`:case`exit`:{let r=t[n];r&&Object.assign(e[n],r);break}}}function uv(e,t){throw Error(e?"Cannot close `"+e.type+"` ("+Am({start:e.start,end:e.end})+"): a different token (`"+t.type+"`, "+Am({start:t.start,end:t.end})+`) is open`:"Cannot close document, a token (`"+t.type+"`, "+Am({start:t.start,end:t.end})+`) is still open`)}function dv(e){let t=this;t.parser=n;function n(n){return av(n,{...t.data(`settings`),...e,extensions:t.data(`micromarkExtensions`)||[],mdastExtensions:t.data(`fromMarkdownExtensions`)||[]})}}function fv(e,t){let n={type:`element`,tagName:`blockquote`,properties:{},children:e.wrap(e.all(t),!0)};return e.patch(t,n),e.applyData(t,n)}function pv(e,t){let n={type:`element`,tagName:`br`,properties:{},children:[]};return e.patch(t,n),[e.applyData(t,n),{type:`text`,value:`
@@ -4663,158 +4663,6 @@ $G = 8\\pi T,$
 
 $G_{\\alpha\\beta} = 8\\pi T_{\\alpha\\beta}.$
 
-## Detailed summaries of the boxes
-
-## Box 1.1 - Mathematical notation for events, coordinates, and vectors
-This box establishes the notation used throughout the book.
-
-### Main points
-- Events are denoted by script letters.
-- Coordinates of an event can be written explicitly as $t(\\mathcal P), x(\\mathcal P), y(\\mathcal P), z(\\mathcal P)$ or more abstractly as $x^\\alpha(\\mathcal P)$.
-- The time coordinate is typically $x^0$.
-- Spatial coordinates are $x^1, x^2, x^3$.
-- One can use several coordinate systems for the same event, distinguished by bars, primes, hats, or other decorations.
-- Coordinate transformations are represented by four functions giving the new coordinates as functions of the old.
-- A separation vector between neighboring events can be denoted by $u$, $v$, or $\\xi$.
-- Vector components transform by derivatives of the coordinate transformation.
-- Einstein summation convention is introduced: repeated indices are automatically summed.
-
-### Why it matters
-This box gives the language needed for the rest of the chapter. It makes clear that coordinates are labels attached to events, while vectors are geometric objects whose component values depend on coordinate choice.
-
-## Box 1.2 - Materials of the most diverse composition fall with the same acceleration
-This box is a historical and experimental survey of universal free fall.
-
-### Main points
-- Aristotle is quoted as holding that heavier bodies fall faster.
-- Pre-Galilean literature sometimes claimed that different materials fall similarly.
-- Galileo is credited with showing that in a medium with negligible resistance, all bodies fall with nearly the same acceleration.
-- Newton compares pendulums made of different substances and finds equal acceleration to high precision.
-- Lorand von Eotvos improves the test dramatically by comparing the directions of effective acceleration for different suspended materials.
-- Roll, Krotkov, and Dicke compare aluminum and gold and find equality of fall to about one part in $10^{11}$.
-- Braginsky and Panov improve this to roughly one part in $10^{12}$.
-- Beall discusses particle-physics consequences of departures from universal free fall.
-
-### Why it matters
-The box supplies the empirical foundation for the equivalence principle. The common "standard world line" of freely falling bodies is not a philosophical guess; it is an experimental fact.
-
-## Box 1.3 - Local Lorentz geometry and local Euclidean geometry: with and without coordinates
-This is the chapter’s most important technical box.
-
-### Main points
-- It compares a tiny Euclidean patch on the apple with a tiny Lorentzian region of spacetime.
-- In coordinate-free Euclidean geometry, the Pythagorean relation characterizes distance.
-- In coordinate Euclidean form, distance is given by the ordinary sum of squares.
-- In coordinate-free Lorentz geometry, intervals are described by light rays and proper times.
-- In coordinate Lorentz form, the interval is
-  $s^2 = -(\\Delta x^0)^2 + (\\Delta x^1)^2 + (\\Delta x^2)^2 + (\\Delta x^3)^2.$
-- The box then introduces the metric tensor $g$ as a bilinear machine acting on two vectors.
-- In local Euclidean coordinates, the metric components reduce to the Kronecker delta.
-- In local Lorentz coordinates, the metric components reduce to the Minkowski matrix $\\eta_{\\alpha\\beta}$.
-
-### Why it matters
-This box is the bridge from visual geometry to modern tensor language. It shows how local Euclidean and local Lorentz structure can be described either geometrically or with coordinates, and proves that the two descriptions are equivalent.
-
-## Box 1.4 - Time today
-This box surveys the evolution of time standards.
-
-### Main points
-- Before 1956, the second was tied to the mean solar day.
-- From 1956 to 1967, the second was defined using the tropical year and ephemeris time.
-- Since 1967, the SI second has been defined by the cesium-133 hyperfine transition, namely $9{,}192{,}631{,}770$ periods.
-- The box distinguishes several time scales: UT0, UT1, UT2, Ephemeris Time, and Coordinated Universal Time (UTC).
-- UTC is held close to Earth-rotation time by occasional leap seconds.
-- A newspaper clipping about a leap second is included to illustrate this operationally.
-- The box ends with a table comparing the stability of familiar clocks, from tuning-fork watches to quartz devices, rubidium clocks, cesium clocks, hydrogen masers, and stabilized lasers.
-
-### Why it matters
-The box shows that timekeeping is not metaphysical but operational. Better clocks better approximate the time coordinate that makes motion look simple.
-
-## Box 1.5 - Test for flatness
-This box gives a practical criterion for when spacetime may be treated as flat.
-
-### Main points
-- Specify the spatial size $L$ and temporal duration $T$ of the region under study.
-- Specify the measurement precision $\\delta\\xi$ for relative separation of nearby test particles.
-- Follow initially parallel world lines through that region.
-- If relative displacements remain below the stated precision, then the region may be treated as flat to that precision.
-- The example near the Earth’s surface considers a region roughly $100\\,\\text{m}$ across followed for about $3\\,\\text{s}$.
-- Over that region, the expected relative displacement from Earth’s tidal field is about $1.72\\,\\text{mm}$.
-
-### Why it matters
-Flatness is not absolute. It is always a matter of scale and experimental precision.
-
-## Box 1.6 - Curvature of what?
-This box addresses a common misunderstanding.
-
-### Main points
-- It criticizes the idea that gravity can be explained merely as curvature of three-dimensional space.
-- It notes that ball and bullet trajectories in space have very different apparent curvatures, so space-curvature pictures alone can mislead.
-- It argues that the correct object is the curvature of spacetime.
-- Light bending by the sun is used as an example where a spacetime treatment is essential.
-- The correct observable is the relative behavior of nearby geodesics, not the embedding of trajectories in an external laboratory picture.
-
-### Why it matters
-This box prevents one of the most common conceptual mistakes in popular accounts of general relativity: replacing spacetime curvature with a purely spatial rubber-sheet picture.
-
-## Box 1.7 - Equation of motion under the influence of a gravitational field and an electromagnetic field, compared and contrasted
-This box compares electromagnetism with gravitation.
-
-### Main points
-- In electromagnetism, acceleration can be defined for a single charged particle relative to an uncharged fiducial one.
-- In gravitation, absolute acceleration of a single free particle is not meaningful in the same way; only relative acceleration between neighboring geodesics is physically significant.
-- Electromagnetic acceleration depends on charge-to-mass ratio $e/m$.
-- Gravitational tidal acceleration is universal for all test particles with the same local state of motion.
-- The driving field in electromagnetism is the electromagnetic tensor; in gravitation it is the Riemann curvature tensor.
-- The Lorentz force law is contrasted with the equation of geodesic deviation.
-
-### Why it matters
-This box clarifies why gravitation in general relativity is not just another force field. Its observable content is geometric and tidal.
-
-## Box 1.8 - Geometrized units
-This box explains the unit system used in the book.
-
-### Main points
-- The chapter sets $c = 1$, $G = 1$, and also uses Boltzmann’s constant $k = 1$ where helpful.
-- It gives conversion factors between conventional units and centimeters.
-- Examples are provided for converting mass, energy, and other quantities into geometric units.
-- The mass of the sun becomes about $1.477\\,\\text{km}$ in geometrized units.
-
-### Why it matters
-Geometrized units make spacetime geometry more transparent by expressing time, mass, and energy in the same underlying unit system.
-
-## Box 1.9 - Galileo Galilei
-This is a historical box devoted to Galileo.
-
-### Main points
-- It gives Galileo’s dates and portrait.
-- It quotes Galileo on free fall, astronomical observation, and the value of reason over authority.
-- It highlights Galileo’s role in rejecting naive Aristotelian mechanics and in opening the path toward modern kinematics and observation-based science.
-
-### Why it matters
-Galileo is presented as the early architect of the empirical and conceptual shift away from inherited authority and toward quantitative laws of motion.
-
-## Box 1.10 - Isaac Newton
-This historical box is devoted to Newton.
-
-### Main points
-- It gives Newton’s dates and image.
-- It quotes Newton on geometry, absolute space, absolute time, and his refusal to speculate beyond phenomena with the famous attitude later paraphrased as *hypotheses non fingo*.
-- It also notes Newton’s retrospective remarks about thinking about gravity in the plague years.
-
-### Why it matters
-Newton is presented both as the creator of the classical framework and as the thinker whose concepts of absolute space and time Einstein eventually had to surpass.
-
-## Box 1.11 - Albert Einstein
-This closing historical box gives Einstein’s dates and several photographs.
-
-### Main points
-- It serves primarily as a visual and biographical marker at the culmination of the chapter.
-- Placed beside the introduction of the Einstein field equation, it signals the historical transition from Newtonian gravitation to spacetime geometry.
-
-### Why it matters
-The box frames the chapter’s end as the arrival at Einstein’s synthesis: gravitation as geometry, governed by $G = 8\\pi T$.
-
 ## Final synthesis
 Chapter 1 is a conceptual overture to the whole book. It does not try to prove everything rigorously at once. Instead, it builds a layered understanding:
 
@@ -5001,7 +4849,413 @@ This elegant result shows that the orbital frequency depends **only** on the ave
 | 1.1 | Cylinder has $R = 0$ (developable surface) |
 | 1.2 | Moon's tidal effect ≈ 2.2× Sun's; Spring/Neap ratio ≈ 2.7 |
 | 1.3 | $\\omega^2 = \\frac{4\\pi}{3}\\rho_K$ (depends only on average density) |
-`;function CA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:SA})})}function wA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 1 - Geometrodynamics in Brief`}),(0,L.jsxs)(`div`,{className:`chapter1-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter1-content`,children:[e===`summary`&&(0,L.jsx)(xA,{}),e===`exercises`&&(0,L.jsx)(CA,{})]})]})})}var TA=`# Detailed Summary of Chapter 2: *Foundations of Special Relativity*
+`;function CA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:SA})})}var wA=`# Chapter 1 Boxes: Detailed Summaries
+
+## Box 1.1 - Mathematical Notation for Events, Coordinates, and Vectors
+
+This box establishes the notation used throughout the book.
+
+### Main Points
+
+- **Events** are denoted by capital script, one-letter Latin names such as $\\mathcal{P}$, $\\mathcal{Q}$, $\\mathcal{A}$, $\\mathcal{B}$.
+
+- **Coordinates of an event** $\\mathcal{P}$ are denoted by:
+  - $t(\\mathcal{P})$, $x(\\mathcal{P})$, $y(\\mathcal{P})$, $z(\\mathcal{P})$, or
+  - more abstractly by $x^\\mu(\\mathcal{P})$ or $x^\\alpha(\\mathcal{P})$.
+
+- **Greek indices** ($\\alpha, \\beta, \\ldots$) take on values 0, 1, 2, or 3.
+
+- **The time coordinate** is $x^0(\\mathcal{P})$.
+
+- **Space coordinates** are $x^1(\\mathcal{P})$, $x^2(\\mathcal{P})$, $x^3(\\mathcal{P})$, sometimes denoted $x^j(\\mathcal{P})$ or $x^k(\\mathcal{P})$ where **Latin indices** take values 1, 2, or 3.
+
+- **Shorthand notation**: One adopts $x^\\beta$ for the coordinates of event $\\mathcal{P}$, and $x^j$ for space coordinates.
+
+- **Other coordinates** for the same event may be denoted $x^{\\bar\\alpha}(\\mathcal{P})$ or just $x^{\\bar\\alpha}$, $x^{\\alpha'}(\\mathcal{P})$ or just $x^{\\alpha'}$.
+
+- **Transformation** from one coordinate system to another is achieved by four functions $x^{\\bar\\alpha}(x^0, x^1, x^2, x^3)$, denoted more succinctly $x^{\\bar\\alpha}(x^\\beta)$.
+
+- A **separation vector** reaching from one event $\\mathcal{Q}$ to neighboring event $\\mathcal{P}$ can be denoted abstractly by $\\mathbf{u}$, $\\mathbf{v}$, $\\boldsymbol{\\xi}$, or $\\mathcal{P} - \\mathcal{Q}$.
+
+- **Components of the vector**: $\\xi^\\alpha \\equiv x^\\alpha(\\mathcal{P}) - x^\\alpha(\\mathcal{Q})$.
+
+- **Transformation of components**: $\\xi^{\\bar\\alpha} = \\frac{\\partial x^{\\bar\\alpha}}{\\partial x^\\beta}\\xi^\\beta$.
+
+- **Einstein summation convention**: any index that is repeated in a product is automatically summed on.
+
+### Why It Matters
+
+This box gives the language needed for the rest of the chapter. It makes clear that coordinates are labels attached to events, while vectors are geometric objects whose component values depend on coordinate choice.
+
+---
+
+## Box 1.2 - Materials of the Most Diverse Composition Fall with the Same Acceleration ("Standard World Line")
+
+This box is a historical and experimental survey of universal free fall.
+
+### Main Points
+
+- **Aristotle**: "the downward movement of a mass of gold or lead, or of any other body endowed with weight, is quicker in proportion to its size."
+
+- **Pre-Galilean literature**: metal and wood weights fall at the same rate.
+
+- **Galileo**: 
+  1. "the variation of speed in air between balls of gold, lead, copper, porphyry, and other heavy materials is so slight that in a fall of 100 cubits [about 46 meters] a ball of gold would surely not outstrip one of copper by as much as four fingers."
+  2. Later experiments of greater precision "diluting gravity" and finding same time of descent for different objects along an inclined plane.
+
+- **Newton**: inclined plane replaced by arc of pendulum bob; "time of fall" for bodies of different composition determined by comparing time of oscillation of pendulum bobs of the two materials.
+
+- **Lorand von Eötvös, Budapest, 1889 and 1922**: compared on the rotating earth the vertical defined by a plumb bob of one material with the vertical defined by a plumb bob of other material. The direction of the supporting thread reveals the direction in which the mass is being dragged away from its normal world line of "free fall" or "weightlessness."
+
+- **Roll, Krotkov, and Dicke, Princeton, 1964**: employed as fiducial acceleration the daily alternating 0.59 cm/sec² produced by the sun's attraction. Reported $|g(\\text{Au}) - g(\\text{Al})|/g$ less than $1 \\times 10^{-11}$.
+
+- **Braginsky and Panov, Moscow, 1971**: like Roll, Krotkov, and Dicke, employed Sun's attraction as fiducial acceleration. Reported $|g(\\text{Pt}) - g(\\text{Al})|/g$ less than $1 \\times 10^{-12}$.
+
+- **Beall, 1970**: particles that are deflected less by the Earth's or the sun's gravitational field than a photon would be, effectively travel faster than light. Observations of $10^{13}$ eV muons show that muons are not "too light" by as much as $5 \\times 10^{-5}$.
+
+### Why It Matters
+
+The box supplies the empirical foundation for the equivalence principle. The common "standard world line" of freely falling bodies is not a philosophical guess; it is an experimental fact verified to extraordinary precision.
+
+---
+
+## Box 1.3 - Local Lorentz Geometry and Local Euclidean Geometry: With and Without Coordinates
+
+This is the chapter's most important technical box.
+
+### I. Local Euclidean Geometry
+
+**What does it mean to say that the geometry of a tiny thumbprint on the apple is Euclidean?**
+
+#### A. Coordinate-free Language (Euclid)
+
+Given a line $\\mathcal{A}\\mathcal{C}$. Extend it by an equal distance $\\mathcal{C}\\mathcal{X}$. Let $\\mathcal{B}$ be a point not on $\\mathcal{A}\\mathcal{X}$ but equidistant from $\\mathcal{A}$ and $\\mathcal{X}$. Then:
+
+$$s_{\\mathcal{A}\\mathcal{B}}^2 = s_{\\mathcal{A}\\mathcal{C}}^2 + s_{\\mathcal{B}\\mathcal{C}}^2.$$
+
+(Theorem of Pythagoras; also other theorems of Euclidean geometry.)
+
+#### B. Language of Coordinates (Descartes)
+
+From any point $\\mathcal{A}$ to any other point $\\mathcal{B}$ there is a distance $s$ given in suitable (Euclidean) coordinates by:
+
+$$s_{\\mathcal{A}\\mathcal{B}}^2 = [x^1(\\mathcal{B}) - x^1(\\mathcal{A})]^2 + [x^2(\\mathcal{B}) - x^2(\\mathcal{A})]^2.$$
+
+If one succeeds in finding any coordinate system where this is true for all points $\\mathcal{A}$ and $\\mathcal{B}$ in the thumbprint, then one is guaranteed that:
+- (i) this coordinate system is locally Euclidean, and
+- (ii) the geometry of the apple's surface is locally Euclidean.
+
+### II. Local Lorentz Geometry
+
+**What does it mean to say that the geometry of a sufficiently limited region of spacetime in the real physical world is Lorentzian?**
+
+#### A. Coordinate-free Language (Robb 1936)
+
+Let $\\mathcal{A}\\mathcal{X}$ be the world line of a free particle. Let $\\mathcal{B}$ be an event not on this world line. Let a light ray from $\\mathcal{B}$ strike $\\mathcal{A}\\mathcal{X}$ at the event $\\mathcal{Q}$. Let a light ray take off from such an earlier event $\\mathcal{P}$ along $\\mathcal{A}\\mathcal{X}$ that it reaches $\\mathcal{B}$. Then the proper distance $s_{\\mathcal{A}\\mathcal{B}}$ (spacelike separation) or proper time $\\tau_{\\mathcal{A}\\mathcal{B}}$ (timelike separation) is given by:
+
+$$s_{\\mathcal{A}\\mathcal{B}}^2 \\equiv -\\tau_{\\mathcal{A}\\mathcal{B}}^2 = -\\tau_{\\mathcal{A}\\mathcal{Q}}\\tau_{\\mathcal{Q}\\mathcal{P}}.$$
+
+#### B. Language of Coordinates (Lorentz, Poincaré, Minkowski, Einstein)
+
+From any event $\\mathcal{A}$ to any other nearby event $\\mathcal{B}$, there is a proper distance $s_{\\mathcal{A}\\mathcal{B}}$ or proper time $\\tau_{\\mathcal{A}\\mathcal{B}}$ given in suitable (local Lorentz) coordinates by:
+
+$$s_{\\mathcal{A}\\mathcal{B}}^2 = -\\tau_{\\mathcal{A}\\mathcal{B}}^2 = -[x^0(\\mathcal{B}) - x^0(\\mathcal{A})]^2 + [x^1(\\mathcal{B}) - x^1(\\mathcal{A})]^2 + [x^2(\\mathcal{B}) - x^2(\\mathcal{A})]^2 + [x^3(\\mathcal{B}) - x^3(\\mathcal{A})]^2.$$
+
+If one succeeds in finding any coordinate system where this is locally true for all neighboring events $\\mathcal{A}$ and $\\mathcal{B}$, then one is guaranteed that:
+- (i) this coordinate system is locally Lorentzian, and
+- (ii) the geometry of spacetime is locally Lorentzian.
+
+### III. Statements of Fact
+
+- The geometry of an apple's surface is locally Euclidean everywhere.
+- The geometry of spacetime is locally Lorentzian everywhere.
+
+### IV. Local Geometry in the Language of Modern Mathematics
+
+#### A. The Metric for Any Manifold
+
+At each point on the apple, at each event of spacetime, indeed, at each point of any "Riemannian manifold," there exists a geometrical object called the **metric tensor** $\\mathbf{g}$. It is a machine with two input slots for the insertion of two vectors:
+
+$$\\mathbf{g}(\\text{slot 1}, \\text{slot 2}).$$
+
+If one inserts the same vector $\\mathbf{u}$ into both slots, one gets out the square of the length of $\\mathbf{u}$:
+
+$$\\mathbf{g}(\\mathbf{u}, \\mathbf{u}) = \\mathbf{u}^2.$$
+
+If one inserts two different vectors, $\\mathbf{u}$ and $\\mathbf{v}$, one gets out a number called the "scalar product of $\\mathbf{u}$ on $\\mathbf{v}$" and denoted $\\mathbf{u} \\cdot \\mathbf{v}$:
+
+$$\\mathbf{g}(\\mathbf{u}, \\mathbf{v}) = \\mathbf{g}(\\mathbf{v}, \\mathbf{u}) = \\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{v} \\cdot \\mathbf{u}.$$
+
+The metric is a linear machine:
+
+$$\\mathbf{g}(2\\mathbf{u} + 3\\mathbf{w}, \\mathbf{v}) = 2\\mathbf{g}(\\mathbf{u}, \\mathbf{v}) + 3\\mathbf{g}(\\mathbf{w}, \\mathbf{v}),$$
+
+$$\\mathbf{g}(\\mathbf{u}, a\\mathbf{v} + b\\mathbf{w}) = a\\mathbf{g}(\\mathbf{u}, \\mathbf{v}) + b\\mathbf{g}(\\mathbf{u}, \\mathbf{w}).$$
+
+Consequently, in a given (arbitrary) coordinate system, its operation on two vectors can be written in terms of their components as a bilinear expression:
+
+$$\\mathbf{g}(\\mathbf{u}, \\mathbf{v}) = g_{\\alpha\\beta}u^\\alpha v^\\beta$$
+
+(implied summation on $\\alpha$, $\\beta$).
+
+#### B. Components of the Metric in Local Lorentz and Local Euclidean Frames
+
+The components of the metric are:
+
+$$g_{11} = g_{22} = 1, \\quad g_{12} = g_{21} = 0; \\quad \\text{i.e., } g_{\\alpha\\beta} = \\delta_{\\alpha\\beta} \\quad \\text{on apple, in local Euclidean coordinates;}$$
+
+$$g_{00} = -1, \\quad g_{0k} = 0, \\quad g_{jk} = \\delta_{jk} \\quad \\text{in spacetime, in local Lorentz coordinates.}$$
+
+In matrix notation:
+
+$$\\|g_{\\hat\\alpha\\hat\\beta}\\| = \\|\\eta_{\\alpha\\beta}\\| = \\begin{pmatrix} -1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\end{pmatrix}.$$
+
+### Why It Matters
+
+This box is the bridge from visual geometry to modern tensor language. It shows how local Euclidean and local Lorentz structure can be described either geometrically or with coordinates, and proves that the two descriptions are equivalent.
+
+---
+
+## Box 1.4 - Time Today
+
+This box surveys the evolution of time standards.
+
+### Main Points
+
+- **Prior to 1956**: the second was defined as the fraction 1/86,400 of the mean solar day.
+
+- **From 1956 to 1967**: the "second" meant the ephemeris second, defined as the fraction 1/(31,556,925.9747) of the tropical year 00h00m00s December 31, 1899.
+
+- **Since 1967**: the standard second has been the SI (Système International) second, defined as 9,192,631,770 periods of the unperturbed microwave transition between the two hyperfine levels of the ground state of Cs¹³³.
+
+- **Universal time, UT0**: based on the count of days as they actually occurred historically; on the actual spin of the earth on its axis.
+
+- **UT1**: the "navigator's time scale," is the same time as corrected for the wobble of the earth on its axis ($\\Delta t \\sim 0.05$ sec).
+
+- **UT2**: is UT1 as corrected for the periodic fluctuations of unknown origin with periods of one-half year and one year ($\\Delta t \\sim 0.05$ sec; measured to 3 ms in one day).
+
+- **Ephemeris Time, ET**: as defined by the theory of gravitation and by astronomical observations and calculations, is essentially determined by the orbital motion of the earth around the sun.
+
+- **Coordinated Universal Time (UTC)**: is broadcast on stations such as WWV. It was adopted internationally in February 1971 to become effective January 1, 1972. The clock rate is controlled by atomic clocks to be as uniform as possible for one year, but is changed by the infrequent addition or deletion of a second—called a "leap second"—so that UTC never differs more than 0.7 sec from the navigator's time scale, UT1.
+
+### Timekeeping Capabilities of Some Familiar Clocks
+
+| Clock | Precision |
+|-------|-----------|
+| Tuning fork wrist watch (1960) | 1 min/mo |
+| Quartz crystal clock (1921-1930) | 1 μsec/day, 1 sec/yr |
+| Quartz crystal wrist watch (1971) | 0.2 sec/2 mos., 1 sec/yr |
+| Cesium beam (atomic resonance, Cs¹³³), (1952-1955) | 0.1 μsec/day, 0.5 μsec/mo |
+| Rubidium gas cell (Rb⁸⁷ resonance), (1957) | 0.1 μsec/day, 1-5 μsec/mo |
+| Hydrogen maser (1960) | 0.01 μsec/2 hr, 0.1 μsec/day |
+| Methane stabilized laser (1969) | 0.01 μsec/100 sec |
+
+### Why It Matters
+
+The box shows that timekeeping is not metaphysical but operational. Better clocks better approximate the time coordinate that makes motion look simple.
+
+---
+
+## Box 1.5 - Test for Flatness
+
+This box gives a practical criterion for when spacetime may be treated as flat.
+
+### Main Points
+
+1. Specify the extension in space $L$ (cm or m) and extension in time $T$ (cm or m of light travel time) of the region under study.
+
+2. Specify the precision $\\delta\\xi$ with which one can measure the separation of test particles in this region.
+
+3. Follow the motion of test particles moving along initially parallel world lines through this region of spacetime.
+
+4. When the world lines remain parallel to the precision $\\delta\\xi$ for all directions of travel, then one says that "in a region so limited and to a precision so specified, spacetime is flat."
+
+### Example
+
+Region just above the surface of the earth, 100 m × 100 m × 100 m (space extension), followed for $10^9$ m of light-travel time ($T_{\\text{conv}} \\sim 3$ sec).
+
+- Mass of Earth, $m_{\\text{conv}} = 5.98 \\times 10^{27}$ g
+- $m = (0.742 \\times 10^{-28} \\text{ cm/g}) \\times (5.98 \\times 10^{27} \\text{ g}) = 0.444$ cm
+
+Tide-producing acceleration $R^z{}_{0z0}$ (relative acceleration in z-direction of two test particles initially at rest and separated from each other by 1 cm of vertical elevation) is:
+
+$$(d/dr)(m/r^2) = -2m/r^3 = -0.888 \\text{ cm}/(6.37 \\times 10^8 \\text{ cm})^3 = -3.44 \\times 10^{-27} \\text{ cm}^{-2}.$$
+
+Two test particles with a vertical separation $\\xi^z = 10^4$ cm acquire in the time $t = 10^{11}$ cm a relative displacement:
+
+$$\\delta\\xi^z = -\\frac{1}{2}R^z{}_{0z0}t^2\\xi^z = 1.72 \\times 10^{-27} \\text{ cm}^{-2}(10^{11} \\text{ cm})^2 10^4 \\text{ cm} = 1.72 \\text{ mm}.$$
+
+### Why It Matters
+
+Flatness is not absolute. It is always a matter of scale and experimental precision. When the minimum uncertainty attainable in a measurement exceeds 1.72 mm, then to this level of precision the region of spacetime under consideration can be treated as flat.
+
+---
+
+## Box 1.6 - Curvature of What?
+
+This box addresses a common misunderstanding.
+
+### Main Points
+
+- Nothing seems more attractive at first glance than the idea that gravitation is a manifestation of the curvature of space (A), and nothing more ridiculous at a second glance (B).
+
+- How can the tracks of a ball and of a bullet be curved so differently if that curvature arises from the geometry of space?
+
+- Riemann gave the world the mathematical machinery to define and calculate curvature (metric and Riemannian geometry) at the age of 28 (June 10, 1854).
+
+- To make the forward step took forty years to special relativity (1905: time on the same footing as space) and then another ten years (1915: general relativity).
+
+- Depicted in spacetime (C), the tracks of ball and bullet appear to have comparable curvature. In fact, however, neither track has any curvature at all. They both look curved in (C) only because one has forgotten that the spacetime they reside in is itself curved—curved precisely enough to make these tracks the straightest lines in existence ("geodesics").
+
+- The earth-bound laboratory has no simple status whatsoever in a proper discussion. First, it is no Lorentz frame. Second, even to mention the earth makes one think of an action-at-a-distance version of gravity.
+
+- To look at local physics, however, means to compare one geodesic of one test particle with geodesics of other test particles traveling:
+  1. nearby with
+  2. nearly the same directions and
+  3. nearly the same speeds.
+
+- Then one can "look at the separations between these nearby test particles and from the second time-rate of change of these separations and the 'equation of geodesic deviation' (equation 1.8') read out the curvature of spacetime."
+
+### Why It Matters
+
+This box prevents one of the most common conceptual mistakes in popular accounts of general relativity: replacing spacetime curvature with a purely spatial rubber-sheet picture. The correct observable is the relative behavior of nearby geodesics in spacetime, not the embedding of trajectories in an external laboratory picture.
+
+---
+
+## Box 1.7 - Equation of Motion Under the Influence of a Gravitational Field and an Electromagnetic Field, Compared and Contrasted
+
+This box compares electromagnetism with gravitation.
+
+| Feature | Electromagnetism [Lorentz force, equation (1.11)] | Gravitation [Equation of geodesic deviation (1.8')] |
+|---------|--------------------------------------------------|-----------------------------------------------------|
+| Acceleration is defined for one particle? | Yes | No |
+| Acceleration defined how? | Actual world line compared to world line of uncharged "fiducial" test particle passing through same point with same 4-velocity | Already an uncharged test particle, which can't accelerate relative to itself! Acceleration measured relative to a nearby test particle as fiduciary standard |
+| Acceleration depends on all four components of the 4-velocity of the particle? | Yes | Yes |
+| Universal acceleration for all test particles in same locations with same 4-velocity? | No: is proportional to $e/m$ | Yes |
+| Driving field | Electromagnetic field | Riemann curvature tensor |
+| Ostensible number of distinct components of driving field | $4 \\times 4 = 16$ | $4^4 = 256$ |
+| Actual number when allowance is made for symmetries of tensor | 6 | 20 |
+| Names for more familiar of these components | 3 electric, 3 magnetic | 6 components of local Newtonian tide-producing acceleration |
+
+### Why It Matters
+
+This box clarifies why gravitation in general relativity is not just another force field. Its observable content is geometric and tidal. In electromagnetism, acceleration can be defined for a single charged particle relative to an uncharged fiducial one. In gravitation, absolute acceleration of a single free particle is not meaningful in the same way; only relative acceleration between neighboring geodesics is physically significant.
+
+---
+
+## Box 1.8 - Geometrized Units
+
+This box explains the unit system used in the book.
+
+### Main Points
+
+Throughout this book, we use "geometrized units," in which the speed of light $c$, Newton's gravitational constant $G$, and Boltzmann's constant $k$ are all equal to unity. The following alternative ways to express the number 1.0 are of great value:
+
+$$1.0 = c = 2.997930 \\cdots \\times 10^{10} \\text{ cm/sec}$$
+
+$$1.0 = G/c^2 = 0.7425 \\times 10^{-28} \\text{ cm/g}$$
+
+$$1.0 = G/c^4 = 0.826 \\times 10^{-49} \\text{ cm/erg}$$
+
+$$1.0 = Gk/c^4 = 1.140 \\times 10^{-65} \\text{ cm/K}$$
+
+$$1.0 = c^2/G^{1/2} = 3.48 \\times 10^{24} \\text{ cm/gauss}^{-1}$$
+
+One can multiply a factor of unity, expressed in any one of these ways, into any term in any equation without affecting the validity of the equation. Thereby one can convert one's units of measure from grams to centimeters to seconds to ergs to...
+
+### For Example
+
+$$\\text{Mass of sun} = M_\\odot = 1.989 \\times 10^{33} \\text{ g}$$
+
+$$= (1.989 \\times 10^{33} \\text{ g}) \\times (G/c^2) = 1.477 \\times 10^5 \\text{ cm}$$
+
+$$= (1.989 \\times 10^{33} \\text{ g}) \\times (c^2) = 1.788 \\times 10^{54} \\text{ ergs}$$
+
+The standard unit, in terms of which everything is measured in this book, is centimeters. However, occasionally conventional units are used; in such cases a subscript "conv" is sometimes, but not always, appended to the quantity measured:
+
+$$M_{\\odot\\text{conv}} = 1.989 \\times 10^{33} \\text{ g}.$$
+
+### Why It Matters
+
+Geometrized units make spacetime geometry more transparent by expressing time, mass, and energy in the same underlying unit system. The mass of the sun becomes about 1.477 km in geometrized units.
+
+---
+
+## Box 1.9 - Galileo Galilei
+
+**Pisa, February 15, 1564—Arcetri, Florence, January 8, 1642**
+
+### Main Points
+
+- It gives Galileo's dates and portrait (from Uffizi Gallery, Florence).
+- It quotes Galileo on free fall, astronomical observation, and the value of reason over authority.
+
+### Key Quotes from Galileo
+
+> "In questions of science the authority of a thousand is not worth the humble reasoning of a single individual." (1632)
+
+> "The spaces described by a body falling from rest with a uniformly accelerated motion are to each other as the squares of the time intervals employed in traversing these distances." (1638)
+
+> "Everything that has been said before and imagined by other people [about the tides] is in my opinion completely invalid. But among the great men who have philosophised about this marvellous effect of nature the one who surprised me the most is Kepler."
+
+> "It is a most beautiful and delightful sight to behold [with the new telescope] the body of the Moon... the Moon certainly does not possess a smooth and polished surface, but one rough and uneven... full of vast protuberances, deep chasms and sinuosities... stars in myriads, which have never been seen before and which surpass the old, previously known, stars in number more than ten times." (*Sidereus Nuncius*, 1610)
+
+> "So the principles which are set forth in this treatise will, when taken up by thoughtful minds, lead to many another more remarkable result; and it is to be believed that it will be so on account of the nobility of the subject, which is superior to any other in nature." (1638)
+
+### Why It Matters
+
+Galileo is presented as the early architect of the empirical and conceptual shift away from inherited authority and toward quantitative laws of motion. His telescopic discoveries and kinematic insights opened the path toward modern science.
+
+---
+
+## Box 1.10 - Isaac Newton
+
+**Woolsthorpe, Lincolnshire, England, December 25, 1642—Kensington, London, March 20, 1726**
+
+### Main Points
+
+- It gives Newton's dates and image.
+- It quotes Newton on geometry, absolute space, absolute time, and his refusal to speculate beyond phenomena with the famous attitude later paraphrased as *hypotheses non fingo*.
+
+### Key Quotes from Newton
+
+> "The description of right lines and circles, upon which geometry is founded, belongs to mechanics. Geometry does not teach us to draw these lines, but requires them to be drawn."
+
+*[From p. 1 of Newton's preface to the first (1687) edition of the Principia]*
+
+> "Absolute space, in its own nature, without relation to anything external, remains always similar and immovable."
+
+> "Absolute, true, and mathematical time, of itself, and from its own nature, flows equably without relation to anything external."
+
+*[From the Scholium in the Principia]*
+
+> "I have not been able to discover the cause of those properties of gravity from phenomena, and I frame no hypotheses; for whatever is not reduced from the phenomena is to be called an hypothesis; and hypotheses... have no place in experimental philosophy... And to us it is enough that gravity does really exist, and act according to the laws which we have explained, and abundantly serves to account for all the motions of the celestial bodies, and of our sea."
+
+*[From the General Scholium added at the end of the third book of the Principia in the second edition of 1713; especially famous for the phrase often quoted from Newton's original Latin, "HYPOTHESES NON FINGO."]*
+
+> "And the same year [1665 or 1666] I began to think of gravity extending to the orb of the Moon, and having found out... All this was in the two plague years of 1665 and 1666, for in those days I was in the prime of my age for invention, and minded Mathematicks and Philosophy more than at any time since."
+
+*[From memorandum in Newton's handwriting about his discoveries on fluxions, the binomial theorem, optics, dynamics, and gravity]*
+
+### Why It Matters
+
+Newton is presented both as the creator of the classical framework and as the thinker whose concepts of absolute space and time Einstein eventually had to surpass. His refusal to speculate beyond phenomena ("hypotheses non fingo") marks a methodological commitment to empirical grounding.
+
+---
+
+## Box 1.11 - Albert Einstein
+
+This closing historical box gives Einstein's dates and several photographs.
+
+### Main Points
+
+- It serves primarily as a visual and biographical marker at the culmination of the chapter.
+- Placed beside the introduction of the Einstein field equation, it signals the historical transition from Newtonian gravitation to spacetime geometry.
+
+### Why It Matters
+
+The box frames the chapter's end as the arrival at Einstein's synthesis: gravitation as geometry, governed by $G = 8\\pi T$.
+`;function TA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:wA})})}function EA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 1 - Geometrodynamics in Brief`}),(0,L.jsxs)(`div`,{className:`chapter1-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`boxes`?`active`:``}`,onClick:()=>t(`boxes`),children:`Boxes`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter1-content`,children:[e===`summary`&&(0,L.jsx)(xA,{}),e===`boxes`&&(0,L.jsx)(TA,{}),e===`exercises`&&(0,L.jsx)(CA,{})]})]})})}var DA=`# Detailed Summary of Chapter 2: *Foundations of Special Relativity*
 
 ## Source and scope
 This document summarizes the attached Chapter 2, **"Foundations of Special Relativity."** It includes:
@@ -5657,7 +5911,7 @@ Chapter 2 builds the conceptual foundation for the rest of the book. Its deepest
 - coordinates are secondary representations,
 - and special relativity is fundamentally the geometry of Minkowski spacetime.
 
-By the end of the chapter, the reader has a toolkit that is both more rigorous and more flexible than standard component-based special relativity. That toolkit is clearly designed to carry over into curved spacetime, where coordinate-free thinking becomes indispensable.`;function EA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:TA})})}var DA=`# Chapter 2 Exercises - Solutions
+By the end of the chapter, the reader has a toolkit that is both more rigorous and more flexible than standard component-based special relativity. That toolkit is clearly designed to carry over into curved spacetime, where coordinate-free thinking becomes indispensable.`;function OA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:DA})})}var kA=`# Chapter 2 Exercises - Solutions
 
 **Source:** *Gravitation* by Misner, Thorne, and Wheeler
 
@@ -6039,7 +6293,285 @@ These are the familiar Lorentz boost matrices along the $z$-axis.
 | 2.5 | $E = -p \\cdot u$, $m^2 = -p^2$, velocity formulas |
 | 2.6 | $dT/d\\tau = \\langle dT, u \\rangle$ (directional derivative) |
 | 2.7 | Arbitrary boost verified; reduces to standard z-boost |
-`;function OA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:DA})})}function kA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter2-container`,children:[(0,L.jsxs)(`div`,{className:`chapter2-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 2 - Foundations of Special Relativity`}),(0,L.jsxs)(`div`,{className:`chapter2-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter2-content`,children:[e===`summary`&&(0,L.jsx)(EA,{}),e===`exercises`&&(0,L.jsx)(OA,{})]})]})})}var AA=`# Chapter 3 Detailed Summary: The Electromagnetic Field
+`;function AA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:kA})})}var jA=`# Chapter 2 Boxes: Detailed Summaries
+
+## Box 2.1 - Farewell to "ict"
+
+This box argues strongly against the notation $x^4 = ict$.
+
+### Main Message
+
+The imaginary time coordinate was historically introduced to make Lorentz transformations resemble Euclidean rotations and to make spacetime geometry look superficially like Euclidean geometry. The box argues that this convenience is misleading.
+
+### Reasons the Chapter Rejects $x^4 = ict$
+
+1. **Hides the vector/1-form distinction**: It obscures the distinction between quantities with upper indices (such as the components $p^\\mu$ of the energy-momentum vector) and quantities with lower indices (such as the components $p_\\mu$ of the energy-momentum 1-form). Without it, one cannot know whether a vector (§2.3) is meant or the very different geometric object that is a 1-form (§2.5).
+
+2. **Blurs Euclidean and Minkowski geometry**: Moreover, there is a significant difference between an angle on which everything depends periodically (a rotation) and a parameter the increase of which gives rise to ever-growing momentum differences (the "velocity parameter" of a Lorentz transformation; Box 2.4).
+
+3. **Hides causal structure**: If the imaginary time-coordinate hides from view the character of the geometric object being dealt with and the nature of the parameter in a transformation, it also does something even more serious: it hides the completely different metric structure (§2.4) of $+++$ geometry and $-+++$ geometry.
+
+4. **Suggests false periodicity**: In Euclidean geometry, when the distance between two points is zero, the two points must be the same point. In Lorentz-Minkowski geometry, when the interval between two events is zero, one event may be on Earth and the other on a supernova in the galaxy M31, but their separation must be a null ray (piece of a light cone).
+
+5. **Does not generalize to curved spacetime**: The backward-pointing light cone at a given event contains all the events by which that event can be influenced. The forward-pointing light cone contains all events that it can influence. The multitude of double light cones taking off from all the events of spacetime forms an interlocking causal structure. This structure makes the machinery of the physical world function as it does. If in a region where spacetime is flat, one can hide this structure from view by writing:
+
+$$(\\Delta s)^2 = (\\Delta x^1)^2 + (\\Delta x^2)^2 + (\\Delta x^3)^2 + (\\Delta x^4)^2,$$
+
+with $x^4 = ict$, no one has discovered a way to make the imaginary coordinate work in the general curved spacetime manifold. If "$x^4 = ict$" cannot be used there, it will not be used here.
+
+### Practical Conclusion
+
+In this chapter and hereafter, as throughout the literature of general relativity, a **real time coordinate** is used:
+
+$$x^0 = t = ct_{\\text{conv}}$$
+
+(superscript 0 rather than 4 to avoid any possibility of confusion with the imaginary time coordinate).
+
+### Why It Matters
+
+The box establishes the notational convention for the entire book and prevents conceptual confusion between Euclidean and Lorentzian geometry. The causal structure of spacetime—with its light cones and null rays—is fundamental to relativity and should not be hidden by misleading notation.
+
+---
+
+## Box 2.2 - Worked Exercises Using the Metric
+
+This box illustrates how the metric is used in concrete calculations.
+
+### Exercise 1: 4-Velocity Has Squared Length $-1$
+
+**Exercise:** Show that the squared length of a test particle's 4-velocity $\\mathbf{u}$ is $-1$.
+
+**Solution:** In any Lorentz frame, using the components (2.2), one calculates as follows:
+
+$$\\mathbf{u}^2 = \\mathbf{g}(\\mathbf{u}, \\mathbf{u}) = u^\\alpha u^\\beta \\eta_{\\alpha\\beta} = -(u^0)^2 + (u^1)^2 + (u^2)^2 + (u^3)^2$$
+
+$$= -\\frac{1}{1 - v^2} + \\frac{v^2}{1 - v^2} = -1.$$
+
+This establishes that the 4-velocity of a massive particle is a unit timelike vector in the chosen signature.
+
+### Exercise 2: Energy-Momentum Relation
+
+**Exercise:** Show that the rest mass of a particle is related to its energy and momentum by the famous equation:
+
+$$(mc^2)^2 = E^2 - (pc)^2$$
+
+or, equivalently (geometrized units!),
+
+$$m^2 = E^2 - p^2.$$
+
+#### First Solution
+
+The 4-momentum is defined by $\\mathbf{p} = m\\mathbf{u}$, where $\\mathbf{u}$ is the 4-velocity and $m$ is the rest mass. Consequently, its squared length is:
+
+$$\\mathbf{p}^2 = m^2 \\mathbf{u}^2 = -m^2$$
+
+$$= -(mu^0)^2 + m^2\\mathbf{u}^2 = -\\frac{m^2}{1 - v^2} + \\frac{m^2v^2}{1 - v^2}.$$
+
+$$\\uparrow \\qquad \\qquad \\qquad \\uparrow$$
+
+$$E^2 \\qquad \\qquad \\qquad p^2$$
+
+#### Second Solution
+
+In the frame of the observer, where $E$ and $\\mathbf{p}$ are measured, the 4-momentum splits into time and space parts as:
+
+$$p^0 = E, \\qquad p^1\\mathbf{e}_1 + p^2\\mathbf{e}_2 + p^3\\mathbf{e}_3 = \\mathbf{p}.$$
+
+Hence, its squared length is:
+
+$$\\mathbf{p}^2 = -E^2 + p^2.$$
+
+But in the particle's rest frame, $\\mathbf{p}$ splits as:
+
+$$p^0 = m, \\qquad p^1 = p^2 = p^3 = 0.$$
+
+Hence, its squared length is $\\mathbf{p}^2 = -m^2$. But the squared length is a geometric object defined independently of any coordinate system; so it must be the same by whatever means one calculates it:
+
+$$-\\mathbf{p}^2 = m^2 = E^2 - p^2.$$
+
+### Why It Matters
+
+The box demonstrates that $\\mathbf{p}^2$ is a geometric invariant, so the energy-momentum relation must hold in every Lorentz frame. It shows the power of the geometric approach: the same result can be derived in any frame, and the answer must agree because it represents a frame-independent geometric quantity.
+
+---
+
+## Box 2.3 - Differentials
+
+This box reinterprets the differential $df$ from elementary calculus.
+
+### Main Message
+
+The ordinary classroom phrase "the differential of $f$" is incomplete unless one specifies a direction. The box says that $df$ is not itself a number; it is a **1-form**.
+
+### Explanation
+
+The "exterior derivative" or "gradient" $df$ of a function $f$ is a more rigorous version of the elementary concept of "differential."
+
+In elementary textbooks, one is presented with the differential $df$ as representing "an infinitesimal change in the function $f(\\mathcal{P})$" associated with some infinitesimal displacement of the point $\\mathcal{P}$; but one will recall that the displacement of $\\mathcal{P}$ is left arbitrary, albeit infinitesimal. Thus $df$ represents a change in $f$ in some unspecified direction.
+
+But this is precisely what the exterior derivative $df$ represents. Choose a particular, infinitesimally long displacement $\\mathbf{v}$ of the point $\\mathcal{P}$. Let the displacement vector $\\mathbf{v}$ pierce $df$ to give the number:
+
+$$\\langle df, \\mathbf{v} \\rangle = \\partial_{\\mathbf{v}}f.$$
+
+That number is the change of $f$ in going from the tail of $\\mathbf{v}$ to its tip. Thus $df$, before it has been pierced to give a number, represents the change of $f$ in an unspecified direction.
+
+### The Act of Piercing
+
+The act of piercing $df$ with $\\mathbf{v}$ is the act of making explicit the direction in which the change is to be measured. The only failing of the textbook presentation, then, was its suggestion that $df$ was a scalar or a number; the explicit recognition of the need for specifying a direction $\\mathbf{v}$ to reduce $df$ to a number $\\langle df, \\mathbf{v} \\rangle$ shows that in fact $df$ is a **1-form**, the gradient of $f$.
+
+### Why It Matters
+
+This box connects modern differential geometry with elementary calculus by clarifying that the differential is fundamentally a covector, or 1-form. It bridges the gap between the informal "infinitesimal change" language of introductory calculus and the rigorous geometric formulation needed for general relativity.
+
+---
+
+## Box 2.4 - Lorentz Transformations
+
+This box is a compact reference sheet for the most important Lorentz transformation formulas.
+
+### Part 1: Spatial Rotations in the $x$-$y$ Plane
+
+**Rotation of Frame of Reference by Angle $\\theta$ in $x$-$y$ Plane**
+
+Slope $s = \\tan\\theta$;
+
+$$\\sin\\theta = \\frac{s}{(1 + s^2)^{1/2}}; \\qquad \\cos\\theta = \\frac{1}{(1 + s^2)^{1/2}}$$
+
+**Coordinate transformation:**
+
+$$\\bar{t} = t$$
+
+$$\\bar{x} = x\\cos\\theta + y\\sin\\theta$$
+
+$$\\bar{y} = -x\\sin\\theta + y\\cos\\theta$$
+
+$$\\bar{z} = z$$
+
+$$t = \\bar{t}$$
+
+$$x = \\bar{x}\\cos\\theta - \\bar{y}\\sin\\theta$$
+
+$$y = \\bar{x}\\sin\\theta + \\bar{y}\\cos\\theta$$
+
+$$z = \\bar{z}$$
+
+All signs follow from sign of this term. Positive by inspection of point $\\mathcal{P}$.
+
+### Combination of Two Such Rotations
+
+$$s = \\frac{s_1 + s_2}{1 - s_1s_2} \\qquad \\text{or} \\qquad \\theta = \\theta_1 + \\theta_2$$
+
+### Part 2: Boosts in the $z$-$t$ Plane
+
+**Boost of Frame of Reference by Velocity Parameter $\\alpha$ in $z$-$t$ Plane**
+
+Velocity $\\beta = \\tanh\\alpha$;
+
+$$\\sinh\\alpha = \\frac{\\beta}{(1 - \\beta^2)^{1/2}}; \\qquad \\cosh\\alpha = \\frac{1}{(1 - \\beta^2)^{1/2}} = \\text{"}\\gamma\\text{"}$$
+
+$$\\tan\\theta = \\text{velocity } \\beta = \\tanh\\alpha$$
+
+**Coordinate transformation:**
+
+$$\\bar{t} = t\\cosh\\alpha + z\\sinh\\alpha$$
+
+$$\\bar{x} = x$$
+
+$$\\bar{y} = y$$
+
+$$\\bar{z} = -t\\sinh\\alpha + z\\cosh\\alpha$$
+
+$$t = \\bar{t}\\cosh\\alpha - \\bar{z}\\sinh\\alpha$$
+
+$$\\bar{x} = x$$
+
+$$\\bar{y} = y$$
+
+$$\\bar{z} = t\\sinh\\alpha + \\bar{z}\\cosh\\alpha$$
+
+All signs follow from sign of this term. Positive because object at rest at $\\bar{z} = 0$ in rocket frame moves in direction of increasing $z$ in lab frame.
+
+### Matrix Notation
+
+$$x^\\mu = \\Lambda^\\mu{}_{\\bar{\\nu}}x^{\\bar{\\nu}}, \\qquad x^{\\bar{\\nu}} = \\Lambda^{\\bar{\\nu}}{}_\\mu x^\\mu$$
+
+$$\\|\\Lambda^\\mu{}_{\\bar{\\nu}}\\| = \\begin{vmatrix} \\cosh\\alpha & 0 & 0 & \\sinh\\alpha \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ \\sinh\\alpha & 0 & 0 & \\cosh\\alpha \\end{vmatrix}, \\quad \\|\\Lambda^{\\bar{\\nu}}{}_\\mu\\| = \\begin{vmatrix} \\cosh\\alpha & 0 & 0 & -\\sinh\\alpha \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ -\\sinh\\alpha & 0 & 0 & \\cosh\\alpha \\end{vmatrix}$$
+
+### Part 3: Transformation of Physical Quantities
+
+**Energy-momentum 4-vector:**
+
+$$E = \\bar{E}\\cosh\\alpha + p^{\\bar{z}}\\sinh\\alpha$$
+
+$$p^x = p^{\\bar{x}}$$
+
+$$p^y = p^{\\bar{y}}$$
+
+$$p^z = \\bar{E}\\sinh\\alpha + p^{\\bar{z}}\\cosh\\alpha$$
+
+**Charge density-current 4-vector:**
+
+$$\\rho = \\bar{\\rho}\\cosh\\alpha + j^{\\bar{z}}\\sinh\\alpha$$
+
+$$j^x = j^{\\bar{x}}$$
+
+$$j^y = j^{\\bar{y}}$$
+
+$$j^z = \\bar{\\rho}\\sinh\\alpha + j^{\\bar{z}}\\cosh\\alpha$$
+
+### Aberration, Incoming Photon
+
+$$\\sin\\theta = \\frac{-p_\\perp}{E} = \\frac{(1 - \\beta^2)^{1/2}\\sin\\bar{\\theta}}{1 - \\beta\\cos\\bar{\\theta}}$$
+
+$$\\cos\\theta = \\frac{-p^z}{E} = \\frac{\\cos\\bar{\\theta} - \\beta}{1 - \\beta\\cos\\bar{\\theta}}$$
+
+$$\\tan(\\theta/2) = e^\\alpha\\tan(\\bar{\\theta}/2)$$
+
+$$\\sin\\bar{\\theta} = \\frac{-\\bar{p}_\\perp}{\\bar{E}} = \\frac{(1 - \\beta^2)^{1/2}\\sin\\theta}{1 + \\beta\\cos\\theta}$$
+
+$$\\cos\\bar{\\theta} = \\frac{-\\bar{p}^z}{\\bar{E}} = \\frac{\\cos\\theta + \\beta}{1 + \\beta\\cos\\theta}$$
+
+$$\\tan(\\bar{\\theta}/2) = e^{-\\alpha}\\tan(\\theta/2)$$
+
+### Combination of Two Boosts in Same Direction
+
+$$\\beta = \\frac{\\beta_1 + \\beta_2}{1 + \\beta_1\\beta_2} \\qquad \\text{or} \\qquad \\alpha = \\alpha_1 + \\alpha_2$$
+
+### General Combinations of Boosts and Rotations
+
+Spinor formalism of Chapter 41.
+
+### Poincaré Transformation
+
+$$x^\\mu = \\Lambda^\\mu{}_{\\alpha'}x^{\\alpha'} + a^\\mu.$$
+
+**Condition on the Lorentz part of this transformation:**
+
+$$ds'^2 = \\eta_{\\alpha'\\beta'}\\,dx^{\\alpha'}\\,dx^{\\beta'} = ds^2 = \\eta_{\\mu\\nu}\\Lambda^\\mu{}_{\\alpha'}\\Lambda^\\nu{}_{\\beta'}\\,dx^{\\alpha'}\\,dx^{\\beta'}$$
+
+or $\\Lambda^T\\eta\\Lambda = \\eta$ (matrix equation, with $T$ indicating "transposed," or rows and columns interchanged).
+
+### Effect of Transformation on Other Quantities
+
+| Quantity | Transformation |
+|----------|---------------|
+| $u^\\mu = \\Lambda^\\mu{}_{\\alpha'}u^{\\alpha'}$ | (4-velocity) |
+| $p^\\mu = \\Lambda^\\mu{}_{\\alpha'}p^{\\alpha'}$ | (4-momentum) |
+| $F^{\\mu\\nu} = \\Lambda^\\mu{}_{\\alpha'}\\Lambda^\\nu{}_{\\beta'}F^{\\alpha'\\beta'}$ | (electromagnetic field) |
+| $\\mathbf{e}_{\\alpha'} = \\mathbf{e}_\\mu\\Lambda^\\mu{}_{\\alpha'}$ | (basis vectors) |
+| $\\mathbf{w}^{\\alpha'} = \\Lambda^{\\alpha'}{}_\\mu\\mathbf{w}^\\mu$ | (basis 1-forms) |
+| $\\mathbf{u} = \\mathbf{e}_{\\alpha'}u^{\\alpha'} = \\mathbf{e}_\\mu u^\\mu = \\mathbf{u}$ | (the 4-velocity vector) |
+
+| Quantity | Transformation |
+|----------|---------------|
+| $u_{\\alpha'} = u_\\mu\\Lambda^\\mu{}_{\\alpha'}$ |
+| $p_{\\alpha'} = p_\\mu\\Lambda^\\mu{}_{\\alpha'}$ |
+| $F_{\\alpha'\\beta'} = F_{\\mu\\nu}\\Lambda^\\mu{}_{\\alpha'}\\Lambda^\\nu{}_{\\beta'}$ |
+
+### Why It Matters
+
+This box provides the essential computational toolkit for working with Lorentz transformations. It shows how all physical quantities transform under changes of reference frame, from simple coordinate transformations to the transformation of tensors and basis objects. The matrix condition $\\Lambda^T\\eta\\Lambda = \\eta$ is the fundamental statement that Lorentz transformations preserve the Minkowski metric.
+`;function MA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:jA})})}function NA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter2-container`,children:[(0,L.jsxs)(`div`,{className:`chapter2-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 2 - Foundations of Special Relativity`}),(0,L.jsxs)(`div`,{className:`chapter2-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`boxes`?`active`:``}`,onClick:()=>t(`boxes`),children:`Boxes`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter2-content`,children:[e===`summary`&&(0,L.jsx)(OA,{}),e===`boxes`&&(0,L.jsx)(MA,{}),e===`exercises`&&(0,L.jsx)(AA,{})]})]})})}var PA=`# Chapter 3 Detailed Summary: The Electromagnetic Field
 
 ## Overall purpose of the chapter
 
@@ -6593,7 +7125,7 @@ The stress-energy tensor $T^{\\mu\\nu}$ shows that fields themselves store and t
 
 Chapter 3 is a foundational bridge chapter. It starts with the familiar Lorentz force law and ends with a fully geometric account of electromagnetism in spacetime language. Along the way it teaches the reader how to think about tensors as geometric machines, how to translate between geometric and component languages, how Maxwell’s equations become elegant in tensor form, and how electromagnetism naturally leads to potentials, gauge invariance, and stress-energy.
 
-If Chapter 2 emphasized motion and collisions, Chapter 3 shows that in relativity the correct language for fields is not separate “electric” and “magnetic” pictures, but unified spacetime geometry.`;function jA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:AA})})}var MA=`# Chapter 3 Exercises - Solutions
+If Chapter 2 emphasized motion and collisions, Chapter 3 shows that in relativity the correct language for fields is not separate “electric” and “magnetic” pictures, but unified spacetime geometry.`;function FA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:PA})})}var IA=`# Chapter 3 Exercises - Solutions
 
 **Source:** *Gravitation* by Misner, Thorne, and Wheeler
 
@@ -7393,7 +7925,7 @@ This is the Lorentz force density—the rate of energy-momentum transfer from fi
 | 3.16 | Charge conservation |
 | 3.17 | Vector potential and gauge |
 | 3.18 | Stress-energy tensor divergence |
-`;function NA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:MA})})}function PA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter3-container`,children:[(0,L.jsxs)(`div`,{className:`chapter3-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 3 - The Electromagnetic Field`}),(0,L.jsxs)(`div`,{className:`chapter3-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter3-content`,children:[e===`summary`&&(0,L.jsx)(jA,{}),e===`exercises`&&(0,L.jsx)(NA,{})]})]})})}var FA=`# Detailed Summary of Chapter 4: *Electromagnetism and Differential Forms*
+`;function LA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:IA})})}function RA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter3-container`,children:[(0,L.jsxs)(`div`,{className:`chapter3-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 3 - The Electromagnetic Field`}),(0,L.jsxs)(`div`,{className:`chapter3-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter3-content`,children:[e===`summary`&&(0,L.jsx)(FA,{}),e===`exercises`&&(0,L.jsx)(LA,{})]})]})})}var zA=`# Detailed Summary of Chapter 4: *Electromagnetism and Differential Forms*
 
 ## Source and scope
 This summary covers the attached chapter titled **"Electromagnetism and Differential Forms"**. The chapter is presented as an advanced or optional "Track 2" chapter and develops electromagnetism using the language of differential forms.
@@ -8106,7 +8638,7 @@ The exercises deepen the chapter in several directions:
 - formalizing antisymmetrization and wedge-product identities
 
 ## Final takeaway
-This chapter is not mainly about introducing new physical laws. Instead, it **re-describes known electrodynamics in a more geometric and more invariant language**. The reward is substantial: Lorentz force, flux, field invariants, charge conservation, radiation, and retarded potentials all become parts of one coherent picture. Differential forms turn Maxwell theory from a collection of four vector equations into a small number of structural statements about geometry in spacetime.`;function IA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:FA})})}var LA=`# Chapter 4 Exercises - Solutions
+This chapter is not mainly about introducing new physical laws. Instead, it **re-describes known electrodynamics in a more geometric and more invariant language**. The reward is substantial: Lorentz force, flux, field invariants, charge conservation, radiation, and retarded potentials all become parts of one coherent picture. Differential forms turn Maxwell theory from a collection of four vector equations into a small number of structural statements about geometry in spacetime.`;function BA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:zA})})}var VA=`# Chapter 4 Exercises - Solutions
 
 **Source:** *Gravitation* by Misner, Thorne, and Wheeler
 
@@ -8665,7 +9197,7 @@ This is the determinant of the matrix with columns $u_1, \\ldots, u_p$.
 | 4.10 | Calumoid: loop motion preserving fluxes |
 | 4.11 | Hamilton's equations from $d\\omega = 0$ |
 | 4.12 | Alternation and wedge product as tensor operations |
-`;function RA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:LA})})}function zA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter4-container`,children:[(0,L.jsxs)(`div`,{className:`chapter4-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 4 - Electromagnetism and Differential Forms`}),(0,L.jsxs)(`div`,{className:`chapter4-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter4-content`,children:[e===`summary`&&(0,L.jsx)(IA,{}),e===`exercises`&&(0,L.jsx)(RA,{})]})]})})}var BA=`# Detailed Summary of Chapter 5: *Stress-Energy Tensor and Conservation Laws*
+`;function HA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:VA})})}function UA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter4-container`,children:[(0,L.jsxs)(`div`,{className:`chapter4-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 4 - Electromagnetism and Differential Forms`}),(0,L.jsxs)(`div`,{className:`chapter4-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter4-content`,children:[e===`summary`&&(0,L.jsx)(BA,{}),e===`exercises`&&(0,L.jsx)(HA,{})]})]})})}var WA=`# Detailed Summary of Chapter 5: *Stress-Energy Tensor and Conservation Laws*
 
 ## Source and scope
 This summary covers the attached chapter titled **"Stress-Energy Tensor and Conservation Laws"**. The chapter introduces the **stress-energy tensor** as the object that measures local energy density, momentum density, energy flux, and stress, and then uses it to formulate conservation of 4-momentum and angular momentum in a geometric, frame-independent way.
@@ -9295,7 +9827,7 @@ In compact form, the chapter's central laws are:
 - $\\oint_{\\partial \\mathcal V} T \\cdot d^3\\Sigma = 0$,
 - $\\nabla \\cdot T = 0$.
 
-The overall lesson is that conservation laws in relativity are best understood geometrically. Matter and fields do not merely possess energy and momentum; they carry them through spacetime in a structured way, and the stress-energy tensor is the mathematical object that captures that structure.`;function VA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:BA})})}var HA=`# Chapter 5 Exercises: Stress-Energy Tensor and Conservation Laws
+The overall lesson is that conservation laws in relativity are best understood geometrically. Matter and fields do not merely possess energy and momentum; they carry them through spacetime in a structured way, and the stress-energy tensor is the mathematical object that captures that structure.`;function GA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:WA})})}var KA=`# Chapter 5 Exercises: Stress-Energy Tensor and Conservation Laws
 
 ## Exercise 5.1: Electromagnetic Stress-Energy Tensor
 
@@ -9931,7 +10463,4306 @@ For an electron with spin $\\hbar/2$ and mass $m_e$, this gives the **Compton wa
 $$r_{\\text{min}} \\sim \\frac{\\hbar}{m_e c}.$$
 
 This exercise shows that angular momentum places a fundamental lower bound on the size of any physical system.
-`;function UA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:HA})})}function WA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter5-container`,children:[(0,L.jsxs)(`div`,{className:`chapter5-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 5 - Stress-Energy Tensor and Conservation Laws`}),(0,L.jsxs)(`div`,{className:`chapter5-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter5-content`,children:[e===`summary`&&(0,L.jsx)(VA,{}),e===`exercises`&&(0,L.jsx)(UA,{})]})]})})}var GA=`**Quaternions and the Exponential Map: A Rigorous Introduction**
+`;function qA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:KA})})}function JA(){let[e,t]=(0,v.useState)(`summary`),n=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter5-container`,children:[(0,L.jsxs)(`div`,{className:`chapter5-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>n(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:`Chapter 5 - Stress-Energy Tensor and Conservation Laws`}),(0,L.jsxs)(`div`,{className:`chapter5-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${e===`summary`?`active`:``}`,onClick:()=>t(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${e===`exercises`?`active`:``}`,onClick:()=>t(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter5-content`,children:[e===`summary`&&(0,L.jsx)(GA,{}),e===`exercises`&&(0,L.jsx)(qA,{})]})]})})}function YA({title:e,summary:t,exercises:n}){let[r,i]=(0,v.useState)(`summary`),a=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter-page-container`,children:[(0,L.jsxs)(`div`,{className:`chapter-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>a(`/chapters`),children:`← Back to Chapters`}),(0,L.jsx)(`h1`,{children:e}),(0,L.jsxs)(`div`,{className:`chapter-page-tabs`,children:[(0,L.jsx)(`button`,{className:`tab ${r===`summary`?`active`:``}`,onClick:()=>i(`summary`),children:`Summary`}),(0,L.jsx)(`button`,{className:`tab ${r===`exercises`?`active`:``}`,onClick:()=>i(`exercises`),children:`Exercises`})]})]}),(0,L.jsxs)(`div`,{className:`chapter-page-content`,children:[r===`summary`&&t,r===`exercises`&&n]})]})})}var XA=`# Detailed Summary of Chapter 6: *Accelerated Observers*
+
+## Source and scope
+This summary covers the attached chapter titled **"Accelerated Observers."** The chapter asks a central question of relativistic physics:
+
+**How should physics be described by an observer who is accelerating rather than moving inertially?**
+
+The answer is that accelerated observers can still be analyzed within **special relativity**, provided one works **locally**. This local analysis becomes the conceptual bridge to **general relativity**, because gravity can be locally mimicked by acceleration through the **equivalence principle**.
+
+The chapter develops that idea in stages:
+
+- it explains why accelerated motion can be treated by special relativity;
+- it studies the simplest example, **uniform proper acceleration**;
+- it shows why a global coordinate system for an accelerated observer fails beyond a certain scale;
+- it introduces a carried **orthonormal tetrad**;
+- it generalizes the notion of a **nonrotating frame** via **Fermi-Walker transport**;
+- it constructs the observer's **local coordinates**, which in the uniformly accelerated case become the familiar **Rindler-type coordinates**.
+
+The chapter also contains two important boxes:
+
+- **Box 6.1**: why general relativity is built on special relativity;
+- **Box 6.2**: a compact summary of accelerated observers, clocks, rods, local frames, inertial forces, and Fermi-Walker transport.
+
+---
+
+## Executive summary
+The chapter's core message is that an accelerated observer can always set up a meaningful frame **in a sufficiently small neighborhood of his world line**, but not over arbitrarily large distances.
+
+That local frame has three essential ingredients:
+
+1. **Proper time** measured along the observer's world line.
+2. A carried **orthonormal tetrad** whose timelike vector is the observer's 4-velocity.
+3. A rule for keeping the spatial axes **nonrotating**, namely **Fermi-Walker transport**.
+
+For an observer with constant proper acceleration $g$, the world line in Minkowski spacetime is a hyperbola,
+
+$t = g^{-1}\\sinh(g\\tau), \\qquad x = g^{-1}\\cosh(g\\tau),$
+
+so that
+
+$x^2 - t^2 = g^{-2}.$
+
+This is the standard picture of **hyperbolic motion**. It shows immediately that the accelerated observer has a limited natural coordinate patch: the local simultaneity hypersurfaces eventually intersect, and beyond distances of order $g^{-1}$ the notion of "coordinates relative to the accelerated observer" becomes ambiguous.
+
+The chapter resolves this by abandoning any attempt at a global accelerated coordinate system and instead constructing a **local** one from the observer's world line and tetrad. For uniform acceleration, the resulting coordinates satisfy
+
+$x^0 = (g^{-1} + \\xi^1)\\sinh(g\\xi^0),$
+$x^1 = (g^{-1} + \\xi^1)\\cosh(g\\xi^0),$
+$x^2 = \\xi^2,$
+$x^3 = \\xi^3,$
+
+with metric
+
+$ds^2 = -(1 + g\\xi^1)^2(d\\xi^0)^2 + (d\\xi^1)^2 + (d\\xi^2)^2 + (d\\xi^3)^2.$
+
+This metric reduces to the Minkowski form at the observer's position $\\xi^1 = 0$, which is exactly the local flatness expected from the equivalence principle.
+
+---
+
+## High-level roadmap of the chapter
+The chapter develops its argument in the following order:
+
+1. It explains why accelerated observers can be analyzed using special relativity.
+2. It studies the simplest accelerated motion: **constant proper acceleration**, which produces a hyperbolic world line.
+3. It argues that any natural coordinate system for an accelerated observer must be only **local**, because global constructions fail at distances of order $g^{-1}$.
+4. It introduces the observer's carried **orthonormal tetrad**.
+5. It generalizes the idea of a nonrotating tetrad to arbitrary acceleration via **Fermi-Walker transport**.
+6. It constructs the observer's local coordinates and derives the line element for the uniformly accelerated case.
+7. Through the exercises, it connects these ideas to radar measurements, clock-rate differences across an accelerated lattice, rotating tetrads, and Thomas precession.
+
+---
+
+## 1. Why accelerated observers can be treated with special relativity
+
+### The main conceptual move
+The chapter begins by considering a region of spacetime so far from gravitating matter, and so weakly disturbed, that spacetime can be treated as flat. Into that flat spacetime it inserts an observer who *feels* gravity because he is accelerating, for example in a rocket.
+
+The central claim is that this is not a pathological situation for special relativity. On the contrary, special relativity was designed precisely to analyze accelerated particles and accelerated objects. The observer may interpret his experience as "gravity," but as long as spacetime itself is flat, the physics of his local observations can still be analyzed within special relativity.
+
+This is already a major step toward general relativity:
+
+- **acceleration can imitate gravity locally**;
+- therefore one can learn about gravitation by studying accelerated observers in flat spacetime.
+
+### Extremely large accelerations are still compatible with special relativity
+The chapter emphasizes that huge accelerations occur routinely in microphysics. For example, the effective acceleration of a neutron bound in a nucleus can be fantastically large, yet special relativity still handles the physics correctly. The lesson is that **acceleration itself does not invalidate special relativity**. What matters is whether spacetime curvature is negligible in the region under study.
+
+### Locality is the key restriction
+The analysis only works cleanly when the observer confines attention to a sufficiently small neighborhood around his world line. This locality requirement becomes more precise later in the chapter, where the natural size limit is shown to be of order
+
+$l \\ll g^{-1},$
+
+with $g$ the magnitude of the observer's proper acceleration.
+
+### What makes accelerated frames different from inertial frames?
+According to the chapter, local experiments performed by an accelerated observer differ from the same experiments in an inertial Lorentz frame in only three ways:
+
+1. There are fractional corrections of order $gl$, which become negligible if the frame is kept small enough.
+2. There can be **Coriolis-type effects** if the observer's carried lattice rotates.
+3. There are **inertial forces** due to the acceleration itself.
+
+Thus the theory of accelerated observers is not a replacement for special relativity; it is special relativity plus the careful bookkeeping needed for noninertial motion.
+
+---
+
+## 2. Hyperbolic motion: the model of uniform proper acceleration
+
+Section 6.2 studies the simplest and most important example: an observer who always feels the same acceleration magnitude $g$.
+
+### 4-velocity and 4-acceleration
+The observer's 4-velocity $u$ is normalized by
+
+$u^2 = -1.$
+
+The 4-acceleration is defined by
+
+$a = \\dfrac{du}{d\\tau},$
+
+where $\\tau$ is proper time. Since the norm of $u$ is fixed, differentiating $u \\cdot u = -1$ gives
+
+$a \\cdot u = 0.$
+
+So the 4-acceleration is always orthogonal to the 4-velocity in Lorentz geometry. This is one of the chapter's key geometric facts.
+
+### Proper acceleration as an invariant
+In the passenger's instantaneous rest frame, the temporal component of $a^\\mu$ vanishes and the spatial components reduce to the ordinary acceleration. Therefore the magnitude of the proper acceleration can be written invariantly as
+
+$a^2 = a^\\mu a_\\mu = g^2.$
+
+That quantity is what the passenger physically *feels* and what an accelerometer would measure.
+
+### Solving the equations of motion
+For constant proper acceleration in the $x^1$ direction, the chapter obtains
+
+$\\dfrac{dt}{d\\tau} = u^0, \\qquad \\dfrac{dx}{d\\tau} = u^1,$
+
+and
+
+$\\dfrac{du^0}{d\\tau} = gu^1, \\qquad \\dfrac{du^1}{d\\tau} = gu^0.$
+
+These equations integrate immediately to
+
+$t = g^{-1}\\sinh(g\\tau), \\qquad x = g^{-1}\\cosh(g\\tau).$
+
+Hence the world line satisfies
+
+$x^2 - t^2 = g^{-2}.$
+
+This is the standard hyperbola of constant proper acceleration.
+
+### Why the motion is called hyperbolic
+In a spacetime diagram, the uniformly accelerated observer does **not** trace a straight line, as an inertial observer would. Instead, the world line is a hyperbola asymptotic to null lines. This is why the motion is called **hyperbolic motion**.
+
+### Physical interpretation of the scale $g^{-1}$
+The chapter evaluates the scale corresponding to one earth gravity and notes that
+
+$g \\sim (1\\ \\text{light-year})^{-1}$
+
+in relativistic units. That means an observer maintaining an acceleration of roughly one earth gravity for about a year of proper time can reach highly relativistic speeds. This also makes the length scale $g^{-1}$ physically intuitive: it is enormous for ordinary accelerations, which is why local accelerated coordinates are usually perfectly adequate in everyday contexts.
+
+### Why this example matters
+Hyperbolic motion becomes the chapter's prototype because:
+
+- it is mathematically simple;
+- it captures the core geometry of uniform acceleration;
+- it foreshadows horizons and coordinate breakdown;
+- it leads directly to the local coordinate system later derived in Section 6.6.
+
+---
+
+## 3. Constraints on the size of an accelerated frame
+
+Section 6.3 makes a foundational point: the phrase **"the coordinate system of an accelerated observer"** is misleading if interpreted globally.
+
+### Why a global accelerated coordinate system is problematic
+If one takes the phrase literally, it suggests a single coordinate system naturally attached to a particular accelerated observer and valid everywhere. The chapter argues that this is not possible in any natural way.
+
+The reason is partly **causal** and partly **geometric**.
+
+### Causal breakdown
+Using the hyperbolic world line of Figure 6.1, the chapter points out that large regions of spacetime do not maintain ordinary two-way causal contact with the observer:
+
+- one region can neither send signals to the observer nor receive signals from him;
+- another can send but not receive;
+- another can receive but not send.
+
+This already shows that a coordinate system "centered on the observer" cannot naturally extend to all of spacetime, because some remote events have no direct operational relation to the observer.
+
+### Inconsistency after a brief acceleration
+The chapter then considers a second example: an observer who is first inertial, then briefly accelerated, then inertial again at a different velocity. It is tempting to say that his natural coordinates should coincide with the first inertial frame before acceleration and with the second inertial frame after acceleration.
+
+But this leads to a contradiction: in a region of overlap, the two coordinate prescriptions are incompatible. So even in this very simple situation, a global natural coordinate system fails.
+
+### The characteristic breakdown scale
+In both the hyperbolic-motion example and the briefly accelerated example, the serious difficulty begins at distances of order
+
+$g^{-1}$
+
+from the observer's world line.
+
+This is the chapter's central limitation result:
+
+**an accelerated observer has no natural global coordinate system, only a natural local one.**
+
+That local solution is built from a transported tetrad.
+
+---
+
+## 4. The tetrad carried by a uniformly accelerated observer
+
+Section 6.4 introduces the mathematical object that replaces the impossible global accelerated frame: an **orthonormal tetrad** carried along the observer's world line.
+
+### What a tetrad is
+A tetrad is a set of four orthonormal basis vectors
+
+$e_0, e_1, e_2, e_3$
+
+attached to the observer at each instant of proper time.
+
+Its purpose is to provide an **infinitesimal reference frame**:
+
+- the timelike vector gives the observer's local time direction;
+- the three spacelike vectors give the observer's local spatial axes.
+
+### The timelike basis vector
+The chapter chooses
+
+$e_0 = u,$
+
+so the time axis of the tetrad is the observer's 4-velocity. This means the observer is always instantaneously at rest in his own tetrad frame.
+
+### The spatial basis vectors for hyperbolic motion
+For uniform acceleration in the $x^1$ direction, the chapter constructs the tetrad explicitly:
+
+$(e_0)^\\mu = (\\cosh g\\tau,\\ \\sinh g\\tau,\\ 0,\\ 0),$
+
+$(e_1)^\\mu = (\\sinh g\\tau,\\ \\cosh g\\tau,\\ 0,\\ 0),$
+
+$(e_2)^\\mu = (0,\\ 0,\\ 1,\\ 0),$
+
+$(e_3)^\\mu = (0,\\ 0,\\ 0,\\ 1).$
+
+Here:
+
+- $e_0$ is tangent to the world line;
+- $e_1$ points in the direction of acceleration;
+- $e_2$ and $e_3$ are the unaffected transverse axes.
+
+### Orthonormality
+The tetrad satisfies
+
+$e_{\\mu'} \\cdot e_{\\nu'} = \\eta_{\\mu'\\nu'},$
+
+so it is orthonormal in the Minkowski metric.
+
+### Geometric meaning
+The chapter emphasizes that this tetrad can be obtained by taking the original inertial frame and applying, at each instant, the Lorentz boost that makes the observer momentarily at rest. Thus the tetrad is the natural continuously updated rest frame of the accelerated observer.
+
+This is the infinitesimal precursor to the observer's local coordinate system.
+
+---
+
+## 5. Arbitrary acceleration and Fermi-Walker transport
+
+Section 6.5 generalizes the carried tetrad from uniform acceleration to **arbitrary finite acceleration varying with time**.
+
+This section is one of the most important mathematically.
+
+### The problem: what does "nonrotating" mean?
+For an arbitrarily accelerated observer, the tetrad must satisfy three conditions:
+
+1. it remains orthonormal;
+2. it remains a rest frame for the observer, so $e_0 = u$;
+3. it is "nonrotating."
+
+The subtlety lies in the third condition. Since the 4-velocity changes direction when the observer accelerates, some Lorentz "rotation" in the timelike plane spanned by $u$ and $a$ is unavoidable. So "nonrotating" cannot mean *no change at all*.
+
+Instead it means:
+
+- allow the change required by the evolving 4-velocity and 4-acceleration;
+- forbid any **extra spatial rotation** of the three spatial basis vectors.
+
+### From ordinary rotation to spacetime rotation
+The chapter first recalls that an ordinary spatial rotation can be represented by an antisymmetric matrix. It then generalizes this to spacetime by introducing an antisymmetric tensor $\\Omega^{\\mu\\nu}$, the infinitesimal Lorentz generator.
+
+A generalized infinitesimal rotation acts on a vector $v^\\mu$ by
+
+$\\dfrac{dv^\\mu}{d\\tau} = -\\Omega^\\mu{}_\\nu v^\\nu,$
+
+with
+
+$\\Omega^{\\mu\\nu} = -\\Omega^{\\nu\\mu}.$
+
+### The unique choice for a nonrotating accelerated frame
+To generate exactly the boost in the $u \\wedge a$ plane and no spatial rotation, the chapter finds the unique choice
+
+$\\Omega^{\\mu\\nu} = a^\\mu u^\\nu - a^\\nu u^\\mu.$
+
+Equivalently, in wedge notation,
+
+$\\Omega = a \\wedge u.$
+
+### Fermi-Walker transport
+Substituting this into the transport law yields the defining equation for **Fermi-Walker transport**:
+
+$\\dfrac{dv^\\mu}{d\\tau} = (u^\\mu a^\\nu - u^\\nu a^\\mu)v_\\nu.$
+
+A vector transported in this way changes only as much as the observer's acceleration forces it to change. It experiences no extraneous spatial rotation.
+
+### Why Fermi-Walker transport is the right notion
+This transport law has exactly the needed properties:
+
+- it preserves orthonormality;
+- it preserves the norm of transported vectors;
+- it keeps vectors orthogonal to the observer's 4-velocity if they start that way;
+- it encodes the idea of a **nonrotating carried frame**.
+
+This is the correct relativistic generalization of "keep the gyroscope axes fixed."
+
+### Physical interpretation
+The chapter notes that in practice the spatial basis vectors of such a tetrad can be realized by **gyroscopes** carried by the observer. That gives Fermi-Walker transport a direct operational meaning.
+
+---
+
+## 6. Local coordinates for an accelerated observer
+
+Section 6.6 uses the tetrad to build an actual coordinate system in a finite neighborhood of the observer.
+
+### Constructing the local coordinates
+At proper time $\\tau$, the observer is at an event $P(\\tau)$ on his world line. Let the displacement from the origin of the original inertial frame to $P(\\tau)$ be $z(\\tau)$.
+
+At that event, the spatial tetrad vectors $e_1(\\tau), e_2(\\tau), e_3(\\tau)$ span a spacelike hyperplane orthogonal to the world line. A typical point of that hyperplane is written as
+
+$x = \\xi^1 e_1(\\tau) + \\xi^2 e_2(\\tau) + \\xi^3 e_3(\\tau) + z(\\tau).$
+
+The local coordinates assigned to the event are then
+
+$\\xi^0 = \\tau, \\qquad \\xi^1,\\xi^2,\\xi^3,$
+
+or in components,
+
+$x^\\mu = \\xi^k [e_k(\\tau)]^\\mu + z^\\mu(\\tau).$
+
+This is the general prescription for coordinates relative to the accelerated observer.
+
+### Why the construction is only local
+As proper time changes, successive simultaneity hyperplanes sweep through spacetime. But at sufficiently large distances from the world line, they begin to intersect each other. At that point, a single event would lie on more than one such hyperplane, so its "time coordinate relative to the accelerated observer" becomes ambiguous.
+
+Thus the coordinate system fails beyond some distance from the observer. The chapter shows that the breakdown distance is again of order
+
+$g^{-1},$
+
+or more generally of order determined by the instantaneous proper acceleration magnitude.
+
+### The uniformly accelerated case
+Applying the general construction to hyperbolic motion yields
+
+$x^0 = (g^{-1} + \\xi^1)\\sinh(g\\xi^0),$
+
+$x^1 = (g^{-1} + \\xi^1)\\cosh(g\\xi^0),$
+
+$x^2 = \\xi^2,$
+
+$x^3 = \\xi^3.$
+
+These are exactly the local coordinates naturally adapted to a uniformly accelerated observer.
+
+### The induced metric
+Substituting these expressions into the Minkowski line element gives
+
+$ds^2 = -(1 + g\\xi^1)^2(d\\xi^0)^2 + (d\\xi^1)^2 + (d\\xi^2)^2 + (d\\xi^3)^2.$
+
+This is one of the chapter's most important formulas.
+
+It shows:
+
+- the coordinates are noninertial;
+- the coefficient of $(d\\xi^0)^2$ depends on spatial position;
+- at the observer's own location $\\xi^1 = 0$, the metric reduces locally to the standard Minkowski form.
+
+So these coordinates reproduce exactly the local flatness principle: the observer sees ordinary Lorentz geometry in his immediate neighborhood, but not over an extended region.
+
+### Breakdown of the coordinates
+The chapter and Figure 6.4 show that these coordinates fail when
+
+$\\xi^1 < -g^{-1}.$
+
+Geometrically, the simultaneity hyperplanes intersect there. Operationally, the observer can no longer assign coordinates uniquely. This is the clearest concrete demonstration of why accelerated coordinates are fundamentally local.
+
+---
+
+## 7. What the exercises add to the chapter
+
+Although the chapter's main body already develops the theory, the exercises deepen its physical content.
+
+### Radar measurements are distorted by acceleration
+Exercises 6.4 and 6.5 show that if an accelerated observer naively uses radar formulas derived from inertial motion, the inferred speed and distance of remote objects are generally incorrect. This reinforces the chapter's central lesson that only **local** measurements resemble those of inertial frames without correction.
+
+### Clock rates vary across the accelerated lattice
+Exercise 6.6 uses the metric
+
+$ds^2 = -(1 + g\\xi^1)^2(d\\xi^0)^2 + \\cdots$
+
+to show that a clock fixed at lattice point $(\\xi^1,\\xi^2,\\xi^3)$ ticks according to
+
+$\\dfrac{d\\tau}{d\\xi^0} = 1 + g\\xi^1.$
+
+Thus clocks at different spatial positions in the accelerated frame do **not** remain synchronized. This is a major physical effect: the accelerated observer's notion of time varies across the frame.
+
+### Different lattice points feel different accelerations
+Exercise 6.7 asks for the acceleration measured by an accelerometer attached to a lattice point away from the world line. This quantifies the earlier statement that the accelerated frame can only be treated as rigid and natural when its size is much smaller than $g^{-1}$.
+
+### Rotating tetrads introduce Coriolis terms
+Exercise 6.8 studies what happens when the observer deliberately lets the tetrad rotate instead of Fermi-Walker transporting it. The resulting transport tensor splits into:
+
+- a Fermi-Walker part, driven by $u$ and $a$;
+- a spatial-rotation part, driven by an angular velocity vector $\\omega$.
+
+Near the observer, the coordinate acceleration of a free particle picks up:
+
+- an inertial-acceleration term,
+- a Coriolis term,
+- a relativistic correction.
+
+This exercise shows exactly where the familiar Newtonian noninertial forces come from inside the relativistic framework.
+
+### Thomas precession
+Exercise 6.9 applies Fermi-Walker transport to a spinning body and derives **Thomas precession**. The precession frequency is
+
+$\\omega_{\\text{Thomas}} = (\\gamma - 1)\\omega \\simeq \\dfrac{1}{2}v^2\\omega \\qquad (v \\ll 1).$
+
+This is a major physical payoff of the chapter. It connects the geometry of accelerated motion and noncommuting Lorentz boosts to a real observable effect in atomic physics.
+
+---
+
+## 8. Key figures and what they show
+
+## Figure 6.1: Hyperbolic motion
+This figure is the chapter's first major visual anchor. It shows the world line of a uniformly accelerated observer as a hyperbola in a Minkowski diagram. The 4-velocity $u$ is tangent to the curve, and the 4-acceleration $a$ is everywhere orthogonal to $u$.
+
+The figure visually encodes several key facts:
+
+- constant proper acceleration does not mean a straight world line;
+- the trajectory approaches null asymptotes;
+- the geometry naturally introduces an observer-dependent horizon structure;
+- the characteristic scale is set by $g^{-1}$.
+
+## Figure 6.2: Brief acceleration and coordinate inconsistency
+This figure shows an observer inertial before and after a short burst of acceleration. Each constant-velocity phase admits its own inertial coordinates, but in the region where the two coordinate prescriptions overlap there is no natural way to reconcile them. The figure is the geometric proof that a global accelerated coordinate system is generally impossible.
+
+## Figure 6.3: Orthogonal hyperplanes along the world line
+This figure illustrates how the observer's tetrad defines, at each instant, a spacelike hyperplane orthogonal to the world line. The important visual lesson is that these hyperplanes eventually intersect one another at a distance of order $g^{-1}(\\tau)$. That intersection is exactly what makes the local coordinates break down.
+
+## Figure 6.4: Local coordinates for uniform acceleration
+This figure specializes the local-coordinate construction to hyperbolic motion. The surfaces of constant $\\xi^0$ are straight spacelike lines through the origin in the $(x^0,x^1)$ plane, while the curves of constant $\\xi^1$ are hyperbolas. The figure also makes the domain of validity explicit: the coordinates fail for $\\xi^1 < -g^{-1}$.
+
+---
+
+## 9. Detailed summaries of the boxes
+
+## Box 6.1: *General Relativity Is Built on Special Relativity*
+This box states the philosophical and methodological backbone of the chapter.
+
+A passenger in a rocket may feel "gravity," even though no genuine gravitational field is present. Einstein's local equivalence principle says that, by local experiments alone, one cannot distinguish a uniform gravitational field from uniform acceleration. Therefore a physicist who analyzes the rocket passenger's local world using special relativity is not making a mistake; he is rehearsing the exact procedure that will later be generalized into gravitation theory.
+
+The box stresses that **general relativity does not discard special relativity**. Instead, it is built from three ingredients:
+
+1. **special-relativistic physics**,
+2. **the equivalence principle**,
+3. **the local nature of physical law**.
+
+The real challenge of general relativity is then twofold:
+
+- dissect spacetime into small locally flat pieces where special relativity applies;
+- reassemble those pieces into a global picture of curved, dynamical spacetime.
+
+So the box presents general relativity as a theory constructed from local special-relativistic patches stitched together by geometry.
+
+## Box 6.2: *Accelerated Observers in Brief*
+This box is a condensed summary of the whole chapter.
+
+It says that an accelerated observer can carry:
+
+- **clocks**, which measure proper time along his world line,
+- **rods**, which define spatial distances in his neighborhood.
+
+The proper time measured by the observer's clock over a displacement $\\xi$ along the world line is
+
+$\\Delta\\tau = [-g(\\xi,\\xi)]^{1/2}.$
+
+The box emphasizes that if the clocks are chosen so that acceleration negligibly affects their internal structure, they tick at the same rate as momentarily comoving inertial clocks. Similarly, sufficiently rigid rods measure the same lengths as momentarily comoving inertial rods.
+
+However, the observer's lattice of rods and clocks must be kept **small**:
+
+$l \\ll g^{-1}.$
+
+If this condition is violated, different parts of the lattice develop significant discrepancies:
+
+- accelerometers at different locations measure slightly different accelerations;
+- clocks initially synchronized drift out of step;
+- the whole frame ceases to behave as a single natural system.
+
+The box then summarizes the three differences between local physics in an accelerated frame and local physics in an inertial Lorentz frame:
+
+1. corrections of fractional size $gl$;
+2. Coriolis-type effects if the frame rotates;
+3. inertial forces caused by acceleration.
+
+To eliminate the Coriolis-type effects, the spatial axes should be carried without extra rotation. The box identifies this nonrotating transport law as **Fermi-Walker transport**, summarized by the transport equation for the basis vectors.
+
+In short, Box 6.2 packages the chapter's complete message into a practical rule:
+
+**an accelerated observer is well described by clocks, rods, and a nonrotating tetrad, but only locally.**
+
+---
+
+## 10. Main equations to remember
+
+### Proper acceleration and orthogonality
+$u^2 = -1,$
+
+$a = \\dfrac{du}{d\\tau},$
+
+$a \\cdot u = 0.$
+
+### Constant proper acceleration
+$\\dfrac{du^0}{d\\tau} = gu^1, \\qquad \\dfrac{du^1}{d\\tau} = gu^0.$
+
+### Hyperbolic world line
+$t = g^{-1}\\sinh(g\\tau), \\qquad x = g^{-1}\\cosh(g\\tau),$
+
+$x^2 - t^2 = g^{-2}.$
+
+### Uniformly accelerated tetrad
+$(e_0)^\\mu = (\\cosh g\\tau,\\ \\sinh g\\tau,\\ 0,\\ 0),$
+
+$(e_1)^\\mu = (\\sinh g\\tau,\\ \\cosh g\\tau,\\ 0,\\ 0),$
+
+$(e_2)^\\mu = (0,\\ 0,\\ 1,\\ 0),$
+
+$(e_3)^\\mu = (0,\\ 0,\\ 0,\\ 1).$
+
+### Orthonormality
+$e_{\\mu'} \\cdot e_{\\nu'} = \\eta_{\\mu'\\nu'}.$
+
+### Fermi-Walker generator
+$\\Omega^{\\mu\\nu} = a^\\mu u^\\nu - a^\\nu u^\\mu.$
+
+### Fermi-Walker transport law
+$\\dfrac{dv^\\mu}{d\\tau} = (u^\\mu a^\\nu - u^\\nu a^\\mu)v_\\nu.$
+
+### General local-coordinate prescription
+$x^\\mu = \\xi^k [e_k(\\tau)]^\\mu + z^\\mu(\\tau).$
+
+### Uniform-acceleration local coordinates
+$x^0 = (g^{-1} + \\xi^1)\\sinh(g\\xi^0),$
+
+$x^1 = (g^{-1} + \\xi^1)\\cosh(g\\xi^0),$
+
+$x^2 = \\xi^2, \\qquad x^3 = \\xi^3.$
+
+### Local line element
+$ds^2 = -(1 + g\\xi^1)^2(d\\xi^0)^2 + (d\\xi^1)^2 + (d\\xi^2)^2 + (d\\xi^3)^2.$
+
+### Clock-rate variation across the accelerated lattice
+$\\dfrac{d\\tau}{d\\xi^0} = 1 + g\\xi^1.$
+
+### Thomas precession
+$\\omega_{\\text{Thomas}} = (\\gamma - 1)\\omega \\simeq \\dfrac{1}{2}v^2\\omega \\qquad (v \\ll 1).$
+
+---
+
+## 11. Final takeaway
+Chapter 6 establishes the local kinematics of accelerated observers in flat spacetime.
+
+Its deepest lesson is that acceleration does **not** destroy the framework of special relativity. Instead, it forces one to use that framework with greater geometric care:
+
+- replace a global inertial frame by a local tetrad;
+- replace naive rigid coordinates by a local coordinate patch;
+- replace "fixed axes" by **Fermi-Walker transport**;
+- accept that beyond distances of order $g^{-1}$, the observer's natural coordinates become ambiguous.
+
+This is precisely the conceptual template needed for general relativity. In curved spacetime, one cannot have a global Lorentz frame, but one can always have a **local** one. Thus Chapter 6 is more than a study of rockets in flat spacetime: it is a training ground for the geometric logic of gravitation.
+
+## 12. Short conceptual checklist
+By the end of the chapter, the reader should understand:
+
+- why accelerated observers can be analyzed locally using special relativity;
+- why constant proper acceleration leads to hyperbolic motion;
+- why a global accelerated coordinate system generally fails;
+- how a tetrad supplies the observer's infinitesimal rest frame;
+- why Fermi-Walker transport is the correct relativistic notion of a nonrotating frame;
+- how local coordinates are built from the world line and tetrad;
+- why the uniformly accelerated metric has the form
+  $ds^2 = -(1 + g\\xi^1)^2(d\\xi^0)^2 + d\\vec{\\xi}^{\\,2}$;
+- how Thomas precession arises from accelerated motion without torque.`;function ZA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:XA})})}var QA=`# Chapter 6 Exercises: Accelerated Observers
+
+## Exercise 6.1: A Trip to the Galactic Nucleus
+
+For constant proper acceleration, the half-trip distance is
+
+$$L = g^{-1}(\\cosh(g\\tau_{1/2}) - 1).$$
+
+So for a one-way distance of $15{,}000$ ly and $g \\simeq 1\\ \\text{ly/yr}^2$,
+
+$$\\tau_{1/2} = g^{-1}\\operatorname{arcosh}(1 + gL) = \\operatorname{arcosh}(15001) \\approx 10.31\\ \\text{yr}.$$
+
+The total proper time is therefore
+
+$$\\Delta \\tau \\approx 20.6\\ \\text{yr}.$$
+
+## Exercise 6.2: Rocket Payload
+
+For an ideal photon rocket, each maximum-acceleration leg changes the mass by a factor $e^{-\\eta}$, where
+
+$$\\eta = \\operatorname{arcosh}(1 + gL).$$
+
+The full trip has two such legs, so the payload fraction is
+
+$$\\frac{m_{\\text{payload}}}{m_0} = e^{-2\\eta}.$$
+
+For the galactic-nucleus trip, this is
+
+$$e^{-2\\,\\operatorname{arcosh}(15001)} \\approx 1.1 \\times 10^{-9}.$$
+
+## Exercise 6.3: Twin Paradox
+
+### (a)
+In the inertial frame of the unaccelerated twin,
+
+$$d\\tau = \\sqrt{1-v^2}\\,dt \\le dt.$$
+
+Integrating gives $\\Delta\\tau \\le \\Delta t$, with equality only for $v=0$ everywhere. So the unaccelerated world line has the longest proper time.
+
+### (b)
+Take a path with two long segments at speed arbitrarily close to $c$, joined by a very short turnaround. Then the accumulated proper time can be made arbitrarily small.
+
+### (c)
+The minimizing path is two equal segments of constant proper acceleration $g$. If the inertial twin ages by $\\Delta T$, then
+
+$$\\Delta T = \\frac{2}{g}\\sinh\\!\\left(\\frac{g\\Delta\\tau_{\\min}}{2}\\right),$$
+
+so
+
+$$\\Delta\\tau_{\\min} = \\frac{2}{g}\\operatorname{arsinh}\\!\\left(\\frac{g\\Delta T}{2}\\right).$$
+
+### (d)
+Use the formula above for any chosen trip. For large $\\Delta T$, the accelerated twin's proper time grows only logarithmically:
+
+$$\\Delta\\tau_{\\min} \\sim \\frac{2}{g}\\ln(g\\Delta T).$$
+
+## Exercise 6.4: Radar Speed Indicator
+
+At the reflection event, use the momentary inertial frame of the observer. By symmetry, the acceleration contributes equally to the outbound and inbound legs of the pulse, so it cancels in the round trip.
+
+### (a)
+If the object and radar are at rest with respect to each other at the reflection event, the returned signal has the same frequency as the emitted signal:
+
+$$1+z = \\frac{\\omega_e}{\\omega_o} = 1.$$
+
+So the radar infers zero velocity.
+
+### (b)
+For a nonzero instantaneous relative velocity at reflection, the radar still reads the special-relativistic value associated with that momentary inertial frame. In other words, with the symmetry assumed in the exercise,
+
+$$v_{\\text{read}} = v_{\\text{actual}},$$
+
+so the ratio is $1$.
+
+## Exercise 6.5: Radar Distance Indicator
+
+Let the object be at rest in the momentary inertial frame at the reflection event, and let $L$ be the proper distance measured there, opposite the direction of acceleration. If the total round-trip proper time is $\\Delta\\tau$, so that the emission and reception occur at $\\pm \\Delta\\tau/2$, then
+
+$$L = g^{-1}\\left(1 - e^{-gL_0}\\right), \\qquad L_0 = \\frac{\\Delta\\tau}{2}.$$
+
+Equivalently,
+
+$$L_0 = -\\frac{1}{g}\\ln(1-gL).$$
+
+Hence $L_0 \\to \\infty$ as $L \\to g^{-1}$.
+
+## Exercise 6.6: Clock Rates Versus Coordinate Time
+
+For a clock held at fixed $(\\xi^1,\\xi^2,\\xi^3)$, the metric gives
+
+$$d\\tau^2 = -(ds^2) = (1+g\\xi^1)^2(d\\xi^0)^2.$$
+
+Therefore
+
+$$\\frac{d\\tau}{d\\xi^0} = 1 + g\\xi^1.$$
+
+## Exercise 6.7: Acceleration of Lattice Points
+
+A grid point at fixed $\\xi^i$ follows a hyperbola with radius $g^{-1}+\\xi^1$. Its proper acceleration is the inverse radius:
+
+$$a(\\xi^1) = \\frac{g}{1+g\\xi^1}.$$
+
+This reduces to $g$ on the observer's world line at $\\xi^1=0$ and diverges at the horizon $\\xi^1=-g^{-1}$.
+
+## Exercise 6.8: Observer With Rotating Tetrad
+
+Write the transport tensor as
+
+$$\\Omega^{\\mu\\nu} = \\left(a^\\mu u^\\nu - a^\\nu u^\\mu\\right) + \\epsilon^{\\mu\\nu}{}_{\\rho\\sigma}u^\\rho\\omega^\\sigma.$$
+
+### (a)
+Since $e_0=u$ and the rotation term is orthogonal to $u$, the choice $e_0=u$ is preserved by the transport law.
+
+### (b)
+The spatial-rotation term vanishes when contracted with $u$ or $\\omega$, so it acts only in the 2-plane orthogonal to both. In the observer's rest frame it is just the usual 3D rotation with angular velocity $\\boldsymbol{\\omega}$.
+
+### (c)
+Subtracting the Fermi-Walker transport law from the rotating one gives
+
+$$\\frac{d\\mathbf e_j}{d\\tau} - \\frac{d\\mathbf e'_j}{d\\tau} = \\boldsymbol{\\omega}\\times \\mathbf e_j,$$
+
+so the first tetrad rotates relative to the second with angular velocity $\\boldsymbol{\\omega}$. 
+
+### (d)
+At the chosen event $Q$, set $\\tau=0$ and align the inertial frame with the rotating tetrad. Then
+
+$$z^\\mu(Q)=0, \\qquad e^\\mu_{\\alpha'}(0)=e^\\mu_\\alpha.$$
+
+### (e)
+Near $Q$, the coordinate map becomes
+
+$$x^0 = \\xi^{0'} + a_k \\xi^{k'}\\xi^{0'} + O((\\xi^{\\alpha'})^3),$$
+
+$$x^j = \\xi^{j'} + \\frac{1}{2}a^j(\\xi^{0'})^2 + \\epsilon^{jkl}\\omega_k\\xi^{l'}\\xi^{0'} + O((\\xi^{\\alpha'})^3).$$
+
+### (f)
+For a free particle, the coordinate motion near $Q$ has the standard inertial, Coriolis, and relativistic-correction terms:
+
+$$\\frac{d^2\\boldsymbol{\\xi}}{d(\\xi^{0'})^2} = -\\mathbf a - 2\\,\\boldsymbol{\\omega}\\times \\mathbf v + 2(\\mathbf a\\cdot \\mathbf v)\\mathbf v.$$
+
+## Exercise 6.9: Thomas Precession
+
+For circular motion, Fermi-Walker transport keeps the spin orthogonal to the 4-velocity and produces the secular precession
+
+$$\\boldsymbol{\\omega}_{\\text{Thomas}} = (\\gamma - 1)\\boldsymbol{\\omega} \\simeq \\frac{1}{2}v^2\\boldsymbol{\\omega} \\qquad (v \\ll 1).$$
+
+Equivalently, the spin has the time dependence quoted in the text: a steady retrograde Thomas precession plus a small oscillatory term needed to preserve $S\\cdot u=0$.
+`;function $A(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:QA})})}function ej(){return(0,L.jsx)(YA,{title:`Chapter 6 - Accelerated Observers`,summary:(0,L.jsx)(ZA,{}),exercises:(0,L.jsx)($A,{})})}var tj=`# Chapter 7 Detailed Summary  
+## *Incompatibility of Gravity and Special Relativity*
+
+## Overview
+
+Chapter 7 explains why gravity cannot be consistently incorporated into **special relativity** while keeping spacetime globally flat. The chapter begins by showing that Newtonian gravity is incompatible with Lorentz invariance, then surveys several increasingly sophisticated flat-spacetime attempts to build a relativistic theory of gravity. Each attempt fails in an important way.
+
+The chapter then turns to **gravitational redshift**, first deriving it from energy conservation and then using it as evidence that spacetime itself must be curved. The chapter concludes by connecting redshift to Einstein’s **equivalence principle** and to the idea that spacetime can be **locally flat** while still being **globally curved**.
+
+The central message is:
+
+- Newtonian gravity is not relativistically acceptable.
+- Simple scalar and vector relativistic gravities do not match observation.
+- The best flat-spacetime tensor theory comes very close, but is internally inconsistent.
+- Gravitational redshift shows that a global Minkowski spacetime cannot describe a world with gravity.
+- Therefore gravity must be understood geometrically, through curved spacetime.
+
+---
+
+## 7.1 Attempts to Incorporate Gravity into Special Relativity
+
+The chapter opens by recalling Newton’s laws for gravity:
+
+- particle motion:
+  $$
+  \\frac{d^2 x^i}{dt^2} = -\\frac{\\partial \\Phi}{\\partial x^i}
+  $$
+- field equation:
+  $$
+  \\nabla^2 \\Phi = 4\\pi G \\rho
+  $$
+
+These equations are incompatible with special relativity for two main reasons.
+
+First, the equation of motion is written in a **three-dimensional** form rather than a fully spacetime-covariant four-dimensional form.
+
+Second, the Poisson equation uses the three-dimensional Laplacian $\\nabla^2$ rather than the Lorentz-invariant wave operator $\\Box$. As a result, the Newtonian potential responds instantaneously to changes in the source, which means gravity propagates with **infinite speed**. That violates relativity.
+
+The chapter then considers several relativistic generalizations of Newtonian gravity.
+
+### Scalar theory of gravity
+
+The first possibility is to keep gravity as a **scalar field** $\\Phi$ and let it couple to matter relativistically.
+
+This scalar theory can reproduce a static Newtonian-like potential, and it can be used to derive equations of motion for particles. However, it fails badly as a physical theory of gravity. In particular:
+
+- it gives the wrong relativistic corrections for planetary motion,
+- and it predicts **no bending of light** by the sun.
+
+That last failure is decisive, because observed light deflection is a key empirical signature of gravitation.
+
+### Vector theory of gravity
+
+The second possibility is to imitate electromagnetism and represent gravity by a **vector field** $\\phi_\\mu$.
+
+This theory is more sophisticated and naturally relativistic in form. But it also fails:
+
+- it gives incorrect orbital effects,
+- it predicts the wrong behavior for light,
+- and, most seriously, its gravitational waves carry **negative energy**.
+
+Negative-energy wave modes signal deep instability and are physically unacceptable.
+
+### Symmetric tensor theory in flat spacetime
+
+The third and best attempt is to describe gravity by a **symmetric tensor field** $h_{\\mu\\nu}$ in flat spacetime. This is much closer in spirit to general relativity, because gravity now has the right index structure to affect the geometry experienced by matter.
+
+This tensor theory does much better than the scalar and vector theories:
+
+- it produces a sensible field of a point mass,
+- it predicts light bending,
+- it predicts positive-energy gravitational waves,
+- and its linearized equations resemble Einstein’s weak-field theory.
+
+But it ultimately fails because it is **self-inconsistent** when fully coupled to its matter sources. Once one tries to repair that inconsistency, the theory is driven toward full general relativity.
+
+### Main conclusion of Section 7.1
+
+All straightforward flat-spacetime relativistic modifications of Newtonian gravity are unsatisfactory. The scalar and vector theories fail phenomenologically; the tensor theory is the best of the three, but still breaks down internally. This motivates abandoning globally flat spacetime and moving toward Einstein’s curved-spacetime viewpoint.
+
+---
+
+## Exercises 7.1–7.3: What the Chapter Is Testing
+
+The chapter’s exercises are not just drills. They systematically test three candidate relativistic gravities:
+
+1. **Exercise 7.1:** scalar gravity  
+2. **Exercise 7.2:** vector gravity  
+3. **Exercise 7.3:** symmetric tensor gravity in flat spacetime  
+
+The reader is meant to compare these theories on the basis of:
+
+- field equations,
+- particle motion,
+- perihelion precession,
+- bending of light,
+- gravitational waves,
+- and internal consistency.
+
+The detailed solution to the best candidate, the tensor theory, is presented in **Box 7.1**.
+
+---
+
+## Box 7.1 Detailed Summary  
+## An Attempt to Describe Gravity by a Symmetric Tensor Field in Flat Spacetime
+
+Box 7.1 is the mathematical centerpiece of the chapter. It develops the strongest possible flat-spacetime theory of gravity before showing why it still cannot be the final theory.
+
+### 1. Motivation for the tensor theory
+
+The box begins by explaining the logic of escalation:
+
+- A scalar field is the natural first guess because Newtonian gravity uses a scalar potential.
+- A vector field is the next guess by analogy with electromagnetism.
+- After both fail, one is led to a **symmetric tensor potential** $h_{\\mu\\nu} = h_{\\nu\\mu}$.
+
+This choice is not arbitrary. A massless spin-2 field is exactly the sort of object that can represent a relativistic gravitational interaction in flat spacetime.
+
+### 2. Equation of motion for a test particle
+
+Using the particle action and the interaction term, the box derives a relativistic equation of motion of the schematic form
+$$
+(\\eta_{\\mu\\nu} + h_{\\mu\\nu}) \\ddot z^\\nu + \\Gamma_{\\mu\\alpha\\beta}\\dot z^\\alpha \\dot z^\\beta = 0,
+$$
+where the “gravitational force field”
+$$
+\\Gamma_{\\mu\\alpha\\beta}
+= \\frac12 \\left(
+h_{\\mu\\alpha,\\beta}
++ h_{\\mu\\beta,\\alpha}
+- h_{\\alpha\\beta,\\mu}
+\\right)
+$$
+is built from the tensor potential.
+
+This already resembles Christoffel-symbol structure, which is a major hint that gravity wants to be geometric rather than just a field in a fixed background.
+
+### 3. Field equations
+
+By varying the field variables, the box obtains field equations expressible in terms of a derived tensor $H^{\\mu\\alpha\\nu\\beta}$ and ultimately, after imposing a gauge condition, in a wave-equation form for the trace-reversed field $\\bar h_{\\mu\\nu}$:
+$$
+\\Box \\bar h^{\\mu\\nu} = -16\\pi T^{\\mu\\nu},
+$$
+with gauge condition
+$$
+\\bar h^{\\mu\\alpha}{}_{,\\alpha} = 0.
+$$
+
+This is the familiar linearized-gravity structure. It is formally similar to electromagnetism in Lorenz gauge, but now with a symmetric rank-2 field instead of a four-potential.
+
+### 4. Gauge invariance
+
+A major theme of the box is **gauge freedom**. The theory is invariant under transformations of the form
+$$
+h_{\\mu\\nu} \\rightarrow h_{\\mu\\nu} + \\xi_{\\mu,\\nu} + \\xi_{\\nu,\\mu},
+$$
+and corresponding transformations for $\\bar h_{\\mu\\nu}$.
+
+This gauge freedom means that not all components of $h_{\\mu\\nu}$ are physically independent. It also makes the theory look much more like a geometry theory in disguise: different fields can represent the same physical situation.
+
+### 5. Field of a point mass
+
+For a static point mass, the wave equation reduces to a Laplace equation, and the solution becomes
+$$
+h_{00} = \\frac{2M}{r}, \\qquad
+h_{0k}=0, \\qquad
+h_{ik} = \\delta_{ik}\\frac{2M}{r}.
+$$
+
+This is significant because it already resembles the weak-field limit of the Schwarzschild geometry. So the theory is reproducing part of the correct weak-field structure.
+
+### 6. Perihelion precession
+
+Using the effective Lagrangian for a particle orbiting in the static central field, the box derives an orbital equation and ultimately a perihelion advance per orbit:
+$$
+\\Delta \\phi = \\frac{8\\pi M}{r_0} + O\\!\\left(\\left(\\frac{M}{r_0}\\right)^3\\right).
+$$
+
+This is only **two-thirds** of the general relativistic prediction. Therefore the tensor flat-spacetime theory still disagrees with Mercury’s observed perihelion advance.
+
+This is a major result: even the best flat-spacetime theory gets one of the classic relativistic tests wrong.
+
+### 7. Bending of light
+
+The box then studies light bending by taking the zero-rest-mass limit. In this theory, the deflection for light grazing the sun is
+$$
+\\Delta \\phi = \\frac{4M_\\odot}{R_\\odot},
+$$
+which corresponds to about
+$$
+1''.75.
+$$
+
+This agrees with the prediction of general relativity and with observation. So unlike the scalar theory, this tensor theory **does** bend light correctly.
+
+### 8. Gravitational waves
+
+Because the field equations coincide with those of linearized gravity, the treatment of gravitational waves also carries over. The box considers plane-wave solutions and shows that the physically relevant wave modes can be reduced by gauge choice.
+
+### 9. Positive energy of the waves
+
+Unlike the vector theory, the tensor theory gives **positive energy density** for the gravitational waves considered. This is a major improvement and removes one of the biggest problems of the vector theory.
+
+### 10. Self-inconsistency of the theory
+
+The box culminates in the decisive objection. The field equations require stress-energy conservation:
+$$
+T^{\\mu\\nu}{}_{,\\nu}=0.
+$$
+
+But in the presence of gravity, the motion equation implies that matter should not in general move with conserved flat-spacetime four-momentum. Put differently:
+
+- the field equations require source conservation in the flat-spacetime sense,
+- but the particle motion induced by gravity does not preserve that same conservation law.
+
+Therefore the theory is internally inconsistent as an exact theory of gravitating matter.
+
+The box makes the physical implication stark: if the conservation law held in the required flat-spacetime form, gravitating bodies could not truly accelerate under gravity. The Earth could not orbit the sun correctly. So the theory cannot be the real theory of gravitation.
+
+### Bottom line of Box 7.1
+
+Box 7.1 shows that the most promising flat-spacetime tensor theory:
+
+- has the right field type,
+- has gauge structure,
+- yields positive-energy waves,
+- gets light bending right,
+- comes close to Einstein’s weak-field theory,
+
+but still fails because its coupling to matter is fundamentally inconsistent. That failure points directly toward full general relativity.
+
+---
+
+## 7.2 Gravitational Red Shift Derived from Energy Conservation
+
+Section 7.2 presents Einstein’s 1911 argument that light must suffer a gravitational redshift.
+
+The setup is simple:
+
+1. A particle of rest mass $m$ falls through height $h$ in a gravitational field $g$.
+2. It gains kinetic energy $mgh$.
+3. At the lower point, it annihilates into a photon.
+4. That photon then climbs back upward.
+
+If the photon did **not** lose energy while climbing out of the gravitational field, one could recover the original rest mass at the top and still keep the extra energy $mgh$, violating energy conservation.
+
+Therefore the photon must lose energy while rising.
+
+The section writes the energy relation as
+$$
+E_{\\text{bottom}} = E_{\\text{top}}(1+gh)
+= E_{\\text{top}}\\!\\left(1+\\frac{g_{\\rm conv}h}{c^2}\\right).
+$$
+
+Since photon energy is proportional to frequency, the frequency must drop and the wavelength must increase. The redshift formula becomes
+$$
+1+z
+=
+\\frac{\\lambda_{\\text{top}}}{\\lambda_{\\text{bottom}}}
+=
+\\frac{h\\nu_{\\text{bottom}}}{h\\nu_{\\text{top}}}
+=
+\\frac{E_{\\text{bottom}}}{E_{\\text{top}}}
+=
+1+gh.
+$$
+
+So the chapter’s weak-field redshift prediction is
+$$
+z \\approx gh.
+$$
+
+### Physical meaning
+
+This section is important because it does not yet use spacetime curvature explicitly. Instead, it shows that once energy conservation is taken seriously, gravity must affect light. That alone already pushes beyond Newtonian intuition and prepares the reader for the geometric argument that follows.
+
+---
+
+## 7.3 Gravitational Redshift Implies Spacetime Is Curved
+
+Section 7.3 gives a deeper argument, due to Schild, that gravitational redshift is not just a curious effect: it proves that special relativity cannot remain globally valid in the presence of gravity.
+
+### Core idea
+
+Consider two observers at rest relative to the Earth at different heights, with light pulses traveling from the lower observer to the upper one. The lower observer emits a pulse containing a fixed number $N$ of cycles. Because of gravitational redshift, the upper observer receives the same $N$ cycles over a **different time interval**.
+
+That means the proper time intervals measured at top and bottom differ:
+$$
+\\delta\\tau_{\\text{top}} > \\delta\\tau_{\\text{bottom}}.
+$$
+
+### Why this contradicts global Minkowski spacetime
+
+If one insists that the entire situation can be represented in a single global Minkowski spacetime with special-relativistic geometry, then the pulse worldlines and observer worldlines form a parallelogram-type construction. In flat Minkowski spacetime, opposite sides of that construction must match appropriately. But the observed redshift requires unequal corresponding time intervals.
+
+Thus the geometry implied by the experiment is incompatible with a globally flat spacetime.
+
+### Improved version of the argument
+
+The section notes that light paths themselves may be influenced by gravity and therefore need not be straight in the spacetime diagram. Even after allowing for curved light paths, the contradiction remains because:
+
+- the gravitational field is static,
+- the apparatus is static,
+- successive pulse paths are congruent,
+- and the observers remain in fixed relative configuration.
+
+So the failure is not merely due to a bad drawing of light rays. It is a genuine geometric failure of flat spacetime.
+
+### Conclusion of Section 7.3
+
+Gravitational redshift implies that **flat Minkowski spacetime is inadequate globally**. The presence of gravity requires spacetime curvature.
+
+This section is one of the conceptual turning points of the book: it shifts the reader from “gravity as a force in flat spacetime” to “gravity as a manifestation of spacetime geometry.”
+
+---
+
+## Figure 7.1 Summary
+
+**Figure 7.1** supports Schild’s argument. It shows successive light pulses traveling upward from one height to another in the Earth’s gravitational field.
+
+- In panel **A**, the light rays are drawn as $45^\\circ$ null lines, as in simple special-relativistic diagrams.
+- In panel **B**, the paths are allowed to curve under the influence of gravity.
+
+The important point is that in either case, the two pulse paths must be congruent because the field is static and the setup does not change with time. Yet the measured top and bottom time intervals differ because of redshift. Therefore the geometry cannot be globally Minkowskian.
+
+The figure visually reinforces the claim that gravitational redshift is evidence for spacetime curvature, not merely for a force acting on photons.
+
+---
+
+## 7.4 Gravitational Redshift as Evidence for the Principle of Equivalence
+
+Section 7.4 connects gravitational redshift to Einstein’s **principle of equivalence**.
+
+The principle is stated as:
+
+> the effects of a uniform gravitational field are locally identical to the effects of a uniformly accelerating frame.
+
+The section emphasizes that this principle generalizes Newtonian ideas and extends them to all laws of physics, not just particle mechanics.
+
+### Rocket-ship argument
+
+Imagine a rocket accelerating uniformly with acceleration $g$. Two observers are separated by a height $h$ along the direction of acceleration.
+
+If the lower observer emits a photon upward, the photon takes time $t=h$ to reach the upper observer. During that time, the upper observer acquires speed
+$$
+v = gt = gh.
+$$
+
+Therefore the upper observer sees a Doppler redshift
+$$
+z = v = gh.
+$$
+
+This reproduces the same result obtained from the gravitational argument:
+$$
+z \\approx gh.
+$$
+
+By the principle of equivalence, if uniform acceleration produces this redshift, then a uniform gravitational field must produce the same effect.
+
+### Why this matters
+
+This argument makes redshift an observational consequence of the equivalence principle. It therefore serves as evidence not only for gravity affecting light, but also for Einstein’s deeper claim that gravitation and acceleration are locally indistinguishable.
+
+---
+
+## 7.5 Local Flatness, Global Curvature
+
+Section 7.5 explains how gravity can be compatible with the local validity of special relativity while still requiring global curvature.
+
+### Local Lorentz frames
+
+The equivalence principle implies that around any event in a gravitational field, one can choose a small freely falling frame in which physics looks locally special relativistic. So spacetime is **locally flat**.
+
+But these local inertial frames cannot, in general, be patched together into a single global Lorentz frame.
+
+### Earth example
+
+The chapter considers local Lorentz frames near the Earth. Relative to an Earth-bound laboratory, nearby freely falling frames accelerate downward. But the downward radial direction differs from place to place around the Earth.
+
+So two local inertial frames on opposite sides of the Earth cannot remain globally aligned. If extended sufficiently, they “nonmesh.” This nonmeshing is a direct sign of curvature.
+
+### Cartographic analogy
+
+The section gives a geographic analogy:
+
+- small regions of the Earth can be mapped with ordinary flat rectangular coordinates,
+- but larger regions cannot be fitted together consistently without angular mismatch,
+- because the Earth’s surface is curved.
+
+Likewise, small neighborhoods of spacetime can be described by local Lorentz frames, but the large-scale structure cannot be globally Minkowskian if gravity is present.
+
+### Two geometries that enter general relativity
+
+The section distinguishes two kinds of geometry relevant to spacetime:
+
+1. **Metric geometry** — geometry of lengths and angles, leading to **Riemannian geometry**.  
+2. **Affine geometry** — geometry of locally straight worldlines and free fall, leading to concepts such as covariant derivative and curvature.
+
+This distinction previews later chapters, where both metric structure and free-fall structure will be unified in the full geometry of general relativity.
+
+### Final message of Section 7.5
+
+Special relativity survives only **locally** in a gravitational field. Globally, gravity forces spacetime to be curved. This is the conceptual bridge into the geometry chapters that follow.
+
+---
+
+## Key Equations and Results
+
+### Newtonian gravity
+$$
+\\frac{d^2 x^i}{dt^2} = -\\frac{\\partial \\Phi}{\\partial x^i},
+\\qquad
+\\nabla^2 \\Phi = 4\\pi G\\rho
+$$
+
+### Tensor-theory gauge condition
+$$
+\\bar h^{\\mu\\alpha}{}_{,\\alpha}=0
+$$
+
+### Tensor-theory wave equation
+$$
+\\Box \\bar h^{\\mu\\nu} = -16\\pi T^{\\mu\\nu}
+$$
+
+### Point-mass field in the flat-spacetime tensor theory
+$$
+h_{00} = \\frac{2M}{r},
+\\qquad
+h_{0k}=0,
+\\qquad
+h_{ik}=\\delta_{ik}\\frac{2M}{r}
+$$
+
+### Perihelion advance in the tensor flat-spacetime theory
+$$
+\\Delta\\phi = \\frac{8\\pi M}{r_0} + O\\!\\left(\\left(\\frac{M}{r_0}\\right)^3\\right)
+$$
+
+### Light deflection in the same theory
+$$
+\\Delta\\phi = \\frac{4M_\\odot}{R_\\odot}
+$$
+
+### Gravitational redshift from energy conservation
+$$
+E_{\\text{bottom}} = E_{\\text{top}}(1+gh)
+$$
+
+### Weak-field redshift formula
+$$
+1+z = \\frac{\\lambda_{\\text{top}}}{\\lambda_{\\text{bottom}}} = 1+gh
+$$
+
+### Equivalence-principle derivation
+$$
+v = gt = gh,
+\\qquad
+z = gh
+$$
+
+---
+
+## Main Takeaways
+
+1. **Newtonian gravity is not Lorentz invariant.**  
+   Its equations are three-dimensional and imply instantaneous propagation.
+
+2. **Simple relativistic field theories of gravity fail.**  
+   Scalar gravity predicts no light bending; vector gravity gives negative-energy waves.
+
+3. **The symmetric tensor theory is the best flat-spacetime attempt.**  
+   It captures many correct weak-field features, including light bending and positive-energy waves.
+
+4. **Even the tensor theory fails as an exact theory.**  
+   Its coupling to matter is internally inconsistent.
+
+5. **Gravitational redshift is a decisive clue.**  
+   It shows that gravity acts on light and cannot be described consistently in globally flat spacetime.
+
+6. **The equivalence principle deepens the argument.**  
+   Uniform acceleration and uniform gravity produce the same redshift effect.
+
+7. **Spacetime must be locally Minkowskian but globally curved.**  
+   This is the transition from special relativity to general relativity.
+
+---
+
+## Conceptual Bridge to Later Chapters
+
+Chapter 7 serves as the last major warning that one cannot keep gravity inside the conceptual framework of special relativity. It demonstrates, by both failed field-theory attempts and redshift arguments, that gravity demands geometry.
+
+The next conceptual move is therefore inevitable:
+
+- abandon the idea of a single global inertial frame,
+- keep local inertial frames,
+- and study the geometry required to fit those local frames together.
+
+That is the road to curved spacetime, covariant derivatives, and general relativity.
+`;function nj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:tj})})}var rj=`# Chapter 7 Exercises: Incompatibility of Gravity and Special Relativity
+
+## Exercise 7.1: Scalar Gravitational Field
+
+### A
+With proper time $\\tau$ as parameter, the particle action is
+
+$$I_p = -m\\int e^\\Phi\\,d\\tau.$$
+
+Varying the world line gives
+
+$$\\frac{du^\\mu}{d\\tau} = -(\\eta^{\\mu\\nu}+u^\\mu u^\\nu)\\Phi_{,\\nu},$$
+
+so the force is orthogonal to $u^\\mu$.
+
+### B
+Varying the field action gives the scalar wave equation with source,
+
+$$\\Box \\Phi = -4\\pi T,$$
+
+with $T$ the trace-like matter source used in this theory. In the weak, static limit this reduces to Poisson’s equation.
+
+### C
+For a single static source, the solution is the Coulomb/Newton form
+
+$$\\Phi = -\\frac{M}{r}$$
+
+up to the convention used for the sign of $\\Phi$. This is consistent near the Earth only in the weak-field regime.
+
+### D
+Using the static central field in the particle action yields a central-force orbit equation, but the relativistic correction is too small. The perihelion advance is not the observed one.
+
+### E
+For $m\\to 0$, the quantity
+
+$$q^\\mu = k^\\mu e^\\Phi$$
+
+is conserved along null trajectories, so the direction of $k^\\mu$ is unchanged by the field. Hence this scalar theory predicts no light bending by the Sun.
+
+## Exercise 7.2: Vector Gravitational Field
+
+### A
+The action is Maxwell-like. Variation with respect to $\\Phi_\\mu$ gives
+
+$$\\partial_\\nu F^{\\mu\\nu} = 4\\pi J^\\mu,$$
+
+and variation of the particle path gives the Lorentz-force law.
+
+### B
+For a static source, the field has the Coulomb form
+
+$$\\Phi_0 = \\frac{M}{r}, \\qquad \\Phi_i = 0,$$
+
+again up to sign convention. The coefficient choices are fixed so the Newtonian limit is recovered.
+
+### C
+The resulting perihelion shift does not match the observed value; it is not the general-relativistic correction.
+
+### D
+The light deflection is also wrong in this vector theory.
+
+### E
+The Hamiltonian density for the vector field is negative for radiative modes, so vector gravitational waves carry negative energy. That makes the theory unstable.
+
+## Exercise 7.3: Symmetric Tensor Gravitational Field
+
+### A
+The test-particle equation of motion can be written as
+
+$$\\left(\\eta^{\\mu\\nu}+h^{\\mu\\nu}\\right)\\ddot z_\\nu + \\Gamma^\\mu{}_{\\alpha\\beta}\\dot z^\\alpha \\dot z^\\beta = 0,$$
+
+with
+
+$$\\Gamma^\\mu{}_{\\alpha\\beta}=\\frac12\\left(h^\\mu{}_{\\alpha,\\beta}+h^\\mu{}_{\\beta,\\alpha}-h_{\\alpha\\beta}{}^{,\\mu}\\right).$$
+
+### B
+The field equations are the linearized Einstein equations in flat background form:
+
+$$\\Box \\bar h^{\\mu\\nu}=-16\\pi T^{\\mu\\nu}, \\qquad \\bar h^{\\mu\\nu}{}_{,\\nu}=0,$$
+
+with gauge freedom
+
+$$h_{\\mu\\nu}\\to h_{\\mu\\nu}+\\xi_{\\mu,\\nu}+\\xi_{\\nu,\\mu}.$$
+
+### C
+For a static point mass,
+
+$$h_{00}=\\frac{2M}{r}, \\qquad h_{0i}=0, \\qquad h_{ij}=\\delta_{ij}\\frac{2M}{r}.$$
+
+### D
+The perihelion advance is
+
+$$\\Delta\\phi = \\frac{8\\pi M}{r_0} + O\\!\\left((M/r_0)^3\\right),$$
+
+which is the standard general-relativistic value in the weak-field limit.
+
+### E
+The light deflection for a grazing ray is
+
+$$\\Delta\\phi = \\frac{4M_\\odot}{R_\\odot} \\approx 1''.75.$$
+
+### F
+For a plane wave
+
+$$h_{\\mu\\nu}=A_{\\mu\\nu}e^{ik_\\alpha x^\\alpha},$$
+
+the field equations require
+
+$$k^\\alpha k_\\alpha = 0, \\qquad A_{\\mu\\nu}k^\\nu=0.$$
+
+Residual gauge freedom allows the further conditions
+
+$$u^\\mu A_{\\mu\\nu}=0, \\qquad A^\\mu{}_\\mu=0,$$
+
+so the physical wave has only transverse-traceless components.
+
+### G
+The Hamiltonian density is nonnegative for the radiative modes:
+
+$$\\mathcal H \\propto \\dot h^{TT}_{ij}\\dot h^{TT}_{ij}\\ge 0.$$
+
+So the tensor theory avoids the negative-energy problem of the vector theory.
+
+### H
+The particle stress-energy tensor is not conserved in flat-space form once the gravitational force acts on matter, so the coupled system demands a source with
+
+$$T^{\\mu\\nu}{}_{,\\nu}=0$$
+
+that ordinary gravitating matter does not satisfy. The field equations and particle equations are therefore internally inconsistent as an exact flat-spacetime theory.
+
+## Bottom Line
+The scalar theory gives no light bending, the vector theory gives negative-energy waves, and the symmetric tensor theory comes closest to the truth but still fails as an exact flat-spacetime theory. That failure is what forces the geometric move to curved spacetime.
+`;function ij(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:rj})})}function aj(){return(0,L.jsx)(YA,{title:`Chapter 7 - Incompatibility of Gravity and Special Relativity`,summary:(0,L.jsx)(nj,{}),exercises:(0,L.jsx)(ij,{})})}var oj=`# Chapter 8 Detailed Summary  
+## Differential Geometry: An Overview
+
+## 1. Chapter purpose and big picture
+
+Chapter 8 is a **guided overview of differential geometry for relativity**, designed to prepare the reader for the deeper mathematical development in later chapters. Its central theme is that **gravitation is spacetime curvature**, and curvature becomes physically visible through the **relative acceleration of nearby freely falling particles**, i.e. **geodesic deviation**.
+
+The chapter is not trying to build the full theory from first principles in complete rigor. Instead, it gives a **Track-1 overview**: enough mathematics to understand curved spacetime, geodesics, parallel transport, covariant differentiation, and curvature, while postponing the fuller metric-free and more abstract development to later chapters.
+
+The core question motivating the chapter is:
+
+- How does one define the **separation** between neighboring geodesics in curved spacetime?
+- How does one define the **rate of change** of that separation?
+- How do those ideas lead to a definition of **curvature**?
+
+The answer requires a chain of new concepts:
+
+1. **Tangent vectors** to describe local separation,
+2. **Parallel transport** to compare vectors at different points,
+3. **Covariant derivatives** to measure change relative to parallel transport,
+4. **Geodesics** as the “straightest possible” curves,
+5. **Geodesic deviation** as the physically measurable manifestation of curvature,
+6. **The Riemann tensor** as the mathematical encoding of curvature.
+
+So this chapter functions as a bridge between:
+- familiar flat-spacetime tensor algebra,
+- local Lorentz frames and the equivalence principle,
+- and the full machinery of curved-spacetime geometry.
+
+---
+
+## 2. Section 8.1 — Overview of Part III
+
+The section opens with the physical statement that **gravity manifests itself as spacetime curvature**. Curvature shows up operationally as the fact that neighboring freely falling particles do not remain in uniform relative motion; instead, their separation changes according to the geometry of spacetime.
+
+The chapter emphasizes that in curved spacetime, “separation” can no longer be treated naively as a simple displacement between two distant points in the flat-space sense. Instead, separation must become a **local vector concept**, namely a **tangent vector**. This is one of the first major conceptual shifts from flat geometry to differential geometry.
+
+The text then outlines the program of the coming chapters:
+
+- **Chapter 9** sharpens the notion of vector into the local notion of **tangent vector** and explains what happens to 1-forms and tensors in curved spacetime.
+- **Chapter 10** introduces **parallel transport**, uses geodesics to define it, and then uses parallel transport to define **covariant derivatives**.
+- **Chapter 11** introduces **geodesic deviation** and uses it to define **curvature**.
+- Later chapters then connect curvature to:
+  - Newtonian gravity,
+  - the metric structure of Einstein spacetime,
+  - computational methods for curvature,
+  - and the algebraic and differential symmetries of curvature.
+
+A major pedagogical point is also introduced here: fully understanding curvature takes time, and this chapter therefore offers a **Track-1 overview** for readers who want the essential tools without yet taking the full Track-2 route.
+
+### Main idea of §8.1
+
+Curved spacetime requires a new local language:
+- vectors become tangent vectors,
+- change requires transport,
+- curvature is ultimately defined from how geodesics separate.
+
+---
+
+## 3. Section 8.2 — Track 1 versus Track 2
+
+This section explains the philosophical and technical difference between two ways of learning the geometry of gravitation.
+
+### Track 2
+
+Track 2 temporarily avoids using the metric and instead studies what can be learned from geodesics and curvature **without first introducing spacetime intervals**. This is important because, as the text stresses, both **Newtonian gravity** and **Einstein gravity** can be described geometrically in terms of curvature, even though Newtonian theory does not admit the same spacetime interval concept that Einstein theory does.
+
+Thus Track 2 develops:
+- geometry without a metric,
+- parallel transport from geodesics,
+- covariant differentiation,
+- geodesic deviation,
+- and curvature,
+before bringing the Einstein metric back in.
+
+This metric-free approach has major conceptual power because it makes clear:
+- what structures are genuinely metric-independent,
+- how Newtonian and Einsteinian geometry can be compared,
+- and how curvature can be understood in a more fundamental way.
+
+### Track 1
+
+Track 1, which this chapter follows, keeps the **Einstein metric** in the story from the start. This is quicker and better suited to readers who want to move sooner into applications like:
+- relativistic stars,
+- cosmology,
+- black holes,
+- gravitational waves,
+- experiments,
+- and the dynamics of spacetime geometry.
+
+But Track 1 pays a price. The reader loses, at least temporarily:
+1. a clear view of curvature working inside Newtonian spacetime,
+2. a clean comparison between Newtonian and Einsteinian geometric structures,
+3. a deeper grasp of how metric, geodesic, parallel transport, covariant derivative, and curvature relate,
+4. and a natural introduction to differential topology and affine geometry.
+
+### Main idea of §8.2
+
+Track 1 is faster and more application-oriented.  
+Track 2 is slower but conceptually deeper and more powerful.
+
+---
+
+## 4. Section 8.3 — Three aspects of geometry: pictorial, abstract, component
+
+This section is one of the chapter’s key pedagogical statements. The author argues that differential geometry must be understood in **three mutually reinforcing languages**:
+
+1. **Pictorial**
+2. **Abstract**
+3. **Component**
+
+These are not competing descriptions. They are complementary.
+
+### 4.1 Pictorial language
+
+The pictorial language treats vectors and motion visually. One sees arrows, curves, turning basis vectors, and deviations. This is closest to physical intuition.
+
+### 4.2 Abstract language
+
+The abstract language treats vectors, forms, tensors, and derivatives as geometric objects in their own right, without requiring coordinates. This is mathematically clean and conceptually powerful.
+
+### 4.3 Component language
+
+The component language writes everything in coordinates. This is what makes detailed calculations possible. It is indispensable for explicit computations in relativity.
+
+### Example: planetary motion
+
+The chapter uses the familiar example of a planet orbiting the sun to show how the same physical situation can be described in all three ways.
+
+The velocity is written in polar-unit-vector form as
+
+$v = v^{\\hat r} e_{\\hat r} + v^{\\hat \\phi} e_{\\hat \\phi}$
+
+and the acceleration becomes
+
+$a = \\frac{dv}{dt}
+= \\frac{dv^{\\hat r}}{dt} e_{\\hat r}
++ \\frac{dv^{\\hat \\phi}}{dt} e_{\\hat \\phi}
++ v^{\\hat r}\\frac{de_{\\hat r}}{dt}
++ v^{\\hat \\phi}\\frac{de_{\\hat \\phi}}{dt}$
+
+Because the basis vectors themselves rotate, one has
+
+$\\frac{de_{\\hat r}}{dt} = \\omega e_{\\hat \\phi}
+= \\frac{d\\phi}{dt} e_{\\hat \\phi}$
+
+$\\frac{de_{\\hat \\phi}}{dt} = -\\omega e_{\\hat r}
+= -\\frac{d\\phi}{dt} e_{\\hat r}$
+
+which leads to the familiar polar-coordinate acceleration components
+
+$a^{\\hat r} = \\frac{d^2 r}{dt^2} - r\\left(\\frac{d\\phi}{dt}\\right)^2$
+
+$a^{\\hat \\phi} = \\frac{d}{dt}\\left(r\\frac{d\\phi}{dt}\\right)$
+
+The point of this example is not orbital mechanics itself. The point is that changing basis vectors already foreshadow:
+- covariant differentiation,
+- connection coefficients,
+- and the geometric meaning of basis change.
+
+### Main idea of §8.3
+
+Differential geometry is most powerful when the reader can move fluently between:
+- picture,
+- abstract object,
+- and components.
+
+---
+
+## 5. Figure summaries
+
+### Figure 8.1 — Keplerian orbit and turning basis vectors
+
+Figure 8.1 shows a planetary orbit around the sun and illustrates how the polar basis vectors change direction from point to point. The figure is used to motivate:
+- rotating bases,
+- the appearance of extra terms in acceleration,
+- and the need for geometric differentiation beyond naive component differentiation.
+
+### Figure 8.2 — Definition of the covariant derivative
+
+This figure explains the geometric meaning of the covariant derivative of a vector field $v$ along a curve with tangent vector $u = d\\mathcal{P}/d\\lambda$. One:
+1. takes a nearby point on the curve,
+2. parallel-transports the vector back,
+3. subtracts,
+4. divides by the parameter difference,
+5. and takes the limit.
+
+That is the geometric content of $ \\nabla_u v $.
+
+### Figure 8.3 — Why connection coefficients matter
+
+This figure uses motion on the Earth’s surface to explain why a vector can remain geometrically “constant” while its components change. The great-circle route of an aircraft is geodesic, but latitude-longitude coordinates twist relative to that route, so the connection coefficients tell how the components must change to compensate.
+
+### Figure 8.4 — A family of geodesics
+
+This figure introduces a 2-parameter family $\\mathcal{P}(\\lambda,n)$:
+- $\\lambda$ tells where you are along a geodesic,
+- $n$ tells which geodesic in the family you are on.
+
+The tangent vector is
+
+$u = \\partial \\mathcal{P}/\\partial \\lambda$
+
+and the separation vector is
+
+$n = \\partial \\mathcal{P}/\\partial n$.
+
+This visual setup is the basis for the geodesic deviation equation.
+
+---
+
+## 6. Section 8.4 — Tensor algebra in curved spacetime
+
+This section makes a crucial claim:
+
+> At a single event in curved spacetime, tensor algebra looks just like tensor algebra in flat spacetime.
+
+The reason is locality. If one shrinks the laboratory to infinitesimal size, curvature effects become negligible at that one event. Thus vectors, 1-forms, and tensors can still be manipulated locally exactly as in flat spacetime.
+
+### 6.1 Local tensor algebra survives curvature
+
+At a point $\\mathcal{P}_0$, one can still define:
+- a 4-momentum $p$ with squared norm
+
+$p^2 = p \\cdot p = g(p,p) = -m^2$
+
+- a 4-acceleration $a$,
+- and tensor operations such as contraction.
+
+If the particle is charged and moving in an electromagnetic field, then
+
+$ma = eF(\\ldots,u)$
+
+This remains meaningful because it is a **local relation** at one event.
+
+### 6.2 Arbitrary bases at a fixed event
+
+The section then explains how to do index manipulation in an arbitrary basis $\\{e_\\alpha\\}$ at a fixed point.
+
+The ordinary Lorentz metric components $\\eta_{\\alpha\\beta}$ are replaced by the basis-dependent metric components
+
+$g_{\\alpha\\beta} \\equiv e_\\alpha \\cdot e_\\beta = g(e_\\alpha,e_\\beta)$
+
+and the inverse matrix $g^{\\alpha\\beta}$ satisfies
+
+$g_{\\alpha\\beta} g^{\\beta\\gamma} = \\delta_\\alpha{}^\\gamma$
+
+The text also introduces general basis transformations
+
+$e_\\beta = e_{\\alpha'} L^{\\alpha'}{}_\\beta$
+
+$\\beta^\\beta = L^\\beta{}_{\\alpha'} \\beta^{\\alpha'}$
+
+and shows how coordinate bases arise as the special case
+
+$e_\\alpha = \\partial \\mathcal{P}/\\partial x^\\alpha$
+
+### 6.3 Levi-Civita tensor in arbitrary basis
+
+The Levi-Civita tensor acquires basis-dependent components involving the determinant of the metric:
+
+$\\epsilon_{\\alpha\\beta\\gamma\\delta} = (-g)^{1/2}[\\alpha\\beta\\gamma\\delta]$
+
+$\\epsilon^{\\alpha\\beta\\gamma\\delta} = -(-g)^{-1/2}[\\alpha\\beta\\gamma\\delta]$
+
+where $[\\alpha\\beta\\gamma\\delta]$ is the totally antisymmetric symbol and
+
+$g = \\det\\|g_{\\alpha\\beta}\\|$
+
+### 6.4 Tangent space and locality
+
+The section warns against a flat-space habit: one must **not casually move vectors from point to point** in curved spacetime. Each vector, 1-form, or tensor lives at a definite event. This leads to the notion of the **tangent space** at each point:
+- vectors live in the tangent space,
+- 1-forms act on those vectors,
+- tensors are multilinear maps built from them.
+
+The section also sharpens the meaning of vector by identifying tangent vectors with directional derivative operators:
+
+$u = \\partial_u$
+
+This is one of the key conceptual transitions from physical pictures to mathematical precision.
+
+### Main idea of §8.4
+
+At one point, tensor algebra is local and flat-like.  
+The real difficulty begins when one tries to compare geometric objects at **different** points.
+
+---
+
+## 7. Section 8.5 — Parallel transport, covariant derivative, connection coefficients, geodesics
+
+This is the central computational section of the chapter.
+
+### 7.1 Local Lorentz frames and the equivalence principle
+
+A local Lorentz frame at an event $\\mathcal{P}_0$ is a coordinate system such that
+
+$g_{\\mu\\nu}(\\mathcal{P}_0) = \\eta_{\\mu\\nu}$
+
+and
+
+$\\partial g_{\\mu\\nu}/\\partial x^\\alpha \\big|_{\\mathcal{P}_0} = 0$
+
+These conditions formalize the equivalence principle:
+- locally, the laws of physics reduce to special relativity,
+- but curvature reappears when one looks beyond one event.
+
+### 7.2 Parallel transport
+
+Parallel transport is defined operationally by asking how a local Lorentz observer would move a vector while keeping its Lorentz-frame components fixed. More abstractly, parallel transport becomes the standard against which change is measured.
+
+The crucial statement is:
+
+$\\nabla_u T = 0$
+
+if and only if $T$ is parallel-transported along the curve with tangent vector $u$.
+
+### 7.3 Covariant derivative
+
+The covariant derivative of a tensor field $T$ along a curve is defined geometrically by:
+- transport $T$ from a nearby point back to the point of interest,
+- subtract,
+- divide by the parameter difference,
+- take the limit.
+
+This is the content of
+
+$\\left(\\nabla_u T\\right)_{\\mathcal{P}(0)}
+= \\lim_{\\epsilon\\to 0}
+\\frac{T[\\mathcal{P}(\\epsilon)]_{\\text{parallel-transported to }\\mathcal{P}(0)}
+- T[\\mathcal{P}(0)]}{\\epsilon}$
+
+The gradient tensor $\\nabla T$ is then defined so that inserting $u$ into its last slot yields $\\nabla_u T$.
+
+### 7.4 Connection coefficients
+
+When one works in a general basis that varies from point to point, the basis itself changes, and this introduces additional terms. These are encoded by the **connection coefficients**
+
+$\\Gamma^\\alpha{}_{\\beta\\gamma}
+= \\langle \\omega^\\alpha, \\nabla_\\gamma e_\\beta \\rangle$
+
+and equivalently
+
+$\\langle \\nabla_\\gamma \\omega^\\alpha, e_\\beta \\rangle
+= -\\Gamma^\\alpha{}_{\\beta\\gamma}$
+
+These coefficients tell how the basis twists, turns, expands, or contracts. They are not tensors; they depend on the chosen basis.
+
+### 7.5 Covariant derivative in components
+
+For a mixed tensor $T^\\beta{}_\\alpha$, the gradient components are
+
+$T^\\beta{}_{\\alpha;\\gamma}
+=
+T^\\beta{}_{\\alpha,\\gamma}
++
+\\Gamma^\\beta{}_{\\mu\\gamma} T^\\mu{}_\\alpha
+-
+\\Gamma^\\mu{}_{\\alpha\\gamma} T^\\beta{}_\\mu$
+
+This is the main replacement for ordinary differentiation in curved spacetime. The rule is:
+- add a $+\\Gamma$ term for each upper index,
+- add a $-\\Gamma$ term for each lower index.
+
+Along a curve, one obtains
+
+$\\frac{D T^\\beta{}_\\alpha}{d\\lambda}
+=
+\\frac{d T^\\beta{}_\\alpha}{d\\lambda}
++
+\\left(
+\\Gamma^\\beta{}_{\\mu\\gamma}T^\\mu{}_\\alpha
+-
+\\Gamma^\\mu{}_{\\alpha\\gamma}T^\\beta{}_\\mu
+\\right)
+\\frac{dx^\\gamma}{d\\lambda}$
+
+### 7.6 How connection coefficients are computed
+
+Given a basis, one computes:
+1. the metric components $g_{\\beta\\gamma}$,
+2. their directional derivatives,
+3. the commutation coefficients $c_{\\mu\\beta\\gamma}$ of the basis,
+4. then the covariant connection coefficients
+
+$\\Gamma_{\\mu\\beta\\gamma}
+=
+\\frac{1}{2}
+\\left(
+g_{\\mu\\beta,\\gamma}
++
+g_{\\mu\\gamma,\\beta}
+-
+g_{\\beta\\gamma,\\mu}
++
+c_{\\mu\\beta\\gamma}
++
+c_{\\mu\\gamma\\beta}
+-
+c_{\\beta\\gamma\\mu}
+\\right)$
+
+and finally raises an index:
+
+$\\Gamma^\\alpha{}_{\\beta\\gamma}
+=
+g^{\\alpha\\mu}\\Gamma_{\\mu\\beta\\gamma}$
+
+In a coordinate basis, the commutation coefficients vanish, and one recovers the familiar Christoffel symbols.
+
+### 7.7 Geodesics
+
+A geodesic is defined abstractly as a curve that parallel-transports its own tangent vector:
+
+$\\nabla_u u = 0$
+
+In coordinates, if $u^\\alpha = dx^\\alpha/d\\lambda$, then the geodesic equation becomes
+
+$\\frac{d^2 x^\\alpha}{d\\lambda^2}
++
+\\Gamma^\\alpha{}_{\\mu\\gamma}
+\\frac{dx^\\mu}{d\\lambda}
+\\frac{dx^\\gamma}{d\\lambda}
+= 0$
+
+This is the central dynamical equation for free fall in curved spacetime.
+
+### Main idea of §8.5
+
+Ordinary derivatives are not geometrically meaningful in curved spacetime.  
+The correct derivative is the **covariant derivative**, built from parallel transport, and geodesics are the curves for which the tangent vector transports itself.
+
+---
+
+## 8. Section 8.6 — Local Lorentz frames: mathematical discussion
+
+This section shows how the earlier ideas reproduce the expected physical content of the equivalence principle.
+
+Suppose an observer is falling freely through curved spacetime. At any event $\\mathcal{P}_0$ on the observer’s world line, choose local Lorentz coordinates satisfying
+
+$g_{\\alpha\\beta}(\\mathcal{P}_0)=\\eta_{\\alpha\\beta}$
+
+$\\partial g_{\\alpha\\beta}/\\partial x^\\mu \\big|_{\\mathcal{P}_0}=0$
+
+From the connection formulas, this implies
+
+$\\Gamma^\\alpha{}_{\\beta\\gamma} = 0
+\\quad \\text{at } \\mathcal{P}_0$
+
+So at that event, the “correction terms” in covariant differentiation vanish.
+
+### 8.1 Freely falling observer
+
+If the observer is at rest in that local frame, then the 4-velocity is
+
+$u = e_0$
+
+and the 4-acceleration is
+
+$a = \\nabla_u u = \\nabla_0 e_0 = \\Gamma^\\alpha{}_{00} e_\\alpha = 0
+\\quad \\text{at } \\mathcal{P}_0$
+
+Thus the observer is indeed freely falling.
+
+### 8.2 Straight-line motion locally
+
+A freely falling particle obeys the geodesic equation. In local Lorentz coordinates at $\\mathcal{P}_0$, the connection vanishes at that event, so the particle’s world line is momentarily straight there:
+
+$\\frac{d^2 x^\\alpha}{d\\tau^2} = 0
+\\quad \\text{at } \\mathcal{P}_0$
+
+This is the mathematical form of the equivalence principle:
+- gravity can be transformed away locally,
+- but not globally.
+
+### 8.3 Fermi-Walker transport and observer basis
+
+The section also asks whether the freely falling observer can carry spatial basis vectors $e_j$ along in the expected physical way. The answer is yes: since the observer’s acceleration vanishes, Fermi-Walker transport reduces to parallel transport, so the spatial basis is transported consistently along the world line.
+
+### Main idea of §8.6
+
+A local Lorentz frame is precisely the coordinate system in which:
+- the metric looks Minkowskian at one event,
+- first derivatives vanish there,
+- connection coefficients vanish there,
+- and freely falling motion looks momentarily like inertial motion.
+
+---
+
+## 9. Section 8.7 — Geodesic deviation and the Riemann curvature tensor
+
+This is the conceptual climax of the chapter.
+
+### 9.1 Family of geodesics
+
+Consider a family of geodesics $\\mathcal{P}(\\lambda,n)$.
+
+For fixed $n$, one moves along a geodesic using affine parameter $\\lambda$. The tangent vector is
+
+$u = \\partial \\mathcal{P}/\\partial \\lambda$
+
+Since each curve is geodesic,
+
+$\\nabla_u u = 0$
+
+The separation vector between neighboring geodesics is
+
+$n = \\partial \\mathcal{P}/\\partial n$
+
+This vector tells how nearby geodesics are displaced relative to each other.
+
+### 9.2 Relative acceleration and curvature
+
+The physically meaningful quantity is the **relative acceleration** of neighboring free-fall world lines. In flat spacetime, if initially parallel geodesics are compared, this relative acceleration vanishes. In curved spacetime, it does not.
+
+The geodesic deviation equation is written abstractly as
+
+$\\nabla_u \\nabla_u n + \\text{Riemann}(\\ldots,u,n,u) = 0$
+
+and in component form as
+
+$\\frac{D^2 n^\\alpha}{d\\lambda^2}
++
+R^\\alpha{}_{\\beta\\gamma\\delta}
+u^\\beta n^\\gamma u^\\delta
+= 0$
+
+This equation is extraordinarily important:
+- it gives an operational definition of curvature,
+- it tells how tidal gravity acts,
+- and it ties abstract curvature directly to physical measurements.
+
+### 9.3 The Riemann tensor
+
+The Riemann curvature tensor is introduced through geodesic deviation and also through the noncommutation of covariant derivatives. In a coordinate basis, its components are
+
+$R^\\alpha{}_{\\beta\\gamma\\delta}
+=
+\\Gamma^\\alpha{}_{\\beta\\delta,\\gamma}
+-
+\\Gamma^\\alpha{}_{\\beta\\gamma,\\delta}
++
+\\Gamma^\\mu{}_{\\beta\\delta}\\Gamma^\\alpha{}_{\\mu\\gamma}
+-
+\\Gamma^\\mu{}_{\\beta\\gamma}\\Gamma^\\alpha{}_{\\mu\\delta}$
+
+This tensor measures the failure of spacetime to be flat.
+
+### 9.4 Other effects of curvature
+
+The chapter notes that curvature causes:
+- geodesic deviation,
+- path dependence of parallel transport,
+- failure of covariant derivatives to commute,
+- and impossibility of defining a single global Lorentz coordinate system.
+
+### 9.5 Symmetries of Riemann
+
+The Riemann tensor has strong algebraic symmetries:
+
+$R_{\\alpha\\beta\\gamma\\delta}
+=
+-R_{\\beta\\alpha\\gamma\\delta}
+=
+-R_{\\alpha\\beta\\delta\\gamma}
+=
+R_{\\gamma\\delta\\alpha\\beta}$
+
+and its totally antisymmetric part vanishes. In four dimensions these symmetries reduce the apparent 256 components to only 20 independent ones.
+
+### 9.6 Bianchi identities
+
+The differential symmetries of curvature are encoded by the Bianchi identities:
+
+$R_{\\alpha\\beta[\\gamma\\delta;\\mu]} = 0$
+
+The chapter highlights these as deeply significant and notes that they are developed later in more geometric form.
+
+### 9.7 Ricci, scalar, and Einstein curvature
+
+By contracting Riemann one forms:
+
+- the **Ricci tensor**
+
+$R_{\\alpha\\beta} = R^\\mu{}_{\\alpha\\mu\\beta}$
+
+- the **scalar curvature**
+
+$R = R^\\mu{}_\\mu$
+
+- the **Einstein tensor**
+
+$G_{\\alpha\\beta}
+=
+R_{\\alpha\\beta}
+-
+\\frac{1}{2} g_{\\alpha\\beta} R$
+
+Among second-rank contractions of curvature, the Einstein tensor is singled out because it satisfies the contracted Bianchi identities:
+
+$G^\\alpha{}_{\\beta;\\alpha} = 0$
+
+This property becomes essential later when curvature is related to stress-energy in Einstein’s field equations.
+
+### Main idea of §8.7
+
+Curvature is not an abstract luxury. It is what makes neighboring free-fall world lines accelerate relative to one another. The Riemann tensor is the mathematical object that encodes this physical tidal effect.
+
+---
+
+## 10. Box summaries
+
+## Box 8.1 — Books on differential geometry
+
+This box gives a short bibliography of texts suitable for deeper study. Its main function is to place the book’s approach in a wider mathematical context.
+
+### Key points
+- **Bishop and Goldberg (1968)** is identified as the main reference.
+- **Hicks (1965)** and **O’Neill (1966)** are suggested as strong alternatives at graduate and undergraduate levels.
+- **Auslander and MacKenzie (1963)** is recommended for readers more comfortable with differential equations.
+- **Willmore (1959)** is described as easy to read but less challenging and less modern in style.
+- **Trautman** and **Misner** are described as broadly similar in spirit but less pictorial.
+- **Flanders (1963)** is highlighted for exterior differential forms and applications to physics and engineering.
+
+### Significance
+The box tells the reader that this chapter is only an entry point and that the subject stands within a broader tradition including both modern abstract geometry and relativity-oriented expositions.
+
+---
+
+## Box 8.2 — Élie Cartan, 1869–1951
+
+This biographical box explains why Cartan is central to the chapter’s outlook.
+
+### Key points
+- Cartan made foundational contributions to:
+  - exterior differentiation,
+  - Lie groups,
+  - differential equations,
+  - and differential geometry.
+- He helped establish the **modern abstract, coordinate-free viewpoint** that the book adopts.
+- He also discovered the geometric formulation of **Newtonian gravity**, which becomes important later.
+- The box emphasizes that Cartan’s work was initially underappreciated, then later recognized through the conceptual frameworks built by later mathematicians.
+
+### Significance
+Cartan is presented not merely as a historical figure but as the person whose viewpoint allows the reader to understand geometry in the modern local and structural way.
+
+---
+
+## Box 8.3 — Three levels of differential geometry
+
+This box formalizes the three-language philosophy of the chapter.
+
+### Level 1: Pictorial geometry
+- vectors are imagined as arrows,
+- local addition/subtraction resembles flat space,
+- comparison at distinct points is handled by parallel transport,
+- little algebra is used.
+
+### Level 2: Abstract differential geometry
+- vectors are treated as geometric objects in their own right,
+- one need not resolve everything into components,
+- differentiation can be expressed directly at the geometric level.
+
+### Level 3: Component differential geometry
+- everything is written in components,
+- this is essential for calculations,
+- especially in computational general relativity and explicit physical applications.
+
+### Significance
+The box argues that full fluency in the subject requires all three levels. A person who knows only one of them will either lose intuition, lose conceptual clarity, or lose computational power.
+
+---
+
+## Box 8.4 — Tensor algebra at a fixed event in an arbitrary basis
+
+This is a very important technical box. It summarizes the full machinery of tensor algebra at a single event using an arbitrary basis.
+
+### A. Bases
+- Choose an arbitrary linearly independent basis of tangent vectors $\\{e_\\alpha\\}$.
+- Define the dual basis of 1-forms $\\{\\omega^\\alpha\\}$ by
+
+$\\langle \\omega^\\alpha, e_\\beta \\rangle = \\delta^\\alpha{}_\\beta$
+
+- In a coordinate basis, one has
+  - $e_\\alpha = \\partial/\\partial x^\\alpha$
+  - $\\omega^\\alpha = dx^\\alpha$
+
+### B. Algebra of tangent vectors and 1-forms
+- Vectors expand as $u = e_\\alpha u^\\alpha$
+- 1-forms expand as $\\sigma = \\sigma_\\alpha \\omega^\\alpha$
+- Components are extracted by dual pairing
+- Gradients of functions obey
+  - $df = f_{,\\alpha} \\omega^\\alpha$
+  - $f_{,\\alpha} = \\partial_\\alpha f$
+- Raising and lowering indices use the metric:
+  - $u_\\alpha = g_{\\beta\\alpha}u^\\beta$
+  - $u^\\beta = g^{\\beta\\alpha}u_\\alpha$
+
+### C. Change of basis
+The box records the transformation laws for:
+- basis vectors,
+- dual basis 1-forms,
+- vector components,
+- covector components,
+- and coordinate-basis transformations.
+
+### D. Algebra of tensors
+It generalizes the tensor rules from earlier chapters:
+- tensor expansion,
+- component extraction,
+- raising and lowering indices,
+- change of basis,
+- tensor products,
+- contraction,
+- wedge products,
+- and Hodge duals.
+
+### E. Commutators
+The box defines the commutator of vector fields:
+
+$[u,v] = [\\partial_u,\\partial_v] = \\partial_u\\partial_v - \\partial_v\\partial_u$
+
+and introduces basis commutation coefficients through
+
+$[e_\\alpha,e_\\beta] = c_{\\alpha\\beta}{}^\\gamma e_\\gamma$
+
+A coordinate basis is **holonomic** and has vanishing commutators; a noncoordinate basis is **anholonomic** and generally does not.
+
+### Significance
+This box is the chapter’s compact reference sheet for doing tensor algebra locally in any basis, which is exactly what later curved-spacetime calculations require.
+
+---
+
+## Box 8.5 — Georg Friedrich Bernhard Riemann
+
+This box presents Riemann as the foundational figure for higher-dimensional geometry.
+
+### Key points
+- Riemann founded major areas of modern mathematics, including:
+  - Riemann surfaces,
+  - Riemannian geometry,
+  - and topological ideas later connected to Betti numbers and more general spaces.
+- He insisted that the properties of physical space are not known a priori but must be inferred from experience.
+- He recognized that curvature can vary from point to point and that flatness is only an approximation over measurable regions.
+- The box also notes Riemann’s conceptual reach into problems that later became central in relativity, geometry, and even superspace.
+
+### Significance
+Riemann is presented as the thinker who first gave geometry the flexibility needed for modern gravitational physics: space is not rigid and Euclidean by necessity, but dynamic and empirically determined.
+
+---
+
+## Box 8.6 — Covariant derivative and curvature: fundamental equations
+
+This is the chapter’s final summary box. It gathers the central equations into one compact table.
+
+### Covariant derivative
+For a tensor field, the box records:
+- abstract definition,
+- component definition,
+- algebraic properties,
+- chain rule,
+- commutation with contraction,
+- and metric compatibility.
+
+### Connection coefficients
+The box summarizes:
+- the definition of connection coefficients,
+- their metric-and-commutator formula,
+- and the raised-index form.
+
+### Local Lorentz frame
+The box states the defining local conditions:
+- $g_{\\alpha\\beta}(\\mathcal{P}_0)=\\eta_{\\alpha\\beta}$
+- $\\Gamma^\\alpha{}_{\\beta\\gamma}(\\mathcal{P}_0)=0$
+
+### Parallel transport
+It records the equation
+- $\\nabla_u T = 0$
+for transport along the curve.
+
+### Geodesics
+It summarizes both the abstract and coordinate forms:
+- $\\nabla_u u = 0$
+- and the coordinate geodesic equation.
+
+### Curvature
+It records:
+- the Riemann tensor,
+- Ricci tensor,
+- scalar curvature,
+- Einstein tensor,
+- symmetries of curvature,
+- Bianchi identities,
+- contracted Bianchi identities,
+- geodesic deviation,
+- and route dependence of parallel transport around a closed curve.
+
+### Significance
+Box 8.6 is effectively the **formula sheet for the whole chapter**. It condenses the structure of curved-spacetime differential geometry into a usable reference framework.
+
+---
+
+## 11. Key equations and what they mean
+
+### Basis turning in the orbit example
+$\\frac{de_{\\hat r}}{dt} = \\frac{d\\phi}{dt} e_{\\hat \\phi}$
+
+$\\frac{de_{\\hat \\phi}}{dt} = -\\frac{d\\phi}{dt} e_{\\hat r}$
+
+These show that even in flat space, a changing basis produces geometric derivative terms.
+
+### Metric in arbitrary basis
+$g_{\\alpha\\beta} = e_\\alpha \\cdot e_\\beta$
+
+This is the metric written in a general basis.
+
+### Levi-Civita tensor
+$\\epsilon_{\\alpha\\beta\\gamma\\delta} = (-g)^{1/2}[\\alpha\\beta\\gamma\\delta]$
+
+This shows how orientation and volume depend on the metric determinant.
+
+### Tangent vector as directional derivative
+$u = \\partial_u$
+
+This is the modern mathematical definition of tangent vector emphasized in the chapter.
+
+### Local Lorentz frame conditions
+$g_{\\mu\\nu}(\\mathcal{P}_0)=\\eta_{\\mu\\nu}$
+
+$\\partial_\\alpha g_{\\mu\\nu}(\\mathcal{P}_0)=0$
+
+These encode the local inertial character of spacetime.
+
+### Covariant derivative and parallel transport
+$\\nabla_u T = 0$
+
+This means $T$ is parallel-transported along the direction $u$.
+
+### Component covariant derivative
+$T^\\beta{}_{\\alpha;\\gamma}
+=
+T^\\beta{}_{\\alpha,\\gamma}
++
+\\Gamma^\\beta{}_{\\mu\\gamma}T^\\mu{}_\\alpha
+-
+\\Gamma^\\mu{}_{\\alpha\\gamma}T^\\beta{}_\\mu$
+
+This is the working formula for differentiation in curved spacetime.
+
+### Connection from metric and commutators
+$\\Gamma_{\\mu\\beta\\gamma}
+=
+\\frac{1}{2}
+\\left(
+g_{\\mu\\beta,\\gamma}
++
+g_{\\mu\\gamma,\\beta}
+-
+g_{\\beta\\gamma,\\mu}
++
+c_{\\mu\\beta\\gamma}
++
+c_{\\mu\\gamma\\beta}
+-
+c_{\\beta\\gamma\\mu}
+\\right)$
+
+This shows how the connection depends on the metric and the chosen basis.
+
+### Geodesic equation
+$\\frac{d^2 x^\\alpha}{d\\lambda^2}
++
+\\Gamma^\\alpha{}_{\\mu\\gamma}
+\\frac{dx^\\mu}{d\\lambda}
+\\frac{dx^\\gamma}{d\\lambda}
+= 0$
+
+This is the coordinate expression for free-fall motion.
+
+### Metric compatibility
+$\\nabla g = 0$
+
+This means the covariant derivative preserves the metric, and therefore preserves inner products under parallel transport.
+
+### Geodesic deviation
+$\\frac{D^2 n^\\alpha}{d\\lambda^2}
++
+R^\\alpha{}_{\\beta\\gamma\\delta}
+u^\\beta n^\\gamma u^\\delta
+= 0$
+
+This gives the relative acceleration of neighboring geodesics and is the operational heart of curvature.
+
+### Einstein tensor
+$G_{\\alpha\\beta}
+=
+R_{\\alpha\\beta}
+-
+\\frac{1}{2} g_{\\alpha\\beta} R$
+
+This is the special second-rank curvature tensor whose divergence vanishes.
+
+### Contracted Bianchi identity
+$G^\\alpha{}_{\\beta;\\alpha}=0$
+
+This identity later underlies conservation laws in general relativity.
+
+---
+
+## 12. Conceptual arc of the chapter
+
+The chapter develops a very clear arc:
+
+1. **Curvature is physically measurable** through tidal effects.
+2. To define tidal effects, one must compare vectors at different points.
+3. To compare vectors, one needs **parallel transport**.
+4. To measure change relative to transport, one needs the **covariant derivative**.
+5. A geodesic is the curve whose tangent vector parallel-transports itself.
+6. The failure of nearby geodesics to remain at fixed separation defines **geodesic deviation**.
+7. Geodesic deviation defines the **Riemann curvature tensor**.
+8. Contractions of Riemann give Ricci, scalar, and Einstein curvature.
+
+Thus the chapter is not a random collection of formulas. It is a tightly connected conceptual chain.
+
+---
+
+## 13. What this chapter prepares the reader for
+
+Chapter 8 prepares the reader to enter later chapters with a working understanding of:
+
+- tangent spaces,
+- local Lorentz frames,
+- arbitrary bases,
+- parallel transport,
+- covariant differentiation,
+- connection coefficients,
+- geodesics,
+- geodesic deviation,
+- Riemann curvature,
+- Ricci curvature,
+- scalar curvature,
+- Einstein curvature,
+- and Bianchi identities.
+
+It also prepares the reader to understand why general relativity is geometrical:
+- free particles follow geodesics,
+- gravity is encoded in curvature,
+- and curvature is measurable through the relative motion of neighboring free-fall paths.
+
+---
+
+## 14. Final takeaway
+
+Chapter 8 is an overview chapter, but it contains the conceptual backbone of curved-spacetime geometry.
+
+Its deepest message is:
+
+- **Locally**, spacetime looks flat.
+- **Globally**, curvature prevents one from comparing distant objects naively.
+- The correction for that failure is the **connection**.
+- The derivative built from that correction is the **covariant derivative**.
+- The straightest curves are **geodesics**.
+- The physically measurable effect of curvature is **geodesic deviation**.
+- The tensor that encodes all of this is the **Riemann curvature tensor**.
+
+In that sense, Chapter 8 is the first full synthesis of the mathematical language needed to understand gravity as geometry.
+`;function sj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:oj})})}var cj=`# Chapter 8 Exercises: Differential Geometry
+
+## Exercise 8.1: Practice with Tensor Algebra
+
+Take inertial coordinates $(t,x,y,z)$ and spherical coordinates
+
+$$x=r\\sin\\theta\\cos\\phi,\\quad y=r\\sin\\theta\\sin\\phi,\\quad z=r\\cos\\theta.$$
+
+The coordinate basis is $\\{e_t,e_r,e_\\theta,e_\\phi\\}$, while the orthonormal noncoordinate basis is
+
+$$e_{\\hat 0}=e_t,\\quad e_{\\hat r}=e_r,\\quad e_{\\hat\\theta}=r^{-1}e_\\theta,\\quad e_{\\hat\\phi}=(r\\sin\\theta)^{-1}e_\\phi.$$
+
+### (a)
+At fixed $t,r$, the vectors $e_\\theta$ and $e_\\phi$ are tangent to increasing $\\theta$ and $\\phi$ directions on the sphere. The hatted vectors are the same directions but rescaled to unit length.
+
+### (b)
+The dual one-forms are
+
+$$\\omega^t=dt,\\ \\omega^r=dr,\\ \\omega^\\theta=d\\theta,\\ \\omega^\\phi=d\\phi,$$
+
+and
+
+$$\\omega^{\\hat 0}=dt,\\quad \\omega^{\\hat r}=dr,\\quad \\omega^{\\hat\\theta}=r\\,d\\theta,\\quad \\omega^{\\hat\\phi}=r\\sin\\theta\\,d\\phi.$$
+
+### (c)
+The basis transformation from $(t,x,y,z)$ to $(t,r,\\theta,\\phi)$ is
+
+$$
+\\begin{pmatrix}
+e_t\\\\ e_r\\\\ e_\\theta\\\\ e_\\phi
+\\end{pmatrix}
+=
+\\begin{pmatrix}
+1&0&0&0\\\\
+0&\\sin\\theta\\cos\\phi&\\sin\\theta\\sin\\phi&\\cos\\theta\\\\
+0&r\\cos\\theta\\cos\\phi&r\\cos\\theta\\sin\\phi&-r\\sin\\theta\\\\
+0&-r\\sin\\theta\\sin\\phi&r\\sin\\theta\\cos\\phi&0
+\\end{pmatrix}
+\\begin{pmatrix}
+e_t\\\\ e_x\\\\ e_y\\\\ e_z
+\\end{pmatrix}.
+$$
+
+### (d)
+This gives
+
+$$g_{\\alpha\\beta}=\\mathrm{diag}\\!\\left(-1,\\,1,\\,r^2,\\,r^2\\sin^2\\theta\\right),$$
+
+with inverse
+
+$$g^{\\alpha\\beta}=\\mathrm{diag}\\!\\left(-1,\\,1,\\,r^{-2},\\,(r^2\\sin^2\\theta)^{-1}\\right).$$
+
+### (e)
+The hatted basis is orthonormal everywhere:
+
+$$g_{\\hat\\alpha\\hat\\beta}=\\eta_{\\alpha\\beta}.$$
+
+Equivalently,
+
+$$g=-\\omega^{\\hat0}\\otimes\\omega^{\\hat0}+\\omega^{\\hat r}\\otimes\\omega^{\\hat r}+\\omega^{\\hat\\theta}\\otimes\\omega^{\\hat\\theta}+\\omega^{\\hat\\phi}\\otimes\\omega^{\\hat\\phi}.$$
+
+### (f)
+For a scalar $f$,
+
+$$\\nabla f=-f_{,t}e_{\\hat0}+f_{,r}e_{\\hat r}+\\frac1r f_{,\\theta}e_{\\hat\\theta}+\\frac1{r\\sin\\theta}f_{,\\phi}e_{\\hat\\phi}.$$
+
+### (g)
+With the standard orientation,
+
+$$\\epsilon_{tr\\theta\\phi}=r^2\\sin\\theta,\\qquad \\epsilon_{\\hat0\\hat r\\hat\\theta\\hat\\phi}=+1,$$
+
+and all other components follow by antisymmetry.
+
+## Exercise 8.5: A Sheet of Paper in Polar Coordinates
+
+For
+
+$$ds^2=dr^2+r^2d\\phi^2,$$
+
+the only nonzero Christoffel symbols are
+
+$$\\Gamma^r_{\\phi\\phi}=-r,\\qquad \\Gamma^\\phi_{r\\phi}=\\Gamma^\\phi_{\\phi r}=\\frac1r.$$
+
+The geodesic equations are
+
+$$r''-r\\phi'^2=0,\\qquad \\phi''+\\frac{2}{r}r'\\phi'=0,$$
+
+so $r^2\\phi'=\\text{const}$ and the Cartesian combinations
+
+$$x=r\\cos\\phi,\\qquad y=r\\sin\\phi$$
+
+obey $x''=y''=0$. Hence the geodesic is a uniformly parameterized straight line.
+
+For the orthonormal basis
+
+$$e_{\\hat r}=e_r,\\qquad e_{\\hat\\phi}=r^{-1}e_\\phi,$$
+
+the dual forms are
+
+$$\\omega^{\\hat r}=dr,\\qquad \\omega^{\\hat\\phi}=r\\,d\\phi,$$
+
+and the connection coefficients satisfy
+
+$$\\Gamma^{\\hat\\phi}{}_{\\hat r\\hat\\phi}=0,\\qquad \\Gamma^{\\hat\\phi}{}_{\\hat\\phi\\hat r}=\\frac1r,\\qquad \\Gamma^{\\hat r}{}_{\\hat\\phi\\hat\\phi}=-\\frac1r.$$
+`;function lj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:cj})})}function uj(){return(0,L.jsx)(YA,{title:`Chapter 8 - Differential Geometry: An Overview`,summary:(0,L.jsx)(sj,{}),exercises:(0,L.jsx)(lj,{})})}var dj=`# Chapter 9 Detailed Summary  
+## Differential Topology
+
+## 1. Chapter purpose and overall arc
+
+Chapter 9 shifts to a **metric-free, geodesic-free viewpoint** and asks what remains of spacetime geometry once one removes the Lorentz metric, proper length, geodesics, and parallel transport. The answer is that a large amount of local geometric structure survives, but it must be **reinterpreted more carefully**.
+
+This is why the chapter is called **Differential Topology**. It studies the most primitive differentiable structures that still make sense on spacetime or, more generally, on any differentiable manifold:
+
+- events
+- curves
+- tangent vectors
+- 1-forms
+- tensors
+- bases and components
+- commutators of vector fields
+- manifolds and coordinate systems
+
+The chapter’s deepest conceptual move is the replacement of the old flat-spacetime idea of a vector as a displacement between two points with the new idea of a vector as a **tangent vector**, identified with a **directional derivative operator** at a single event.
+
+So the chapter is fundamentally about **locality**:
+
+- geometric objects live at a specific event,
+- tangent vectors act on functions near that event,
+- 1-forms and tensors also reside at that event,
+- and the most basic geometric structure comes from differentiability, not from distance.
+
+The chapter also prepares the reader for later chapters by showing how to work with geometry before adding richer structure such as:
+
+- affine structure
+- parallel transport
+- curvature
+- metric structure
+- geodesics
+- Riemannian or Lorentzian geometry
+
+In that sense, Chapter 9 isolates the **bare differentiable skeleton** underlying later geometry.
+
+---
+
+## 2. Section 9.1 — Geometric objects in metric-free, geodesic-free spacetime
+
+The opening section explains what happens to familiar geometric objects when the Lorentz metric is removed.
+
+### 2.1 Events
+
+The concept of an **event** needs essentially no refinement. An event remains something identifiable in spacetime. Its existence does not depend on a metric.
+
+The key point is:
+
+- an event is still meaningful without notions of length, angle, or interval.
+
+### 2.2 Curves
+
+A **curve** $\\mathcal{P}(\\lambda)$ also remains meaningful. What disappears is not the curve itself, but any metric notion tied to it, such as:
+
+- proper length
+- proper time
+- spacetime arc length
+
+Thus a curve survives as a differentiable path, but not as something with an intrinsic length unless extra structure is supplied.
+
+### 2.3 Vectors
+
+This is where major refinement is needed.
+
+In flat spacetime one could think of a vector as:
+
+- an arrow from one event to another,
+- a straight-line displacement,
+- or a rate of change of position.
+
+Without a metric and without an already defined affine structure, the first two pictures break down. There is no invariant notion of “straight arrow in spacetime” joining two events. So the chapter replaces the old bilocal picture with a purely local one.
+
+A vector must now be regarded as attached to one event only. It becomes a **tangent vector** in the tangent space at that event.
+
+### 2.4 1-forms
+
+A **1-form** survives with much less change than a vector, but one major thing is lost:
+
+- there is no longer any canonical way to identify a vector with a corresponding 1-form,
+- so one cannot raise or lower indices.
+
+A 1-form is still a linear map on tangent vectors, but it must also live at a definite event.
+
+### 2.5 Tensors
+
+A **tensor** survives too, but with two important restrictions:
+
+1. it must reside at a specific event,
+2. each slot is type-specific.
+
+Without a metric, a tensor slot that accepts vectors cannot be freely converted into one that accepts 1-forms, and vice versa. So the familiar metric-based flexibility of index raising and lowering disappears.
+
+### Main idea of §9.1
+
+When the metric is removed, geometry becomes more local and more type-sensitive.  
+Events and curves remain primitive. Vectors, 1-forms, and tensors survive, but must be reformulated as objects attached to a single event.
+
+---
+
+## 3. Section 9.2 — “Vector” and “directional derivative” refined into tangent vector
+
+This is the conceptual core of the chapter.
+
+### 3.1 Why the old definition fails
+
+In flat spacetime one could define a vector using a straight arrow between two events or a straight parametrized line. But in a metric-free setting there is no privileged notion of straightness in spacetime itself.
+
+This forces a rethinking: a vector should not be understood as a finite displacement between two distant points, but as an **infinitesimal displacement along a curve** at one point.
+
+### 3.2 Tangent vector via a limiting process
+
+The chapter first presents the intuitive Cartan-style picture:
+
+- choose a curve $\\mathcal{P}(\\lambda)$,
+- zoom in near $\\lambda = 0$,
+- think of the tangent vector as the infinitesimal displacement along the curve.
+
+This leads pictorially to the tangent vector $d\\mathcal{P}/d\\lambda$, visualized as lying in a tangent space that touches spacetime only at the event $\\mathcal{P}(0)$.
+
+But the chapter then stresses that this picture, while insightful, is not mathematically clean unless one introduces an external embedding space. So a better definition is needed.
+
+### 3.3 Tangent vector as directional derivative
+
+The more precise definition is:
+
+$u = \\partial_u = \\left(d/d\\lambda\\right)_{\\text{along curve}}$
+
+This is equation (9.1) in the chapter’s notation.
+
+In words:
+
+- the tangent vector to the curve is the operator that differentiates scalar functions along that curve.
+
+This is the decisive conceptual shift. A tangent vector is not merely something that points. It is something that **acts on functions**.
+
+If $f$ is a scalar function, then the tangent vector tells how $f$ changes as one moves along the curve:
+
+$u[f] = df/d\\lambda$
+
+So the chapter effectively identifies a tangent vector with a first-order differential operator evaluated at one event.
+
+### 3.4 Why this makes sense
+
+The chapter argues that the old “displacement” intuition is not really lost. Instead, it is refined.
+
+If one studies how all scalar functions change under an infinitesimal motion of the point, then the operator $d/d\\lambda$ captures exactly the local information one wanted from the tangent vector. Thus the vector becomes the infinitesimal change operator associated with motion along the curve.
+
+### 3.5 Isomorphism between vectors and directional derivatives
+
+Once a basis of vectors is chosen at an event, the same coefficients that expand a vector also expand its directional derivative operator.
+
+If
+
+$u = u^\\alpha e_\\alpha, \\qquad v = v^\\alpha e_\\alpha$
+
+then the associated operators satisfy
+
+$\\partial_u = u^\\alpha \\partial_\\alpha, \\qquad \\partial_v = v^\\alpha \\partial_\\alpha$
+
+and linear relations between vectors induce identical linear relations between their operators.
+
+This establishes a complete isomorphism between:
+
+- tangent vectors
+- directional derivative operators at the same point
+
+### 3.6 Tangent space
+
+Because these derivative operators at one event obey the usual linear rules, they form a finite-dimensional vector space called the **tangent space** at that event.
+
+So the tangent space is the abstract vector space of all directional derivative operators at a point. The older geometric picture of tangent arrows becomes a visualization of this abstract space, not its fundamental definition.
+
+### Main idea of §9.2
+
+A vector in differential topology is not a displacement between distant points.  
+It is a **tangent vector**, best understood as a **directional derivative operator** acting on scalar functions at a single event.
+
+---
+
+## 4. Box 9.1 — Tangent vectors and tangent space
+
+This box gives the chapter’s key geometric picture for tangent vectors.
+
+### Main content of the box
+
+The box defines a tangent vector pictorially as the infinitesimal limit of scaled displacements of a point moving along a curve. Since those displacements cannot be interpreted as straight arrows within metric-free spacetime itself, the box visualizes the manifold as embedded in a higher-dimensional flat space.
+
+Then:
+
+- the tangent vector lies in a **tangent plane** or **tangent space**,
+- the tangent space touches spacetime only at the event of interest,
+- and many different tangent vectors to different curves through the same event all lie in that same tangent space.
+
+The box emphasizes that the tangent vector and tangent space do **not** depend on the embedding. The embedding is just a visualization aid.
+
+### Why the box matters
+
+This box preserves Cartan’s geometric intuition:
+
+- a tangent vector still feels like an infinitesimal displacement,
+- but that displacement belongs to the tangent space, not to spacetime itself.
+
+It also explains why the more precise operator definition is adopted in the main text: the operator formulation avoids confusing the intrinsic geometry with artifacts of embedding.
+
+### Core lesson of Box 9.1
+
+The tangent vector is geometrically pictured as an infinitesimal arrow in tangent space, but mathematically formalized as a directional derivative operator.
+
+---
+
+## 5. Section 9.3 — Bases, components, and transformation laws for vectors
+
+Once tangent vectors are defined, the chapter develops their component machinery.
+
+### 5.1 Coordinate-induced basis
+
+Given local coordinates $\\{x^0, x^1, x^2, x^3\\}$ near an event $\\mathcal{P}_0$, one gets a natural basis of the tangent space:
+
+$e_0 = \\frac{\\partial}{\\partial x^0}, \\qquad
+e_1 = \\frac{\\partial}{\\partial x^1}, \\qquad
+e_2 = \\frac{\\partial}{\\partial x^2}, \\qquad
+e_3 = \\frac{\\partial}{\\partial x^3}$
+
+This is equation (9.5) in the text.
+
+These basis vectors are defined as directional derivatives along curves for which all but one coordinate are held fixed.
+
+### 5.2 Expansion of a vector
+
+Any tangent vector at the event can be expanded as
+
+$u = u^\\alpha e_\\alpha$
+
+The coefficients $u^\\alpha$ are its components in that basis.
+
+### 5.3 Change of basis
+
+If one changes from a basis $\\{e_\\beta\\}$ to another basis $\\{e_{\\alpha'}\\}$ via
+
+$e_{\\alpha'} = e_\\beta L^\\beta{}_{\\alpha'}$
+
+then the components must transform by the inverse matrix:
+
+$u^{\\alpha'} = L^{\\alpha'}{}_\\beta u^\\beta$
+
+This is the usual vector-space logic: basis vectors transform one way, vector components transform the opposite way so that the vector itself stays unchanged.
+
+### 5.4 Coordinate transformations
+
+For coordinate-induced bases, the transformation matrix is the Jacobian:
+
+$L^\\beta{}_{\\alpha'} = \\frac{\\partial x^\\beta}{\\partial x^{\\alpha'}}$
+
+This is equation (9.9) and generalizes the familiar differential form of Lorentz transformations from flat spacetime.
+
+### Main idea of §9.3
+
+The tangent space behaves like an ordinary finite-dimensional vector space.  
+Once coordinates are chosen, tangent vectors acquire basis expansions and standard transformation laws.
+
+---
+
+## 6. Figure 9.1 — Coordinate-induced basis vectors
+
+Figure 9.1 visualizes a coordinate system laid on a curved two-dimensional surface and shows the basis vectors induced by the coordinates.
+
+### What the figure shows
+
+The figure depicts two coordinate families, $x(\\mathcal{P})$ and $\\psi(\\mathcal{P})$, on a truncated curved surface. At a chosen event, the coordinate lines induce two tangent basis vectors:
+
+- $\\partial/\\partial x$
+- $\\partial/\\partial \\psi$
+
+These lie in the tangent space at that point rather than in the surface globally.
+
+### Why the figure is important
+
+The figure makes the local meaning of coordinate basis vectors concrete. A coordinate system is not just a labeling device; it induces a basis in each tangent space. This prepares the reader for all later component calculations in differential geometry.
+
+---
+
+## 7. Section 9.4 — 1-forms
+
+This section develops the metric-free theory of 1-forms.
+
+### 7.1 1-forms live in tangent space
+
+Without a metric, a 1-form $\\sigma$ cannot be identified with a vector. It must be treated independently as an object in the dual space to the tangent space.
+
+The chapter emphasizes that the family of surfaces representing a 1-form belongs to the tangent space at the event, not to spacetime itself. The pairing of a 1-form with a tangent vector occurs entirely within the tangent space.
+
+### 7.2 Dual basis
+
+Given a basis of tangent vectors $\\{e_\\alpha\\}$ at an event, one defines the dual basis of 1-forms $\\{\\omega^\\beta\\}$ by
+
+$\\langle \\omega^\\beta, e_\\alpha \\rangle = \\delta^\\beta{}_\\alpha$
+
+This is equation (9.10).
+
+This duality is the foundation for all component manipulation involving vectors and covectors.
+
+### 7.3 Component formulas
+
+The chapter then records the basic formulas:
+
+$u = e_\\alpha u^\\alpha$
+
+$\\sigma = \\sigma_\\beta \\omega^\\beta$
+
+$u^\\alpha = \\langle \\omega^\\alpha, u \\rangle$
+
+$\\sigma_\\beta = \\langle \\sigma, e_\\beta \\rangle$
+
+$\\langle \\sigma, u \\rangle = \\sigma_\\alpha u^\\alpha$
+
+These are equations (9.11a)–(9.11e).
+
+### 7.4 Transformation laws for 1-forms
+
+If the vector basis changes, the dual basis transforms accordingly:
+
+$\\omega^{\\alpha'} = L^{\\alpha'}{}_\\beta \\omega^\\beta$
+
+and the components of a 1-form transform as
+
+$\\sigma_{\\alpha'} = \\sigma_\\beta L^\\beta{}_{\\alpha'}$
+
+These are equations (9.11f) and (9.11g).
+
+### 7.5 Gradient of a function
+
+The gradient 1-form $df$ is still perfectly meaningful without a metric. Its essential relation to a tangent vector is unchanged:
+
+$\\langle df, u \\rangle = \\partial_u f = u[f]$
+
+This is equation (9.12).
+
+In components,
+
+$df = f_{,\\alpha}\\omega^\\alpha$
+
+with
+
+$f_{,\\alpha} = e_\\alpha[f]$
+
+and, in a coordinate basis,
+
+$f_{,\\alpha} = \\partial f/\\partial x^\\alpha$
+
+These are equations (9.13a) and (9.13b).
+
+### 7.6 Duality of coordinate bases
+
+The coordinate 1-form basis $\\{dx^\\alpha\\}$ and the coordinate vector basis $\\{\\partial/\\partial x^\\beta\\}$ are dual:
+
+$\\langle dx^\\alpha, \\partial/\\partial x^\\beta \\rangle = \\delta^\\alpha{}_\\beta$
+
+This is equation (9.14).
+
+### Main idea of §9.4
+
+1-forms remain fully meaningful without a metric.  
+What disappears is only the metric-induced identification between vectors and 1-forms.
+
+---
+
+## 8. Figure 9.2 — Basis vectors and dual basis 1-forms
+
+Figure 9.2 is the main visual explanation of duality.
+
+### What the figure shows
+
+The figure depicts basis vectors $e_1, e_2, e_3$ and corresponding dual basis 1-forms $\\omega^1, \\omega^2, \\omega^3$ as families of parallel surfaces in tangent space.
+
+The duality condition
+
+$\\langle \\omega^\\beta, e_\\alpha \\rangle = \\delta^\\beta{}_\\alpha$
+
+is visualized by arranging the surfaces so that:
+
+- $e_\\alpha$ pierces one surface family with unit rate only for its matching 1-form,
+- and lies parallel to the surfaces of the other 1-forms.
+
+### Why the figure matters
+
+The figure turns the abstract duality relation into a geometric picture. It also connects the language of 1-forms to familiar “surface families” used elsewhere in physics, such as crystallography and wavefronts.
+
+---
+
+## 9. Section 9.5 — Tensors
+
+This section extends the metric-free viewpoint to tensors.
+
+### 9.1 What changes without a metric
+
+A tensor differs from the flat-spacetime version in two ways:
+
+1. it must be attached to a specific event,
+2. each slot has a fixed type.
+
+Thus a tensor that expects a 1-form in one slot and vectors in others cannot have those slots converted into different kinds by raising or lowering indices, because no metric exists to do that.
+
+### 9.2 Tensor notation and components
+
+If $S$ is a tensor with one vector output slot and two covector input slots, its components are defined by inserting basis objects of the correct type, for example:
+
+$S^\\alpha{}_{\\beta\\gamma} = S(\\omega^\\alpha, e_\\beta, e_\\gamma)$
+
+The tensor can then be expanded in basis form as
+
+$S = S^\\alpha{}_{\\beta\\gamma}\\, e_\\alpha \\otimes \\omega^\\beta \\otimes \\omega^\\gamma$
+
+and evaluated on arguments by the usual multilinear component machinery.
+
+The chapter stresses that, apart from the absence of raising/lowering and the need to stay at one event, tensor algebra proceeds just as before.
+
+### Main idea of §9.5
+
+Tensor algebra survives metric removal almost intact, but with strict slot specificity and without any index raising or lowering.
+
+---
+
+## 10. Section 9.6 — Commutators and pictorial techniques
+
+This is the other major conceptual section of the chapter.
+
+### 10.1 From vectors at a point to vector fields
+
+A tangent vector at one event only differentiates a function there. But a **vector field** assigns a tangent vector to each point in a region, so it acts on functions to produce new functions.
+
+If $u$ and $v$ are vector fields, then one can compare the results of applying them in opposite orders.
+
+### 10.2 Definition of the commutator
+
+The commutator is defined by
+
+$[u,v][f] = u(v[f]) - v(u[f])$
+
+This is equation (9.19).
+
+This measures the failure of the two directional derivative operations to commute.
+
+### 10.3 Commutator as a vector field
+
+The chapter then shows that $[u,v]$ is itself a vector field, not just an abstract operator combination.
+
+In a coordinate basis,
+
+$[u,v] =
+\\left(u^\\alpha v^\\beta{}_{,\\alpha}
+-
+v^\\alpha u^\\beta{}_{,\\alpha}\\right)
+\\frac{\\partial}{\\partial x^\\beta}$
+
+This is equation (9.20).
+
+### 10.4 Coordinate bases commute
+
+If the basis vectors come from coordinates, then partial derivatives commute, so
+
+$[e_\\alpha, e_\\beta] = 0$
+
+This is equation (9.21).
+
+This gives a practical criterion for recognizing coordinate-induced bases.
+
+### 10.5 Anholonomic bases and commutation coefficients
+
+For a noncoordinate basis, the commutators need not vanish. One defines the commutation coefficients by
+
+$[e_\\mu, e_\\nu] = c^\\alpha{}_{\\mu\\nu} e_\\alpha$
+
+This is equation (9.22).
+
+Then for arbitrary vector fields expressed in that basis, the commutator becomes
+
+$[u,v] =
+\\left(
+u[v^\\beta]
+-
+v[u^\\beta]
++
+u^\\mu v^\\nu c^\\beta{}_{\\mu\\nu}
+\\right)e_\\beta$
+
+This is equation (9.23).
+
+These coefficients become important later in differential geometry, especially in noncoordinate frames.
+
+### 10.6 Lie derivative
+
+The chapter introduces the Lie derivative of a vector field $v$ along a vector field $u$:
+
+$\\mathcal{L}_u v = [u,v]$
+
+This is equation (9.24).
+
+So the commutator is not just a computational convenience; it is the natural derivative measuring how one vector field changes relative to the flow of another.
+
+### 10.7 Jacobi identity
+
+The commutator also satisfies the Jacobi identity:
+
+$[u,[v,w]] + [v,[w,u]] + [w,[u,v]] = 0$
+
+This is equation (9.25).
+
+This shows that vector fields with commutator form a Lie algebraic structure.
+
+### Main idea of §9.6
+
+The commutator measures the noncommutativity of flows generated by vector fields.  
+It distinguishes coordinate from noncoordinate bases and leads naturally to Lie derivatives and structure coefficients.
+
+---
+
+## 11. Box 9.2 — The commutator as a closer of quadrilaterals
+
+This is the second major box and one of the most important intuitive pictures in the chapter.
+
+### Part A — Pictorial representation in flat spacetime
+
+The box first considers flat spacetime and two vector fields $u(\\mathcal{P})$ and $v(\\mathcal{P})$ laid out directly in spacetime.
+
+Starting at a point $\\mathcal{P}_0$, one follows:
+
+1. one edge along $u$,
+2. then one edge along $v$,
+3. then compares that route with
+4. first going along $v$ and then along $u$.
+
+In general the resulting four-legged curve does **not** close exactly. The failure to close is represented by the vector from $\\mathcal{P}_3$ to $\\mathcal{P}_4$, and the box shows that, to leading order, this gap is the commutator $[u,v]$.
+
+So the commutator is interpreted as the vector that **closes the quadrilateral**.
+
+### Part B — Metric-free or curved-spacetime representation
+
+The box then adapts the picture to settings where vectors should not be laid directly in spacetime itself.
+
+Instead of drawing vector arrows in spacetime, one draws two families of curves whose tangent fields are $u$ and $v$. The nonclosure of the quadrilateral is then characterized indirectly by comparing values of an arbitrary scalar function $f$ at the two would-be end points.
+
+The resulting difference is shown to be
+
+$f(\\mathcal{P}_4) - f(\\mathcal{P}_3)
+=
+\\{[u,v][f]\\}_{\\mathcal{P}_0}
++
+\\text{higher-order errors}$
+
+So $[u,v]$ again describes the infinitesimal nonclosure.
+
+### Part C — Philosophy of pictures
+
+The box ends with a methodological warning:
+
+- pictures are not substitutes for computation,
+- but they are excellent for suggesting and interpreting geometric relations.
+
+It therefore endorses carefully used “sloppy pictures” in which tangent vectors are drawn as if they lived directly in spacetime, so long as one remembers their true local meaning and checks error scaling.
+
+### Core lesson of Box 9.2
+
+The commutator is the infinitesimal failure of two flows to close into a quadrilateral.  
+It is a geometric measure of order-dependence.
+
+---
+
+## 12. Section 9.7 — Manifolds and differential topology
+
+The final section broadens the scope beyond spacetime.
+
+### 12.1 What is a differentiable manifold?
+
+A differentiable manifold is described intuitively as a set of points that, in sufficiently small neighborhoods, can be put in one-to-one differentiable correspondence with open subsets of $\\mathbb{R}^n$.
+
+That local correspondence provides coordinates.
+
+The point of the section is that the machinery developed earlier in the chapter is not peculiar to spacetime. It applies to **any differentiable manifold**.
+
+### 12.2 Example: $S^2$ as a manifold
+
+The chapter presents the 2-sphere in an abstract way. One can think of $S^2$ as:
+
+- the set of all rays in $\\mathbb{R}^3$ from the origin,
+- or the usual round sphere,
+- or any closed smooth surface intersected once by each ray.
+
+These all represent the same differentiable manifold at the level of differential topology.
+
+The lesson is that the manifold is not tied to one particular embedding or shape. Different geometric realizations can correspond to the same underlying differentiable manifold.
+
+### 12.3 Example: torus $T^2$
+
+The torus $T^2$ is presented as an example of a manifold with a different differentiable structure from $S^2$ at this level.
+
+There is no smooth invertible correspondence between $T^2$ and $S^2$, so they are genuinely different manifolds.
+
+### 12.4 Example: $SO(3)$
+
+The rotation group $SO(3)$ is presented as another differentiable manifold. Its points are $3\\times 3$ orthogonal matrices with determinant $1$.
+
+Since one can introduce local coordinates on it, differentiate functions on it, and define tangent vectors and vector fields on it, it is a manifold just as much as spacetime is.
+
+The Lorentz group is mentioned as another example.
+
+### 12.5 Differential topology versus richer geometry
+
+The chapter closes by distinguishing levels of structure:
+
+- **differential topology** gives smoothness and local coordinate structure,
+- **affine geometry** adds geodesics, parallel transport, and curvature,
+- **Riemannian geometry** adds a metric.
+
+So a bare differentiable manifold is still “shapeless and sizeless” until additional structure is supplied.
+
+### Main idea of §9.7
+
+The notions introduced in the chapter are not specifically relativistic. They belong to the much broader setting of differentiable manifolds.
+
+---
+
+## 13. Figure 9.3 — Three representations of $S^2$
+
+Figure 9.3 illustrates the manifold viewpoint beautifully.
+
+### What the figure shows
+
+The figure gives three different realizations of the same differentiable manifold $S^2$:
+
+1. the set of rays from the origin in $\\mathbb{R}^3$,
+2. the standard sphere they intersect,
+3. an irregular closed surface intersected once by each ray.
+
+### Why the figure matters
+
+It shows that differential topology is not about one rigid geometric shape. It is about the underlying differentiable structure preserved across different smooth realizations.
+
+This is the figure that makes the abstract notion of manifold operational and intuitive.
+
+---
+
+## 14. Key equations and what they mean
+
+### Tangent vector as operator
+$u = \\partial_u = \\left(d/d\\lambda\\right)_{\\text{along curve}}$
+
+This is the defining equation of the chapter. It identifies tangent vectors with directional derivatives.
+
+### Vector/operator isomorphism
+If $u = u^\\alpha e_\\alpha$, then
+
+$\\partial_u = u^\\alpha \\partial_\\alpha$
+
+This expresses the complete correspondence between tangent vectors and first-order directional derivative operators.
+
+### Coordinate basis
+$e_\\alpha = \\partial/\\partial x^\\alpha$
+
+A coordinate system induces a basis in each tangent space.
+
+### Basis transformation
+$e_{\\alpha'} = e_\\beta L^\\beta{}_{\\alpha'}$
+
+This is the vector-space transformation law for basis vectors.
+
+### Component transformation
+$u^{\\alpha'} = L^{\\alpha'}{}_\\beta u^\\beta$
+
+Vector components transform by the inverse matrix.
+
+### Coordinate Jacobian rule
+$L^\\beta{}_{\\alpha'} = \\partial x^\\beta/\\partial x^{\\alpha'}$
+
+For coordinate changes, the transformation matrix is the Jacobian.
+
+### Dual basis condition
+$\\langle \\omega^\\beta, e_\\alpha \\rangle = \\delta^\\beta{}_\\alpha$
+
+This defines the dual basis of 1-forms.
+
+### Vector and 1-form expansions
+$u = e_\\alpha u^\\alpha$
+
+$\\sigma = \\sigma_\\beta \\omega^\\beta$
+
+These are the component decompositions of vectors and 1-forms.
+
+### Pairing formula
+$\\langle \\sigma, u \\rangle = \\sigma_\\alpha u^\\alpha$
+
+This is the core scalar pairing of a 1-form with a vector.
+
+### Gradient relation
+$\\langle df, u \\rangle = u[f]$
+
+This says the gradient 1-form applied to a tangent vector gives the directional derivative of the function.
+
+### Coordinate duality
+$\\langle dx^\\alpha, \\partial/\\partial x^\\beta \\rangle = \\delta^\\alpha{}_\\beta$
+
+Coordinate 1-forms and coordinate tangent vectors are dual.
+
+### Commutator definition
+$[u,v][f] = u(v[f]) - v(u[f])$
+
+This measures the failure of two vector fields to commute when acting on functions.
+
+### Commutator in coordinate components
+$[u,v] =
+\\left(u^\\alpha v^\\beta{}_{,\\alpha} - v^\\alpha u^\\beta{}_{,\\alpha}\\right)\\frac{\\partial}{\\partial x^\\beta}$
+
+This is the working formula in coordinate bases.
+
+### Coordinate basis commutation
+$[e_\\alpha,e_\\beta]=0$
+
+Coordinate basis vectors commute.
+
+### Commutation coefficients
+$[e_\\mu,e_\\nu]=c^\\alpha{}_{\\mu\\nu}e_\\alpha$
+
+This defines the structure functions of a noncoordinate basis.
+
+### Commutator in a noncoordinate basis
+$[u,v]=\\left(u[v^\\beta]-v[u^\\beta]+u^\\mu v^\\nu c^\\beta{}_{\\mu\\nu}\\right)e_\\beta$
+
+This is the corrected component formula when the basis itself has nonzero commutators.
+
+### Lie derivative of a vector field
+$\\mathcal{L}_u v = [u,v]$
+
+The Lie derivative of one vector field along another is the commutator.
+
+### Jacobi identity
+$[u,[v,w]] + [v,[w,u]] + [w,[u,v]] = 0$
+
+This is the fundamental algebraic identity for commutators.
+
+---
+
+## 15. Conceptual backbone of the chapter
+
+The chapter has a very clean logical progression:
+
+1. Remove the metric and ask what survives.
+2. Keep events and curves.
+3. Replace vectors by tangent vectors at a point.
+4. Define tangent vectors as directional derivative operators.
+5. Build tangent spaces from those operators.
+6. Introduce coordinate-induced bases and component laws.
+7. Define 1-forms as dual objects.
+8. Keep tensors, but without raising and lowering.
+9. Study vector fields and their commutators.
+10. Interpret commutators geometrically as infinitesimal nonclosure.
+11. Generalize everything from spacetime to arbitrary differentiable manifolds.
+
+This progression is the chapter’s real achievement. It strips geometry down to its smooth local essence.
+
+---
+
+## 16. What this chapter prepares the reader for
+
+Chapter 9 prepares the reader for later differential geometry by making clear what is already available **before** metric, connection, and curvature enter.
+
+After this chapter the reader should understand:
+
+- what tangent vectors really are,
+- why they are local,
+- how tangent spaces are defined,
+- how coordinate bases and dual bases work,
+- why 1-forms are not vectors without a metric,
+- why tensor slots become type-specific,
+- how commutators measure flow noncommutativity,
+- and what a differentiable manifold is at the most basic level.
+
+This is precisely the right foundation for later chapters on:
+
+- affine geometry
+- covariant differentiation
+- curvature
+- metric geometry
+- geodesics
+- rotation-group manifolds and related applications
+
+---
+
+## 17. Final takeaway
+
+Chapter 9 is a foundational chapter in the strongest sense. It teaches the reader how to think geometrically **before** adding measurement.
+
+Its deepest lesson is:
+
+- geometry begins not with distance, but with **differentiable structure**.
+
+From that structure alone one can define:
+
+- tangent vectors,
+- tangent spaces,
+- dual 1-forms,
+- tensors,
+- vector-field commutators,
+- and smooth manifolds.
+
+Only later does one add richer concepts such as:
+
+- metric
+- curvature
+- geodesics
+- parallel transport
+
+So Chapter 9 marks the transition from naive geometric pictures tied to flat spacetime into the modern manifold-based language of differential geometry.
+`;function fj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:dj})})}var pj=`# Chapter 9 Exercises: Differential Topology
+
+## Exercise 9.1: Component Manipulations
+
+The needed identities are the usual vector-space rules for components in a basis:
+
+$$u=u^\\alpha e_\\alpha,\\qquad v=v^\\alpha e_\\alpha,$$
+
+so
+
+$$u+v=(u^\\alpha+v^\\alpha)e_\\alpha,\\qquad au=(au^\\alpha)e_\\alpha.$$
+
+If the basis changes by
+
+$$e_{\\alpha'}=e_\\beta L^\\beta{}_{\\alpha'},$$
+
+then the components must transform oppositely:
+
+$$u^{\\alpha'}=L^{\\alpha'}{}_\\beta u^\\beta.$$
+
+The tensor-product and basis-tensor relations follow by inserting the expansions of the vectors and 1-forms into the machine definition of a tensor. This yields equations (9.11c) through (9.11g).
+
+## Exercise 9.2: Components of Gradient, and Duality of Coordinate Bases
+
+From the expansion of a scalar differential in an arbitrary basis,
+
+$$df=f_{,\\alpha}\\,\\omega^\\alpha,$$
+
+one gets
+
+$$f_{,\\alpha}=e_\\alpha[f].$$
+
+For a coordinate basis, the coordinate 1-forms and coordinate vectors are dual:
+
+$$dx^\\alpha\\!\\left(\\frac{\\partial}{\\partial x^\\beta}\\right)=\\delta^\\alpha{}_\\beta.$$
+
+So the bases $\\{dx^\\alpha\\}$ and $\\{\\partial/\\partial x^\\alpha\\}$ are dual to each other.
+
+## Exercise 9.3: Practice Manipulating Tangent Vectors
+
+Let
+
+$$P_0=(0,1,0),\\quad
+P(\\lambda)=(\\lambda,1,\\lambda),\\quad
+P(\\xi)=(\\sin\\xi,\\cos\\xi,\\xi),\\quad
+P(\\rho)=(\\sinh\\rho,\\cosh\\rho,\\rho+\\rho^3).$$
+
+For $f=x^2-y^2+z^2$,
+
+$$\\nabla f=(2x,-2y,2z),$$
+
+so at $P_0$,
+
+$$\\nabla f(P_0)=(0,-2,0).$$
+
+Therefore
+
+$$\\left.\\frac{d}{d\\lambda}f\\right|_{P_0}=0,\\qquad
+\\left.\\frac{d}{d\\xi}f\\right|_{P_0}=0,\\qquad
+\\left.\\frac{d}{d\\rho}f\\right|_{P_0}=0.$$
+
+The tangent vectors at $P_0$ are the curve derivatives:
+
+$$\\left.\\frac{d}{d\\lambda}\\right|_{P_0}=\\partial_x+\\partial_z,$$
+
+$$\\left.\\frac{d}{d\\xi}\\right|_{P_0}=\\partial_x+\\partial_z,$$
+
+$$\\left.\\frac{d}{d\\rho}\\right|_{P_0}=\\partial_x+\\partial_z,$$
+
+where the last uses $\\cosh 0=1$, $\\sinh 0=0$, and $(d/d\\rho)(\\rho+\\rho^3)|_{\\rho=0}=1$.
+
+## Exercise 9.4: More Practice with Tangent Vectors
+
+With
+
+$$v=y^2\\frac{\\partial}{\\partial x}-x\\frac{\\partial}{\\partial z},\\qquad f=xy,\\qquad g=z^3,$$
+
+one finds
+
+$$v[f]=y^3,\\qquad v[g]=-3xz^2,\\qquad v[fg]=y^3z^3-3x^2yz^2,$$
+
+and, more systematically,
+
+$$v[fg]=f\\,v[g]+g\\,v[f],$$
+
+$$v[f^2+g^2]=2f\\,v[f]+2g\\,v[g],$$
+
+$$v\\{v[f]\\}=v[y^3]=2y^4.$$
+
+This exercise is just the Leibniz rule and repeated application of the directional derivative.
+
+## Exercise 9.5: Picture of Basis 1-Forms Induced by Coordinates
+
+In the tangent space of Figure 9.1, the basis 1-forms $dt$ and $dx$ are the covectors dual to the coordinate basis vectors $\\partial/\\partial t$ and $\\partial/\\partial x$. They should be drawn as families of equally spaced parallel hyperplanes, orthogonal to the corresponding basis vectors.
+
+## Exercise 9.6: Practice with Dual Bases
+
+For
+
+$$e_r=\\frac{\\partial}{\\partial r},\\qquad
+e_\\theta=\\frac1r\\frac{\\partial}{\\partial\\theta},\\qquad
+e_\\phi=\\frac{1}{r\\sin\\theta}\\frac{\\partial}{\\partial\\phi},$$
+
+the dual 1-forms are
+
+$$\\omega^r=dr,\\qquad \\omega^\\theta=r\\,d\\theta,\\qquad \\omega^\\phi=r\\sin\\theta\\,d\\phi.$$
+
+On the unit sphere $r=1$, the coordinate and orthonormal bases differ only by the scale factors $r$ and $r\\sin\\theta$; the orthonormal basis is unit-length everywhere away from the poles.
+
+## Exercise 9.7: Practice with Commutators
+
+For the spherical orthonormal basis fields
+
+$$e_{\\hat\\theta}=\\frac1r\\frac{\\partial}{\\partial\\theta},\\qquad
+e_{\\hat\\phi}=\\frac{1}{r\\sin\\theta}\\frac{\\partial}{\\partial\\phi},$$
+
+the commutator is
+
+$$[e_{\\hat\\theta},e_{\\hat\\phi}]
+= e_{\\hat\\theta}\\!\\left(\\frac{1}{r\\sin\\theta}\\right)\\frac{\\partial}{\\partial\\phi}
+= -\\frac{\\cot\\theta}{r}\\,e_{\\hat\\phi}.$$
+
+So the only nonzero commutation coefficient here is
+
+$$c_{\\hat\\theta\\hat\\phi}{}^{\\hat\\phi}=-\\frac{\\cot\\theta}{r}.$$
+
+## Exercise 9.8: Angular Momentum Operators
+
+Take the standard Euclidean vector fields
+
+$$L_x=y\\frac{\\partial}{\\partial z}-z\\frac{\\partial}{\\partial y},\\quad
+L_y=z\\frac{\\partial}{\\partial x}-x\\frac{\\partial}{\\partial z},\\quad
+L_z=x\\frac{\\partial}{\\partial y}-y\\frac{\\partial}{\\partial x}.$$
+
+Their commutators are the $\\mathfrak{so}(3)$ relations:
+
+$$[L_x,L_y]=L_z,\\qquad [L_y,L_z]=L_x,\\qquad [L_z,L_x]=L_y.$$
+
+These are the infinitesimal generators of rotations.
+
+## Exercise 9.9: Commutators and Coordinate-Induced Bases
+
+If $u=\\partial/\\partial x^1$ and $v=\\partial/\\partial x^2$ in some coordinate system, then clearly $[u,v]=0$.
+
+Conversely, if $u$ and $v$ are linearly independent and commute, then their flows commute. By the local flow-box/Frobenius theorem, one can choose coordinates in a neighborhood where the two flows become coordinate lines, so
+
+$$u=\\frac{\\partial}{\\partial x^1},\\qquad v=\\frac{\\partial}{\\partial x^2}.$$
+
+The same argument extends to four vector fields: a basis is coordinate-induced iff all pairwise commutators vanish.
+
+## Exercise 9.10: Components of Commutator in Non-Coordinate Basis
+
+Using
+
+$$[e_\\beta,e_\\gamma]=c_{\\beta\\gamma}{}^\\alpha e_\\alpha,$$
+
+and expanding
+
+$$u=u^\\beta e_\\beta,\\qquad v=v^\\gamma e_\\gamma,$$
+
+one obtains
+
+$$[u,v]=\\left(u^\\beta v^\\alpha{}_{,\\beta}-v^\\beta u^\\alpha{}_{,\\beta}-c_{\\beta\\gamma}{}^\\alpha u^\\beta v^\\gamma\\right)e_\\alpha.$$
+
+That is equation (9.23).
+
+## Exercise 9.11: Lie Derivative
+
+The Lie derivative is defined by
+
+$$\\mathcal L_u v=[u,v].$$
+
+So the “Lie transport” law $\\mathcal L_u v=0$ means that $v$ is dragged along the flow of $u$ without changing its commutator with the flow tangent.
+
+## Exercise 9.12: A Chip Off the Old Block
+
+The Jacobi identity is
+
+$$[u,[v,w]]+[v,[w,u]]+[w,[u,v]]=0.$$
+
+This follows from expanding each commutator as a derivative operator and grouping the third-order terms. The same identity holds in index form for the structure coefficients. Geometrically, it is the algebraic consistency condition behind the closure of commutators.
+
+## Exercise 9.13: Rotation Group Generators
+
+For the rotation matrices about the $x$, $y$, and $z$ axes, one writes
+
+$$R_x(\\theta)=e^{\\theta K_x},\\qquad R_y(\\phi)=e^{\\phi K_y},\\qquad R_z(\\psi)=e^{\\psi K_z},$$
+
+with $K_i$ the infinitesimal generators.
+
+The Euler-angle parametrization
+
+$$R=R_z(\\phi)R_x(\\theta)R_z(\\psi)$$
+
+gives local coordinates on $SO(3)$. The vector fields generated by the one-parameter subgroups are the tangent vectors to those curves in the group manifold.
+
+## Exercise 9.14: Rotation Group Structure Constants
+
+Using the generator basis from the previous exercise, the commutators are
+
+$$[e_1,e_2]=e_3,\\qquad [e_2,e_3]=e_1,\\qquad [e_3,e_1]=e_2,$$
+
+up to the sign convention chosen for the Euler-angle basis. Thus the structure constants are the $\\mathfrak{so}(3)$ constants:
+
+$$c_{12}{}^3=c_{23}{}^1=c_{31}{}^2=1,$$
+
+with antisymmetry supplying the remaining components.
+`;function mj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:pj})})}function hj(){return(0,L.jsx)(YA,{title:`Chapter 9 - Differential Topology`,summary:(0,L.jsx)(fj,{}),exercises:(0,L.jsx)(mj,{})})}var gj=`# Chapter 10 Detailed Summary  
+## Affine Geometry: Geodesics, Parallel Transport, and Covariant Derivative
+
+## 1. Chapter purpose and conceptual overview
+
+Chapter 10 introduces the core structures of **affine geometry** in spacetime: **geodesics**, **parallel transport**, **covariant differentiation**, and their **component representation through connection coefficients**. The chapter is explicitly **Track 2**, building on the metric-free and tangent-space language of Chapter 9.
+
+The chapter’s central claim is that the **equivalence principle** is strong enough to motivate a whole geometric framework for gravity even before bringing in the full metric structure of spacetime. In this framework:
+
+- a **geodesic** is the world line of a freely falling neutral test particle,
+- **parallel transport** tells how to compare vectors at neighboring events,
+- the **covariant derivative** measures how a field changes relative to parallel transport,
+- and the **connection coefficients** are the component representation of that derivative rule.
+
+The logical circle of the chapter is especially important:
+
+1. Start from **free-fall trajectories**.
+2. Interpret them as **geodesics**.
+3. Use geodesics to define **parallel transport**.
+4. Use parallel transport to define the **covariant derivative**.
+5. Use the covariant derivative to characterize **geodesics** again by the equation $ \\nabla_u u = 0 $.
+
+This circle is not a redundancy. It shows that the notions are **equivalent descriptions of the same affine structure**.
+
+The chapter is also important because it isolates what can be done **without yet discussing curvature in detail**. Curvature enters indirectly through one crucial fact: in curved spacetime, the result of parallel transport depends on the path taken. That dependence is only mentioned here and becomes central in Chapter 11.
+
+---
+
+## 2. Section 10.1 — Geodesics and the equivalence principle
+
+The chapter begins from a physical statement: the motion of a freely falling neutral test body is independent of the body’s internal structure and composition. This is the weak equivalence principle. The path through spacetime of such a body is therefore a universal object, not something tied to the details of a particular material body.
+
+The chapter then refines what a trajectory means. A free-fall trajectory is not merely a set of points. A good clock carried along the body labels the events on the path, so the trajectory is a **parameterized curve** $ \\mathcal{P}(\\lambda) $.
+
+The parameter $ \\lambda $ is not completely unique. One may:
+- choose a different zero of time,
+- or choose different units for the clock.
+
+Therefore the parameter is unique only up to the affine transformation
+
+$ \\lambda_{\\text{new}} = a \\lambda_{\\text{old}} + b. $
+
+This motivates the term **affine parameter**.
+
+The chapter emphasizes that this affine parameter does **not** require a metric in advance. It can exist in a metric-free setting. What it gives is a notion of relative separation **along the geodesic itself**: events on a geodesic can be compared by equal increments of the affine parameter. But this parameter says nothing by itself about directions away from the geodesic.
+
+### Main idea of §10.1
+
+A **geodesic** is the uniquely determined, affine-parameterized world line of a freely falling neutral test particle. The equivalence principle gives it physical meaning, and the affine parameter is unique only up to linear transformations.
+
+---
+
+## 3. Figure 10.1 — Geodesic as “straight-on” parallel transport
+
+Figure 10.1 is the chapter’s first major geometric picture. It shows a geodesic with tangent vector $ u = d\\mathcal{P}/d\\lambda $ at one event and then interprets the geodesic as a rule for carrying that vector forward in the “straightest possible” way.
+
+The figure’s point is that the tangent vector at one point and the tangent vector at another point on the same geodesic can be regarded as “the same vector” after **straight-on parallel transport** along the geodesic.
+
+This is the chapter’s first bridge between:
+- geodesics as curves,
+- and parallel transport as a method of comparing vectors at different events.
+
+The figure therefore anticipates the later statement that a geodesic **parallel-transports its own tangent vector along itself**.
+
+---
+
+## 4. Box 10.1 — Geodesics
+
+Box 10.1 condenses the chapter’s physical and geometric interpretation of geodesics.
+
+### Main contents of the box
+
+The box defines a geodesic in brief as:
+
+- **Give a point** and
+- **give a tangent vector**,
+- then get a **unique affine-parameterized curve**.
+
+In gravitational physics, the geodesic is the world line of a neutral test particle. The box emphasizes several ideas:
+
+1. **Given point** means some event on the world line.
+2. **Given vector** means the tangent vector to that world line at that event.
+3. **Unique curve** means that every neutral test body with the same initial event and initial velocity follows the same world line, regardless of composition or mass, as long as it is a test body.
+4. **Affine parameter** is interpreted physically:
+   - in Cartan-Newton theory as universal time,
+   - in relativistic spacetime as proper time along a timelike geodesic when measured by a good clock.
+5. **Parametrized curve** means the affine parameter has only the freedom $ \\lambda \\mapsto a\\lambda + b $, and this can also be characterized operationally by equal-time or equal-parameter constructions along the curve.
+
+### Why Box 10.1 matters
+
+This box ties the mathematical idea of a geodesic directly to physical free fall. It also states clearly that the tangent vector at one point can be operationally carried to another point on the same geodesic in a way that justifies calling it “the same vector,” even though its coordinate components need not stay numerically equal in arbitrary bases.
+
+---
+
+## 5. Section 10.2 — Parallel transport and covariant derivative: pictorial approach
+
+This section asks how to compare vectors attached to **different events**.
+
+Suppose two neighboring events $ \\mathcal{A} $ and $ \\mathcal{B} $ lie on some curve $ \\mathcal{P}(\\lambda) $. A vector $ v_{\\mathcal{A}} $ lives in the tangent space at $ \\mathcal{A} $, while another vector $ v_{\\mathcal{B}} $ lives in the tangent space at $ \\mathcal{B} $. Since these tangent spaces are distinct, a comparison is not automatic.
+
+The chapter appeals to the equivalence principle. An observer moving from $ \\mathcal{A} $ to $ \\mathcal{B} $ can carry the vector with him and use locally flat Newtonian or Minkowskian standards to keep it “unchanging.” When he reaches $ \\mathcal{B} $, he can compare the transported vector with the vector already sitting there.
+
+That procedure defines **parallel transport**.
+
+A key conceptual point follows immediately:
+
+- In flat spacetime, parallel transport between two points is path independent.
+- In curved spacetime, it is **path dependent**.
+
+That path dependence is one of the earliest operational signs of curvature.
+
+The section then announces that the geometrically correct formalization of this physical transport process is given by the **Schild’s ladder** construction in Box 10.2.
+
+### Main idea of §10.2
+
+Parallel transport is the rule for comparing vectors at different events by carrying them with locally inertial standards. In curved spacetime the result depends on the route, foreshadowing curvature.
+
+---
+
+## 6. Box 10.2 — From geodesics to parallel transport to covariant differentiation to geodesics
+
+Box 10.2 is the core constructive box of the chapter. It gives the operational procedure that ties together geodesics, parallel transport, and covariant differentiation.
+
+### A. Parallel transport from geodesics
+
+The box begins by defining parallel transport using only geodesics and affine parameters.
+
+The construction is local:
+- take a short segment of a curve,
+- build a small geodesic “cross-brace,”
+- use equal affine-parameter steps to propagate the vector,
+- and repeat.
+
+This iterative construction is called **Schild’s ladder**.
+
+The important consequences are:
+
+- it certainly reproduces ordinary parallel transport in flat spacetime,
+- it is local, so by the equivalence principle it must also work in curved spacetime,
+- and the result of transporting a vector from $ \\mathcal{A} $ to $ \\mathcal{B} $ depends on the chosen world line between them.
+
+That last feature is explicitly identified as evidence of curvature.
+
+### B. Covariant derivative from parallel transport
+
+Once parallel transport is defined, one asks how fast a vector field $ v $ changes along a curve with tangent $ u = d/d\\lambda $.
+
+The answer is the **covariant derivative** along $ u $:
+
+$ \\nabla_u v
+= \\lim_{\\epsilon \\to 0}
+\\frac{v(\\lambda_0 + \\epsilon)\\ \\text{parallel transported back to}\\ \\lambda_0 - v(\\lambda_0)}{\\epsilon}. $
+
+This is the geometric difference-quotient definition.
+
+### C. Symmetry / torsion-free condition
+
+By combining the pictures for $ \\nabla_u v $ and $ \\nabla_v u $, the box shows that
+
+$ \\nabla_u v - \\nabla_v u = [u,v]. $
+
+This is the defining symmetry property of the **torsion-free** or **symmetric** covariant derivative relevant for gravity in this book.
+
+### D. Chain rule
+
+The same construction guarantees the product rule
+
+$ \\nabla_u (fv) = f \\nabla_u v + v\\, \\partial_u f. $
+
+So covariant differentiation behaves like ordinary differentiation with respect to scalar multiplication.
+
+### E. Additivity
+
+Parallel transport preserves vector addition: it cannot “break the legs of a triangle apart.” This implies linearity in the vector field slot and additivity in the direction slot.
+
+### F. Geodesics recovered
+
+Applying Schild’s ladder to the tangent field of a geodesic yields the key conclusion:
+
+$ u = d/d\\lambda \\ \\text{is tangent to a geodesic}
+\\quad \\Longleftrightarrow \\quad
+\\nabla_u u = 0. $
+
+The box ends by remarking that the circle is complete:
+
+- geodesic $\\to$ parallel transport $\\to$ covariant derivative $\\to$ geodesic.
+
+### Why Box 10.2 matters
+
+This box gives the chapter’s deepest constructive insight. It shows that the affine geometry of spacetime can be built from free fall alone and that geodesics and the covariant derivative are equivalent descriptions of the same structure.
+
+---
+
+## 7. Page 252 and Figure 10.2 — Basic properties and the link between tangent spaces
+
+The chapter summarizes the core properties of the covariant derivative as:
+
+- **Symmetry**
+  $ \\nabla_u v - \\nabla_v u = [u,v] $
+- **Chain rule**
+  $ \\nabla_u (fv) = f \\nabla_u v + v\\, \\partial_u f $
+- **Additivity in the differentiated vector field**
+  $ \\nabla_u (v+w) = \\nabla_u v + \\nabla_u w $
+- **Linearity in the direction**
+  $ \\nabla_{au+bn} v = a \\nabla_u v + b \\nabla_n v $
+
+Figure 10.2 illustrates a crucial geometric consequence: a parallel-transport law creates a **link between neighboring tangent spaces**. If basis vectors $ e_1, e_2 $ at one event are parallel transported to a nearby event, then any other vector that is parallel transported along the same route has the **same numerical components** in the transported basis.
+
+This is extremely important. It means that parallel transport provides a way to identify tangent spaces locally in a structure-preserving way:
+- it preserves vector addition,
+- it preserves 1-form relations,
+- and it preserves tensor relations.
+
+The figure also notes that this link is exact only in the infinitesimal limit. For finite separations in curved spacetime, different routes produce slightly different identifications.
+
+---
+
+## 8. Section 10.3 — Parallel transport and covariant derivative: abstract approach
+
+This section replaces pictures with a coordinate-free formulation.
+
+The chapter defines a **symmetric covariant derivative** as any rule $ \\nabla $ for producing new vector fields from old that satisfies the four properties listed above. Such a rule is **not** inherent in the bare differentiable-manifold structure of Chapter 9. It is an additional piece of affine structure.
+
+The section then states two equivalences:
+
+### Parallel transport
+
+A vector field $ v $ is parallel transported along a curve with tangent $ u = d/d\\lambda $ if
+
+$ \\frac{dv}{d\\lambda} \\equiv \\nabla_u v = 0. \\tag{10.3} $
+
+### Geodesic condition
+
+A curve $ \\mathcal{P}(\\lambda) $ with tangent $ u = d/d\\lambda $ is a geodesic if
+
+$ \\nabla_u u = 0. \\tag{10.4} $
+
+So, knowing all geodesics is equivalent to knowing the covariant derivative.
+
+The section then broadens the action of $ \\nabla $:
+
+### On functions
+
+$ \\nabla f = df, \\qquad \\nabla_u f = \\partial_u f = u[f] = \\langle df, u \\rangle. \\tag{10.5} $
+
+### On 1-forms
+
+The chapter defines the gradient of a 1-form $ \\sigma $ through its action on parallel-transported vectors. In abstract notation,
+
+$ (\\nabla \\sigma)(v,u) \\equiv \\langle \\nabla_u \\sigma, v \\rangle \\equiv \\nabla_u \\langle \\sigma, v \\rangle = \\frac{d}{d\\lambda}\\langle \\sigma, v \\rangle, \\tag{10.6} $
+
+when $ v $ is held constant by parallel transport along $ u $.
+
+### Product rule for pairings
+
+If $ v $ is not assumed constant, then
+
+$ \\frac{d}{d\\lambda}\\langle \\sigma, v \\rangle
+= \\langle \\nabla_u \\sigma, v \\rangle
++ \\langle \\sigma, \\nabla_u v \\rangle. \\tag{10.7} $
+
+### On general tensors
+
+For a tensor field $ S $, the gradient $ \\nabla S $ is defined similarly by inserting parallel-transported arguments and differentiating the resulting scalar:
+
+$ (\\nabla S)(\\sigma,v,w,u) = \\nabla_u [S(\\sigma,v,w)] = \\partial_u [S(\\sigma,v,w)]. \\tag{10.8} $
+
+### Main idea of §10.3
+
+The abstract covariant derivative is the affine-space generalization of the flat-space gradient. It acts on functions, vectors, 1-forms, and tensors, and the affine structure of spacetime is completely encoded either by $ \\nabla $ or by the family of geodesics.
+
+---
+
+## 9. Box 10.3 — Covariant derivative as a machine; connection coefficients as its components
+
+Box 10.3 gives one of the chapter’s most memorable viewpoints.
+
+### A. The machine view
+
+The covariant derivative $ \\nabla $ is treated as a machine with slots. At an event $ \\mathcal{P}_0 $, the machine takes:
+
+- a 1-form $ \\sigma $,
+- a vector field $ v $,
+- and a vector $ u $,
+
+and produces the number
+
+$ \\nabla(\\sigma, v, u) \\equiv \\langle \\sigma, \\nabla_u v \\rangle. $
+
+The box then gives equivalent ways to interpret this:
+
+- Fill all slots: get a number.
+- Leave the first slot empty: get the vector $ \\nabla_u v $.
+- Leave the first and third slots empty: get the tensor $ \\nabla v $, the gradient of the vector field.
+
+This makes precise the relation among:
+- $ \\nabla $ as an operator,
+- $ \\nabla v $ as a tensor field,
+- and $ \\nabla_u v $ as a vector field along a chosen direction.
+
+### B. Why $ \\nabla $ is not a tensor
+
+The box stresses that $ \\nabla $ is **not** a tensor for two reasons:
+
+1. its middle slot demands a **vector field**, not merely a vector at a point,
+2. it is not fully linear in all slots, because differentiating $ fv $ produces an extra derivative term.
+
+That is why the covariant derivative operator itself is a non-tensorial geometric object.
+
+### C. Connection coefficients as components of $ \\nabla $
+
+The box then explains how to represent $ \\nabla $ in a basis $ \\{e_\\alpha\\} $ with dual basis $ \\{\\omega^\\alpha\\} $.
+
+For an ordinary tensor, components are defined by inserting basis elements into the slots. For $ \\nabla $, the analogous components are
+
+$ \\Gamma^\\alpha{}_{\\beta\\gamma}
+\\equiv \\nabla(\\omega^\\alpha, e_\\beta(\\mathcal{P}), e_\\gamma)
+\\equiv \\langle \\omega^\\alpha, \\nabla_{e_\\gamma} e_\\beta \\rangle. $
+
+These are the **connection coefficients**.
+
+The box makes a vivid conceptual point:
+- $ \\nabla $ as an operator and
+- $ \\Gamma^\\alpha{}_{\\beta\\gamma} $ as a set of numbers
+
+look very different, but they encode the same geometric information:
+- they summarize the local family of geodesics,
+- and they provide the rules for comparing vectors and tensors at neighboring events.
+
+### Why Box 10.3 matters
+
+This box clarifies both the abstract and computational roles of the covariant derivative. It explains why connection coefficients are not arbitrary bookkeeping symbols: they are the component form of the spacetime’s affine structure.
+
+---
+
+## 10. Section 10.4 — Parallel transport and covariant derivative: component approach
+
+This section turns the abstract theory into working formulas.
+
+The chapter notes that in flat spacetime one global Lorentz basis can often be used, but in curved spacetime each event has its own tangent space and hence its own basis. As one moves from point to point, the bases twist and turn. The covariant derivative records this twisting.
+
+### 10.1 Defining directional basis derivatives
+
+The chapter abbreviates
+
+$ \\nabla_{e_\\beta} \\equiv \\nabla_\\beta. \\tag{10.12} $
+
+Then the rate of change of a basis vector along another basis vector is expanded in the basis itself:
+
+$ \\nabla_\\beta e_\\alpha = e_\\mu \\Gamma^\\mu{}_{\\alpha\\beta}. \\tag{10.13} $
+
+The order of indices matters: the derivative direction is the last index.
+
+Projecting with the dual basis gives
+
+$ \\langle \\omega^\\mu, \\nabla_\\beta e_\\alpha \\rangle = \\Gamma^\\mu{}_{\\alpha\\beta}. \\tag{10.14} $
+
+Because the dual basis is locked to the vector basis, the same connection coefficients determine the change of the 1-form basis:
+
+$ \\nabla_\\beta \\omega^\\mu = - \\Gamma^\\mu{}_{\\alpha\\beta}\\,\\omega^\\alpha, \\tag{10.15} $
+
+and equivalently
+
+$ \\langle \\nabla_\\beta \\omega^\\mu, e_\\alpha \\rangle = -\\Gamma^\\mu{}_{\\alpha\\beta}. \\tag{10.16} $
+
+### 10.2 Components of the gradient of a tensor
+
+For a tensor field $ S^\\alpha{}_{\\beta\\gamma} $, the gradient is written
+
+$ \\nabla S = S^\\alpha{}_{\\beta\\gamma;\\delta}\\,
+e_\\alpha \\otimes \\omega^\\beta \\otimes \\omega^\\gamma \\otimes \\omega^\\delta. \\tag{10.17} $
+
+The covariant derivative components are obtained from ordinary directional derivatives plus correction terms for each index:
+
+$ S^\\alpha{}_{\\beta\\gamma;\\delta}
+=
+S^\\alpha{}_{\\beta\\gamma,\\delta}
++ S^\\mu{}_{\\beta\\gamma}\\Gamma^\\alpha{}_{\\mu\\delta}
+- S^\\alpha{}_{\\mu\\gamma}\\Gamma^\\mu{}_{\\beta\\delta}
+- S^\\alpha{}_{\\beta\\mu}\\Gamma^\\mu{}_{\\gamma\\delta}. \\tag{10.18} $
+
+Here
+
+$ S^\\alpha{}_{\\beta\\gamma,\\delta}
+\\equiv e_\\delta[S^\\alpha{}_{\\beta\\gamma}]
+\\equiv \\partial_{e_\\delta} S^\\alpha{}_{\\beta\\gamma}. \\tag{10.19} $
+
+This is one of the chapter’s key formulas. The pattern is simple:
+
+- add a $+\\Gamma$ correction for each **upper** index,
+- add a $-\\Gamma$ correction for each **lower** index.
+
+### 10.3 Covariant derivative along a curve
+
+If $ u = d/d\\lambda $, then
+
+$ \\nabla_u S
+=
+\\frac{D S^\\alpha{}_{\\beta\\gamma}}{d\\lambda}\\,
+e_\\alpha \\otimes \\omega^\\beta \\otimes \\omega^\\gamma, \\tag{10.20} $
+
+with
+
+$ \\frac{D S^\\alpha{}_{\\beta\\gamma}}{d\\lambda}
+=
+\\frac{d S^\\alpha{}_{\\beta\\gamma}}{d\\lambda}
++ S^\\mu{}_{\\beta\\gamma}\\Gamma^\\alpha{}_{\\mu\\delta}u^\\delta
+- S^\\alpha{}_{\\mu\\gamma}\\Gamma^\\mu{}_{\\beta\\delta}u^\\delta
+- S^\\alpha{}_{\\beta\\mu}\\Gamma^\\mu{}_{\\gamma\\delta}u^\\delta. \\tag{10.21} $
+
+### 10.4 Chain rule in components
+
+The chapter stresses that many abstract chain rules collapse into one very simple statement in components:
+
+> The gradient operation “$;$” obeys the ordinary chain rule.
+
+Examples include:
+
+$ (f v^\\alpha)_{;\\mu} = f_{,\\mu} v^\\alpha + f\\, v^\\alpha{}_{;\\mu}, \\tag{10.22a} $
+
+$ (\\sigma_\\alpha v^\\alpha)_{;\\mu}
+=
+\\sigma_{\\alpha;\\mu} v^\\alpha + \\sigma_\\alpha v^\\alpha{}_{;\\mu}, \\tag{10.22b} $
+
+and analogous rules for higher tensor products.
+
+### 10.5 Symmetry of connection coefficients
+
+Exercise 10.9 extracts an important consequence of torsion-freeness:
+
+$ \\Gamma^\\mu{}_{[\\alpha\\beta]}
+=
+-\\frac{1}{2} c_{\\alpha\\beta}{}^\\mu, \\tag{10.23} $
+
+where $ c_{\\alpha\\beta}{}^\\mu $ are the commutator coefficients of the basis. In a **coordinate basis**, the commutators vanish, so the connection is symmetric in the lower two indices:
+
+$ \\Gamma^\\mu{}_{\\alpha\\beta} = \\Gamma^\\mu{}_{\\beta\\alpha}. $
+
+This reduces the number of independent connection coefficients at an event from $4 \\times 4 \\times 4 = 64$ to $4 \\times 10 = 40$.
+
+### 10.6 Divergence
+
+The divergence is introduced by contraction of the gradient. For a tensor field $ T $ of type $ (2,0) $,
+
+$ (\\nabla \\cdot T)^\\alpha = T^{\\alpha\\beta}{}_{;\\beta}. \\tag{10.24} $
+
+### Main idea of §10.4
+
+The component approach translates the geometric content of parallel transport and covariant differentiation into explicit computational formulas. The connection coefficients encode how bases twist, and the semicolon notation packages all correction terms into one rule.
+
+---
+
+## 11. Section 10.5 — Geodesic equation
+
+This final section returns to geodesics, now in components.
+
+A geodesic is defined abstractly by
+
+$ \\nabla_u u = 0, $
+
+with $ u = d\\mathcal{P}/d\\lambda $ the tangent vector to the curve.
+
+In coordinates, if
+
+$ u^\\alpha = \\frac{dx^\\alpha}{d\\lambda}, $
+
+then the condition $ \\nabla_u u = 0 $ becomes
+
+$ 0 = u^\\alpha{}_{;\\beta} u^\\beta
+= \\left(u^\\alpha{}_{,\\beta} + \\Gamma^\\alpha{}_{\\gamma\\beta}u^\\gamma\\right)u^\\beta, $
+
+which reduces to the differential equation
+
+$ \\frac{d^2 x^\\alpha}{d\\lambda^2}
++ \\Gamma^\\alpha{}_{\\gamma\\beta}
+\\frac{dx^\\gamma}{d\\lambda}
+\\frac{dx^\\beta}{d\\lambda}
+= 0. \\tag{10.27} $
+
+This is the **component version of the geodesic equation**.
+
+The chapter then makes an important inverse point: if one knows enough geodesics experimentally, one can read off the connection coefficients. Watch many freely falling particles pass through a given event, measure their initial velocities and accelerations, and solve equation (10.27) for the connection coefficients. In a coordinate frame this determines the symmetric part, and the antisymmetric part vanishes there anyway.
+
+Once the connection coefficients are known, one can parallel transport any vector $ v $ along any curve using
+
+$ \\nabla_u v = 0
+\\quad \\Longleftrightarrow \\quad
+\\frac{d v^\\alpha}{d\\lambda}
++ \\Gamma^\\alpha{}_{\\gamma\\beta} v^\\gamma \\frac{dx^\\beta}{d\\lambda}
+= 0. \\tag{10.28} $
+
+### Main idea of §10.5
+
+The geodesic equation is the coordinate translation of the statement that a geodesic parallel-transports its own tangent vector. Conversely, the family of geodesics determines the connection, and the connection determines parallel transport.
+
+---
+
+## 12. Exercise themes and what they reinforce
+
+Although the exercises are not the main text, they reveal the chapter’s intended lessons.
+
+### Exercises 10.1–10.6
+These reinforce the abstract theory:
+- additivity of the commutator,
+- product and chain rules,
+- tensor-product differentiation,
+- and the proof that geodesics satisfy $ \\nabla_u u = 0 $.
+
+### Exercises 10.7–10.14
+These focus on computation:
+- deriving formulas for connection coefficients,
+- relating the connection for basis vectors and 1-forms,
+- symmetry of the connection,
+- divergence,
+- transformation laws,
+- and explicit examples in polar coordinates.
+
+### Exercises 10.15–10.17
+These apply the theory:
+- parallel transport in components,
+- geodesics in polar coordinates,
+- and an affine geometry on the group manifold $ SO(3) $.
+
+The final exercise is especially instructive because it shows that once a suitable family of geodesics is chosen, even a manifold like $ SO(3) $ acquires affine structure.
+
+---
+
+## 13. Key equations and what they mean
+
+### Affine reparameterization
+$ \\lambda_{\\text{new}} = a \\lambda_{\\text{old}} + b $
+
+The affine parameter along a geodesic is unique only up to a linear change of origin and scale.
+
+### Parallel transport law
+$ \\nabla_u v = 0 $
+
+A vector field is parallel transported along a curve if its covariant derivative along the tangent vanishes.
+
+### Geodesic equation, abstract form
+$ \\nabla_u u = 0 $
+
+A geodesic parallel-transports its own tangent vector.
+
+### Symmetry / torsion-free condition
+$ \\nabla_u v - \\nabla_v u = [u,v] \\tag{10.2a} $
+
+This identifies the covariant derivative as the torsion-free one appropriate to the chapter’s gravitational setting.
+
+### Product rule
+$ \\nabla_u(fv) = f\\nabla_u v + v\\,\\partial_u f \\tag{10.2b} $
+
+Covariant differentiation obeys the ordinary scalar product rule.
+
+### Function gradient
+$ \\nabla f = df, \\qquad \\nabla_u f = u[f] \\tag{10.5} $
+
+On scalar functions, the covariant derivative reduces to the ordinary directional derivative.
+
+### Pairing rule
+$ \\frac{d}{d\\lambda}\\langle \\sigma,v\\rangle
+=
+\\langle \\nabla_u \\sigma, v\\rangle
++
+\\langle \\sigma,\\nabla_u v\\rangle \\tag{10.7} $
+
+This is the covariant chain rule for a 1-form paired with a vector.
+
+### Basis-vector derivative
+$ \\nabla_\\beta e_\\alpha = e_\\mu \\Gamma^\\mu{}_{\\alpha\\beta} \\tag{10.13} $
+
+The connection coefficients measure how the basis changes from point to point.
+
+### Basis-1-form derivative
+$ \\nabla_\\beta \\omega^\\mu = -\\Gamma^\\mu{}_{\\alpha\\beta}\\omega^\\alpha \\tag{10.15} $
+
+The dual basis changes with the opposite sign.
+
+### Covariant derivative of tensor components
+$ S^\\alpha{}_{\\beta\\gamma;\\delta}
+=
+S^\\alpha{}_{\\beta\\gamma,\\delta}
++ S^\\mu{}_{\\beta\\gamma}\\Gamma^\\alpha{}_{\\mu\\delta}
+- S^\\alpha{}_{\\mu\\gamma}\\Gamma^\\mu{}_{\\beta\\delta}
+- S^\\alpha{}_{\\beta\\mu}\\Gamma^\\mu{}_{\\gamma\\delta} \\tag{10.18} $
+
+This is the master correction formula for tensor differentiation in components.
+
+### Covariant derivative along a curve
+$ \\frac{D S^\\alpha{}_{\\beta\\gamma}}{d\\lambda}
+=
+\\frac{d S^\\alpha{}_{\\beta\\gamma}}{d\\lambda}
++ \\text{connection corrections} \\tag{10.21} $
+
+This is the tensorial analogue of ordinary total differentiation along a path.
+
+### Geodesic equation in coordinates
+$ \\frac{d^2 x^\\alpha}{d\\lambda^2}
++ \\Gamma^\\alpha{}_{\\gamma\\beta}
+\\frac{dx^\\gamma}{d\\lambda}
+\\frac{dx^\\beta}{d\\lambda}
+= 0 \\tag{10.27} $
+
+This is the differential equation followed by freely falling particles.
+
+### Parallel-transport equation in coordinates
+$ \\frac{d v^\\alpha}{d\\lambda}
++ \\Gamma^\\alpha{}_{\\gamma\\beta} v^\\gamma \\frac{dx^\\beta}{d\\lambda}
+= 0 \\tag{10.28} $
+
+This is the component law for transporting a vector along a curve.
+
+---
+
+## 14. Conceptual backbone of the chapter
+
+The chapter has a very tight conceptual structure:
+
+1. **Free fall** identifies the natural curves of spacetime.
+2. Those curves are called **geodesics**.
+3. Their affine parameterization provides a notion of ordered progression along the curve.
+4. Geodesics provide a local way to construct **parallel transport**.
+5. Parallel transport defines what it means for a vector field to remain unchanged.
+6. Comparing a transported vector with the original one defines the **covariant derivative**.
+7. The covariant derivative extends naturally from vectors to functions, 1-forms, and tensors.
+8. In components, this derivative is encoded by the **connection coefficients**.
+9. The geodesic equation becomes $ \\nabla_u u = 0 $, or its component form $ d^2x^\\alpha/d\\lambda^2 + \\Gamma^\\alpha{}_{\\gamma\\beta}(dx^\\gamma/d\\lambda)(dx^\\beta/d\\lambda)=0 $.
+10. Therefore geodesics and the covariant derivative are **equivalent descriptions of the same affine geometry**.
+
+This is the main achievement of the chapter.
+
+---
+
+## 15. Final takeaway
+
+Chapter 10 shows that a large part of spacetime geometry can be built from the equivalence principle and free fall alone.
+
+Its deepest message is:
+
+- a **geodesic** is the affine-geometric expression of free fall,
+- **parallel transport** is the rule for comparing tangent spaces at neighboring events,
+- the **covariant derivative** is the derivative compatible with that transport law,
+- and the **connection coefficients** are the component-language face of that same derivative rule.
+
+The chapter also makes clear that these notions are not separate inventions but a single unified structure. If you know the geodesics, you know the connection; if you know the connection, you know how to parallel transport; and if you know parallel transport, you know how to differentiate tensor fields covariantly.
+
+That is why Chapter 10 is foundational: it introduces the affine machinery that later chapters will use to describe curvature, tidal gravity, and ultimately the geometric content of gravitation itself.
+`;function _j(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:gj})})}var vj=`# Chapter 10 Exercises: Affine Geometry
+
+## Exercise 10.1: Additivity of Covariant Differentiation
+
+The commutator is bilinear, so
+
+$$[u,v+w]=[u,v]+[u,w],\\qquad [u+v,w]=[u,w]+[v,w].$$
+
+Using symmetry,
+
+$$\\nabla_u v-\\nabla_v u=[u,v],$$
+
+and the corresponding relations for $v+w$, one gets
+
+$$\\nabla_u(v+w)=\\nabla_u v+\\nabla_u w.$$
+
+## Exercise 10.2: Chain Rule for Covariant Differentiation
+
+For a scalar $f$ and vector field $w$,
+
+$$\\nabla_v(fw)=v[f]\\,w+f\\,\\nabla_v w.$$
+
+This is exactly the transport-definition version of the ordinary product rule.
+
+## Exercise 10.3: Another Chain Rule
+
+For a 1-form $\\sigma$ and vector $v$,
+
+$$v\\!\\left[\\langle \\sigma,w\\rangle\\right]
+=\\langle \\nabla_v \\sigma,w\\rangle+\\langle \\sigma,\\nabla_v w\\rangle.$$
+
+This is equation (10.7); it follows by parallel transporting both factors back to one event and then taking the difference quotient.
+
+## Exercise 10.4: Still Another Chain Rule
+
+The covariant derivative obeys the tensor-product Leibniz rule:
+
+$$\\nabla_v(\\omega\\otimes w)=(\\nabla_v\\omega)\\otimes w+\\omega\\otimes(\\nabla_v w).$$
+
+In flat-space components this is just the familiar product rule for partial derivatives applied to tensor components.
+
+## Exercise 10.5: One More Chain Rule
+
+Likewise for a triple tensor product,
+
+$$\\nabla_v(\\sigma\\otimes\\omega\\otimes w)
+=(\\nabla_v\\sigma)\\otimes\\omega\\otimes w
++\\sigma\\otimes(\\nabla_v\\omega)\\otimes w
++\\sigma\\otimes\\omega\\otimes(\\nabla_v w).$$
+
+## Exercise 10.6: Geodesic Equation
+
+Schild’s ladder shows that if a curve parallel-transports its own tangent, then
+
+$$\\nabla_u u=0,$$
+
+so geodesics are exactly the curves whose tangent vectors are parallel transported along themselves.
+
+## Exercise 10.7: Computation of Connection Coefficients
+
+The connection coefficients are defined by expanding the covariant derivative of a basis vector:
+
+$$\\nabla_{e_\\gamma}e_\\beta=\\Gamma^\\alpha{}_{\\beta\\gamma}e_\\alpha.$$
+
+Equivalently,
+
+$$\\Gamma^\\alpha{}_{\\beta\\gamma}=e^\\alpha\\!\\left(\\nabla_{e_\\gamma}e_\\beta\\right).$$
+
+## Exercise 10.8: Connection for 1-Form Basis
+
+For the dual basis $\\omega^\\alpha$,
+
+$$\\nabla_{e_\\gamma}\\omega^\\alpha=-\\Gamma^\\alpha{}_{\\beta\\gamma}\\,\\omega^\\beta.$$
+
+This is the 1-form version of the connection law and is the content of equations (10.15) and (10.16).
+
+## Exercise 10.9: Symmetry of Connection Coefficients
+
+The torsion-free condition
+
+$$\\nabla_u v-\\nabla_v u=[u,v]$$
+
+is equivalent to
+
+$$\\Gamma^\\alpha{}_{\\beta\\gamma}-\\Gamma^\\alpha{}_{\\gamma\\beta}=c^\\alpha{}_{\\beta\\gamma},$$
+
+where
+
+$$[e_\\beta,e_\\gamma]=c^\\alpha{}_{\\beta\\gamma}e_\\alpha.$$
+
+In a coordinate basis, $c^\\alpha{}_{\\beta\\gamma}=0$, so the connection is symmetric in its lower indices. The number of independent coefficients drops from $64$ to $40$.
+
+## Exercise 10.10: Components of Gradient
+
+For a scalar field $s$,
+
+$$\\nabla s=ds=s_{,\\alpha}\\,\\omega^\\alpha,$$
+
+so the gradient components are simply
+
+$$s_{,\\alpha}=e_\\alpha[s].$$
+
+## Exercise 10.11: Divergence
+
+For a rank-2 tensor $T^{\\alpha\\beta}$, the divergence on the second slot is
+
+$$T^{\\alpha\\beta}{}_{;\\beta}
+=T^{\\alpha\\beta}{}_{,\\beta}
++\\Gamma^\\alpha{}_{\\mu\\beta}T^{\\mu\\beta}
++\\Gamma^\\beta{}_{\\mu\\beta}T^{\\alpha\\mu}.$$
+
+This is the flat-space divergence plus the correction terms for each free index.
+
+## Exercise 10.12: Verification of Chain Rule
+
+For a contracted tensor product, the covariant derivative obeys the same Leibniz cancellation pattern as in flat space: the correction terms from the two factors cancel pairwise, leaving only the divergence of the contracted tensor. The result is the chain rule stated in the exercise.
+
+## Exercise 10.13: Transformation Law for Connection Coefficients
+
+If
+
+$$e'_\\mu=L^\\alpha{}_\\mu e_\\alpha,$$
+
+then
+
+$$\\Gamma'^\\sigma{}_{\\mu\\nu}
+=L^\\sigma{}_\\alpha\\,L^\\beta{}_\\mu\\,L^\\gamma{}_\\nu\\,\\Gamma^\\alpha{}_{\\beta\\gamma}
++L^\\sigma{}_\\alpha\\,\\partial_\\nu L^\\alpha{}_\\mu.$$
+
+This is the affine-connection transformation law.
+
+## Exercise 10.14: Polar Coordinates in Flat 2-Dimensional Space
+
+For a sheet of paper with
+
+$$e_r=\\frac{\\partial}{\\partial r},\\qquad e_\\phi=\\frac1r\\frac{\\partial}{\\partial\\phi},$$
+
+Euclid’s parallel transport gives
+
+$$\\nabla_{e_r}e_r=0,\\qquad \\nabla_{e_r}e_\\phi=0,\\qquad
+\\nabla_{e_\\phi}e_r=\\frac1r e_\\phi,\\qquad
+\\nabla_{e_\\phi}e_\\phi=-\\frac1r e_r.$$
+
+So the only nonzero coefficients are
+
+$$\\Gamma^r{}_{\\phi\\phi}=-r,\\qquad \\Gamma^\\phi{}_{r\\phi}=\\Gamma^\\phi{}_{\\phi r}=\\frac1r.$$
+
+The divergence formula becomes
+
+$$\\nabla\\cdot A=\\frac1r\\frac{\\partial}{\\partial r}(rA^r)+\\frac1r\\frac{\\partial A^\\phi}{\\partial\\phi}.$$
+
+## Exercise 10.15: Components of Parallel-Transport Law
+
+The vector law
+
+$$\\nabla_u v=0$$
+
+becomes, in components,
+
+$$\\frac{dv^\\alpha}{d\\lambda}+\\Gamma^\\alpha{}_{\\beta\\gamma}u^\\beta v^\\gamma=0.$$
+
+That is equation (10.28).
+
+## Exercise 10.16: Geodesics in Polar Coordinates
+
+Starting from $x=r\\cos\\phi$, $y=r\\sin\\phi$ and the straight-line equations $x''=y''=0$, one gets
+
+$$r''-r\\phi'^2=0,\\qquad \\phi''+\\frac{2r'}{r}\\phi'=0.$$
+
+These identify the same polar-coordinate connection coefficients as in Exercise 10.14, both for the coordinate basis and for the orthonormal basis.
+
+## Exercise 10.17: Rotation Group: Geodesics and Connection Coefficients
+
+Let
+
+$$R_{\\mathbf n}(\\lambda)=\\exp\\!\\left(\\lambda\\,n^i H_i\\right),$$
+
+so $R_{\\mathbf n}$ is a rotation by angle $\\lambda|\\mathbf n|$ about axis $\\mathbf n$.
+
+For the SO(3) manifold, the geodesic through a point $P$ with tangent $u=u^i e_i$ is
+
+$$\\zeta(\\lambda)=\\exp(\\lambda u^i e_i)\\,P.$$
+
+Using the geodesic equation and the commutators of the generator basis gives
+
+$$\\Gamma^i{}_{jk}=\\frac12\\,\\epsilon^i{}_{jk},$$
+
+with $\\epsilon_{123}=+1$, independent of position on $SO(3)$.
+`;function yj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:vj})})}function bj(){return(0,L.jsx)(YA,{title:`Chapter 10 - Affine Geometry: Geodesics, Parallel Transport, and Covariant Derivative`,summary:(0,L.jsx)(_j,{}),exercises:(0,L.jsx)(yj,{})})}var xj=`**Quaternions and the Exponential Map: A Rigorous Introduction**
 
 **Generated March 20, 2026**
 
@@ -10301,7 +15132,7 @@ $$ \\frac{\\partial p_b}{\\partial d} = A \\Bigl[ -2\\frac{d}{\\rho} \\cdot \\fr
 $$ \\frac{\\partial p_c}{\\partial d} = A \\Bigl[ -2\\frac{d}{\\rho} \\cdot \\frac{c}{\\rho} \\sin\\theta + 2a \\frac{d}{\\rho} \\cdot \\frac{c}{\\rho} \\cos\\theta - \\sin\\theta \\cdot \\frac{cd}{\\rho^3} \\Bigr], $$  
 $$ \\frac{\\partial p_d}{\\partial d} = A \\Bigl[ -2\\frac{d}{\\rho} \\cdot \\frac{d}{\\rho} \\sin\\theta + 2a \\frac{d}{\\rho} \\cdot \\frac{d}{\\rho} \\cos\\theta + \\sin\\theta \\cdot \\frac{b^2 + c^2}{\\rho^3} \\Bigr]. $$
 
-`;function KA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:GA})})}var qA=`# Differential Geometry Crash Course
+`;function Sj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE],rehypePlugins:[bD],children:xj})})}var Cj=`# Differential Geometry Crash Course
 
 ## 1. Purpose of This Crash Course
 
@@ -11311,7 +16142,7 @@ Those ideas are enough to orient almost any first encounter with differential ge
 Differential geometry is the study of smooth spaces and the structures that live on them. It begins with manifolds, where coordinates exist only locally. Tangent vectors and covectors capture first-order behavior. Tensors encode multilinear geometric quantities. A metric introduces measurement. A connection introduces differentiation. Geodesics describe the natural notion of straight motion. Curvature describes how geometry departs from flatness. Differential forms and Stokes' theorem unify integration and conservation laws.
 
 Once these ideas are in place, many advanced subjects become natural extensions rather than disconnected topics.
-`;function JA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:qA})})}var YA=`# Crash Course on Special Relativity
+`;function wj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Cj})})}var Tj=`# Crash Course on Special Relativity
 
 ## 1. Big Picture
 
@@ -11976,7 +16807,7 @@ The deepest message of special relativity is not merely that moving clocks run s
 
 > Space and time are not separate absolute backgrounds. They are intertwined parts of a single geometric structure, and the invariant content of physics lives in spacetime geometry.
 
-That is why the subject feels both physically revolutionary and mathematically elegant. It is the doorway from classical mechanics into modern geometric physics.`;function XA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:YA})})}var ZA=`# Tensor Calculus Crash Course
+That is why the subject feels both physically revolutionary and mathematically elegant. It is the doorway from classical mechanics into modern geometric physics.`;function Ej(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Tj})})}var Dj=`# Tensor Calculus Crash Course
 
 ## 1. Purpose of This Crash Course
 
@@ -13180,7 +18011,7 @@ A good practical definition of mastery is this:
 
 You understand tensor calculus when you can start with a metric, compute the inverse metric, compute Christoffel symbols, take covariant derivatives, and derive geodesic, divergence, Laplacian, or curvature formulas without getting lost in index structure.
 
-That is the transition from “recognizing formulas” to actually using the subject.`;function QA(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:ZA})})}var $A=`# Crash Course on Calculus of Variations
+That is the transition from “recognizing formulas” to actually using the subject.`;function Oj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Dj})})}var kj=`# Crash Course on Calculus of Variations
 
 ## 1. What Calculus of Variations Is
 
@@ -14049,7 +18880,3994 @@ From this single pattern, we get:
 - equilibrium PDEs
 - modern field equations
 
-That is why calculus of variations is one of the great unifying languages of mathematics and physics.`;function ej(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:$A})})}function tj(){let{id:e}=st(),t=at();return e?(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>t(`/appendices`),children:`← Back to Appendices`}),(0,L.jsxs)(`h1`,{children:[`Appendix `,e]})]}),(0,L.jsxs)(`div`,{className:`chapter1-content`,children:[e===`A`&&(0,L.jsx)(KA,{}),e===`B`&&(0,L.jsx)(JA,{}),e===`C`&&(0,L.jsx)(XA,{}),e===`D`&&(0,L.jsx)(QA,{}),e===`E`&&(0,L.jsx)(ej,{})]})]})}):(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`h1`,{children:`Appendices`}),(0,L.jsx)(`p`,{className:`appendices-intro`,children:`Supplementary mathematical reference materials`})]}),(0,L.jsx)(`div`,{className:`chapter1-content`,children:(0,L.jsx)(`div`,{className:`appendices-list`,children:[{id:`A`,title:`Quaternions and the Exponential Map`,description:`A rigorous introduction to quaternion algebra, exponential function on ℝ, ℂ, and ℍ, and Jacobian matrices`,topics:[`Quaternion Algebra ℍ`,`Exponential Function`,`Jacobian Matrix`,`3D Rotations`,`Lie Group Theory`]},{id:`B`,title:`Differential Geometry`,description:`A comprehensive introduction to manifolds, tangent spaces, metrics, connections, geodesics, and curvature`,topics:[`Manifolds`,`Tangent Vectors`,`Metric Tensor`,`Connections`,`Geodesics`,`Curvature`,`Differential Forms`]},{id:`C`,title:`Special Relativity`,description:`The geometry and physics of spacetime with the principle of relativity and constancy of the speed of light`,topics:[`Lorentz Transformations`,`4-Momentum`,`Time Dilation`,`Length Contraction`,`Mass-Energy Equivalence`]},{id:`D`,title:`Tensor Calculus`,description:`The language of coordinate-independent mathematics for vectors, tensors, and differential operators`,topics:[`Index Notation`,`Tensor Transformations`,`Covariant Derivative`,`Christoffel Symbols`,`Tensor Operations`]},{id:`E`,title:`Calculus of Variations`,description:`The mathematical framework for optimizing functionals, including Euler-Lagrange equations and geodesics`,topics:[`Functionals`,`Euler-Lagrange Equations`,`Lagrangian Mechanics`,`Geodesics`,`First Variation`]}].map(e=>(0,L.jsxs)(`div`,{className:`appendix-card`,onClick:()=>t(`/appendix/${e.id}`),children:[(0,L.jsxs)(`div`,{className:`appendix-badge`,children:[`Appendix `,e.id]}),(0,L.jsxs)(`div`,{className:`appendix-info`,children:[(0,L.jsx)(`h3`,{children:e.title}),(0,L.jsx)(`p`,{className:`appendix-description`,children:e.description}),(0,L.jsx)(`div`,{className:`appendix-topics`,children:e.topics.map(e=>(0,L.jsx)(`span`,{className:`appendix-tag`,children:e},e))})]}),(0,L.jsx)(`div`,{className:`appendix-arrow`,children:`→`})]},e.id))})})]})})}function nj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`visualizations-page`,children:[(0,L.jsxs)(`div`,{className:`visualizations-header`,children:[(0,L.jsx)(`h1`,{children:`Unified MeshGrid System`}),(0,L.jsx)(`p`,{className:`visualizations-intro`,children:`Three levels of grid generation for visualizing coordinate systems and curved spacetime geometries`})]}),(0,L.jsxs)(`div`,{className:`comparison-matrix`,children:[(0,L.jsx)(`h2`,{children:`Comparison Matrix`}),(0,L.jsxs)(`table`,{children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`th`,{children:`Feature`}),(0,L.jsx)(`th`,{children:`Level 1`}),(0,L.jsx)(`th`,{children:`Level 2`}),(0,L.jsx)(`th`,{children:`Level 3`})]})}),(0,L.jsxs)(`tbody`,{children:[(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Embedding function`}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Metric tensor`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Proper distances`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Christoffel symbols`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Null geodesics`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Timelike geodesics`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Light bending`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Complexity`}),(0,L.jsx)(`td`,{children:`Low`}),(0,L.jsx)(`td`,{children:`Medium`}),(0,L.jsx)(`td`,{children:`High`})]})]})]})]}),(0,L.jsx)(`div`,{className:`interactive-section`,children:(0,L.jsxs)(`div`,{className:`interactive-card`,onClick:()=>e(`/viz`),children:[(0,L.jsx)(`div`,{className:`interactive-icon`,children:`🔮`}),(0,L.jsxs)(`div`,{className:`interactive-content`,children:[(0,L.jsx)(`h3`,{children:`Interactive 3D Visualization`}),(0,L.jsx)(`p`,{children:`Explore coordinate systems and curved spacetime geometries in real-time with our interactive 3D viewer. Rotate, zoom, and pan to examine the grid from any angle.`}),(0,L.jsx)(`span`,{className:`launch-btn`,children:`Launch Interactive Viewer →`})]})]})}),(0,L.jsx)(`div`,{className:`levels-grid`,children:[{id:`level1`,path:`/visualization/level1`,title:`Level 1: Coordinate Grid`,subtitle:`Simple Embedding`,description:`Direct mapping from parameter space to 3D visualization using embedding functions. No metric awareness—just pure coordinate transformations.`,features:[`Embedding function (u,v,w) → (x,y,z)`,`Fixed coordinate curves`,`No metric awareness`,`Fast rendering`],useCases:[`Standard coordinate systems`,`Parametric surfaces`,`Quaternion visualizations`],complexity:`Low`,icon:`📐`},{id:`level2`,path:`/visualization/level2`,title:`Level 2: Metric-Aware Grid`,subtitle:`Proper Distances`,description:`Accounts for the metric tensor when drawing lines. Shows what the grid "actually looks like" in curved spacetime with proper distances.`,features:[`Metric tensor g_ij defines geometry`,`Proper distances along curves`,`Equidistant lines in actual geometry`,`Shows curvature effects`],useCases:[`Gravitational redshift visualization`,`Black hole spacetime`,`Cosmological metrics`],complexity:`Medium`,icon:`📏`},{id:`level3`,path:`/visualization/level3`,title:`Level 3: Geodesic Grid`,subtitle:`True Geodesics`,description:`Renders true geodesics—the straightest possible paths in curved spacetime. Shows how light and matter actually move.`,features:[`Christoffel symbols from metric`,`Numerically integrated geodesics`,`Null and timelike geodesics`,`Light bending visualization`],useCases:[`Gravitational lensing`,`Black hole physics`,`Orbital mechanics`],complexity:`High`,icon:`🌌`}].map(t=>(0,L.jsxs)(`div`,{className:`level-card`,onClick:()=>e(t.path),children:[(0,L.jsx)(`div`,{className:`level-icon`,children:t.icon}),(0,L.jsxs)(`div`,{className:`level-content`,children:[(0,L.jsx)(`h3`,{children:t.title}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:t.subtitle}),(0,L.jsx)(`p`,{className:`level-description`,children:t.description}),(0,L.jsxs)(`div`,{className:`level-section`,children:[(0,L.jsx)(`h4`,{children:`Key Features`}),(0,L.jsx)(`ul`,{children:t.features.map((e,t)=>(0,L.jsx)(`li`,{children:e},t))})]}),(0,L.jsxs)(`div`,{className:`level-section`,children:[(0,L.jsx)(`h4`,{children:`Use Cases`}),(0,L.jsx)(`ul`,{children:t.useCases.map((e,t)=>(0,L.jsx)(`li`,{children:e},t))})]}),(0,L.jsxs)(`div`,{className:`level-footer`,children:[(0,L.jsxs)(`span`,{className:`complexity-badge`,children:[`Complexity: `,t.complexity]}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read documentation →`})]})]})]},t.id))})]})})}var rj=`# Level 1: Coordinate Grid
+That is why calculus of variations is one of the great unifying languages of mathematics and physics.`;function Aj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:kj})})}var jj=`# Comprehensive Crash Course on *Introduction to Electrodynamics* by David J. Griffiths
+
+## 1. Purpose of this crash course
+
+This document is a compact but comprehensive study guide to the core material traditionally covered in *Introduction to Electrodynamics* by David J. Griffiths. It is designed to help you:
+
+- see the big picture of electrodynamics,
+- understand the main physical ideas,
+- learn the standard equations and how they connect,
+- build intuition for solving typical problems,
+- and prepare for deeper study, homework, or review.
+
+The focus is on the standard undergraduate arc:
+
+1. Vector analysis
+2. Electrostatics
+3. Potentials
+4. Electric fields in matter
+5. Magnetostatics
+6. Magnetic fields in matter
+7. Electrodynamics
+8. Conservation laws
+9. Electromagnetic waves
+10. Potentials and gauge ideas
+11. Radiation
+
+This is not a substitute for working problems, but it gives you the conceptual backbone and formula structure of the subject.
+
+---
+
+## 2. The big picture of electrodynamics
+
+Electrodynamics studies electric and magnetic fields, their sources, and how they evolve.
+
+The sources are:
+
+- electric charge density $ \\rho $
+- electric current density $ \\mathbf{J} $
+
+The fields are:
+
+- electric field $ \\mathbf{E} $
+- magnetic field $ \\mathbf{B} $
+
+At the deepest level, classical electrodynamics is summarized by **Maxwell's equations**:
+
+$ \\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0} $
+
+$ \\nabla \\cdot \\mathbf{B} = 0 $
+
+$ \\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t} $
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} + \\mu_0 \\varepsilon_0 \\frac{\\partial \\mathbf{E}}{\\partial t} $
+
+Everything in introductory electrodynamics is, in some sense, unpacking these four equations.
+
+They tell you:
+
+- how charges create electric fields,
+- why isolated magnetic monopoles do not appear in ordinary classical theory,
+- how changing magnetic fields create electric fields,
+- and how currents and changing electric fields create magnetic fields.
+
+The force law that connects fields to matter is the **Lorentz force law**:
+
+$ \\mathbf{F} = q(\\mathbf{E} + \\mathbf{v} \\times \\mathbf{B}) $
+
+So the full story is:
+
+- charges and currents generate fields,
+- fields act back on charges and currents,
+- and the whole system evolves self-consistently.
+
+---
+
+## 3. Mathematical foundation: vector analysis
+
+Griffiths begins with vector calculus because electrodynamics is a field theory written in vector language.
+
+### 3.1 Scalars and vectors
+
+A scalar has magnitude only, like temperature $T$ or potential $V$.
+
+A vector has magnitude and direction, like displacement $ \\mathbf{r} $, electric field $ \\mathbf{E} $, or magnetic field $ \\mathbf{B} $.
+
+### 3.2 Coordinate systems
+
+You need fluency in:
+
+- Cartesian coordinates: $ (x,y,z) $
+- Cylindrical coordinates: $ (s,\\phi,z) $
+- Spherical coordinates: $ (r,\\theta,\\phi) $
+
+Each is useful depending on symmetry:
+
+- planes and boxes $\\to$ Cartesian
+- wires and cylinders $\\to$ cylindrical
+- spheres and point charges $\\to$ spherical
+
+### 3.3 Differential operators
+
+#### Gradient
+
+For a scalar field $f$,
+
+$ \\nabla f $
+
+points in the direction of greatest increase of $f$.
+
+#### Divergence
+
+For a vector field $ \\mathbf{A} $,
+
+$ \\nabla \\cdot \\mathbf{A} $
+
+measures how much the field flows outward from a point.
+
+#### Curl
+
+For a vector field $ \\mathbf{A} $,
+
+$ \\nabla \\times \\mathbf{A} $
+
+measures local circulation or rotational tendency.
+
+### 3.4 Integral theorems
+
+Two theorems appear constantly:
+
+#### Divergence theorem
+
+$ \\int_V (\\nabla \\cdot \\mathbf{A})\\, d\\tau = \\oint_S \\mathbf{A}\\cdot d\\mathbf{a} $
+
+This converts volume divergence into total flux through the boundary.
+
+#### Stokes' theorem
+
+$ \\int_S (\\nabla \\times \\mathbf{A})\\cdot d\\mathbf{a} = \\oint_C \\mathbf{A}\\cdot d\\mathbf{l} $
+
+This converts curl through a surface into circulation around the boundary.
+
+These are essential because Maxwell's equations can be written in both differential and integral form.
+
+### 3.5 Dirac delta function
+
+The delta function $ \\delta(\\mathbf{r}) $ is used to represent point sources.
+
+For a point charge $q$ at the origin,
+
+$ \\rho(\\mathbf{r}) = q\\, \\delta^3(\\mathbf{r}) $
+
+This is a compact and powerful way to write localized sources.
+
+### 3.6 Helmholtz idea
+
+A vector field is largely determined by its divergence and curl, together with boundary conditions.
+
+This is one reason Maxwell's equations are so powerful: they specify the essential local structure of the electromagnetic field.
+
+---
+
+## 4. Electrostatics
+
+Electrostatics studies electric fields produced by charges that are stationary in time.
+
+### 4.1 Coulomb's law
+
+The electric force between two point charges is
+
+$ \\mathbf{F} = \\frac{1}{4\\pi \\varepsilon_0} \\frac{q_1 q_2}{r^2}\\, \\hat{\\mathbf{r}} $
+
+Like charges repel. Opposite charges attract.
+
+The electric field of a point charge $q$ at the origin is
+
+$ \\mathbf{E}(\\mathbf{r}) = \\frac{1}{4\\pi \\varepsilon_0}\\frac{q}{r^2}\\hat{\\mathbf{r}} $
+
+### 4.2 Superposition
+
+If there are many charges, fields add linearly:
+
+$ \\mathbf{E}_{\\text{total}} = \\sum_i \\mathbf{E}_i $
+
+For a continuous charge distribution,
+
+$ \\mathbf{E}(\\mathbf{r}) = \\frac{1}{4\\pi \\varepsilon_0}\\int \\frac{\\rho(\\mathbf{r}')\\, \\hat{\\mathbf{R}}}{R^2}\\, d\\tau' $
+
+where
+
+$ \\mathbf{R} = \\mathbf{r} - \\mathbf{r}' $
+
+and
+
+$ R = |\\mathbf{r} - \\mathbf{r}'| $
+
+### 4.3 Gauss's law
+
+In integral form,
+
+$ \\oint_S \\mathbf{E}\\cdot d\\mathbf{a} = \\frac{Q_{\\text{enc}}}{\\varepsilon_0} $
+
+In differential form,
+
+$ \\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0} $
+
+This is one of the most useful equations in all of physics.
+
+### 4.4 When Gauss's law is useful
+
+Gauss's law is always true, but it is only easy to use directly when symmetry is high.
+
+It works best for:
+
+- spherical symmetry
+- cylindrical symmetry
+- planar symmetry
+
+Classic results:
+
+#### Point charge
+
+$ E = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2} $
+
+#### Infinite line charge with density $ \\lambda $
+
+$ E = \\frac{\\lambda}{2\\pi \\varepsilon_0 s} $
+
+#### Infinite plane sheet with surface charge density $ \\sigma $
+
+$ E = \\frac{\\sigma}{2\\varepsilon_0} $
+
+#### Conducting sphere
+
+Outside: same as point charge at center  
+Inside conductor in electrostatic equilibrium: $ \\mathbf{E} = 0 $
+
+### 4.5 Conductors in electrostatic equilibrium
+
+Important facts:
+
+- $ \\mathbf{E} = 0 $ inside a conductor in static equilibrium
+- excess charge resides on the surface
+- the conductor is an equipotential
+- the field just outside is perpendicular to the surface
+- just outside a conductor,
+
+$ E_\\perp = \\frac{\\sigma}{\\varepsilon_0} $
+
+where $ \\sigma $ is the surface charge density
+
+### 4.6 Boundary conditions for $ \\mathbf{E} $
+
+Across a surface charge density $ \\sigma $,
+
+$ E^\\perp_{\\text{above}} - E^\\perp_{\\text{below}} = \\frac{\\sigma}{\\varepsilon_0} $
+
+Tangentially in electrostatics,
+
+$ \\mathbf{E}_{\\text{above}}^\\parallel = \\mathbf{E}_{\\text{below}}^\\parallel $
+
+These conditions are extremely useful for interfaces.
+
+---
+
+## 5. Electric potential
+
+Potential reformulates electrostatics in terms of a scalar function $V$.
+
+### 5.1 Relation to electric field
+
+In electrostatics,
+
+$ \\mathbf{E} = -\\nabla V $
+
+This means the electric field points downhill in potential.
+
+### 5.2 Potential difference
+
+$ V(\\mathbf{b}) - V(\\mathbf{a}) = - \\int_{\\mathbf{a}}^{\\mathbf{b}} \\mathbf{E}\\cdot d\\mathbf{l} $
+
+In electrostatics this line integral is path independent, because
+
+$ \\nabla \\times \\mathbf{E} = 0 $
+
+### 5.3 Potential of a point charge
+
+$ V(\\mathbf{r}) = \\frac{1}{4\\pi \\varepsilon_0} \\frac{q}{r} $
+
+### 5.4 Potential of a charge distribution
+
+$ V(\\mathbf{r}) = \\frac{1}{4\\pi \\varepsilon_0}\\int \\frac{\\rho(\\mathbf{r}')}{|\\mathbf{r}-\\mathbf{r}'|}\\, d\\tau' $
+
+Often it is easier to compute $V$ first, then obtain $ \\mathbf{E} $ from $ -\\nabla V $.
+
+### 5.5 Poisson's and Laplace's equations
+
+From
+
+$ \\nabla \\cdot \\mathbf{E} = \\rho/\\varepsilon_0 $
+
+and
+
+$ \\mathbf{E} = -\\nabla V $
+
+we get
+
+$ \\nabla^2 V = -\\frac{\\rho}{\\varepsilon_0} $
+
+This is **Poisson's equation**.
+
+In regions with no charge, $ \\rho = 0 $, so
+
+$ \\nabla^2 V = 0 $
+
+This is **Laplace's equation**.
+
+These are among the most important PDEs in physics.
+
+### 5.6 Uniqueness theorems
+
+A solution to Laplace's or Poisson's equation is uniquely determined once appropriate boundary conditions are specified.
+
+This matters because if you guess a solution that satisfies:
+
+- the equation, and
+- the boundary conditions,
+
+then you are done.
+
+### 5.7 Method of images
+
+This is a clever technique for conductor problems.
+
+Example: point charge near a grounded conducting plane.
+
+Instead of solving directly with induced charges, replace the conductor by an appropriate fictional image charge. The resulting potential in the physical region satisfies the correct boundary conditions.
+
+The method works because of uniqueness, not because the image charge is physically real.
+
+### 5.8 Separation of variables
+
+For Laplace's equation in symmetric geometries, solutions are built by separating the variables.
+
+Common cases:
+
+- Cartesian boxes
+- cylindrical problems
+- spherical problems
+
+In spherical symmetry, Legendre polynomials appear naturally.
+
+---
+
+## 6. Work, energy, and electrostatic energy
+
+### 6.1 Work done by the field
+
+For a charge $q$ moved through a potential difference,
+
+$ \\Delta U = q \\Delta V $
+
+### 6.2 Energy of a system of point charges
+
+$ U = \\frac{1}{4\\pi \\varepsilon_0} \\sum_{i<j} \\frac{q_i q_j}{r_{ij}} $
+
+### 6.3 Energy of a continuous distribution
+
+$ U = \\frac{1}{2}\\int \\rho V\\, d\\tau $
+
+Equivalent field form:
+
+$ U = \\frac{\\varepsilon_0}{2}\\int E^2\\, d\\tau $
+
+This implies the electrostatic energy density is
+
+$ u_E = \\frac{\\varepsilon_0}{2} E^2 $
+
+This is a deep conceptual result: energy is stored in the field itself.
+
+---
+
+## 7. Multipole expansion
+
+When you are far from a localized charge distribution, the potential can be expanded in powers of $1/r$.
+
+### 7.1 General structure
+
+$ V(\\mathbf{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\left( \\frac{Q}{r} + \\frac{\\mathbf{p}\\cdot \\hat{\\mathbf{r}}}{r^2} + \\cdots \\right) $
+
+The first terms are:
+
+- monopole term
+- dipole term
+- quadrupole term
+- higher multipoles
+
+### 7.2 Dipole moment
+
+For point charges,
+
+$ \\mathbf{p} = \\sum_i q_i \\mathbf{r}_i $
+
+For a continuous distribution,
+
+$ \\mathbf{p} = \\int \\mathbf{r}' \\rho(\\mathbf{r}')\\, d\\tau' $
+
+### 7.3 Field of an ideal dipole
+
+Potential:
+
+$ V(\\mathbf{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\mathbf{p}\\cdot \\hat{\\mathbf{r}}}{r^2} $
+
+Field:
+
+$ \\mathbf{E} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{1}{r^3}\\left[ 3(\\mathbf{p}\\cdot \\hat{\\mathbf{r}})\\hat{\\mathbf{r}} - \\mathbf{p} \\right] $
+
+### 7.4 Force and torque on a dipole
+
+Torque:
+
+$ \\boldsymbol{\\tau} = \\mathbf{p}\\times \\mathbf{E} $
+
+Potential energy:
+
+$ U = -\\mathbf{p}\\cdot \\mathbf{E} $
+
+A dipole tends to align with the field.
+
+---
+
+## 8. Electric fields in matter
+
+Now the subject turns to macroscopic matter, where charges can rearrange inside materials.
+
+### 8.1 Polarization
+
+A dielectric placed in an electric field develops dipoles. The dipole moment per unit volume is the **polarization**:
+
+$ \\mathbf{P} $
+
+Polarization produces bound charges:
+
+Volume bound charge:
+
+$ \\rho_b = -\\nabla \\cdot \\mathbf{P} $
+
+Surface bound charge:
+
+$ \\sigma_b = \\mathbf{P}\\cdot \\hat{\\mathbf{n}} $
+
+### 8.2 Displacement field
+
+To separate free and bound charge, define
+
+$ \\mathbf{D} = \\varepsilon_0 \\mathbf{E} + \\mathbf{P} $
+
+Then Gauss's law becomes
+
+$ \\nabla \\cdot \\mathbf{D} = \\rho_f $
+
+or in integral form,
+
+$ \\oint \\mathbf{D}\\cdot d\\mathbf{a} = Q_{f,\\text{enc}} $
+
+This is often much easier for matter problems.
+
+### 8.3 Linear dielectrics
+
+In a simple linear dielectric,
+
+$ \\mathbf{P} = \\varepsilon_0 \\chi_e \\mathbf{E} $
+
+so
+
+$ \\mathbf{D} = \\varepsilon \\mathbf{E} $
+
+with
+
+$ \\varepsilon = \\varepsilon_0(1+\\chi_e) $
+
+This introduces the relative permittivity.
+
+### 8.4 Boundary conditions in matter
+
+For $ \\mathbf{D} $,
+
+$ D^\\perp_{\\text{above}} - D^\\perp_{\\text{below}} = \\sigma_f $
+
+For $ \\mathbf{E} $ tangentially,
+
+$ \\mathbf{E}_{\\text{above}}^\\parallel = \\mathbf{E}_{\\text{below}}^\\parallel $
+
+### 8.5 Capacitors and dielectric response
+
+Dielectrics reduce the field for fixed free charge and increase capacitance.
+
+For a parallel-plate capacitor,
+
+$ C = \\frac{\\varepsilon A}{d} $
+
+Energy can be written as
+
+$ U = \\frac{1}{2}CV^2 = \\frac{Q^2}{2C} = \\frac{1}{2}QV $
+
+---
+
+## 9. Magnetostatics
+
+Magnetostatics studies steady currents and time-independent magnetic fields.
+
+### 9.1 Magnetic force
+
+On a moving charge,
+
+$ \\mathbf{F}_B = q\\, \\mathbf{v}\\times \\mathbf{B} $
+
+The magnetic force is always perpendicular to velocity, so it does no work on a point charge directly.
+
+### 9.2 Force on a current element
+
+$ d\\mathbf{F} = I\\, d\\mathbf{l}\\times \\mathbf{B} $
+
+### 9.3 Biot-Savart law
+
+For steady current density $ \\mathbf{J} $,
+
+$ \\mathbf{B}(\\mathbf{r}) = \\frac{\\mu_0}{4\\pi}\\int \\frac{\\mathbf{J}(\\mathbf{r}') \\times \\hat{\\mathbf{R}}}{R^2}\\, d\\tau' $
+
+For a filamentary current,
+
+$ \\mathbf{B}(\\mathbf{r}) = \\frac{\\mu_0 I}{4\\pi}\\int \\frac{d\\mathbf{l}'\\times \\hat{\\mathbf{R}}}{R^2} $
+
+### 9.4 Ampere's law
+
+Integral form:
+
+$ \\oint \\mathbf{B}\\cdot d\\mathbf{l} = \\mu_0 I_{\\text{enc}} $
+
+Differential form:
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} $
+
+Also,
+
+$ \\nabla \\cdot \\mathbf{B} = 0 $
+
+### 9.5 When Ampere's law is useful
+
+Ampere's law is easiest with strong symmetry.
+
+Classic results:
+
+#### Infinite straight wire
+
+$ B = \\frac{\\mu_0 I}{2\\pi s} $
+
+#### Infinite solenoid
+
+Inside:
+
+$ B \\approx \\mu_0 n I $
+
+#### Toroid
+
+$ B = \\frac{\\mu_0 N I}{2\\pi s} $
+
+inside the core region
+
+### 9.6 Magnetic vector potential
+
+Since
+
+$ \\nabla \\cdot \\mathbf{B} = 0 $
+
+we can write
+
+$ \\mathbf{B} = \\nabla \\times \\mathbf{A} $
+
+This is analogous to writing $ \\mathbf{E} = -\\nabla V $ in electrostatics, though the magnetic case is more subtle because the curl representation is automatic from zero divergence.
+
+In magnetostatics and Coulomb gauge,
+
+$ \\nabla \\cdot \\mathbf{A} = 0 $
+
+and
+
+$ \\nabla^2 \\mathbf{A} = -\\mu_0 \\mathbf{J} $
+
+### 9.7 Boundary conditions for $ \\mathbf{B} $
+
+Since $ \\nabla \\cdot \\mathbf{B} = 0 $,
+
+$ B^\\perp_{\\text{above}} = B^\\perp_{\\text{below}} $
+
+Tangential discontinuity comes from surface current $ \\mathbf{K} $.
+
+---
+
+## 10. Magnetic fields in matter
+
+Matter can also magnetize.
+
+### 10.1 Magnetization
+
+The magnetic dipole moment per unit volume is
+
+$ \\mathbf{M} $
+
+It produces bound currents:
+
+Volume bound current:
+
+$ \\mathbf{J}_b = \\nabla \\times \\mathbf{M} $
+
+Surface bound current:
+
+$ \\mathbf{K}_b = \\mathbf{M}\\times \\hat{\\mathbf{n}} $
+
+### 10.2 Auxiliary field $ \\mathbf{H} $
+
+Define
+
+$ \\mathbf{H} = \\frac{1}{\\mu_0}\\mathbf{B} - \\mathbf{M} $
+
+Then Ampere's law becomes
+
+$ \\nabla \\times \\mathbf{H} = \\mathbf{J}_f $
+
+or
+
+$ \\oint \\mathbf{H}\\cdot d\\mathbf{l} = I_{f,\\text{enc}} $
+
+### 10.3 Linear magnetic materials
+
+In simple media,
+
+$ \\mathbf{M} = \\chi_m \\mathbf{H} $
+
+so
+
+$ \\mathbf{B} = \\mu \\mathbf{H} $
+
+with
+
+$ \\mu = \\mu_0(1+\\chi_m) $
+
+### 10.4 Comparison with dielectrics
+
+The analogy is important:
+
+- $ \\mathbf{P} $ pairs with $ \\mathbf{D} $
+- $ \\mathbf{M} $ pairs with $ \\mathbf{H} $
+
+But the analogy is not perfect, so it must be used carefully.
+
+---
+
+## 11. Electrodynamics: time-dependent fields
+
+This is where electricity and magnetism become fully unified.
+
+### 11.1 Faraday's law
+
+A changing magnetic field induces an electric field:
+
+$ \\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t} $
+
+Integral form:
+
+$ \\oint \\mathbf{E}\\cdot d\\mathbf{l} = -\\frac{d\\Phi_B}{dt} $
+
+This is the basis of electromagnetic induction.
+
+### 11.2 Motional emf versus transformer emf
+
+Electromotive force can arise from:
+
+- motion through a magnetic field, or
+- a changing magnetic flux field
+
+You must keep straight what is moving and what is varying in time.
+
+### 11.3 Maxwell's displacement current
+
+Ampere's law in its original form fails for time-dependent situations like charging capacitors.
+
+Maxwell fixed this by adding the displacement-current term:
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} + \\mu_0\\varepsilon_0 \\frac{\\partial \\mathbf{E}}{\\partial t} $
+
+This was the key step that made electromagnetic waves possible.
+
+### 11.4 Continuity equation
+
+Charge conservation requires
+
+$ \\frac{\\partial \\rho}{\\partial t} + \\nabla \\cdot \\mathbf{J} = 0 $
+
+This follows directly from Maxwell's equations.
+
+This is a major consistency check: electrodynamics automatically conserves charge.
+
+---
+
+## 12. Maxwell's equations in full
+
+Here they are again, because everything centers on them.
+
+### Differential form
+
+$ \\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0} $
+
+$ \\nabla \\cdot \\mathbf{B} = 0 $
+
+$ \\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t} $
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} + \\mu_0\\varepsilon_0 \\frac{\\partial \\mathbf{E}}{\\partial t} $
+
+### Integral form
+
+$ \\oint_S \\mathbf{E}\\cdot d\\mathbf{a} = \\frac{Q_{\\text{enc}}}{\\varepsilon_0} $
+
+$ \\oint_S \\mathbf{B}\\cdot d\\mathbf{a} = 0 $
+
+$ \\oint_C \\mathbf{E}\\cdot d\\mathbf{l} = -\\frac{d}{dt}\\int_S \\mathbf{B}\\cdot d\\mathbf{a} $
+
+$ \\oint_C \\mathbf{B}\\cdot d\\mathbf{l} = \\mu_0 I_{\\text{enc}} + \\mu_0\\varepsilon_0 \\frac{d}{dt}\\int_S \\mathbf{E}\\cdot d\\mathbf{a} $
+
+### Physical meanings
+
+- first equation: electric charge is the source of electric flux
+- second: no magnetic monopoles in classical theory
+- third: changing magnetic fields produce circulating electric fields
+- fourth: currents and changing electric fields produce circulating magnetic fields
+
+---
+
+## 13. Electromagnetic waves
+
+This is one of the great triumphs of Maxwell theory.
+
+### 13.1 Wave equation in vacuum
+
+In vacuum, where $ \\rho = 0 $ and $ \\mathbf{J} = 0 $, Maxwell's equations imply
+
+$ \\nabla^2 \\mathbf{E} = \\mu_0\\varepsilon_0 \\frac{\\partial^2 \\mathbf{E}}{\\partial t^2} $
+
+$ \\nabla^2 \\mathbf{B} = \\mu_0\\varepsilon_0 \\frac{\\partial^2 \\mathbf{B}}{\\partial t^2} $
+
+These are wave equations with speed
+
+$ c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}} $
+
+This is the speed of light.
+
+### 13.2 Plane waves
+
+A typical plane wave traveling in direction $ \\mathbf{k} $ looks like
+
+$ \\mathbf{E}(\\mathbf{r},t) = \\mathbf{E}_0 \\cos(\\mathbf{k}\\cdot \\mathbf{r} - \\omega t) $
+
+$ \\mathbf{B}(\\mathbf{r},t) = \\mathbf{B}_0 \\cos(\\mathbf{k}\\cdot \\mathbf{r} - \\omega t) $
+
+with
+
+$ \\omega = ck $
+
+### 13.3 Transverse nature
+
+In vacuum plane waves:
+
+- $ \\mathbf{E} \\perp \\mathbf{B} $
+- $ \\mathbf{E} \\perp \\mathbf{k} $
+- $ \\mathbf{B} \\perp \\mathbf{k} $
+
+and
+
+$ B_0 = \\frac{E_0}{c} $
+
+Also,
+
+$ \\mathbf{B} = \\frac{1}{\\omega}\\mathbf{k}\\times \\mathbf{E} $
+
+### 13.4 Energy flow: Poynting vector
+
+The electromagnetic energy flux is
+
+$ \\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times \\mathbf{B} $
+
+This is the **Poynting vector**.
+
+For a wave, it points in the direction of propagation.
+
+### 13.5 Energy density
+
+Total field energy density:
+
+$ u = \\frac{\\varepsilon_0}{2}E^2 + \\frac{1}{2\\mu_0}B^2 $
+
+For plane waves in vacuum, electric and magnetic contributions are equal on average.
+
+### 13.6 Momentum and radiation pressure
+
+Electromagnetic fields carry momentum.
+
+Momentum density:
+
+$ \\mathbf{g} = \\varepsilon_0\\, \\mathbf{E}\\times \\mathbf{B} $
+
+Radiation exerts pressure on surfaces. This is a physical manifestation of field momentum.
+
+---
+
+## 14. Potentials and gauge transformations
+
+### 14.1 Scalar and vector potentials
+
+In general time-dependent electrodynamics,
+
+$ \\mathbf{B} = \\nabla \\times \\mathbf{A} $
+
+and
+
+$ \\mathbf{E} = -\\nabla V - \\frac{\\partial \\mathbf{A}}{\\partial t} $
+
+These automatically satisfy Faraday's law.
+
+### 14.2 Gauge freedom
+
+The potentials are not unique.
+
+If
+
+$ \\mathbf{A}' = \\mathbf{A} + \\nabla \\Lambda $
+
+$ V' = V - \\frac{\\partial \\Lambda}{\\partial t} $
+
+then $ \\mathbf{E} $ and $ \\mathbf{B} $ remain unchanged.
+
+This is called a **gauge transformation**.
+
+### 14.3 Common gauges
+
+#### Coulomb gauge
+
+$ \\nabla \\cdot \\mathbf{A} = 0 $
+
+#### Lorenz gauge
+
+$ \\nabla \\cdot \\mathbf{A} + \\mu_0 \\varepsilon_0 \\frac{\\partial V}{\\partial t} = 0 $
+
+In Lorenz gauge, the potentials satisfy wave equations:
+
+$ \\nabla^2 V - \\mu_0\\varepsilon_0 \\frac{\\partial^2 V}{\\partial t^2} = -\\frac{\\rho}{\\varepsilon_0} $
+
+$ \\nabla^2 \\mathbf{A} - \\mu_0\\varepsilon_0 \\frac{\\partial^2 \\mathbf{A}}{\\partial t^2} = -\\mu_0 \\mathbf{J} $
+
+Gauge freedom is one of the central conceptual ideas in field theory.
+
+---
+
+## 15. Retarded potentials
+
+Because electromagnetic influence propagates at finite speed, the potentials at time $t$ depend on the sources at earlier times.
+
+### 15.1 Retarded time
+
+$ t_r = t - \\frac{R}{c} $
+
+where $R$ is the distance from source point to field point.
+
+### 15.2 Retarded potentials
+
+$ V(\\mathbf{r},t) = \\frac{1}{4\\pi \\varepsilon_0} \\int \\frac{\\rho(\\mathbf{r}', t_r)}{R}\\, d\\tau' $
+
+$ \\mathbf{A}(\\mathbf{r},t) = \\frac{\\mu_0}{4\\pi} \\int \\frac{\\mathbf{J}(\\mathbf{r}', t_r)}{R}\\, d\\tau' $
+
+These are extremely important because they show how causality enters classical field theory.
+
+Fields do not respond instantaneously to source changes at a distance.
+
+---
+
+## 16. Electromagnetic radiation
+
+Accelerating charges radiate electromagnetic waves.
+
+### 16.1 Static versus accelerated charges
+
+- a stationary charge creates an electrostatic field
+- a uniformly moving charge creates a transformed field pattern
+- an accelerating charge emits radiation
+
+The radiative part falls like $1/r$, while near-field terms fall faster.
+
+### 16.2 Oscillating dipole
+
+A standard introductory radiation source is the oscillating electric dipole.
+
+Far away, the fields are transverse and behave like outgoing waves.
+
+The radiated power depends on the second time derivative of the dipole moment.
+
+### 16.3 Larmor formula
+
+For a nonrelativistic accelerating point charge,
+
+$ P = \\frac{\\mu_0 q^2 a^2}{6\\pi c} $
+
+This gives total radiated power.
+
+Radiation is one of the most profound consequences of combining charges with finite-speed field propagation.
+
+---
+
+## 17. Conservation laws in electrodynamics
+
+Electrodynamics has elegant conservation principles.
+
+### 17.1 Charge conservation
+
+$ \\frac{\\partial \\rho}{\\partial t} + \\nabla \\cdot \\mathbf{J} = 0 $
+
+Charge can flow, but it cannot disappear.
+
+### 17.2 Energy conservation: Poynting theorem
+
+A standard form is
+
+$ \\frac{\\partial u}{\\partial t} + \\nabla \\cdot \\mathbf{S} = -\\mathbf{J}\\cdot \\mathbf{E} $
+
+where
+
+$ u = \\frac{\\varepsilon_0}{2}E^2 + \\frac{1}{2\\mu_0}B^2 $
+
+and
+
+$ \\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times \\mathbf{B} $
+
+Interpretation:
+
+- change in field energy inside a region
+- plus net energy flow out through the boundary
+- equals negative of work done on matter
+
+This is one of the deepest equations in classical field theory.
+
+### 17.3 Momentum conservation
+
+The field carries momentum, and forces on matter are balanced by momentum changes in the field plus fluxes of momentum through space.
+
+At the introductory level, the big takeaway is:
+- fields are not just bookkeeping devices,
+- they store and transport real energy and momentum.
+
+---
+
+## 18. Boundary conditions and interfaces
+
+A recurring theme in Griffiths is how fields behave across boundaries.
+
+### 18.1 Electric field
+
+Normal component jump:
+
+$ E^\\perp_{\\text{above}} - E^\\perp_{\\text{below}} = \\frac{\\sigma}{\\varepsilon_0} $
+
+Tangential component continuity in electrostatics:
+
+$ \\mathbf{E}_{\\text{above}}^\\parallel = \\mathbf{E}_{\\text{below}}^\\parallel $
+
+### 18.2 Magnetic field
+
+Normal component continuity:
+
+$ B^\\perp_{\\text{above}} = B^\\perp_{\\text{below}} $
+
+Tangential jump from surface current:
+
+$ \\mathbf{B}_{\\text{above}}^\\parallel - \\mathbf{B}_{\\text{below}}^\\parallel = \\mu_0\\, \\mathbf{K}\\times \\hat{\\mathbf{n}} $
+
+or equivalently in the usual boundary-form arrangement.
+
+### 18.3 Matter versions
+
+For $ \\mathbf{D} $ and $ \\mathbf{H} $ you use free charge and free current rather than total microscopic charge/current.
+
+These conditions are essential for solving piecewise-medium problems.
+
+---
+
+## 19. Relativity and electrodynamics
+
+Even in an introductory treatment, an important message appears: classical electromagnetism points naturally toward special relativity.
+
+### 19.1 Why relativity enters
+
+Maxwell's equations predict a universal wave speed $c$.
+
+This clashes with old Galilean ideas and leads historically and conceptually to special relativity.
+
+### 19.2 Electric and magnetic fields are frame-dependent aspects of one structure
+
+What looks purely electric in one frame may partly appear magnetic in another.
+
+This is one reason electrodynamics is such a natural gateway to relativistic field theory.
+
+### 19.3 Potentials and covariance
+
+Later formulations show that $V$ and $ \\mathbf{A} $ combine into a four-potential, and Maxwell's equations become compact in spacetime notation.
+
+At the introductory Griffiths level, the main point is conceptual: relativity is not an optional add-on but deeply woven into electromagnetism.
+
+---
+
+## 20. Typical problem-solving workflow
+
+When solving Griffiths-style problems, this workflow helps.
+
+### Step 1: Identify the regime
+
+Ask:
+
+- electrostatics or magnetostatics?
+- time-dependent or static?
+- vacuum or matter?
+- symmetry present or not?
+
+### Step 2: Pick the right main tool
+
+Use:
+
+- Coulomb's law for direct integration in electrostatics
+- Gauss's law when symmetry is strong
+- potential methods when scalar formulation is easier
+- Laplace/Poisson methods when boundary conditions matter
+- Biot-Savart for direct magnetic integration
+- Ampere's law when magnetic symmetry is strong
+- Maxwell equations directly for time-dependent systems
+
+### Step 3: Exploit symmetry aggressively
+
+Symmetry is often the difference between a one-line solution and an impossible integral.
+
+Look for:
+
+- spherical symmetry
+- cylindrical symmetry
+- planar symmetry
+- translational invariance
+- azimuthal invariance
+
+### Step 4: Check units
+
+Electrodynamics is full of constants $ \\varepsilon_0 $, $ \\mu_0 $, and geometric factors.
+
+Dimensional analysis catches many mistakes.
+
+### Step 5: Check limiting behavior
+
+Ask:
+
+- what happens far away?
+- what happens at the center?
+- does the answer reduce to a known special case?
+- does it blow up where it should not?
+
+### Step 6: Use boundary conditions carefully
+
+A guessed solution is often correct if it:
+- solves the field equation, and
+- satisfies the boundary conditions
+
+### Step 7: Interpret physically
+
+After the math, ask:
+- what do the field lines look like?
+- where is the energy?
+- what is doing work?
+- what is conserved?
+
+---
+
+## 21. Common conceptual pitfalls
+
+### Pitfall 1: Confusing field with force
+
+The field is $ \\mathbf{E} $ or $ \\mathbf{B} $.  
+The force on charge $q$ is derived from the field.
+
+### Pitfall 2: Using Gauss's law without symmetry
+
+Gauss's law is always true, but it only solves for $E$ easily in highly symmetric cases.
+
+### Pitfall 3: Mixing up source point and field point
+
+When integrating over charge or current distributions, keep $ \\mathbf{r} $ and $ \\mathbf{r}' $ distinct.
+
+### Pitfall 4: Forgetting that electrostatic potential is only path independent when $ \\nabla \\times \\mathbf{E} = 0 $
+
+In time-dependent settings, induced electric fields are not generally conservative.
+
+### Pitfall 5: Treating $ \\mathbf{D} $ and $ \\mathbf{H} $ as more fundamental than $ \\mathbf{E} $ and $ \\mathbf{B} $
+
+$ \\mathbf{D} $ and $ \\mathbf{H} $ are useful auxiliary fields, especially in matter, but $ \\mathbf{E} $ and $ \\mathbf{B} $ are the more direct physical fields.
+
+### Pitfall 6: Forgetting that magnetic force does no work on a point charge
+
+Because $ \\mathbf{v}\\cdot (\\mathbf{v}\\times \\mathbf{B}) = 0 $.
+
+### Pitfall 7: Neglecting the displacement-current term
+
+Without it, Maxwell's equations are inconsistent for time-varying situations.
+
+### Pitfall 8: Confusing near fields with radiation fields
+
+Radiation terms dominate far away and scale differently from static-like near-field terms.
+
+---
+
+## 22. Core formulas to memorize
+
+Here is a compact formula list.
+
+### Electrostatics
+
+$ \\mathbf{E} = \\frac{1}{4\\pi\\varepsilon_0}\\int \\frac{\\rho(\\mathbf{r}')\\hat{\\mathbf{R}}}{R^2}\\, d\\tau' $
+
+$ \\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0} $
+
+$ \\oint \\mathbf{E}\\cdot d\\mathbf{a} = \\frac{Q_{\\text{enc}}}{\\varepsilon_0} $
+
+$ \\mathbf{E} = -\\nabla V $
+
+$ \\nabla^2 V = -\\frac{\\rho}{\\varepsilon_0} $
+
+### Dipoles
+
+$ \\mathbf{p} = \\int \\mathbf{r}'\\rho(\\mathbf{r}')\\, d\\tau' $
+
+$ V_{\\text{dip}} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\mathbf{p}\\cdot \\hat{\\mathbf{r}}}{r^2} $
+
+$ \\boldsymbol{\\tau} = \\mathbf{p}\\times \\mathbf{E} $
+
+$ U = -\\mathbf{p}\\cdot \\mathbf{E} $
+
+### Dielectrics
+
+$ \\rho_b = -\\nabla \\cdot \\mathbf{P} $
+
+$ \\sigma_b = \\mathbf{P}\\cdot \\hat{\\mathbf{n}} $
+
+$ \\mathbf{D} = \\varepsilon_0 \\mathbf{E} + \\mathbf{P} $
+
+$ \\nabla \\cdot \\mathbf{D} = \\rho_f $
+
+### Magnetostatics
+
+$ \\mathbf{B} = \\frac{\\mu_0}{4\\pi}\\int \\frac{\\mathbf{J}(\\mathbf{r}')\\times \\hat{\\mathbf{R}}}{R^2}\\, d\\tau' $
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} $
+
+$ \\oint \\mathbf{B}\\cdot d\\mathbf{l} = \\mu_0 I_{\\text{enc}} $
+
+$ \\nabla \\cdot \\mathbf{B} = 0 $
+
+$ \\mathbf{B} = \\nabla \\times \\mathbf{A} $
+
+### Magnetic matter
+
+$ \\mathbf{J}_b = \\nabla \\times \\mathbf{M} $
+
+$ \\mathbf{K}_b = \\mathbf{M}\\times \\hat{\\mathbf{n}} $
+
+$ \\mathbf{H} = \\frac{1}{\\mu_0}\\mathbf{B} - \\mathbf{M} $
+
+$ \\nabla \\times \\mathbf{H} = \\mathbf{J}_f $
+
+### Electrodynamics
+
+$ \\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t} $
+
+$ \\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J} + \\mu_0\\varepsilon_0\\frac{\\partial \\mathbf{E}}{\\partial t} $
+
+$ \\frac{\\partial \\rho}{\\partial t} + \\nabla \\cdot \\mathbf{J} = 0 $
+
+### Potentials
+
+$ \\mathbf{B} = \\nabla \\times \\mathbf{A} $
+
+$ \\mathbf{E} = -\\nabla V - \\frac{\\partial \\mathbf{A}}{\\partial t} $
+
+### Waves
+
+$ \\nabla^2 \\mathbf{E} = \\mu_0\\varepsilon_0 \\frac{\\partial^2 \\mathbf{E}}{\\partial t^2} $
+
+$ \\nabla^2 \\mathbf{B} = \\mu_0\\varepsilon_0 \\frac{\\partial^2 \\mathbf{B}}{\\partial t^2} $
+
+$ c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}} $
+
+### Energy and momentum
+
+$ u = \\frac{\\varepsilon_0}{2}E^2 + \\frac{1}{2\\mu_0}B^2 $
+
+$ \\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times \\mathbf{B} $
+
+$ \\mathbf{g} = \\varepsilon_0 \\mathbf{E}\\times \\mathbf{B} $
+
+---
+
+## 23. A chapter-by-chapter mental map
+
+A useful way to organize Griffiths is this:
+
+### Vector analysis
+Learn the language.
+
+### Electrostatics
+Charges create static electric fields.
+
+### Potentials
+Scalar reformulation of electrostatics.
+
+### Electric fields in matter
+Matter polarizes; introduce $ \\mathbf{P} $ and $ \\mathbf{D} $.
+
+### Magnetostatics
+Currents create static magnetic fields.
+
+### Magnetic fields in matter
+Matter magnetizes; introduce $ \\mathbf{M} $ and $ \\mathbf{H} $.
+
+### Electrodynamics
+Time variation couples electricity and magnetism.
+
+### Conservation laws
+Fields carry energy and momentum.
+
+### Electromagnetic waves
+Maxwell predicts light.
+
+### Potentials and fields
+Gauge freedom and retarded potentials.
+
+### Radiation
+Accelerating charges emit waves.
+
+This sequence is not arbitrary. It is a carefully staged ascent toward Maxwell theory in its full form.
+
+---
+
+## 24. Deep conceptual lessons of the book
+
+Griffiths is not just a collection of formulas. The book teaches several deep ideas.
+
+### 24.1 Fields are real physical objects
+
+They are not merely shortcuts for action at a distance.
+
+They:
+- store energy,
+- carry momentum,
+- propagate through space,
+- and mediate interactions.
+
+### 24.2 Symmetry is a problem-solving superpower
+
+Most elegant solutions come from recognizing symmetry early.
+
+### 24.3 Potentials are often simpler than fields
+
+The scalar and vector potentials are not merely optional; they often reveal structure more clearly.
+
+### 24.4 Matter response is organized through auxiliary fields
+
+$ \\mathbf{D} $ and $ \\mathbf{H} $ are bookkeeping devices that separate free from bound sources.
+
+### 24.5 Time dependence changes everything
+
+The moment fields vary in time, conservative electrostatics gives way to full electrodynamics.
+
+### 24.6 Electromagnetism unifies electricity, magnetism, optics, and relativity
+
+This is one of the great unifications in physics.
+
+---
+
+## 25. What to study next after Griffiths
+
+After mastering this material, common next steps are:
+
+1. more advanced boundary-value methods
+2. special relativity in four-vector form
+3. covariant electrodynamics
+4. waveguides and optics
+5. radiation theory in more depth
+6. Green's functions
+7. advanced classical mechanics and field theory
+8. quantum mechanics
+9. quantum electrodynamics later on
+
+A strong next conceptual step is learning to rewrite Maxwell's theory in relativistic notation.
+
+---
+
+## 26. Final takeaway
+
+The central idea of *Introduction to Electrodynamics* is that all classical electromagnetic phenomena arise from a small set of elegant principles:
+
+- charge and current generate fields,
+- fields satisfy Maxwell's equations,
+- fields exert Lorentz forces on matter,
+- and fields themselves carry energy, momentum, and waves.
+
+The subject begins with Coulomb's law and simple static fields, but it culminates in an extraordinary synthesis:
+
+- light is an electromagnetic wave,
+- electromagnetic influence propagates causally at speed $c$,
+- electric and magnetic fields are deeply unified,
+- and classical field theory becomes one of the foundational languages of modern physics.
+
+If you keep the following backbone in mind, you will keep the subject organized:
+
+1. Learn vector calculus.
+2. Master electrostatics and potential theory.
+3. Understand matter response through $ \\mathbf{P} $ and $ \\mathbf{D} $.
+4. Master magnetostatics and vector potential.
+5. Understand matter response through $ \\mathbf{M} $ and $ \\mathbf{H} $.
+6. Learn full Maxwell theory.
+7. Understand energy, momentum, and waves.
+8. Learn potentials, gauges, and radiation.
+
+That is the Griffiths electrodynamics story in one line:
+
+**charges and currents create fields, fields act on matter, and Maxwell's equations knit the whole structure into a unified theory of classical electromagnetism.**
+`;function Mj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:jj})})}var Nj=`# Comprehensive Crash Course on *Introduction to Quantum Mechanics* by David J. Griffiths
+
+## 1. Purpose of this crash course
+
+This document is a compact but comprehensive study guide to the core material traditionally covered in *Introduction to Quantum Mechanics* by David J. Griffiths. It is meant to help you:
+
+- see the big structure of quantum mechanics,
+- understand the main physical ideas,
+- learn the standard equations and how they fit together,
+- build intuition for common problem types,
+- and create a strong bridge to deeper study.
+
+The focus is on the standard undergraduate arc:
+
+1. Wave mechanics and the Schrödinger equation
+2. Formal structure of states and observables
+3. Standard one-dimensional systems
+4. Angular momentum and spin
+5. Identical particles
+6. Approximation methods
+7. Time dependence and dynamics
+8. Scattering and central potentials
+9. Conceptual interpretation
+
+This is not a substitute for solving problems, but it gives you the conceptual backbone and formula structure of the subject.
+
+---
+
+## 2. The big picture of quantum mechanics
+
+Quantum mechanics is the framework used to describe microscopic systems such as:
+
+- electrons
+- atoms
+- molecules
+- photons
+- nuclei
+- and many-body microscopic matter
+
+Its central claim is not merely that particles are tiny. It is that physical systems are described by **states**, usually encoded in a **wavefunction** or more abstractly in a **state vector**, and that measurable quantities are associated with **operators**.
+
+At the introductory level, the key object is the wavefunction:
+
+$ \\psi(x,t) $
+
+or in three dimensions,
+
+$ \\psi(\\mathbf{r},t) $
+
+The wavefunction is not itself a classical observable like position or velocity. Instead, it encodes probabilities.
+
+The probability density is
+
+$ |\\psi(x,t)|^2 $
+
+or
+
+$ |\\psi(\\mathbf{r},t)|^2 $
+
+So the broad quantum story is:
+
+- the state evolves according to the Schrödinger equation,
+- observables are represented by operators,
+- measurements yield eigenvalues,
+- probabilities come from amplitudes,
+- and interference, uncertainty, and quantization emerge naturally.
+
+---
+
+## 3. Historical and conceptual motivation
+
+Quantum mechanics was forced on physics by experimental facts that classical mechanics and classical electrodynamics could not explain.
+
+Key motivating phenomena include:
+
+- blackbody radiation
+- the photoelectric effect
+- atomic spectra
+- electron diffraction
+- wave-particle duality
+- atomic stability
+
+Classically, matter and radiation were expected to behave continuously. But microscopic experiments revealed discreteness and interference in surprising combinations.
+
+The conceptual ingredients that pushed physics toward quantum theory include:
+
+### 3.1 Planck's idea
+
+Energy exchange in radiation came in discrete chunks:
+
+$ E = n h \\nu $
+
+### 3.2 Einstein's photon idea
+
+Light sometimes behaves like localized quanta with energy
+
+$ E = h \\nu $
+
+### 3.3 de Broglie wavelength
+
+Matter has wave-like behavior, with wavelength
+
+$ \\lambda = \\frac{h}{p} $
+
+### 3.4 Schrödinger's wave mechanics
+
+If particles have wave character, perhaps their motion is governed by a wave equation.
+
+That wave equation became the Schrödinger equation.
+
+---
+
+## 4. The wavefunction and probability
+
+The wavefunction is the central object of nonrelativistic quantum mechanics.
+
+### 4.1 Born rule
+
+The probability density for finding a particle near position $x$ at time $t$ is
+
+$ |\\psi(x,t)|^2 $
+
+In three dimensions:
+
+$ |\\psi(\\mathbf{r},t)|^2 d\\tau $
+
+is the probability of finding the particle in volume element $d\\tau$.
+
+### 4.2 Normalization
+
+A physical wavefunction must satisfy
+
+$ \\int_{-\\infty}^{\\infty} |\\psi(x,t)|^2 dx = 1 $
+
+or in three dimensions,
+
+$ \\int |\\psi(\\mathbf{r},t)|^2 d\\tau = 1 $
+
+This expresses total probability equal to $1$.
+
+### 4.3 Expectation value
+
+The average value of position is
+
+$ \\langle x \\rangle = \\int \\psi^*(x,t)\\, x\\, \\psi(x,t)\\, dx $
+
+More generally, for an operator $ \\hat{Q} $,
+
+$ \\langle Q \\rangle = \\int \\psi^* \\hat{Q} \\psi \\, dx $
+
+or, in abstract notation,
+
+$ \\langle Q \\rangle = \\langle \\psi | \\hat{Q} | \\psi \\rangle $
+
+### 4.4 Probability current
+
+For the Schrödinger equation, probability is conserved, and the density obeys a continuity equation involving a probability current.
+
+In one dimension, a standard form is
+
+$ j = \\frac{\\hbar}{2mi}\\left(\\psi^* \\frac{\\partial \\psi}{\\partial x} - \\psi \\frac{\\partial \\psi^*}{\\partial x}\\right) $
+
+This helps interpret transport, tunneling, and scattering.
+
+---
+
+## 5. The Schrödinger equation
+
+The core dynamical equation of nonrelativistic quantum mechanics is the Schrödinger equation.
+
+### 5.1 Time-dependent Schrödinger equation
+
+In one dimension:
+
+$ i\\hbar \\frac{\\partial \\psi}{\\partial t} = -\\frac{\\hbar^2}{2m}\\frac{\\partial^2 \\psi}{\\partial x^2} + V(x,t)\\psi $
+
+In three dimensions:
+
+$ i\\hbar \\frac{\\partial \\psi}{\\partial t} = \\left(-\\frac{\\hbar^2}{2m}\\nabla^2 + V(\\mathbf{r},t)\\right)\\psi $
+
+This equation tells how the wavefunction evolves.
+
+### 5.2 Hamiltonian operator
+
+The operator
+
+$ \\hat{H} = -\\frac{\\hbar^2}{2m}\\nabla^2 + V $
+
+is the Hamiltonian.
+
+Then Schrödinger's equation becomes
+
+$ i\\hbar \\frac{\\partial \\psi}{\\partial t} = \\hat{H}\\psi $
+
+The Hamiltonian plays the role of the total energy operator.
+
+### 5.3 Why the equation matters
+
+This single equation contains:
+
+- wave propagation
+- bound states
+- interference
+- tunneling
+- energy quantization
+- and the time evolution of quantum systems
+
+It is to quantum mechanics what Newton's second law is to classical mechanics.
+
+---
+
+## 6. Stationary states and the time-independent Schrödinger equation
+
+When the potential does not depend on time, one can separate variables.
+
+Assume
+
+$ \\psi(x,t) = \\phi(x) T(t) $
+
+Then the spatial part satisfies the **time-independent Schrödinger equation**:
+
+$ \\hat{H}\\phi = E\\phi $
+
+In one dimension:
+
+$ -\\frac{\\hbar^2}{2m}\\frac{d^2\\phi}{dx^2} + V(x)\\phi = E\\phi $
+
+The time factor becomes
+
+$ T(t) = e^{-iEt/\\hbar} $
+
+So a stationary state evolves as
+
+$ \\psi(x,t) = \\phi(x)e^{-iEt/\\hbar} $
+
+### 6.1 Why they are called stationary
+
+Although the wavefunction has time-dependent phase, the probability density does not:
+
+$ |\\psi(x,t)|^2 = |\\phi(x)|^2 $
+
+So the observable spatial probability distribution is time-independent.
+
+### 6.2 Eigenvalue problem
+
+The time-independent Schrödinger equation is an eigenvalue problem:
+
+- eigenfunctions $ \\phi_n $
+- eigenvalues $ E_n $
+
+In bound systems, the allowed energies are often discrete.
+
+---
+
+## 7. Standard one-dimensional systems
+
+Much of Griffiths is built around classic solvable examples. These are not just exercises; they teach the structure of the theory.
+
+### 7.1 Infinite square well
+
+Potential:
+
+$ V(x) =
+\\begin{cases}
+0, & 0 < x < a \\\\
+\\infty, & \\text{otherwise}
+\\end{cases} $
+
+Allowed stationary states are
+
+$ \\phi_n(x) = \\sqrt{\\frac{2}{a}} \\sin\\left(\\frac{n\\pi x}{a}\\right), \\quad n=1,2,3,\\dots $
+
+with energies
+
+$ E_n = \\frac{n^2 \\pi^2 \\hbar^2}{2ma^2} $
+
+Key lessons:
+
+- boundary conditions quantize energy
+- even the ground state has nonzero energy
+- wavefunctions have nodes
+
+### 7.2 Finite square well
+
+The well is no longer infinitely deep, so the wavefunction leaks into the classically forbidden region.
+
+Key lessons:
+
+- bound states may be finite in number
+- tunneling tails appear outside the well
+- continuity of $ \\psi $ and $ d\\psi/dx $ matters
+
+### 7.3 Harmonic oscillator
+
+Potential:
+
+$ V(x) = \\frac{1}{2}m\\omega^2 x^2 $
+
+Allowed energies:
+
+$ E_n = \\left(n+\\frac{1}{2}\\right)\\hbar\\omega, \\quad n=0,1,2,\\dots $
+
+Key lessons:
+
+- equally spaced energy levels
+- zero-point energy
+- Hermite polynomial structure
+- ladder-operator methods
+
+### 7.4 Delta-function well
+
+Potential:
+
+$ V(x) = -\\alpha \\delta(x) $
+
+Key lesson:
+
+- an attractive delta well supports a bound state
+- singular potentials can still be solvable and physically instructive
+
+### 7.5 Free particle
+
+Potential:
+
+$ V(x)=0 $
+
+Solutions are plane waves:
+
+$ \\psi(x,t) \\sim e^{i(kx-\\omega t)} $
+
+with
+
+$ p = \\hbar k, \\qquad E = \\hbar \\omega = \\frac{p^2}{2m} $
+
+Key lesson:
+
+- momentum eigenstates are delocalized
+- localization requires superposition into wave packets
+
+---
+
+## 8. Boundary conditions and physical acceptability
+
+A valid wavefunction must satisfy several conditions.
+
+### 8.1 Normalizability
+
+For bound states, $ \\psi $ should usually be square-integrable.
+
+### 8.2 Single-valuedness
+
+$ \\psi $ must return the same value at the same physical point.
+
+### 8.3 Continuity
+
+Usually $ \\psi $ is continuous.
+
+### 8.4 Differentiability
+
+For ordinary finite potentials, $ d\\psi/dx $ is also continuous.  
+For singular potentials like delta functions, the derivative may jump in a controlled way.
+
+### 8.5 Physical meaning
+
+Boundary conditions are not decorative. They select the allowed states and therefore determine quantization.
+
+---
+
+## 9. Operators and observables
+
+Quantum mechanics represents measurable quantities using operators.
+
+### 9.1 Position operator
+
+In the position representation,
+
+$ \\hat{x}\\psi(x) = x\\psi(x) $
+
+### 9.2 Momentum operator
+
+In one dimension,
+
+$ \\hat{p} = -i\\hbar \\frac{d}{dx} $
+
+In three dimensions,
+
+$ \\hat{\\mathbf{p}} = -i\\hbar \\nabla $
+
+### 9.3 Energy operator
+
+For time evolution, energy corresponds to the Hamiltonian operator $ \\hat{H} $.
+
+### 9.4 Observable requirement
+
+Physical observables are represented by **Hermitian** operators.
+
+This matters because Hermitian operators have:
+
+- real eigenvalues
+- orthogonal eigenfunctions for distinct eigenvalues
+- a complete spectral structure under suitable conditions
+
+These properties are exactly what measurements require.
+
+---
+
+## 10. Hermitian operators, eigenfunctions, and measurement
+
+This is one of the deepest parts of introductory quantum mechanics.
+
+### 10.1 Eigenvalue equation
+
+If
+
+$ \\hat{Q} \\phi = q \\phi $
+
+then $ \\phi $ is an eigenfunction of $ \\hat{Q} $ with eigenvalue $ q $.
+
+### 10.2 Measurement postulate
+
+If the system is in state $ \\psi $, and you measure observable $Q$, the only possible results are eigenvalues of $ \\hat{Q} $.
+
+If $ \\psi $ is expanded as
+
+$ \\psi = \\sum_n c_n \\phi_n $
+
+then the probability of measuring $ q_n $ is
+
+$ |c_n|^2 $
+
+assuming a discrete nondegenerate spectrum and orthonormal eigenbasis.
+
+### 10.3 Collapse idea
+
+After measurement yielding $ q_n $, the state is projected into the corresponding eigenstate or eigensubspace, in the standard textbook interpretation.
+
+### 10.4 Expectation value from expansion
+
+$ \\langle Q \\rangle = \\sum_n |c_n|^2 q_n $
+
+for discrete expansions in eigenstates.
+
+This shows that expectation value is a probability-weighted average of possible outcomes.
+
+---
+
+## 11. Dirac notation
+
+Griffiths often transitions between wavefunction language and abstract bra-ket notation.
+
+### 11.1 Kets
+
+A state is written as
+
+$ |\\psi\\rangle $
+
+### 11.2 Bras
+
+Its dual is
+
+$ \\langle \\psi | $
+
+### 11.3 Inner product
+
+$ \\langle \\phi | \\psi \\rangle $
+
+### 11.4 Operator sandwich
+
+$ \\langle \\psi | \\hat{Q} | \\psi \\rangle $
+
+This notation is powerful because it works independently of any particular basis.
+
+---
+
+## 12. Superposition principle
+
+Quantum mechanics is linear, so if $ \\psi_1 $ and $ \\psi_2 $ are solutions, then so is
+
+$ c_1 \\psi_1 + c_2 \\psi_2 $
+
+This is the basis of:
+
+- interference
+- wave packets
+- mixed probability amplitudes
+- and the structure of quantum state spaces
+
+Superposition is not merely a computational trick. It is one of the defining features of quantum theory.
+
+---
+
+## 13. Commutators and compatibility of observables
+
+### 13.1 Commutator
+
+For operators $ \\hat{A} $ and $ \\hat{B} $,
+
+$ [\\hat{A},\\hat{B}] = \\hat{A}\\hat{B} - \\hat{B}\\hat{A} $
+
+### 13.2 Fundamental position-momentum commutator
+
+$ [\\hat{x},\\hat{p}] = i\\hbar $
+
+This is one of the most important equations in quantum mechanics.
+
+### 13.3 Physical meaning
+
+If two observables commute, they can be simultaneously specified under suitable conditions.
+
+If they do not commute, there is a built-in incompatibility.
+
+---
+
+## 14. Uncertainty principle
+
+The Heisenberg uncertainty principle is not about bad instruments. It is a structural feature of quantum states.
+
+The standard form is
+
+$ \\sigma_x \\sigma_p \\ge \\frac{\\hbar}{2} $
+
+More generally,
+
+$ \\sigma_A \\sigma_B \\ge \\frac{1}{2} |\\langle [\\hat{A},\\hat{B}] \\rangle| $
+
+Key lessons:
+
+- exact position and exact momentum cannot both be assigned in one state
+- uncertainty comes from wave-state structure and noncommuting operators
+- Gaussian wave packets often saturate the bound
+
+---
+
+## 15. Ehrenfest theorem and the classical limit
+
+A beautiful bridge to classical mechanics is Ehrenfest's theorem.
+
+For position and momentum,
+
+$ \\frac{d\\langle x\\rangle}{dt} = \\frac{\\langle p\\rangle}{m} $
+
+$ \\frac{d\\langle p\\rangle}{dt} = - \\left\\langle \\frac{dV}{dx} \\right\\rangle $
+
+This resembles Newtonian mechanics.
+
+The lesson is:
+
+- quantum expectation values can evolve approximately classically in suitable limits,
+- but the full state still obeys the Schrödinger equation.
+
+---
+
+## 16. Angular momentum
+
+Angular momentum is central in quantum mechanics, especially for atoms.
+
+### 16.1 Orbital angular momentum operator
+
+$ \\hat{\\mathbf{L}} = \\hat{\\mathbf{r}} \\times \\hat{\\mathbf{p}} $
+
+Components satisfy commutation relations such as
+
+$ [\\hat{L}_x,\\hat{L}_y] = i\\hbar \\hat{L}_z $
+
+and cyclic permutations.
+
+### 16.2 Total angular momentum squared
+
+$ \\hat{L}^2 = \\hat{L}_x^2 + \\hat{L}_y^2 + \\hat{L}_z^2 $
+
+The simultaneous eigenstates of $ \\hat{L}^2 $ and $ \\hat{L}_z $ satisfy
+
+$ \\hat{L}^2 |l,m\\rangle = \\hbar^2 l(l+1)|l,m\\rangle $
+
+$ \\hat{L}_z |l,m\\rangle = \\hbar m |l,m\\rangle $
+
+where
+
+$ l = 0,1,2,\\dots $
+
+and
+
+$ m = -l,-l+1,\\dots,l $
+
+### 16.3 Spherical harmonics
+
+In position-space angular variables, angular momentum eigenfunctions are spherical harmonics:
+
+$ Y_l^m(\\theta,\\phi) $
+
+These are essential for central-force problems.
+
+### 16.4 Ladder operators
+
+Define
+
+$ \\hat{L}_\\pm = \\hat{L}_x \\pm i\\hat{L}_y $
+
+These raise or lower $m$.
+
+This algebraic method is one of the most elegant parts of the subject.
+
+---
+
+## 17. Spin
+
+Spin is intrinsic angular momentum. It is not literally a tiny classical spinning ball.
+
+### 17.1 Spin-$1/2$
+
+For spin-$1/2$ particles, the spin operators are built from the Pauli matrices:
+
+$ \\sigma_x =
+\\begin{pmatrix}
+0 & 1\\\\
+1 & 0
+\\end{pmatrix}, \\quad
+\\sigma_y =
+\\begin{pmatrix}
+0 & -i\\\\
+i & 0
+\\end{pmatrix}, \\quad
+\\sigma_z =
+\\begin{pmatrix}
+1 & 0\\\\
+0 & -1
+\\end{pmatrix}
+$
+
+and
+
+$ \\hat{\\mathbf{S}} = \\frac{\\hbar}{2}\\boldsymbol{\\sigma} $
+
+### 17.2 Two-component spinors
+
+The state of a spin-$1/2$ system is a two-component spinor.
+
+Example:
+
+$ |\\chi\\rangle =
+\\begin{pmatrix}
+a\\\\
+b
+\\end{pmatrix}
+$
+
+with
+
+$ |a|^2 + |b|^2 = 1 $
+
+### 17.3 Stern-Gerlach lesson
+
+Measurement of spin along an axis yields discrete values, such as
+
+$ \\pm \\hbar/2 $
+
+This is one of the clearest illustrations of quantization and state projection.
+
+---
+
+## 18. Central potentials and the hydrogen atom
+
+The hydrogen atom is the great triumph of nonrelativistic quantum mechanics.
+
+### 18.1 Central potential structure
+
+If
+
+$ V(\\mathbf{r}) = V(r) $
+
+then the Schrödinger equation separates in spherical coordinates.
+
+The solutions factor into:
+
+- radial part
+- angular part
+
+### 18.2 Coulomb potential
+
+For hydrogen,
+
+$ V(r) = -\\frac{e^2}{4\\pi \\varepsilon_0 r} $
+
+### 18.3 Energy levels
+
+The bound-state energies are
+
+$ E_n = - \\frac{m e^4}{2(4\\pi \\varepsilon_0)^2 \\hbar^2}\\frac{1}{n^2} $
+
+with
+
+$ n=1,2,3,\\dots $
+
+### 18.4 Quantum numbers
+
+For hydrogenic states, one commonly uses:
+
+- principal quantum number $n$
+- orbital angular momentum number $l$
+- magnetic quantum number $m$
+
+### 18.5 Why hydrogen matters
+
+Hydrogen teaches:
+
+- exact solvability
+- degeneracy
+- angular momentum structure
+- radial probability distributions
+- and the explanatory power of quantum mechanics for atomic spectra
+
+---
+
+## 19. Identical particles
+
+Quantum mechanics treats identical particles in a way classical mechanics does not.
+
+### 19.1 Indistinguishability
+
+Particles of the same species are fundamentally indistinguishable.
+
+### 19.2 Symmetry requirement
+
+For identical particles, the total wavefunction must be either:
+
+- symmetric under exchange, or
+- antisymmetric under exchange
+
+### 19.3 Bosons and fermions
+
+- bosons have symmetric states
+- fermions have antisymmetric states
+
+### 19.4 Pauli exclusion principle
+
+For fermions, no two identical fermions can occupy the same one-particle state.
+
+This principle explains a vast amount of atomic and condensed-matter structure.
+
+---
+
+## 20. Approximation methods
+
+Most quantum systems are not exactly solvable, so approximation methods are essential.
+
+### 20.1 Time-independent perturbation theory
+
+If
+
+$ \\hat{H} = \\hat{H}_0 + \\lambda \\hat{H}' $
+
+and $ \\hat{H}' $ is small, then energies and states can be expanded in powers of $\\lambda$.
+
+First-order energy correction:
+
+$ E_n^{(1)} = \\langle n^{(0)} | \\hat{H}' | n^{(0)} \\rangle $
+
+This is widely used in atomic physics and beyond.
+
+### 20.2 Degenerate perturbation theory
+
+If the unperturbed level is degenerate, one must diagonalize the perturbation within the degenerate subspace.
+
+This is conceptually important and often the subtle point students miss.
+
+### 20.3 Variational principle
+
+For any normalized trial wavefunction $ \\psi_{\\text{trial}} $,
+
+$ E_{\\text{trial}} =
+\\frac{\\langle \\psi_{\\text{trial}} | \\hat{H} | \\psi_{\\text{trial}} \\rangle}
+{\\langle \\psi_{\\text{trial}} | \\psi_{\\text{trial}} \\rangle}
+\\ge E_0 $
+
+This gives an upper bound on the true ground-state energy.
+
+It is one of the most powerful approximate tools in quantum mechanics.
+
+### 20.4 WKB approximation
+
+For slowly varying potentials, semiclassical approximations can be used.
+
+The WKB method helps analyze:
+
+- tunneling
+- bound-state quantization
+- classical-quantum crossover behavior
+
+---
+
+## 21. Time-dependent perturbation theory
+
+This is the standard introduction to transitions induced by time-dependent influences.
+
+### 21.1 Transition amplitudes
+
+If the Hamiltonian changes with time, the system can move between stationary states.
+
+### 21.2 Fermi's golden rule
+
+For transitions into a continuum or dense set of final states, a standard result is
+
+$ \\Gamma_{i\\to f} =
+\\frac{2\\pi}{\\hbar}
+|\\langle f | \\hat{H}' | i \\rangle|^2
+\\rho(E_f) $
+
+where $ \\rho(E_f) $ is the density of final states.
+
+This is central in spectroscopy, decay, and scattering theory.
+
+---
+
+## 22. Scattering
+
+Scattering theory studies how particles interact with targets and emerge deflected.
+
+### 22.1 Basic idea
+
+A particle approaches from far away, interacts with a potential, and is observed at large distances afterward.
+
+### 22.2 Cross section
+
+The differential cross section tells how likely scattering is into each direction.
+
+### 22.3 Born approximation
+
+For weak potentials, the scattering amplitude can be approximated perturbatively.
+
+This creates a bridge between the potential and measurable scattering distributions.
+
+### 22.4 Why scattering matters
+
+Scattering is one of the main ways microscopic structure is inferred experimentally.
+
+---
+
+## 23. Wave packets and free evolution
+
+A pure momentum eigenstate is spread out everywhere. To model a localized particle, one builds a wave packet from many momentum components.
+
+### 23.1 Superposition of plane waves
+
+$ \\psi(x,t) = \\int \\phi(k) e^{i(kx-\\omega t)} dk $
+
+### 23.2 Group velocity
+
+A wave packet tends to move at the group velocity
+
+$ v_g = \\frac{d\\omega}{dk} $
+
+### 23.3 Dispersion
+
+Different momentum components move with different phase behavior, so packets spread in time.
+
+This is another reason exact classical particle trajectories are not fundamental in quantum mechanics.
+
+---
+
+## 24. Tunneling
+
+One of the most famous nonclassical effects is tunneling.
+
+Classically, a particle with energy $E < V_0$ cannot cross a barrier of height $V_0$.
+
+Quantum mechanically, the wavefunction penetrates the barrier and may emerge on the other side with nonzero probability.
+
+Key lesson:
+
+- classically forbidden does not mean quantum mechanically impossible
+
+Tunneling explains phenomena such as:
+
+- alpha decay
+- scanning tunneling microscopy
+- semiconductor device behavior
+
+---
+
+## 25. Symmetry and degeneracy
+
+Symmetry plays a huge role in quantum mechanics.
+
+### 25.1 Why symmetry matters
+
+Symmetries often imply:
+
+- conserved quantities
+- simplified equations
+- degeneracies
+- selection rules
+
+### 25.2 Examples
+
+- translational symmetry relates to momentum
+- rotational symmetry relates to angular momentum
+- parity symmetry can classify states as even or odd
+
+Recognizing symmetry is often the fastest route to solving a problem.
+
+---
+
+## 26. Parity
+
+Parity is spatial inversion:
+
+$ x \\to -x $
+
+or in three dimensions,
+
+$ \\mathbf{r} \\to -\\mathbf{r} $
+
+For symmetric potentials, parity is often conserved.
+
+Eigenstates of parity satisfy
+
+$ \\hat{P}\\psi = \\pm \\psi $
+
+This helps simplify one-dimensional problems and central-potential systems.
+
+---
+
+## 27. Representation dependence
+
+A quantum state can be represented in different bases.
+
+### 27.1 Position representation
+
+Wavefunction:
+
+$ \\psi(x) $
+
+### 27.2 Momentum representation
+
+Wavefunction in momentum space:
+
+$ \\phi(p) $
+
+The two are related by Fourier transform.
+
+This makes the uncertainty principle and wave-packet structure much more intuitive.
+
+---
+
+## 28. The postulates in compact form
+
+A useful beginner-level summary of the postulates is:
+
+1. **State postulate**  
+   A system is described by a normalized state vector or wavefunction.
+
+2. **Observable postulate**  
+   Each observable corresponds to a Hermitian operator.
+
+3. **Measurement postulate**  
+   Possible outcomes are operator eigenvalues, with probabilities determined by projection amplitudes.
+
+4. **Time-evolution postulate**  
+   States evolve according to the Schrödinger equation.
+
+5. **Composite systems / identical particles**  
+   Combined systems use tensor products, and identical particles obey exchange symmetry rules.
+
+This is the logical skeleton of the formalism.
+
+---
+
+## 29. Common problem-solving workflow
+
+When solving Griffiths-style quantum mechanics problems, this workflow helps.
+
+### Step 1: Identify the regime
+
+Ask:
+
+- time-dependent or time-independent?
+- one dimension or three?
+- exact solution or approximation?
+- bound state or scattering state?
+- single particle or many-particle?
+
+### Step 2: Identify the Hamiltonian
+
+Write down $ \\hat{H} $ carefully.
+
+### Step 3: Choose representation
+
+Usually position space is easiest early on, but not always.
+
+### Step 4: Use symmetry
+
+Check for:
+
+- parity
+- translation symmetry
+- rotational symmetry
+- central potential structure
+
+### Step 5: Apply boundary and normalization conditions
+
+These usually determine allowed solutions.
+
+### Step 6: Interpret physically
+
+Ask:
+
+- what is the probability density doing?
+- what observables are sharp?
+- what are the allowed energy values?
+- what classical analogy, if any, helps?
+
+---
+
+## 30. Common conceptual pitfalls
+
+### Pitfall 1: Thinking $ \\psi $ is a physical wave in ordinary space like a water wave
+
+The wavefunction is a probability amplitude, not a classical medium oscillation.
+
+### Pitfall 2: Confusing expectation value with a single measurement result
+
+Expectation value is an average over many similarly prepared measurements.
+
+### Pitfall 3: Forgetting normalization
+
+Unnormalized states distort all probability predictions.
+
+### Pitfall 4: Ignoring boundary conditions
+
+Many quantum results come entirely from acceptable-boundary constraints.
+
+### Pitfall 5: Treating uncertainty as measurement clumsiness
+
+It is structural, not just practical.
+
+### Pitfall 6: Forgetting operator ordering and commutators
+
+Noncommutativity is central, not optional.
+
+### Pitfall 7: Thinking tunneling means energy conservation is violated
+
+It does not. The total energy can remain well-defined even though the particle accesses classically forbidden regions.
+
+### Pitfall 8: Treating spin as ordinary literal rotation
+
+Spin behaves like angular momentum algebraically, but it is intrinsic quantum structure.
+
+---
+
+## 31. Core formulas to memorize
+
+Here is a compact formula list.
+
+### Schrödinger equation
+
+$ i\\hbar \\frac{\\partial \\psi}{\\partial t} = \\hat{H}\\psi $
+
+$ \\hat{H} = -\\frac{\\hbar^2}{2m}\\nabla^2 + V $
+
+### Time-independent equation
+
+$ \\hat{H}\\phi = E\\phi $
+
+### Born rule
+
+$ P(x) = |\\psi(x)|^2 $
+
+### Normalization
+
+$ \\int |\\psi|^2 dx = 1 $
+
+### Expectation value
+
+$ \\langle Q \\rangle = \\langle \\psi | \\hat{Q} | \\psi \\rangle $
+
+### Momentum operator
+
+$ \\hat{p} = -i\\hbar \\frac{d}{dx} $
+
+### Position-momentum commutator
+
+$ [\\hat{x},\\hat{p}] = i\\hbar $
+
+### Uncertainty principle
+
+$ \\sigma_x \\sigma_p \\ge \\frac{\\hbar}{2} $
+
+### Infinite square well energies
+
+$ E_n = \\frac{n^2\\pi^2\\hbar^2}{2ma^2} $
+
+### Harmonic oscillator energies
+
+$ E_n = \\left(n+\\frac{1}{2}\\right)\\hbar\\omega $
+
+### Angular momentum eigenvalues
+
+$ \\hat{L}^2 |l,m\\rangle = \\hbar^2 l(l+1)|l,m\\rangle $
+
+$ \\hat{L}_z |l,m\\rangle = \\hbar m |l,m\\rangle $
+
+### Hydrogen energies
+
+$ E_n = - \\frac{m e^4}{2(4\\pi \\varepsilon_0)^2 \\hbar^2}\\frac{1}{n^2} $
+
+### First-order perturbation correction
+
+$ E_n^{(1)} = \\langle n^{(0)} | \\hat{H}' | n^{(0)} \\rangle $
+
+### Variational estimate
+
+$ E_{\\text{trial}} \\ge E_0 $
+
+### Fermi's golden rule
+
+$ \\Gamma_{i\\to f} =
+\\frac{2\\pi}{\\hbar}
+|\\langle f | \\hat{H}' | i \\rangle|^2
+\\rho(E_f) $
+
+---
+
+## 32. A chapter-by-chapter mental map
+
+A useful way to organize Griffiths is this:
+
+### Wave mechanics
+Learn what the wavefunction means and how Schrödinger evolution works.
+
+### Basic formalism
+Learn operators, expectation values, Hermitian structure, and measurement.
+
+### Solvable systems
+Use wells, oscillators, and free particles to build intuition.
+
+### Angular momentum and spin
+Learn the algebra of rotational quantum structure.
+
+### Hydrogen atom
+See the formalism explain real atomic spectra.
+
+### Identical particles
+Learn indistinguishability and exchange symmetry.
+
+### Approximation methods
+Handle systems that cannot be solved exactly.
+
+### Time-dependent theory and scattering
+Study transitions, interactions, and observable collision behavior.
+
+This sequence is not random. It is the standard conceptual climb from wavefunctions to the general machinery of microscopic physics.
+
+---
+
+## 33. Deep conceptual lessons of the book
+
+Griffiths teaches several deep ideas that are easy to miss if one only memorizes formulas.
+
+### 33.1 States are more fundamental than trajectories
+
+Quantum mechanics does not primarily describe particles following sharp paths. It describes evolving states.
+
+### 33.2 Measurement is built into the formalism
+
+The theory predicts not just motion, but the statistical structure of observed outcomes.
+
+### 33.3 Noncommutativity reshapes physics
+
+Classical variables can often be simultaneously specified. Quantum observables may not be.
+
+### 33.4 Quantization often comes from boundary conditions and operator structure
+
+Discrete energies are not magical add-ons; they emerge naturally from the allowed solutions.
+
+### 33.5 Symmetry and linear algebra are the real engine of the subject
+
+Many quantum problems are ultimately problems in:
+- eigenvalues
+- vector spaces
+- orthogonality
+- and symmetry
+
+### 33.6 Classical behavior emerges only approximately
+
+Quantum theory contains the classical world as a limit, not as its basic starting point.
+
+---
+
+## 34. What to study next after Griffiths
+
+After mastering this material, common next steps are:
+
+1. more advanced linear algebra for Hilbert spaces
+2. deeper operator methods
+3. relativistic quantum mechanics
+4. quantum statistical mechanics
+5. atomic and molecular physics
+6. quantum field theory later on
+7. solid-state physics
+8. path integrals
+9. advanced scattering theory
+10. quantum information
+
+A particularly valuable next conceptual step is learning the abstract Hilbert-space framework more deeply.
+
+---
+
+## 35. Final takeaway
+
+The central idea of *Introduction to Quantum Mechanics* is that microscopic physics is governed not by classical trajectories but by **wavefunctions or state vectors** that evolve linearly, encode probabilities, and interact with measurement through operator eigenvalue structure.
+
+The subject begins with wavefunctions and Schrödinger's equation, but it quickly opens into a powerful framework involving:
+
+- probability amplitudes
+- Hermitian observables
+- quantized energies
+- angular momentum algebra
+- spin
+- atomic structure
+- identical particles
+- approximation methods
+- and transition dynamics
+
+If you keep the following backbone in mind, the subject stays organized:
+
+1. Learn what the wavefunction means.
+2. Master Schrödinger evolution.
+3. Learn operators, eigenstates, and measurement.
+4. Build intuition from solvable systems.
+5. Learn angular momentum and spin.
+6. Understand hydrogen and central potentials.
+7. Learn identical-particle symmetry.
+8. Master perturbation, variational, and time-dependent methods.
+
+That is the Griffiths quantum mechanics story in one line:
+
+**a quantum system is an evolving state, observables are Hermitian operators, measurements reveal eigenvalue structure probabilistically, and the microscopic world is governed by superposition, quantization, and noncommuting observables.**
+`;function Pj(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Nj})})}var Fj=`# Comprehensive Crash Course on *Partial Differential Equations: An Introduction* by Walter A. Strauss
+
+## 1. Purpose of this crash course
+
+This document is a compact but comprehensive study guide to the core material traditionally covered in *Partial Differential Equations: An Introduction* by Walter A. Strauss. It is designed to help you:
+
+- see the big structure of partial differential equations,
+- understand the major equation types and why they matter,
+- learn the standard solution methods,
+- build intuition for boundary conditions and physical interpretation,
+- and create a strong bridge to deeper study.
+
+The focus is on the standard undergraduate-to-early-graduate arc associated with Strauss-style PDE courses:
+
+1. First-order PDEs and characteristics
+2. Second-order linear PDE classification
+3. The wave equation
+4. The heat equation
+5. Laplace's equation and harmonic functions
+6. Fourier series and separation of variables
+7. Sturm-Liouville theory
+8. Fourier transform methods
+9. Green's functions
+10. Nonhomogeneous problems and boundary-value methods
+11. Physical modeling and qualitative understanding
+
+This is not a substitute for doing problems, but it gives you the conceptual backbone and formula structure of the subject.
+
+---
+
+## 2. What a PDE is and why it matters
+
+A **partial differential equation** is an equation involving an unknown function of several variables and its partial derivatives.
+
+Examples:
+
+- $u_t + c u_x = 0$
+- $u_{tt} = c^2 u_{xx}$
+- $u_t = k u_{xx}$
+- $u_{xx} + u_{yy} = 0$
+
+These equations arise because physical systems depend on both **space** and **time**, or on several spatial variables at once.
+
+Typical applications include:
+
+- vibrations of strings and membranes
+- diffusion of heat
+- fluid flow
+- electrostatics and gravitation
+- quantum mechanics
+- wave propagation
+- elasticity
+- population dynamics
+- probability and stochastic processes
+
+The central idea of PDEs is that local differential laws determine global behavior once you specify suitable **initial conditions** and **boundary conditions**.
+
+---
+
+## 3. The big picture: the three canonical PDEs
+
+Much of an introductory PDE course revolves around three model equations.
+
+### 3.1 The wave equation
+
+$ u_{tt} = c^2 u_{xx} $
+
+This models propagation with finite speed, such as:
+
+- vibrating strings
+- sound waves
+- elastic disturbances
+
+It is the basic **hyperbolic** equation.
+
+### 3.2 The heat equation
+
+$ u_t = k u_{xx} $
+
+This models diffusion and smoothing, such as:
+
+- heat flow
+- diffusion of particles
+- random spreading processes
+
+It is the basic **parabolic** equation.
+
+### 3.3 Laplace's equation
+
+$ u_{xx} + u_{yy} = 0 $
+
+This models equilibrium or steady-state behavior, such as:
+
+- steady temperature
+- electrostatic potential
+- gravitational potential
+- incompressible potential flow
+
+It is the basic **elliptic** equation.
+
+A large part of PDE theory is learning how these three types behave differently.
+
+---
+
+## 4. General structure of PDE problems
+
+A PDE problem is usually not just an equation. It includes additional data.
+
+### 4.1 Unknown function
+
+The goal is to find $u(x,t)$ or $u(x,y)$ or more generally $u(x_1,\\dots,x_n,t)$.
+
+### 4.2 PDE itself
+
+The differential equation constrains local behavior.
+
+### 4.3 Initial conditions
+
+For time-dependent equations, you often specify the state at $t=0$.
+
+Examples:
+
+$ u(x,0) = f(x) $
+
+$ u_t(x,0) = g(x) $
+
+### 4.4 Boundary conditions
+
+If the domain is finite, you must say what happens at the edges.
+
+Common types:
+
+- **Dirichlet**: specify the value of $u$
+- **Neumann**: specify the normal derivative
+- **Robin**: specify a combination of value and derivative
+
+Examples:
+
+$ u(0,t)=0,\\quad u(L,t)=0 $
+
+or
+
+$ u_x(0,t)=0,\\quad u_x(L,t)=0 $
+
+### 4.5 Well-posedness
+
+A good PDE problem should ideally have:
+
+- existence of a solution
+- uniqueness of the solution
+- continuous dependence on the data
+
+This is the idea of a **well-posed problem**.
+
+---
+
+## 5. Order, linearity, and classification
+
+### 5.1 Order
+
+The order is the highest derivative appearing.
+
+Examples:
+
+- $u_t + c u_x = 0$ is first order
+- $u_{tt} - c^2 u_{xx} = 0$ is second order
+
+### 5.2 Linearity
+
+A PDE is **linear** if the unknown function and its derivatives appear linearly.
+
+Example of linear:
+
+$ u_t - k u_{xx} = f(x,t) $
+
+Example of nonlinear:
+
+$ u_t + u u_x = 0 $
+
+Linear PDEs are much more tractable, especially in an introductory course.
+
+### 5.3 Homogeneous versus nonhomogeneous
+
+Homogeneous:
+
+$ L[u] = 0 $
+
+Nonhomogeneous:
+
+$ L[u] = f $
+
+where $f$ is a forcing term or source term.
+
+Because linear equations obey superposition, nonhomogeneous problems are often handled by splitting into:
+
+- homogeneous part
+- particular part
+
+---
+
+## 6. First-order PDEs
+
+Strauss typically begins with first-order equations because they reveal the geometric structure of PDEs very clearly.
+
+### 6.1 Transport equation
+
+The simplest example is:
+
+$ u_t + c u_x = 0 $
+
+This says the profile moves with speed $c$ without changing shape.
+
+If
+
+$ u(x,0)=f(x) $
+
+then the solution is
+
+$ u(x,t)=f(x-ct) $
+
+This is one of the most important exact solutions in all PDEs.
+
+### 6.2 Characteristics
+
+The key method for first-order PDEs is the method of **characteristics**.
+
+For the transport equation, the characteristic curves are:
+
+$ x - ct = \\text{constant} $
+
+Along each such line, the solution is constant.
+
+This generalizes to more complicated first-order PDEs of the form
+
+$ a(x,t,u)u_x + b(x,t,u)u_t = c(x,t,u) $
+
+where one seeks curves along which the PDE becomes an ODE.
+
+### 6.3 Why characteristics matter
+
+Characteristics tell you:
+
+- where information travels
+- how initial data propagates
+- where shocks or singularities may develop
+- how to reduce a PDE to ordinary differential equations along curves
+
+### 6.4 Inhomogeneous transport
+
+For
+
+$ u_t + c u_x = F(x,t) $
+
+the solution can be found by integrating along characteristics:
+
+$ \\frac{d}{dt}u(x(t),t) = F(x(t),t) $
+
+with
+
+$ x(t)=x_0+ct $
+
+This shows the general philosophy:
+
+- move along the natural curves,
+- reduce the PDE to an ODE,
+- integrate.
+
+---
+
+## 7. Second-order PDEs in two variables
+
+A general linear second-order PDE in two variables looks like
+
+$ A u_{xx} + 2B u_{xy} + C u_{yy} + D u_x + E u_y + F u = G $
+
+The classification depends on the discriminant
+
+$ B^2 - AC $
+
+### 7.1 Hyperbolic
+
+If
+
+$ B^2 - AC > 0 $
+
+the equation is hyperbolic.
+
+Prototype: wave equation.
+
+Behavior:
+
+- signals propagate along characteristic curves
+- finite-speed propagation
+- initial-value problems are natural
+
+### 7.2 Parabolic
+
+If
+
+$ B^2 - AC = 0 $
+
+the equation is parabolic.
+
+Prototype: heat equation.
+
+Behavior:
+
+- smoothing and diffusion
+- initial-value problems with boundary conditions
+- influence spreads instantly in the classical model, but with rapid decay
+
+### 7.3 Elliptic
+
+If
+
+$ B^2 - AC < 0 $
+
+the equation is elliptic.
+
+Prototype: Laplace's equation.
+
+Behavior:
+
+- no real characteristic propagation
+- equilibrium type behavior
+- boundary-value problems are natural
+
+This classification is one of the core organizing ideas of PDE theory.
+
+---
+
+## 8. The wave equation
+
+The one-dimensional wave equation is
+
+$ u_{tt} = c^2 u_{xx} $
+
+It models a vibrating string under tension.
+
+### 8.1 Derivation idea
+
+A small segment of string obeys Newton's second law. Balancing vertical forces from tension leads, under small-slope approximations, to the wave equation.
+
+### 8.2 Initial conditions
+
+Typically one specifies:
+
+$ u(x,0)=f(x) $
+
+$ u_t(x,0)=g(x) $
+
+where:
+
+- $f$ is the initial displacement
+- $g$ is the initial velocity
+
+### 8.3 d'Alembert solution on the line
+
+For $x \\in \\mathbb{R}$, the solution is
+
+$ u(x,t)
+=
+\\frac{1}{2}\\bigl[f(x-ct)+f(x+ct)\\bigr]
++
+\\frac{1}{2c}\\int_{x-ct}^{x+ct} g(s)\\, ds $
+
+This is one of the great exact formulas in PDEs.
+
+Interpretation:
+
+- the initial shape splits into left- and right-moving parts
+- the initial velocity contributes through an averaging integral
+
+### 8.4 Finite speed of propagation
+
+A disturbance initially localized in some interval only influences points reachable by speed $c$.
+
+This is a defining feature of hyperbolic equations.
+
+### 8.5 Boundary-value problems for vibrating strings
+
+On $0 < x < L$, one often imposes
+
+$ u(0,t)=0,\\quad u(L,t)=0 $
+
+which corresponds to fixed ends.
+
+Then separation of variables yields standing-wave solutions with frequencies
+
+$ \\omega_n = \\frac{n\\pi c}{L} $
+
+and modes
+
+$ \\sin\\left(\\frac{n\\pi x}{L}\\right) $
+
+### 8.6 Energy of the wave equation
+
+A typical energy is
+
+$ E(t)=\\frac{1}{2}\\int_0^L \\left(u_t^2 + c^2 u_x^2\\right)\\, dx $
+
+For ideal undamped fixed-end strings, this is conserved.
+
+This reflects the nondissipative nature of the wave equation.
+
+---
+
+## 9. The heat equation
+
+The one-dimensional heat equation is
+
+$ u_t = k u_{xx} $
+
+It models diffusion of heat in a rod.
+
+### 9.1 Derivation idea
+
+Combine:
+
+- conservation of energy,
+- Fourier's law of heat flux,
+- constitutive assumptions,
+
+and you obtain the heat equation.
+
+### 9.2 Initial and boundary data
+
+A standard problem on $0<x<L$ is:
+
+$ u_t = k u_{xx} $
+
+$ u(0,t)=0,\\quad u(L,t)=0 $
+
+$ u(x,0)=f(x) $
+
+### 9.3 Separation of variables
+
+Set
+
+$ u(x,t)=X(x)T(t) $
+
+Substitution leads to
+
+$ \\frac{T'}{kT} = \\frac{X''}{X} = -\\lambda $
+
+This yields eigenfunctions
+
+$ X_n(x)=\\sin\\left(\\frac{n\\pi x}{L}\\right) $
+
+and time factors
+
+$ T_n(t)=e^{-k(n\\pi/L)^2 t} $
+
+So the solution is
+
+$ u(x,t)=\\sum_{n=1}^\\infty b_n e^{-k(n\\pi/L)^2 t}\\sin\\left(\\frac{n\\pi x}{L}\\right) $
+
+where the coefficients come from the Fourier sine series of $f$.
+
+### 9.4 Smoothing effect
+
+Unlike the wave equation, the heat equation smooths rough initial data over time.
+
+High-frequency oscillations decay rapidly because of the factor
+
+$ e^{-k(n\\pi/L)^2 t} $
+
+This is the defining qualitative feature of diffusion.
+
+### 9.5 Maximum principle intuition
+
+For the heat equation, maxima tend to decrease and minima tend to increase. Heat spreads from hot to cold, flattening the profile.
+
+This leads to strong uniqueness and stability results.
+
+---
+
+## 10. Laplace's equation and harmonic functions
+
+Laplace's equation in two dimensions is
+
+$ u_{xx}+u_{yy}=0 $
+
+Solutions are called **harmonic functions**.
+
+### 10.1 Physical meaning
+
+Laplace's equation describes steady-state or equilibrium situations:
+
+- steady temperature distribution
+- electrostatic potential in source-free regions
+- gravitational potential away from mass
+- incompressible irrotational flow
+
+### 10.2 Boundary-value problems
+
+Typical elliptic problems specify data on the boundary of a region.
+
+For example, on a rectangle or disk, one might prescribe:
+
+$ u = f \\quad \\text{on the boundary} $
+
+This is a Dirichlet problem.
+
+### 10.3 Mean value property
+
+A harmonic function at a point equals the average of its values over circles or spheres centered at that point.
+
+This is one of the most beautiful features of harmonic functions.
+
+### 10.4 Maximum principle
+
+A nonconstant harmonic function cannot attain its maximum or minimum in the interior of a connected region.
+
+This implies uniqueness for many boundary-value problems.
+
+### 10.5 Why elliptic equations feel different
+
+Elliptic equations do not describe propagation in time. Instead, the value at one point is influenced by the entire boundary structure in a global way.
+
+---
+
+## 11. Separation of variables
+
+This is one of the master techniques in Strauss.
+
+### 11.1 Core idea
+
+Assume the solution can be written as a product:
+
+$ u(x,t)=X(x)T(t) $
+
+or in higher dimensions,
+
+$ u(x,y,t)=X(x)Y(y)T(t) $
+
+Substitute into the PDE and separate variables so each side depends on different variables. Then each side must equal a constant.
+
+### 11.2 Why it works
+
+It transforms a PDE into a family of ODE eigenvalue problems.
+
+### 11.3 Where it works best
+
+Separation of variables is especially effective on domains and equations with compatible geometry:
+
+- intervals
+- rectangles
+- cylinders
+- circles
+- spheres
+
+### 11.4 Typical outcome
+
+You get a sequence of modes:
+
+- spatial eigenfunctions
+- temporal exponential or oscillatory factors
+- coefficients determined from initial or boundary data
+
+The full solution is then a series expansion in these modes.
+
+---
+
+## 12. Fourier series
+
+Fourier series are one of the main tools used to represent initial data and solutions.
+
+### 12.1 Basic idea
+
+A function on an interval can often be expanded in sines and cosines.
+
+For example, on $(-L,L)$:
+
+$ f(x) \\sim \\frac{a_0}{2} + \\sum_{n=1}^\\infty \\left(
+a_n \\cos\\frac{n\\pi x}{L} + b_n \\sin\\frac{n\\pi x}{L}
+\\right) $
+
+with coefficients
+
+$ a_n = \\frac{1}{L}\\int_{-L}^L f(x)\\cos\\frac{n\\pi x}{L}\\, dx $
+
+$ b_n = \\frac{1}{L}\\int_{-L}^L f(x)\\sin\\frac{n\\pi x}{L}\\, dx $
+
+### 12.2 Sine and cosine series
+
+On $0<x<L$, one often uses:
+
+- sine series for odd extensions or zero Dirichlet boundary conditions
+- cosine series for even extensions or zero Neumann boundary conditions
+
+### 12.3 Why Fourier series matter in PDEs
+
+They convert complicated functions into combinations of eigenmodes, and each mode evolves simply under the PDE.
+
+This is exactly why the heat and wave equations on finite intervals become manageable.
+
+### 12.4 Convergence and Gibbs phenomenon
+
+At discontinuities, Fourier series converge to the midpoint of the jump. Near jumps, oscillatory overshoot appears. This is called the Gibbs phenomenon.
+
+Understanding this helps interpret PDE solutions with nonsmooth data.
+
+---
+
+## 13. Sturm-Liouville theory
+
+A large fraction of separation-of-variables problems leads to an eigenvalue problem of the form
+
+$ -(p(x) y')' + q(x) y = \\lambda w(x) y $
+
+with suitable boundary conditions.
+
+This is a **Sturm-Liouville problem**.
+
+### 13.1 Why it matters
+
+It gives the theoretical foundation for:
+
+- orthogonal eigenfunctions
+- real eigenvalues
+- completeness of eigenfunction expansions
+
+### 13.2 Orthogonality
+
+Eigenfunctions corresponding to distinct eigenvalues are orthogonal with respect to the weight $w(x)$:
+
+$ \\int_a^b y_m(x) y_n(x) w(x)\\, dx = 0 \\quad \\text{if } m\\ne n $
+
+### 13.3 Expansion in eigenfunctions
+
+Many functions can be expanded as generalized Fourier series in terms of the eigenfunctions.
+
+This is the general principle behind separation of variables on nontrivial domains or with nontrivial coefficients.
+
+---
+
+## 14. The heat equation on the whole line
+
+On $x\\in\\mathbb{R}$, the heat equation with initial data $u(x,0)=f(x)$ has solution
+
+$ u(x,t)=\\frac{1}{\\sqrt{4\\pi k t}}\\int_{-\\infty}^{\\infty}
+e^{-(x-y)^2/(4kt)} f(y)\\, dy $
+
+The Gaussian kernel
+
+$ G(x,t)=\\frac{1}{\\sqrt{4\\pi k t}} e^{-x^2/(4kt)} $
+
+is called the **heat kernel**.
+
+### 14.1 Interpretation
+
+The solution is a convolution:
+
+$ u(x,t)=(G(\\cdot,t)*f)(x) $
+
+This shows that the initial data is averaged against a Gaussian that widens as time grows.
+
+### 14.2 Qualitative message
+
+The heat equation:
+
+- smooths
+- spreads
+- and damps localized peaks
+
+This explicit formula makes those properties transparent.
+
+---
+
+## 15. The wave equation on the whole line
+
+We already saw d'Alembert's formula. It provides the whole-line solution to the one-dimensional wave equation.
+
+In higher dimensions, the wave equation has more complicated formulas, often involving spherical means. The geometric idea remains the same:
+
+- information propagates at finite speed
+- domains of dependence are determined by characteristic cones
+- the solution at a point depends only on a causally reachable region
+
+This finite-propagation structure is central in PDE theory and physics.
+
+---
+
+## 16. Fourier transform methods
+
+When the spatial domain is the whole real line, Fourier series are replaced by the **Fourier transform**.
+
+### 16.1 Definition idea
+
+For a function $f(x)$, the Fourier transform is typically written as
+
+$ \\hat{f}(\\xi) = \\int_{-\\infty}^\\infty f(x)e^{-i\\xi x}\\, dx $
+
+with inverse transform
+
+$ f(x)=\\frac{1}{2\\pi}\\int_{-\\infty}^\\infty \\hat{f}(\\xi)e^{i\\xi x}\\, d\\xi $
+
+depending on the normalization convention.
+
+### 16.2 Why it is useful
+
+Differentiation becomes multiplication:
+
+$ \\widehat{f'}(\\xi)= i\\xi \\hat{f}(\\xi) $
+
+and
+
+$ \\widehat{f''}(\\xi)= -\\xi^2 \\hat{f}(\\xi) $
+
+This turns constant-coefficient PDEs into ODEs in time or algebraic equations in transform space.
+
+### 16.3 Example: heat equation
+
+For
+
+$ u_t = k u_{xx} $
+
+the transform yields
+
+$ \\hat{u}_t = -k\\xi^2 \\hat{u} $
+
+so
+
+$ \\hat{u}(\\xi,t)=\\hat{f}(\\xi)e^{-k\\xi^2 t} $
+
+Then invert the transform to recover the heat kernel solution.
+
+### 16.4 Example: wave equation
+
+For
+
+$ u_{tt}=c^2 u_{xx} $
+
+the transform yields
+
+$ \\hat{u}_{tt} + c^2 \\xi^2 \\hat{u}=0 $
+
+which is just a harmonic-oscillator ODE in time for each frequency $\\xi$.
+
+This frequency-by-frequency viewpoint is one of the most powerful ideas in PDEs.
+
+---
+
+## 17. Laplace transform methods
+
+The **Laplace transform** is especially useful for time-dependent problems on $t\\ge 0$.
+
+### 17.1 Basic idea
+
+For a function $f(t)$,
+
+$ \\mathcal{L}\\{f\\}(s)=\\int_0^\\infty e^{-st}f(t)\\, dt $
+
+### 17.2 Why it helps
+
+Time derivatives become algebraic expressions involving initial data. This makes it very useful for initial-value problems.
+
+Example:
+
+$ \\mathcal{L}\\{f'(t)\\}= sF(s)-f(0) $
+
+### 17.3 PDE use
+
+For heat or wave problems, one can transform in time, solve a boundary-value ODE in space, and then invert.
+
+This is particularly useful when forcing or boundary data are complicated.
+
+---
+
+## 18. Green's functions
+
+A **Green's function** is the response of a linear operator to a point source.
+
+### 18.1 Basic idea
+
+If
+
+$ L[u]=f $
+
+one tries to find $G$ such that
+
+$ L[G(\\cdot,\\xi)] = \\delta(\\cdot-\\xi) $
+
+Then the solution can often be written as
+
+$ u(x)=\\int G(x,\\xi)f(\\xi)\\, d\\xi $
+
+### 18.2 Why this matters
+
+It converts the PDE into an integral formula.
+
+Green's functions encode:
+
+- the operator
+- the geometry of the domain
+- the boundary conditions
+
+### 18.3 PDE viewpoint
+
+Different boundary conditions lead to different Green's functions. This is a key lesson: the operator alone is not enough; the problem includes the boundary behavior.
+
+### 18.4 Physical interpretation
+
+A Green's function is the field generated by a point source. The full solution is then the superposition of point-source responses.
+
+This is exactly the PDE version of linear response.
+
+---
+
+## 19. The Poisson equation
+
+A standard elliptic nonhomogeneous problem is
+
+$ -\\Delta u = f $
+
+or equivalently
+
+$ \\Delta u = -f $
+
+This generalizes Laplace's equation by including sources.
+
+### 19.1 Physical meaning
+
+Examples:
+
+- electric potential with charge density
+- gravitational potential with mass density
+- steady-state temperature with internal heat generation
+
+### 19.2 Relation to Laplace's equation
+
+Laplace's equation is the source-free case:
+
+$ \\Delta u = 0 $
+
+### 19.3 Boundary-value problems
+
+Solving Poisson's equation usually requires both the source term and boundary conditions.
+
+---
+
+## 20. Higher-dimensional separation of variables
+
+Separation of variables extends beyond one dimension.
+
+### 20.1 Rectangles
+
+For Laplace's equation on a rectangle, one typically sets
+
+$ u(x,y)=X(x)Y(y) $
+
+and obtains trigonometric functions in one variable and hyperbolic functions in the other.
+
+### 20.2 Circular domains
+
+For Laplace's equation in polar coordinates,
+
+$ u_{rr}+\\frac{1}{r}u_r+\\frac{1}{r^2}u_{\\theta\\theta}=0 $
+
+Separation leads to radial powers $r^n$ and angular modes $\\cos(n\\theta)$, $\\sin(n\\theta)$.
+
+### 20.3 Spherical domains
+
+In three dimensions, spherical symmetry leads to special functions such as Legendre polynomials and spherical harmonics.
+
+This is where PDEs begin to connect strongly with mathematical physics.
+
+---
+
+## 21. Bessel functions and special functions
+
+Many PDE problems in cylindrical or spherical coordinates lead to special functions.
+
+### 21.1 Bessel's equation
+
+A standard form is
+
+$ x^2 y'' + x y' + (x^2-\\nu^2)y = 0 $
+
+Its solutions are Bessel functions $J_\\nu(x)$ and $Y_\\nu(x)$.
+
+### 21.2 Why they appear
+
+They arise naturally when separating variables in cylindrical coordinates, such as:
+
+- circular membranes
+- heat flow in cylinders
+- electromagnetic modes in cylindrical geometry
+
+### 21.3 Legendre polynomials
+
+In spherical coordinates, one often meets Legendre's equation and spherical harmonics.
+
+These are the natural angular eigenfunctions for spherical geometry.
+
+An important lesson from Strauss-style PDEs is that geometry determines the natural eigenfunctions.
+
+---
+
+## 22. Boundary conditions in more detail
+
+Boundary conditions are not an afterthought. They are part of the problem.
+
+### 22.1 Dirichlet boundary condition
+
+Specify the value of the solution:
+
+$ u = g \\quad \\text{on the boundary} $
+
+### 22.2 Neumann boundary condition
+
+Specify the normal derivative:
+
+$ \\frac{\\partial u}{\\partial n} = g \\quad \\text{on the boundary} $
+
+### 22.3 Robin boundary condition
+
+Specify a combination:
+
+$ a u + b \\frac{\\partial u}{\\partial n} = g $
+
+### 22.4 Physical meaning
+
+- Dirichlet often means fixed temperature or fixed displacement
+- Neumann often means fixed flux or insulated boundary
+- Robin often means convective exchange or spring-like boundary effects
+
+Understanding the physical meaning of the boundary data is crucial for modeling.
+
+---
+
+## 23. Initial-value versus boundary-value problems
+
+### 23.1 Initial-value problems
+
+These are natural for time-dependent evolution equations like:
+
+- transport
+- wave
+- heat
+
+You specify the initial state and evolve forward.
+
+### 23.2 Boundary-value problems
+
+These are natural for equilibrium equations like:
+
+- Laplace
+- Poisson
+
+You specify boundary behavior and solve throughout the domain.
+
+### 23.3 Mixed problems
+
+Many realistic PDE problems involve both initial and boundary data, especially on finite spatial intervals.
+
+This is common for heat and wave equations on bounded domains.
+
+---
+
+## 24. Superposition and eigenmode decomposition
+
+For linear PDEs, superposition is a central tool.
+
+If $u_1$ and $u_2$ solve the homogeneous PDE, then so does
+
+$ c_1 u_1 + c_2 u_2 $
+
+This makes eigenmode expansions possible.
+
+### 24.1 Why this matters
+
+A complicated initial profile can be decomposed into simple modes.
+
+Each mode then evolves in a simple way:
+
+- oscillatory for wave equations
+- exponentially decaying for heat equations
+- static for Laplace-type spatial problems
+
+The full solution is the sum of these mode evolutions.
+
+This is the main organizing principle behind much of Strauss.
+
+---
+
+## 25. Uniqueness, maximum principles, and energy methods
+
+These are among the most important qualitative tools.
+
+### 25.1 Uniqueness
+
+For many PDEs, uniqueness can be proved without constructing the solution explicitly.
+
+### 25.2 Maximum principle
+
+For elliptic and parabolic equations, maxima and minima obey strong restrictions.
+
+This yields uniqueness and qualitative bounds.
+
+### 25.3 Energy methods
+
+For wave equations and related systems, one defines an energy and differentiates it in time.
+
+This can show:
+
+- uniqueness
+- stability
+- conservation
+- decay
+
+Energy methods are foundational across modern PDE theory.
+
+---
+
+## 26. Domains of dependence and influence
+
+This concept is especially important for hyperbolic PDEs.
+
+### 26.1 Domain of dependence
+
+The solution at a point depends only on data in a certain region.
+
+For the one-dimensional wave equation, the value at $(x,t)$ depends only on initial data from the interval
+
+$ [x-ct,\\ x+ct] $
+
+### 26.2 Domain of influence
+
+A disturbance at one point affects only certain future points.
+
+This finite-speed structure is why wave equations are suited to propagation problems.
+
+### 26.3 Compare with the heat equation
+
+The heat equation, by contrast, has infinite propagation speed in the classical model: data at one point instantly affects the entire domain, though often weakly far away.
+
+This sharp difference between wave and heat equations is one of the core lessons of PDE classification.
+
+---
+
+## 27. Inhomogeneous equations and Duhamel's principle
+
+For forced time-dependent linear PDEs, one often uses **Duhamel's principle**.
+
+### 27.1 Basic idea
+
+Solve the homogeneous problem first, then integrate the effect of the forcing over time.
+
+For example, if
+
+$ u_t - k u_{xx} = F(x,t) $
+
+the solution can often be represented as the accumulation of responses to impulse-like forcings at earlier times.
+
+### 27.2 Why this matters
+
+It turns a nonhomogeneous PDE into a superposition of homogeneous problems.
+
+This is a major unifying method in linear PDEs.
+
+---
+
+## 28. Nonlinearity: a brief introduction
+
+Although Strauss is mainly an introduction, it often gestures toward nonlinear PDEs.
+
+### 28.1 Why nonlinear PDEs are harder
+
+Superposition fails.
+
+Solutions can develop:
+
+- shocks
+- blow-up
+- pattern formation
+- solitons
+- singularities
+
+### 28.2 Example: Burgers-type equation
+
+$ u_t + u u_x = 0 $
+
+Characteristics can intersect, leading to multivalued classical solutions and the need for weak solutions or shock conditions.
+
+### 28.3 Why introductory linear PDEs still matter
+
+The linear theory teaches:
+
+- core geometric ideas
+- transform methods
+- boundary analysis
+- spectral decompositions
+
+All of these remain foundational even in nonlinear PDE theory.
+
+---
+
+## 29. Common modeling interpretations
+
+A Strauss-style PDE course constantly moves between formulas and physical meaning.
+
+### 29.1 Wave equation
+
+Think:
+
+- oscillation
+- propagation
+- finite speed
+- inertia and restoring force
+
+### 29.2 Heat equation
+
+Think:
+
+- smoothing
+- averaging
+- loss of sharp features
+- dissipation
+
+### 29.3 Laplace equation
+
+Think:
+
+- equilibrium
+- no sources in the interior
+- values constrained by the boundary
+
+Keeping these physical interpretations in mind helps choose methods and check answers.
+
+---
+
+## 30. Typical problem-solving workflow
+
+When solving Strauss-style PDE problems, this workflow helps.
+
+### Step 1: Identify the PDE type
+
+Ask:
+
+- first order or second order?
+- linear or nonlinear?
+- hyperbolic, parabolic, or elliptic?
+
+### Step 2: Identify the domain and data
+
+Ask:
+
+- whole line or finite interval?
+- rectangle, disk, sphere?
+- initial conditions?
+- boundary conditions?
+
+### Step 3: Choose the natural method
+
+Use:
+
+- characteristics for first-order equations
+- d'Alembert for wave equation on the line
+- separation of variables for bounded domains
+- Fourier series for interval problems
+- Fourier transform for whole-line problems
+- Laplace transform for time-initial problems
+- Green's functions for forced linear problems
+
+### Step 4: Match the basis to the boundary condition
+
+Examples:
+
+- sine series for zero-endpoint values
+- cosine series for zero-derivative endpoints
+- special functions for cylindrical or spherical domains
+
+### Step 5: Check the solution qualitatively
+
+Ask:
+
+- does the wave propagate at finite speed?
+- does the heat solution smooth out?
+- does the harmonic function respect the boundary data?
+- are dimensions and decay rates sensible?
+
+### Step 6: Use uniqueness when possible
+
+If you find a solution satisfying the PDE and all conditions, uniqueness often tells you it is the solution.
+
+---
+
+## 31. Common conceptual pitfalls
+
+### Pitfall 1: Treating the PDE alone as the whole problem
+
+Without initial and boundary data, there are usually infinitely many solutions.
+
+### Pitfall 2: Using separation of variables blindly
+
+Separation works only when the geometry and data are compatible.
+
+### Pitfall 3: Forgetting the physical meaning of boundary conditions
+
+Boundary conditions are not arbitrary decorations; they encode the environment of the problem.
+
+### Pitfall 4: Mixing up wave and heat behavior
+
+Wave equations preserve oscillatory structure and propagate at finite speed. Heat equations smooth and dissipate.
+
+### Pitfall 5: Ignoring orthogonality in Fourier methods
+
+Orthogonality is what allows you to extract coefficients correctly.
+
+### Pitfall 6: Forgetting the classification of second-order equations
+
+The sign of $B^2-AC$ fundamentally changes the behavior of the problem.
+
+### Pitfall 7: Treating transforms as formal magic
+
+Fourier and Laplace transforms work because they diagonalize differentiation in a systematic way.
+
+### Pitfall 8: Neglecting regularity issues
+
+Discontinuous or nonsmooth data may still be allowed, but then convergence and derivative interpretation require care.
+
+---
+
+## 32. Core formulas to memorize
+
+Here is a compact formula sheet.
+
+### Transport equation
+
+$ u_t + c u_x = 0 $
+
+$ u(x,t)=f(x-ct) $
+
+### Wave equation
+
+$ u_{tt} = c^2 u_{xx} $
+
+d'Alembert formula:
+
+$ u(x,t)
+=
+\\frac{1}{2}\\bigl[f(x-ct)+f(x+ct)\\bigr]
++
+\\frac{1}{2c}\\int_{x-ct}^{x+ct} g(s)\\, ds $
+
+### Heat equation
+
+$ u_t = k u_{xx} $
+
+### Laplace equation
+
+$ \\Delta u = 0 $
+
+### Poisson equation
+
+$ \\Delta u = -f $
+
+### Classification
+
+For
+
+$ A u_{xx}+2B u_{xy}+C u_{yy}+\\cdots=0 $
+
+use
+
+$ B^2-AC $
+
+- $>0$: hyperbolic
+- $=0$: parabolic
+- $<0$: elliptic
+
+### Fourier series
+
+$ f(x) \\sim \\frac{a_0}{2} + \\sum_{n=1}^\\infty
+\\left(
+a_n \\cos\\frac{n\\pi x}{L} + b_n \\sin\\frac{n\\pi x}{L}
+\\right) $
+
+### Heat kernel
+
+$ G(x,t)=\\frac{1}{\\sqrt{4\\pi k t}}e^{-x^2/(4kt)} $
+
+### Fourier transform derivative rule
+
+$ \\widehat{f'}(\\xi)=i\\xi \\hat{f}(\\xi) $
+
+$ \\widehat{f''}(\\xi)=-\\xi^2 \\hat{f}(\\xi) $
+
+### Sturm-Liouville form
+
+$ -(p y')' + q y = \\lambda w y $
+
+---
+
+## 33. A chapter-by-chapter mental map
+
+A useful way to organize Strauss is this:
+
+### First-order equations
+Learn characteristics and how information flows.
+
+### Classification
+Understand hyperbolic, parabolic, and elliptic behavior.
+
+### Wave equation
+Learn propagation, finite speed, and energy ideas.
+
+### Heat equation
+Learn diffusion, smoothing, and exponential decay of modes.
+
+### Laplace and Poisson equations
+Learn equilibrium, boundary-value problems, and maximum principles.
+
+### Fourier series and separation of variables
+Learn eigenmodes on bounded domains.
+
+### Sturm-Liouville theory
+Learn why orthogonal eigenfunction expansions work.
+
+### Fourier and Laplace transforms
+Learn whole-line and half-line methods.
+
+### Green's functions
+Learn point-source response and integral solution formulas.
+
+This progression is not arbitrary. It is the standard conceptual ascent from simple transport and propagation ideas to spectral and transform-based PDE theory.
+
+---
+
+## 34. Deep conceptual lessons of the subject
+
+A Strauss-style PDE course teaches several deep ideas.
+
+### 34.1 PDEs connect local laws to global structure
+
+A differential equation is local, but boundary and initial data determine the full solution.
+
+### 34.2 Geometry matters
+
+The shape of the domain influences the natural coordinates, eigenfunctions, and special functions.
+
+### 34.3 Spectral thinking is fundamental
+
+Many PDEs are solved by decomposing data into eigenmodes.
+
+### 34.4 Different PDE types have different personalities
+
+- hyperbolic equations propagate
+- parabolic equations smooth
+- elliptic equations equilibrate
+
+### 34.5 Boundary conditions are part of the physics
+
+They determine what the system is interacting with at the edges.
+
+### 34.6 Transform methods reveal hidden simplicity
+
+Differentiation becomes multiplication, and complicated PDEs become manageable algebra or ODEs.
+
+### 34.7 PDEs unify mathematics and physics
+
+The same techniques appear in mechanics, thermodynamics, electrodynamics, quantum theory, and geometry.
+
+---
+
+## 35. What to study next after Strauss
+
+After mastering this material, common next steps are:
+
+1. more rigorous functional analysis
+2. Sobolev spaces and weak derivatives
+3. distributions and generalized functions
+4. advanced elliptic theory
+5. advanced hyperbolic theory
+6. nonlinear conservation laws
+7. semigroup theory for evolution equations
+8. numerical PDE methods
+9. finite elements and finite differences
+10. mathematical physics applications
+
+A particularly valuable next step is learning weak formulations and the functional-analytic foundations of PDE theory.
+
+---
+
+## 36. Final takeaway
+
+The central idea of *Partial Differential Equations: An Introduction* is that many physical and mathematical systems are governed by local differential laws whose behavior is shaped by equation type, geometry, and boundary data.
+
+The subject begins with simple first-order transport and quickly opens into a unified theory built around:
+
+- characteristics
+- wave propagation
+- diffusion
+- equilibrium
+- Fourier methods
+- eigenfunction expansions
+- transforms
+- and Green's functions
+
+If you keep the following backbone in mind, the subject stays organized:
+
+1. Learn what PDE type you are dealing with.
+2. Understand the role of initial and boundary conditions.
+3. Match the method to the geometry and data.
+4. Use characteristics for first-order equations.
+5. Use separation and Fourier methods for bounded linear problems.
+6. Use transforms for infinite domains.
+7. Use Green's functions for forced linear problems.
+8. Always interpret the answer qualitatively: propagation, smoothing, or equilibrium.
+
+That is the Strauss PDE story in one line:
+
+**partial differential equations describe how local change in space and time produces global structure, and their solutions are organized by characteristics, eigenmodes, transforms, and boundary conditions.**
+`;function Ij(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Fj})})}function Lj(){let{id:e}=st(),t=at();return e?(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>t(`/appendices`),children:`← Back to Appendices`}),(0,L.jsxs)(`h1`,{children:[`Appendix `,e]})]}),(0,L.jsxs)(`div`,{className:`chapter1-content`,children:[e===`A`&&(0,L.jsx)(Sj,{}),e===`B`&&(0,L.jsx)(wj,{}),e===`C`&&(0,L.jsx)(Ej,{}),e===`D`&&(0,L.jsx)(Oj,{}),e===`E`&&(0,L.jsx)(Aj,{}),e===`F`&&(0,L.jsx)(Mj,{}),e===`G`&&(0,L.jsx)(Pj,{}),e===`H`&&(0,L.jsx)(Ij,{})]})]})}):(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`chapter1-container`,children:[(0,L.jsxs)(`div`,{className:`chapter1-header`,children:[(0,L.jsx)(`h1`,{children:`Appendices`}),(0,L.jsx)(`p`,{className:`appendices-intro`,children:`Supplementary mathematical reference materials`})]}),(0,L.jsx)(`div`,{className:`chapter1-content`,children:(0,L.jsx)(`div`,{className:`appendices-list`,children:[{id:`A`,title:`Quaternions and the Exponential Map`,description:`A rigorous introduction to quaternion algebra, exponential function on ℝ, ℂ, and ℍ, and Jacobian matrices`,topics:[`Quaternion Algebra ℍ`,`Exponential Function`,`Jacobian Matrix`,`3D Rotations`,`Lie Group Theory`]},{id:`B`,title:`Differential Geometry`,description:`A comprehensive introduction to manifolds, tangent spaces, metrics, connections, geodesics, and curvature`,topics:[`Manifolds`,`Tangent Vectors`,`Metric Tensor`,`Connections`,`Geodesics`,`Curvature`,`Differential Forms`]},{id:`C`,title:`Special Relativity`,description:`The geometry and physics of spacetime with the principle of relativity and constancy of the speed of light`,topics:[`Lorentz Transformations`,`4-Momentum`,`Time Dilation`,`Length Contraction`,`Mass-Energy Equivalence`]},{id:`D`,title:`Tensor Calculus`,description:`The language of coordinate-independent mathematics for vectors, tensors, and differential operators`,topics:[`Index Notation`,`Tensor Transformations`,`Covariant Derivative`,`Christoffel Symbols`,`Tensor Operations`]},{id:`E`,title:`Calculus of Variations`,description:`The mathematical framework for optimizing functionals, including Euler-Lagrange equations and geodesics`,topics:[`Functionals`,`Euler-Lagrange Equations`,`Lagrangian Mechanics`,`Geodesics`,`First Variation`]},{id:`F`,title:`Introduction to Electrodynamics`,description:`A compact study guide to vector analysis, electrostatics, magnetostatics, and Maxwell’s equations`,topics:[`Vector Analysis`,`Maxwell Equations`,`Lorentz Force`,`Electromagnetic Waves`,`Radiation`]},{id:`G`,title:`Introduction to Quantum Mechanics`,description:`A compact study guide to wave mechanics, observables, angular momentum, and scattering`,topics:[`Schrödinger Equation`,`Operators`,`Angular Momentum`,`Spin`,`Scattering`]},{id:`H`,title:`Partial Differential Equations`,description:`A compact crash course on first-order equations, classification, wave and heat equations, and Fourier methods`,topics:[`Characteristics`,`Classification`,`Wave Equation`,`Heat Equation`,`Fourier Series`]}].map(e=>(0,L.jsxs)(`div`,{className:`appendix-card`,onClick:()=>t(`/appendix/${e.id}`),children:[(0,L.jsxs)(`div`,{className:`appendix-badge`,children:[`Appendix `,e.id]}),(0,L.jsxs)(`div`,{className:`appendix-info`,children:[(0,L.jsx)(`h3`,{children:e.title}),(0,L.jsx)(`p`,{className:`appendix-description`,children:e.description}),(0,L.jsx)(`div`,{className:`appendix-topics`,children:e.topics.map(e=>(0,L.jsx)(`span`,{className:`appendix-tag`,children:e},e))})]}),(0,L.jsx)(`div`,{className:`appendix-arrow`,children:`→`})]},e.id))})})]})})}function Rj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`visualizations-page`,children:[(0,L.jsxs)(`div`,{className:`visualizations-header`,children:[(0,L.jsx)(`h1`,{children:`Unified MeshGrid System`}),(0,L.jsx)(`p`,{className:`visualizations-intro`,children:`Three levels of grid generation for visualizing coordinate systems and curved spacetime geometries`})]}),(0,L.jsxs)(`div`,{className:`comparison-matrix`,children:[(0,L.jsx)(`h2`,{children:`Comparison Matrix`}),(0,L.jsxs)(`table`,{children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`th`,{children:`Feature`}),(0,L.jsx)(`th`,{children:`Level 1`}),(0,L.jsx)(`th`,{children:`Level 2`}),(0,L.jsx)(`th`,{children:`Level 3`})]})}),(0,L.jsxs)(`tbody`,{children:[(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Embedding function`}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Metric tensor`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Proper distances`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Christoffel symbols`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Null geodesics`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Timelike geodesics`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Light bending`}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{}),(0,L.jsx)(`td`,{children:`✓`})]}),(0,L.jsxs)(`tr`,{children:[(0,L.jsx)(`td`,{children:`Complexity`}),(0,L.jsx)(`td`,{children:`Low`}),(0,L.jsx)(`td`,{children:`Medium`}),(0,L.jsx)(`td`,{children:`High`})]})]})]})]}),(0,L.jsx)(`div`,{className:`interactive-section`,children:(0,L.jsxs)(`div`,{className:`interactive-card`,onClick:()=>e(`/viz`),children:[(0,L.jsx)(`div`,{className:`interactive-icon`,children:`🔮`}),(0,L.jsxs)(`div`,{className:`interactive-content`,children:[(0,L.jsx)(`h3`,{children:`Interactive 3D Visualization`}),(0,L.jsx)(`p`,{children:`Explore coordinate systems and curved spacetime geometries in real-time with our interactive 3D viewer. Rotate, zoom, and pan to examine the grid from any angle.`}),(0,L.jsx)(`span`,{className:`launch-btn`,children:`Launch Interactive Viewer →`})]})]})}),(0,L.jsx)(`div`,{className:`levels-grid`,children:[{id:`level1`,path:`/visualization/level1`,title:`Level 1: Coordinate Grid`,subtitle:`Simple Embedding`,description:`Direct mapping from parameter space to 3D visualization using embedding functions. No metric awareness—just pure coordinate transformations.`,features:[`Embedding function (u,v,w) → (x,y,z)`,`Fixed coordinate curves`,`No metric awareness`,`Fast rendering`],useCases:[`Standard coordinate systems`,`Parametric surfaces`,`Quaternion visualizations`],complexity:`Low`,icon:`📐`},{id:`level2`,path:`/visualization/level2`,title:`Level 2: Metric-Aware Grid`,subtitle:`Proper Distances`,description:`Accounts for the metric tensor when drawing lines. Shows what the grid "actually looks like" in curved spacetime with proper distances.`,features:[`Metric tensor g_ij defines geometry`,`Proper distances along curves`,`Equidistant lines in actual geometry`,`Shows curvature effects`],useCases:[`Gravitational redshift visualization`,`Black hole spacetime`,`Cosmological metrics`],complexity:`Medium`,icon:`📏`},{id:`level3`,path:`/visualization/level3`,title:`Level 3: Geodesic Grid`,subtitle:`True Geodesics`,description:`Renders true geodesics—the straightest possible paths in curved spacetime. Shows how light and matter actually move.`,features:[`Christoffel symbols from metric`,`Numerically integrated geodesics`,`Null and timelike geodesics`,`Light bending visualization`],useCases:[`Gravitational lensing`,`Black hole physics`,`Orbital mechanics`],complexity:`High`,icon:`🌌`}].map(t=>(0,L.jsxs)(`div`,{className:`level-card`,onClick:()=>e(t.path),children:[(0,L.jsx)(`div`,{className:`level-icon`,children:t.icon}),(0,L.jsxs)(`div`,{className:`level-content`,children:[(0,L.jsx)(`h3`,{children:t.title}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:t.subtitle}),(0,L.jsx)(`p`,{className:`level-description`,children:t.description}),(0,L.jsxs)(`div`,{className:`level-section`,children:[(0,L.jsx)(`h4`,{children:`Key Features`}),(0,L.jsx)(`ul`,{children:t.features.map((e,t)=>(0,L.jsx)(`li`,{children:e},t))})]}),(0,L.jsxs)(`div`,{className:`level-section`,children:[(0,L.jsx)(`h4`,{children:`Use Cases`}),(0,L.jsx)(`ul`,{children:t.useCases.map((e,t)=>(0,L.jsx)(`li`,{children:e},t))})]}),(0,L.jsxs)(`div`,{className:`level-footer`,children:[(0,L.jsxs)(`span`,{className:`complexity-badge`,children:[`Complexity: `,t.complexity]}),(0,L.jsx)(`span`,{className:`read-more`,children:`Read documentation →`})]})]})]},t.id))})]})})}var zj=`# Level 1: Coordinate Grid
 
 ## Overview
 
@@ -14236,7 +23054,7 @@ function CoordinateComparison() {
 \`\`\`
 
 The spherical grid shows how the same physical space looks when parameterized differently—grid lines converge at the poles and the origin.
-`;function ij(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 1: Coordinate Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`Simple Embedding - Direct mapping from parameter space to 3D`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:rj})})]})})}var aj=`# Level 2: Metric-Aware Grid
+`;function Bj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 1: Coordinate Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`Simple Embedding - Direct mapping from parameter space to 3D`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:zj})})]})})}var Vj=`# Level 2: Metric-Aware Grid
 
 ## Overview
 
@@ -14534,7 +23352,7 @@ function MetricComparison() {
 \`\`\`
 
 The comparison reveals how mass curves spacetime—grid lines that would be equally spaced in flat space become distorted near a massive object.
-`;function oj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 2: Metric-Aware Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`Proper Distances - Accounting for curved spacetime geometry`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:aj})})]})})}var sj=`# Level 3: Geodesic Grid
+`;function Hj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 2: Metric-Aware Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`Proper Distances - Accounting for curved spacetime geometry`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Vj})})]})})}var Uj=`# Level 3: Geodesic Grid
 
 ## Overview
 
@@ -14906,4 +23724,4 @@ Optimization strategies:
 - Misner, Thorne, Wheeler: *Gravitation*, Chapter 13 (Geodesics)
 - Carroll: *Spacetime and Geometry*, Chapter 3
 - Hartle: *Gravity*, Chapter 9 (Geodesic equation)
-`;function cj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 3: Geodesic Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`True Geodesics - The straightest paths in curved spacetime`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:sj})})]})})}function lj(){return(0,L.jsx)(Op,{children:(0,L.jsx)(`div`,{className:`interactive-viz`,children:(0,L.jsx)(`div`,{className:`viz-container`,children:(0,L.jsx)(Dp,{})})})})}function uj(){return(0,L.jsx)(bn,{basename:`/mtw`,children:(0,L.jsxs)(Nt,{children:[(0,L.jsx)(jt,{path:`/`,element:(0,L.jsx)(kp,{})}),(0,L.jsx)(jt,{path:`/chapters`,element:(0,L.jsx)(Ap,{})}),(0,L.jsx)(jt,{path:`/chapter/1`,element:(0,L.jsx)(wA,{})}),(0,L.jsx)(jt,{path:`/chapter/2`,element:(0,L.jsx)(kA,{})}),(0,L.jsx)(jt,{path:`/chapter/3`,element:(0,L.jsx)(PA,{})}),(0,L.jsx)(jt,{path:`/chapter/4`,element:(0,L.jsx)(zA,{})}),(0,L.jsx)(jt,{path:`/chapter/5`,element:(0,L.jsx)(WA,{})}),(0,L.jsx)(jt,{path:`/appendices`,element:(0,L.jsx)(tj,{})}),(0,L.jsx)(jt,{path:`/appendix/:id`,element:(0,L.jsx)(tj,{})}),(0,L.jsx)(jt,{path:`/visualizations`,element:(0,L.jsx)(nj,{})}),(0,L.jsx)(jt,{path:`/visualization/level1`,element:(0,L.jsx)(ij,{})}),(0,L.jsx)(jt,{path:`/visualization/level2`,element:(0,L.jsx)(oj,{})}),(0,L.jsx)(jt,{path:`/visualization/level3`,element:(0,L.jsx)(cj,{})}),(0,L.jsx)(jt,{path:`/viz`,element:(0,L.jsx)(lj,{})})]})})}(0,_.createRoot)(document.getElementById(`root`)).render((0,L.jsx)(v.StrictMode,{children:(0,L.jsx)(uj,{})}));
+`;function Wj(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`level-page`,children:[(0,L.jsxs)(`div`,{className:`level-page-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/visualizations`),children:`← Back to Visualizations`}),(0,L.jsx)(`h1`,{children:`Level 3: Geodesic Grid`}),(0,L.jsx)(`p`,{className:`level-subtitle`,children:`True Geodesics - The straightest paths in curved spacetime`})]}),(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:Uj})})]})})}function Gj(){return(0,L.jsx)(Op,{children:(0,L.jsx)(`div`,{className:`interactive-viz`,children:(0,L.jsx)(`div`,{className:`viz-container`,children:(0,L.jsx)(Dp,{})})})})}function Kj(){return(0,L.jsx)(bn,{basename:`/mtw`,children:(0,L.jsxs)(Nt,{children:[(0,L.jsx)(jt,{path:`/`,element:(0,L.jsx)(kp,{})}),(0,L.jsx)(jt,{path:`/chapters`,element:(0,L.jsx)(Ap,{})}),(0,L.jsx)(jt,{path:`/chapter/1`,element:(0,L.jsx)(EA,{})}),(0,L.jsx)(jt,{path:`/chapter/2`,element:(0,L.jsx)(NA,{})}),(0,L.jsx)(jt,{path:`/chapter/3`,element:(0,L.jsx)(RA,{})}),(0,L.jsx)(jt,{path:`/chapter/4`,element:(0,L.jsx)(UA,{})}),(0,L.jsx)(jt,{path:`/chapter/5`,element:(0,L.jsx)(JA,{})}),(0,L.jsx)(jt,{path:`/chapter/6`,element:(0,L.jsx)(ej,{})}),(0,L.jsx)(jt,{path:`/chapter/7`,element:(0,L.jsx)(aj,{})}),(0,L.jsx)(jt,{path:`/chapter/8`,element:(0,L.jsx)(uj,{})}),(0,L.jsx)(jt,{path:`/chapter/9`,element:(0,L.jsx)(hj,{})}),(0,L.jsx)(jt,{path:`/chapter/10`,element:(0,L.jsx)(bj,{})}),(0,L.jsx)(jt,{path:`/appendices`,element:(0,L.jsx)(Lj,{})}),(0,L.jsx)(jt,{path:`/appendix/:id`,element:(0,L.jsx)(Lj,{})}),(0,L.jsx)(jt,{path:`/visualizations`,element:(0,L.jsx)(Rj,{})}),(0,L.jsx)(jt,{path:`/visualization/level1`,element:(0,L.jsx)(Bj,{})}),(0,L.jsx)(jt,{path:`/visualization/level2`,element:(0,L.jsx)(Hj,{})}),(0,L.jsx)(jt,{path:`/visualization/level3`,element:(0,L.jsx)(Wj,{})}),(0,L.jsx)(jt,{path:`/viz`,element:(0,L.jsx)(Gj,{})})]})})}(0,_.createRoot)(document.getElementById(`root`)).render((0,L.jsx)(v.StrictMode,{children:(0,L.jsx)(Kj,{})}));
