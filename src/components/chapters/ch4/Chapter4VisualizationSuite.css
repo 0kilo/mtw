@@ -1,0 +1,224 @@
+.chapter4-visual-suite {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chapter4-visual-suite-header {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 30%),
+    linear-gradient(315deg, rgba(124, 58, 237, 0.08), transparent 30%),
+    var(--surface);
+  text-align: left;
+}
+
+.chapter4-visual-suite-kicker,
+.chapter4-lab-kicker {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chapter4-visual-suite-header h2 {
+  margin: 0 0 0.65rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.chapter4-visual-suite-header p {
+  margin: 0;
+}
+
+.chapter4-visual-suite-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.chapter4-visual-suite-nav a {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--background);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.chapter4-lab {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  text-align: left;
+}
+
+.chapter4-lab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.chapter4-lab-header h3 {
+  margin: 0;
+}
+
+.chapter4-inline-control {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.chapter4-inline-control input[type='range'],
+.chapter4-inline-control select {
+  width: 100%;
+}
+
+.chapter4-inline-control select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.chapter4-lab-intro {
+  margin-bottom: 1rem;
+}
+
+.chapter4-dual-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.chapter4-svg-card,
+.chapter4-matrix-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.82), rgba(255, 255, 255, 0.98));
+  overflow: hidden;
+}
+
+.chapter4-panel-title {
+  padding: 0.85rem 1rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.chapter4-svg-card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chapter4-svg-label {
+  fill: var(--text-secondary);
+  font-size: 12px;
+}
+
+.chapter4-form-stack {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.chapter4-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.chapter4-form-pill {
+  min-width: 5.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chapter4-form-pill.surface {
+  background: #0f766e;
+}
+
+.chapter4-form-pill.tube {
+  background: #c2410c;
+}
+
+.chapter4-form-pill.cell {
+  background: #7c3aed;
+}
+
+.chapter4-form-value {
+  flex: 1;
+  text-align: right;
+  font-size: 0.92rem;
+}
+
+.chapter4-matrix-caption {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.chapter4-lab-notes {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.chapter4-note {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--background);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .chapter4-lab-header,
+  .chapter4-dual-panel {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .chapter4-lab-header {
+    justify-content: flex-start;
+  }
+
+  .chapter4-inline-control {
+    min-width: 0;
+  }
+
+  .chapter4-form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chapter4-form-value {
+    text-align: left;
+  }
+}

@@ -1,23 +1,18 @@
-# Task Plan: Fix Geodesic Graph
-
+# Task Plan: Chapter 10 Intuition Visualization
 ## Goal
-Make `src/components/graph/geodesic` render a correct level-3 visualization for the default Schwarzschild demo.
-
+Implement chapter 10 intuition visualization demos and wire them into the chapter 10 summary using the established chapter 1 pattern.
 ## Phases
-- [x] Phase 1: Inspect the geodesic pipeline and compare it with the chapter docs
-- [x] Phase 2: Patch the initial conditions / direction generation
-- [ ] Phase 3: Verify the graph in the browser
-- [ ] Phase 4: Summarize the fix and any remaining limitations
-
+- [x] Phase 1: Inspect chapter 10 content and reference pattern
+- [x] Phase 2: Decide chapter 10 demo set and file wiring
+- [x] Phase 3: Implement components and integrate chapter page
+- [x] Phase 4: Verify build/lint and summarize
 ## Key Questions
-1. Which part of the geodesic setup is producing the misleading display?
-2. What is the smallest code change that makes the default view match the intended demo?
-
+1. Which affine-geometry concepts need visual intuition support?
+2. How should the suite mirror the chapter 1 summary insertion pattern?
 ## Decisions Made
-- Use the existing geodesic helpers rather than introducing a new rendering path.
-
+- Chapter 10 should use four demos: geodesics and affine parameter, parallel transport, covariant derivative, and connection coefficients in polar coordinates.
+- The suite belongs in `Chapter10Summary.jsx` before the markdown, matching the chapter 1 insertion pattern.
 ## Errors Encountered
-- None.
-
+- One lint error from unescaped symbolic coefficient labels; resolved by rendering them as string literals.
 ## Status
-**Currently in Phase 3** - ready for visual verification of the updated Schwarzschild default view.
+**Complete** - Chapter 10 visualizations implemented, wired, and verified

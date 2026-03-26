@@ -3,12 +3,14 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import summaryContent from '../../../chapters/ch2/summary.md?raw'
+import Chapter2VisualizationSuite from './Chapter2VisualizationSuite'
 import 'katex/dist/katex.min.css'
 import './Chapters.css'
 
 function Chapter2Summary() {
   return (
     <div className="chapter-content">
+      <Chapter2VisualizationSuite />
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[rehypeKatex]}

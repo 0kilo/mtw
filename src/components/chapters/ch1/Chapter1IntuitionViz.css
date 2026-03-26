@@ -1,0 +1,124 @@
+.chapter1-intuition-viz {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.1), transparent 24%),
+    var(--surface);
+}
+
+.chapter1-intuition-copy {
+  max-width: 60rem;
+}
+
+.chapter1-intuition-kicker {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chapter1-intuition-copy h2 {
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
+.chapter1-intuition-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.chapter1-intuition-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 18rem));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.chapter1-intuition-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.chapter1-intuition-controls select,
+.chapter1-intuition-controls input[type='range'] {
+  width: 100%;
+}
+
+.chapter1-intuition-controls select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.chapter1-intuition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.chapter1-intuition-panel {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+}
+
+.chapter1-intuition-panel-header {
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chapter1-intuition-panel-header h3 {
+  margin: 0 0 0.35rem;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.chapter1-intuition-panel-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.chapter1-intuition-canvas {
+  height: 22rem;
+  min-height: 22rem;
+  background: #f8fafc;
+}
+
+.chapter1-intuition-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 900px) {
+  .chapter1-intuition-controls,
+  .chapter1-intuition-grid,
+  .chapter1-intuition-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter1-intuition-canvas {
+    height: 18rem;
+    min-height: 18rem;
+  }
+}
