@@ -1,0 +1,215 @@
+.appendix-e-visual-suite {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.appendix-e-markdown-block {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.appendix-e-lab {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.06), transparent 34%),
+    linear-gradient(315deg, rgba(194, 65, 12, 0.06), transparent 34%),
+    var(--surface);
+  text-align: left;
+}
+
+.appendix-e-lab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.appendix-e-kicker {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.appendix-e-lab-header h3 {
+  margin: 0;
+}
+
+.appendix-e-inline-control {
+  min-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.appendix-e-inline-control input[type='range'],
+.appendix-e-inline-control select {
+  width: 100%;
+}
+
+.appendix-e-inline-control select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.appendix-e-lab-intro {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.appendix-e-dual-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.appendix-e-svg-card,
+.appendix-e-matrix-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.82), rgba(255, 255, 255, 0.98));
+  overflow: hidden;
+}
+
+.appendix-e-panel-title {
+  padding: 0.85rem 1rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.appendix-e-svg-card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.appendix-e-svg-label {
+  fill: var(--text-secondary);
+  font-size: 12px;
+}
+
+.appendix-e-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.appendix-e-matrix-cell {
+  min-height: 4.5rem;
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.appendix-e-matrix-cell strong {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+}
+
+.appendix-e-matrix-cell span {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.appendix-e-matrix-cell.accent-teal {
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+.appendix-e-matrix-cell.accent-orange {
+  border-color: rgba(194, 65, 12, 0.25);
+}
+
+.appendix-e-matrix-cell.accent-indigo {
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+.appendix-e-matrix-cell.accent-slate {
+  border-color: rgba(71, 85, 105, 0.25);
+}
+
+.appendix-e-mini-plot {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+}
+
+.appendix-e-mini-plot-title {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.appendix-e-boundary-meter {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+}
+
+.appendix-e-meter-track {
+  height: 14px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.appendix-e-meter-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0f766e, #c2410c);
+}
+
+.appendix-e-meter-fill.is-zero {
+  background: linear-gradient(90deg, #0f766e, #14b8a6);
+}
+
+.appendix-e-meter-caption {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.appendix-e-lab-notes {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.appendix-e-note {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--background);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .appendix-e-lab-header,
+  .appendix-e-dual-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .appendix-e-inline-control {
+    min-width: 0;
+  }
+}

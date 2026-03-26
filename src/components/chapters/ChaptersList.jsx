@@ -56,6 +56,26 @@ function ChaptersList() {
       title: 'Affine Geometry',
       description: 'Geodesics, parallel transport, and covariant derivatives',
     },
+    {
+      number: 11,
+      title: 'Geodesic Deviation and Spacetime Curvature',
+      description: 'Tidal gravity, Riemann curvature, and normal coordinates',
+    },
+    {
+      number: 12,
+      title: 'Newtonian Gravity in the Language of Curved Spacetime',
+      description: 'Newton-Cartan geometry, Galilean frames, and geodesic deviation',
+    },
+    {
+      number: 13,
+      title: 'Riemannian Geometry: Metric as Foundation of All',
+      description: 'Local Lorentz metrics, compatible connections, and curvature symmetries',
+    },
+    {
+      number: 14,
+      title: 'Calculation of Curvature',
+      description: 'Metric-to-curvature workflows, Cartan forms, and worked examples',
+    },
   ]
 
   return (

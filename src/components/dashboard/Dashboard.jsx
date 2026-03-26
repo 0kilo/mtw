@@ -75,6 +75,34 @@ function Dashboard() {
       exercises: 17,
       topics: ['Geodesics', 'Parallel Transport', 'Covariant Derivative', 'Connection Coefficients'],
       status: 'complete'
+    },
+    {
+      number: 11,
+      title: 'Geodesic Deviation and Spacetime Curvature',
+      exercises: 12,
+      topics: ['Riemann Curvature', 'Geodesic Deviation', 'Tidal Gravity', 'Normal Coordinates'],
+      status: 'complete'
+    },
+    {
+      number: 12,
+      title: 'Newtonian Gravity in the Language of Curved Spacetime',
+      exercises: 10,
+      topics: ['Newton-Cartan Geometry', 'Galilean Frames', 'Poisson Equation', 'Inertial Forces'],
+      status: 'complete'
+    },
+    {
+      number: 13,
+      title: 'Riemannian Geometry: Metric as Foundation of All',
+      exercises: 15,
+      topics: ['Local Lorentz Metrics', 'Levi-Civita Connection', 'Curvature Symmetries', 'Weyl Tensor'],
+      status: 'complete'
+    },
+    {
+      number: 14,
+      title: 'Calculation of Curvature',
+      exercises: 18,
+      topics: ['Cartan Forms', 'Ricci Tensor', 'Einstein Tensor', 'Curvature Computation'],
+      status: 'complete'
     }
   ]
 
@@ -109,18 +137,18 @@ function Dashboard() {
         <section className="card">
           <h3>Chapters</h3>
           <div className="chapters-overview">
-            {chapters.map((chapter) => (
-              <div
-                key={chapter.number}
-                className="chapter-overview-item"
+          {chapters.map((chapter) => (
+            <div
+              key={chapter.number}
+              className="chapter-overview-item"
               onClick={() => navigate(`/chapter/${chapter.number}`)}
             >
-                <div className="chapter-badge">Ch {chapter.number}</div>
-                <div className="chapter-info">
-                  <h4>{chapter.title}</h4>
-                  <p className="chapter-topics">{chapter.topics.join(' • ')}</p>
-                  <span className="chapter-exercises">{chapter.exercises} exercises solved</span>
-                </div>
+              <div className="chapter-badge">Ch {chapter.number}</div>
+              <div className="chapter-info">
+                <h4>{chapter.title}</h4>
+                <p className="chapter-topics">{chapter.topics.join(' • ')}</p>
+                <span className="chapter-exercises">{chapter.exercises} exercises solved</span>
+              </div>
               <div className={`chapter-status ${chapter.status}`}>✓</div>
             </div>
           ))}
@@ -158,14 +186,14 @@ function Dashboard() {
           <div className="stat-card" onClick={() => navigate('/chapters')}>
             <div className="stat-icon">📖</div>
             <div className="stat-info">
-              <span className="stat-value">10</span>
+              <span className="stat-value">14</span>
               <span className="stat-label">Chapters</span>
             </div>
           </div>
           <div className="stat-card" onClick={() => navigate('/chapters')}>
             <div className="stat-icon">✏️</div>
             <div className="stat-info">
-              <span className="stat-value">91</span>
+              <span className="stat-value">146</span>
               <span className="stat-label">Exercises Solved</span>
             </div>
           </div>
@@ -179,7 +207,7 @@ function Dashboard() {
           <div className="stat-card" onClick={() => navigate('/appendices')}>
             <div className="stat-icon">📚</div>
             <div className="stat-info">
-              <span className="stat-value">5</span>
+              <span className="stat-value">8</span>
               <span className="stat-label">Appendices</span>
             </div>
           </div>

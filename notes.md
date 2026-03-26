@@ -1,34 +1,43 @@
-# Notes: Chapter 10 Intuition Visualization
+# Notes: Appendix D Tensor Calculus Intuition Visualization
 ## Sources
 
-### Source 1: src/chapters/ch10/summary.md
+### Source 1: src/chapters/tensor-calculus/tensor-calculus.md
 - Key points:
-  - Chapter 10 covers geodesics, affine parameters, parallel transport, covariant differentiation, and connection coefficients.
-  - Core visual anchors are geodesics as free-fall world lines, Schild's ladder / transport, the covariant derivative as transported difference, and polar-coordinate connection coefficients.
-  - The chapter emphasizes the equivalence between geodesics and parallel transport and the torsion-free symmetry relation.
+  - The chapter progresses from the big idea and index notation into transformation laws, dual bases, metrics, covariant derivatives, Christoffel symbols, geodesics, curvature, and worked polar-coordinate examples.
+  - Strong visual anchors are basis transformations, duality, metrics, contraction, Christoffel symbols, geodesics, curvature, and the distinction between coordinate and physical components.
 
-### Source 2: src/chapters/ch10/exercises.md
+### Source 2: src/components/chapters/appendix/AppendixD.jsx
 - Key points:
-  - Exercise 10.6 reinforces geodesic equation as parallel transport of the tangent.
-  - Exercise 10.7 through 10.9 reinforce connection coefficients and symmetry/torsion-free structure.
-  - Exercise 10.14 through 10.17 reinforce polar coordinates and the geodesic/connection link in simple geometries.
+  - Appendix D currently renders the markdown directly with `ReactMarkdown`.
+  - Inline insertion will require splitting the markdown into section-sized chunks and rendering visualization blocks between them.
 
 ### Source 3: src/components/chapters/ch1/Chapter1IntuitionViz.jsx and related files
 - Key points:
-  - Chapter 1 uses a top summary block, controls, paired visualization panels, and notes.
-  - The suite is inserted before markdown inside the summary tab.
+  - The chapter 1 visual style uses compact explanatory copy, paired panels, and short takeaway notes.
+  - The appendix visual blocks should follow the same visual language even though they are inserted inline.
 
 ## Synthesized Findings
 
-### Chapter 10 demo set
-- Build a chapter-specific visualization suite with four demos:
-  - geodesics and affine parameter as free-fall world lines
-  - parallel transport along a geodesic / Schild's ladder intuition
-  - covariant derivative as transported difference and geodesic recovery
-  - connection coefficients in a polar-coordinate basis
+### Appendix D demo set
+- Build a fuller inline set:
+  - tensors as coordinate-independent objects
+  - Einstein summation and contractions
+  - coordinate transformations with Jacobians
+  - basis and dual basis
+  - metric tensor and raising/lowering indices
+  - multilinear maps and tensor products
+  - symmetry, antisymmetry, Kronecker delta, and Levi-Civita symbol
+  - ordinary derivatives versus covariant derivatives
+  - Christoffel symbols and polar coordinates
+  - geodesics, curvature, torsion, and the Levi-Civita connection
+  - covariant conservation laws and common tensors
+  - coordinate components versus physical components
+  - tensor calculus versus vector calculus and differential forms
+  - workflow, mistakes, and the final memory map
 
 ### Placement
-- Insert the suite at the top of Chapter 10 summary content so it appears before the markdown.
+- Insert each visualization at the corresponding point in the appendix narrative, not as a top-level summary block.
+
 ### Verification
-- `npm run lint` passes.
-- `npm run build` passes.
+- `npm run lint` passed.
+- `npm run build` passed.

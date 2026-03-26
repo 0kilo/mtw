@@ -1,18 +1,18 @@
-# Task Plan: Chapter 10 Intuition Visualization
+# Task Plan: Appendix D Tensor Calculus Intuition Visualization
 ## Goal
-Implement chapter 10 intuition visualization demos and wire them into the chapter 10 summary using the established chapter 1 pattern.
+Implement inline intuition visualizations for Appendix D and insert them at the relevant points in the tensor-calculus crash-course page.
 ## Phases
-- [x] Phase 1: Inspect chapter 10 content and reference pattern
-- [x] Phase 2: Decide chapter 10 demo set and file wiring
-- [x] Phase 3: Implement components and integrate chapter page
+- [x] Phase 1: Inspect appendix content and reference pattern
+- [x] Phase 2: Decide appendix demo set and insertion points
+- [x] Phase 3: Implement inline visualization components and integrate Appendix D
 - [x] Phase 4: Verify build/lint and summarize
 ## Key Questions
-1. Which affine-geometry concepts need visual intuition support?
-2. How should the suite mirror the chapter 1 summary insertion pattern?
+1. Which tensor-calculus concepts need visual intuition support?
+2. Where should the demos be inserted so they align with the markdown flow?
 ## Decisions Made
-- Chapter 10 should use four demos: geodesics and affine parameter, parallel transport, covariant derivative, and connection coefficients in polar coordinates.
-- The suite belongs in `Chapter10Summary.jsx` before the markdown, matching the chapter 1 insertion pattern.
+- Appendix D should use an inline suite that covers scalars/vectors/covectors, Einstein summation, coordinate transformations, dual bases, metrics, tensor products, symmetry, covariant derivatives, polar-coordinate operators, geodesics/curvature, conservation laws, workflow, and the difference from vector calculus and differential forms.
+- The demos should be inserted between rendered markdown sections in `AppendixD.jsx` rather than as a top-level block.
 ## Errors Encountered
-- One lint error from unescaped symbolic coefficient labels; resolved by rendering them as string literals.
+- None yet.
 ## Status
-**Complete** - Chapter 10 visualizations implemented, wired, and verified
+**Complete** - Appendix D visualizations implemented and verified
