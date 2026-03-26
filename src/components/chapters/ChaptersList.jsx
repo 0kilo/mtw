@@ -5,6 +5,59 @@ import './ChaptersList.css'
 function ChaptersList() {
   const navigate = useNavigate()
 
+  const chapters = [
+    {
+      number: 1,
+      title: 'Geometrodynamics in Brief',
+      description: 'Gaussian curvature, geodesics, and tidal forces',
+    },
+    {
+      number: 2,
+      title: 'Foundations of Special Relativity',
+      description: 'Vectors, 1-forms, metric tensor, and Lorentz transforms',
+    },
+    {
+      number: 3,
+      title: 'The Electromagnetic Field',
+      description: 'Lorentz force, Faraday tensor, and Maxwell equations',
+    },
+    {
+      number: 4,
+      title: 'Electromagnetism and Differential Forms',
+      description: 'Exterior calculus, Faraday 2-form, and geometric Maxwell equations',
+    },
+    {
+      number: 5,
+      title: 'Stress-Energy Tensor and Conservation Laws',
+      description: 'Energy density, momentum flux, perfect fluids, and angular momentum',
+    },
+    {
+      number: 6,
+      title: 'Accelerated Observers',
+      description: 'Uniform acceleration, tetrads, and Fermi-Walker transport',
+    },
+    {
+      number: 7,
+      title: 'Incompatibility of Gravity and Special Relativity',
+      description: 'Scalar, vector, and tensor gravity plus gravitational redshift',
+    },
+    {
+      number: 8,
+      title: 'Differential Geometry: An Overview',
+      description: 'Tangent vectors, bases, commutators, and geometry language',
+    },
+    {
+      number: 9,
+      title: 'Differential Topology',
+      description: 'Tangent spaces, vector fields, and coordinate-free structure',
+    },
+    {
+      number: 10,
+      title: 'Affine Geometry',
+      description: 'Geodesics, parallel transport, and covariant derivatives',
+    },
+  ]
+
   return (
     <Layout>
       <div className="chapters-list">
@@ -12,51 +65,18 @@ function ChaptersList() {
         <p className="chapters-intro">Select a chapter to view exercises and solutions</p>
 
         <div className="chapter-cards">
-          <div
-            className="chapter-card"
-            onClick={() => navigate('/chapter/1')}
-          >
-            <div className="chapter-number">Chapter 1</div>
-            <h3>Geometrodynamics in Brief</h3>
-            <p>Gaussian curvature, geodesics, and tidal forces</p>
-            <span className="read-more">Read exercises →</span>
-          </div>
-          <div
-            className="chapter-card"
-            onClick={() => navigate('/chapter/2')}
-          >
-            <div className="chapter-number">Chapter 2</div>
-            <h3>Foundations of Special Relativity</h3>
-            <p>4-momentum, Lorentz transformations, and temperature gradients</p>
-            <span className="read-more">Read exercises →</span>
-          </div>
-          <div
-            className="chapter-card"
-            onClick={() => navigate('/chapter/3')}
-          >
-            <div className="chapter-number">Chapter 3</div>
-            <h3>The Electromagnetic Field</h3>
-            <p>Lorentz force, Faraday tensor, and Maxwell's equations</p>
-            <span className="read-more">Read exercises →</span>
-          </div>
-          <div
-            className="chapter-card"
-            onClick={() => navigate('/chapter/4')}
-          >
-            <div className="chapter-number">Chapter 4</div>
-            <h3>Electromagnetism and Differential Forms</h3>
-            <p>Exterior calculus, Faraday 2-form, and geometric Maxwell equations</p>
-            <span className="read-more">Read exercises →</span>
-          </div>
-          <div
-            className="chapter-card"
-            onClick={() => navigate('/chapter/5')}
-          >
-            <div className="chapter-number">Chapter 5</div>
-            <h3>Stress-Energy Tensor and Conservation Laws</h3>
-            <p>Energy density, momentum flux, perfect fluids, and angular momentum</p>
-            <span className="read-more">Read exercises →</span>
-          </div>
+          {chapters.map((chapter) => (
+            <div
+              key={chapter.number}
+              className="chapter-card"
+              onClick={() => navigate(`/chapter/${chapter.number}`)}
+            >
+              <div className="chapter-number">Chapter {chapter.number}</div>
+              <h3>{chapter.title}</h3>
+              <p>{chapter.description}</p>
+              <span className="read-more">Read exercises →</span>
+            </div>
+          ))}
         </div>
 
         <h2 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Appendices</h2>

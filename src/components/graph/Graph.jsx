@@ -23,7 +23,7 @@ function Graph() {
   const geoMetric = getMetric(geodesicMetric) || schwarzschildMetric
   const [geodesicType, setGeodesicType] = useState('null') // 'null' or 'timelike'
   const [nRays, setNRays] = useState(16)
-  const [geoPattern, setGeoPattern] = useState('spherical')
+  const [geoPattern, setGeoPattern] = useState('radial')
   const [geoSpeed, setGeoSpeed] = useState(0.5)
 
   // Range state - initialize based on level
@@ -262,7 +262,7 @@ function Graph() {
             <input
               type="range"
               min="1"
-              max="20"
+              max="40"
               step="1"
               value={resolution}
               onChange={(e) => setResolution(parseInt(e.target.value))}

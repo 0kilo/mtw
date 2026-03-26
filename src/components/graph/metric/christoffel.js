@@ -21,7 +21,7 @@ export function christoffel(metricFn, x) {
   let g
   try {
     g = metricFn(...x)
-  } catch (_e) {
+  } catch {
     // Return zero Christoffel if metric fails
     return [
       [[0, 0, 0], [0, 0, 0], [0, 0, 0]],

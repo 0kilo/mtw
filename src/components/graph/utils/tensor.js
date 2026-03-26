@@ -128,7 +128,7 @@ export function partial(gFn, x, k, h = 0.001) {
   try {
     gPlus = gFn(...xPlus)
     gMinus = gFn(...xMinus)
-  } catch (_e) {
+  } catch {
     return [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
   }
 

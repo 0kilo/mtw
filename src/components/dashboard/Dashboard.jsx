@@ -40,6 +40,41 @@ function Dashboard() {
       exercises: 6,
       topics: ['Stress-Energy Tensor', 'Perfect Fluids', 'Conservation Laws', 'Angular Momentum'],
       status: 'complete'
+    },
+    {
+      number: 6,
+      title: 'Accelerated Observers',
+      exercises: 9,
+      topics: ['Uniform Acceleration', 'Tetrads', 'Rindler Coordinates', 'Fermi-Walker Transport'],
+      status: 'complete'
+    },
+    {
+      number: 7,
+      title: 'Incompatibility of Gravity and Special Relativity',
+      exercises: 3,
+      topics: ['Scalar Gravity', 'Tensor Gravity', 'Redshift', 'Equivalence Principle'],
+      status: 'complete'
+    },
+    {
+      number: 8,
+      title: 'Differential Geometry: An Overview',
+      exercises: 2,
+      topics: ['Tangent Vectors', 'Commutators', 'Dual Bases', 'Rotation Groups'],
+      status: 'complete'
+    },
+    {
+      number: 9,
+      title: 'Differential Topology',
+      exercises: 14,
+      topics: ['Tangent Spaces', 'Lie Derivatives', 'Commutators', 'SO(3)'],
+      status: 'complete'
+    },
+    {
+      number: 10,
+      title: 'Affine Geometry',
+      exercises: 17,
+      topics: ['Geodesics', 'Parallel Transport', 'Covariant Derivative', 'Connection Coefficients'],
+      status: 'complete'
     }
   ]
 
@@ -78,17 +113,17 @@ function Dashboard() {
               <div
                 key={chapter.number}
                 className="chapter-overview-item"
-                onClick={() => navigate(`/chapter/${chapter.number}`)}
-              >
+              onClick={() => navigate(`/chapter/${chapter.number}`)}
+            >
                 <div className="chapter-badge">Ch {chapter.number}</div>
                 <div className="chapter-info">
                   <h4>{chapter.title}</h4>
                   <p className="chapter-topics">{chapter.topics.join(' • ')}</p>
                   <span className="chapter-exercises">{chapter.exercises} exercises solved</span>
                 </div>
-                <div className="chapter-status complete">✓</div>
-              </div>
-            ))}
+              <div className={`chapter-status ${chapter.status}`}>✓</div>
+            </div>
+          ))}
           </div>
         </section>
 
@@ -123,14 +158,14 @@ function Dashboard() {
           <div className="stat-card" onClick={() => navigate('/chapters')}>
             <div className="stat-icon">📖</div>
             <div className="stat-info">
-              <span className="stat-value">5</span>
+              <span className="stat-value">10</span>
               <span className="stat-label">Chapters</span>
             </div>
           </div>
           <div className="stat-card" onClick={() => navigate('/chapters')}>
             <div className="stat-icon">✏️</div>
             <div className="stat-info">
-              <span className="stat-value">46</span>
+              <span className="stat-value">91</span>
               <span className="stat-label">Exercises Solved</span>
             </div>
           </div>

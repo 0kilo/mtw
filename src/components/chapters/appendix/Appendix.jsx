@@ -5,6 +5,9 @@ import AppendixB from './AppendixB'
 import AppendixC from './AppendixC'
 import AppendixD from './AppendixD'
 import AppendixE from './AppendixE'
+import AppendixF from './AppendixF'
+import AppendixG from './AppendixG'
+import AppendixH from './AppendixH'
 import './Appendix.css'
 
 function Appendix() {
@@ -41,6 +44,24 @@ function Appendix() {
       title: 'Calculus of Variations',
       description: 'The mathematical framework for optimizing functionals, including Euler-Lagrange equations and geodesics',
       topics: ['Functionals', 'Euler-Lagrange Equations', 'Lagrangian Mechanics', 'Geodesics', 'First Variation']
+    },
+    {
+      id: 'F',
+      title: 'Introduction to Electrodynamics',
+      description: 'A compact study guide to vector analysis, electrostatics, magnetostatics, and Maxwell’s equations',
+      topics: ['Vector Analysis', 'Maxwell Equations', 'Lorentz Force', 'Electromagnetic Waves', 'Radiation']
+    },
+    {
+      id: 'G',
+      title: 'Introduction to Quantum Mechanics',
+      description: 'A compact study guide to wave mechanics, observables, angular momentum, and scattering',
+      topics: ['Schrödinger Equation', 'Operators', 'Angular Momentum', 'Spin', 'Scattering']
+    },
+    {
+      id: 'H',
+      title: 'Partial Differential Equations',
+      description: 'A compact crash course on first-order equations, classification, wave and heat equations, and Fourier methods',
+      topics: ['Characteristics', 'Classification', 'Wave Equation', 'Heat Equation', 'Fourier Series']
     }
   ]
 
@@ -61,6 +82,9 @@ function Appendix() {
             {id === 'C' && <AppendixC />}
             {id === 'D' && <AppendixD />}
             {id === 'E' && <AppendixE />}
+            {id === 'F' && <AppendixF />}
+            {id === 'G' && <AppendixG />}
+            {id === 'H' && <AppendixH />}
           </div>
         </div>
       </Layout>

@@ -6,6 +6,11 @@ import Chapter2 from './components/chapters/ch2/Chapter2'
 import Chapter3 from './components/chapters/ch3/Chapter3'
 import Chapter4 from './components/chapters/ch4/Chapter4'
 import Chapter5 from './components/chapters/ch5/Chapter5'
+import Chapter6 from './components/chapters/ch6/Chapter6'
+import Chapter7 from './components/chapters/ch7/Chapter7'
+import Chapter8 from './components/chapters/ch8/Chapter8'
+import Chapter9 from './components/chapters/ch9/Chapter9'
+import Chapter10 from './components/chapters/ch10/Chapter10'
 import Appendix from './components/chapters/appendix/Appendix'
 import Visualizations from './components/visualizations/Visualizations'
 import Level1Grid from './components/visualizations/Level1Grid'
@@ -24,6 +29,11 @@ function App() {
         <Route path="/chapter/3" element={<Chapter3 />} />
         <Route path="/chapter/4" element={<Chapter4 />} />
         <Route path="/chapter/5" element={<Chapter5 />} />
+        <Route path="/chapter/6" element={<Chapter6 />} />
+        <Route path="/chapter/7" element={<Chapter7 />} />
+        <Route path="/chapter/8" element={<Chapter8 />} />
+        <Route path="/chapter/9" element={<Chapter9 />} />
+        <Route path="/chapter/10" element={<Chapter10 />} />
         <Route path="/appendices" element={<Appendix />} />
         <Route path="/appendix/:id" element={<Appendix />} />
         <Route path="/visualizations" element={<Visualizations />} />

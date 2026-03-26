@@ -25,7 +25,7 @@ import { nullGeodesics, timelikeGeodesics } from './geodesic'
 function GeodesicGrid({
   metric,
   geodesicType = 'null',
-  origin = [5, Math.PI / 2, 0],
+  origin,
   nRays = 12,
   pattern = 'spherical',
   speed = 0.5,
@@ -38,6 +38,17 @@ function GeodesicGrid({
 
   const spatialMetric = metric?.spatial
   const embedding = metric?.embedding
+  const resolvedOrigin = useMemo(() => {
+    if (origin) return origin
+
+    if (metric?.type === 'curved') {
+      return geodesicType === 'timelike'
+        ? [8, Math.PI / 2, 0]
+        : [15, Math.PI / 2, 0]
+    }
+
+    return [5, Math.PI / 2, 0]
+  }, [origin, metric?.type, geodesicType])
 
   // Compute geodesic paths
   const geodesicPaths = useMemo(() => {
@@ -47,14 +58,14 @@ function GeodesicGrid({
 
     if (geodesicType === 'null') {
       // Compute null geodesics (light paths)
-      paths = nullGeodesics(spatialMetric, origin, nRays, pattern, {
+      paths = nullGeodesics(spatialMetric, resolvedOrigin, nRays, pattern, {
         maxSteps,
         minRadius: 2.1, // Outside Schwarzschild radius
         maxRadius: 30,
       })
     } else {
       // Compute timelike geodesics (particle trajectories)
-      paths = timelikeGeodesics(spatialMetric, origin, nRays, pattern, speed, {
+      paths = timelikeGeodesics(spatialMetric, resolvedOrigin, nRays, pattern, speed, {
         maxSteps,
         minRadius: 2.5,
         maxRadius: 25,
@@ -68,7 +79,7 @@ function GeodesicGrid({
         return new THREE.Vector3(x, y, z)
       })
     )
-  }, [spatialMetric, embedding, geodesicType, origin, nRays, pattern, speed, maxSteps])
+  }, [spatialMetric, embedding, geodesicType, resolvedOrigin, nRays, pattern, speed, maxSteps])
 
   useEffect(() => {
     if (!containerRef.current || geodesicPaths.length === 0) return
@@ -122,7 +133,7 @@ function GeodesicGrid({
     scene.add(geodesicsGroup)
 
     // Add origin marker
-    const originPoint = embedding(...origin)
+    const originPoint = embedding(...resolvedOrigin)
     const originGeom = new THREE.SphereGeometry(0.3, 16, 16)
     const originMat = new THREE.MeshBasicMaterial({ color: 0xffffff })
     const originMesh = new THREE.Mesh(originGeom, originMat)
@@ -196,7 +207,7 @@ function GeodesicGrid({
         horizonMat.dispose()
       }
     }
-  }, [geodesicPaths, embedding, metric, lineColor, showAxes, axisSize, origin])
+  }, [geodesicPaths, embedding, metric, lineColor, showAxes, axisSize, resolvedOrigin])
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%' }} />

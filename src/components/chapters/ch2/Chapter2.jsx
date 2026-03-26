@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../../layout/Layout'
 import Chapter2Summary from './Chapter2Summary'
 import Chapter2Exercises from './Chapter2Exercises'
+import Chapter2Boxes from './Chapter2Boxes'
 import './Chapter2.css'
 
 function Chapter2() {
@@ -25,6 +26,12 @@ function Chapter2() {
               Summary
             </button>
             <button
+              className={`tab ${activeTab === 'boxes' ? 'active' : ''}`}
+              onClick={() => setActiveTab('boxes')}
+            >
+              Boxes
+            </button>
+            <button
               className={`tab ${activeTab === 'exercises' ? 'active' : ''}`}
               onClick={() => setActiveTab('exercises')}
             >
@@ -35,6 +42,7 @@ function Chapter2() {
 
         <div className="chapter2-content">
           {activeTab === 'summary' && <Chapter2Summary />}
+          {activeTab === 'boxes' && <Chapter2Boxes />}
           {activeTab === 'exercises' && <Chapter2Exercises />}
         </div>
       </div>
