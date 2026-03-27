@@ -19325,14 +19325,87 @@ The present Khantraction program remains limited in several important ways:
 
 These limitations are substantial, and they define the current epistemic status of the project.
 
+## Ordered quaternionic state map
+A promising new structural idea is to move beyond raw quaternion components and instead parameterize the internal state by an ordered quaternionic map
+
+$
+Q(\\omega,\\theta,\\phi,\\rho)=e^{\\omega}e^{\\theta i}e^{\\phi j}e^{\\rho k}.
+$
+
+This should **not** be read as the naive commuting identity
+
+$
+e^{\\omega+\\theta i+\\phi j+\\rho k}=e^{\\omega}e^{\\theta i}e^{\\phi j}e^{\\rho k},
+$
+
+since quaternion units do not commute. It is better interpreted as an **ordered factorized quaternionic state construction**.
+
+Using
+
+$
+e^{\\theta i}=\\cos\\theta+i\\sin\\theta,
+\\qquad
+e^{\\phi j}=\\cos\\phi+j\\sin\\phi,
+\\qquad
+e^{\\rho k}=\\cos\\rho+k\\sin\\rho,
+$
+
+and the quaternion multiplication rules
+
+$
+ij=k,
+\\qquad
+jk=i,
+\\qquad
+ki=j,
+$
+
+one obtains the explicit component form
+
+$
+Q=e^{\\omega}(a+bi+cj+dk),
+$
+
+with
+
+$
+a=\\cos\\theta\\cos\\phi\\cos\\rho-\\sin\\theta\\sin\\phi\\sin\\rho,
+$
+
+$
+b=\\sin\\theta\\cos\\phi\\cos\\rho+\\cos\\theta\\sin\\phi\\sin\\rho,
+$
+
+$
+c=\\cos\\theta\\sin\\phi\\cos\\rho-\\sin\\theta\\cos\\phi\\sin\\rho,
+$
+
+$
+d=\\cos\\theta\\cos\\phi\\sin\\rho+\\sin\\theta\\sin\\phi\\cos\\rho.
+$
+
+This makes the ordered state map an explicit nonlinear coordinate map from
+
+$
+(\\omega,\\theta,\\phi,\\rho)
+$
+
+to the quaternion components
+
+$
+(x_0,x_1,x_2,x_3)=(e^{\\omega}a,e^{\\omega}b,e^{\\omega}c,e^{\\omega}d).
+$
+
+Its Jacobian is potentially interesting for Khantraction because it may organize branch sensitivity, transport structure, and fluctuation coordinates more cleanly than raw component variables alone. At present this is still a promising geometric/state-space construction rather than an established dynamical law.
+
 ## Future directions
 - characterize the scalar-to-quaternion branch family more sharply,
 - strengthen stability analysis along the family,
 - compute additional curvature and branch invariants,
-- sharpen the quaternion-geometry correspondence,
+- test whether the ordered quaternionic state map organizes branch observables or fluctuation structure more cleanly,
 - and investigate whether more intrinsically quaternionic transport formulations can make quaternion direction—not just quaternion magnitude—dynamically relevant.
 
-In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, and a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior—not yet as an established theory of particles.
+In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior, and now a potentially useful ordered quaternionic state-space construction—not yet as an established theory of particles.
 `;function EN(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:TN})})}function DN(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`khantraction-page`,children:[(0,L.jsxs)(`div`,{className:`khantraction-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/chapters`),children:`← Back to Chapters`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h1`,{children:`Khantraction: Spacetime Knot Research`}),(0,L.jsx)(`p`,{className:`khantraction-tagline`,children:`Quaternion glue, photon limits, and the numerical profile that ties another knot between geometry and quantum mechanics.`})]})]}),(0,L.jsx)(`div`,{className:`khantraction-content`,children:(0,L.jsx)(EN,{})})]})})}var ON=`**Quaternions and the Exponential Map: A Rigorous Introduction**
 
 **Generated March 20, 2026**
