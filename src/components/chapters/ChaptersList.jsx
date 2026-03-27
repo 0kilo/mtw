@@ -99,6 +99,17 @@ function ChaptersList() {
           ))}
         </div>
 
+        <h2 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Research Notes</h2>
+        <p className="chapters-intro">Ongoing explorations and conceptual threads beyond the textbook.</p>
+        <div className="chapter-cards research-grid">
+          <div className="chapter-card research-card" onClick={() => navigate('/khantraction')}>
+            <div className="chapter-number">Research</div>
+            <h3>Khantraction: Spacetime Knots</h3>
+            <p>Quaternion glue, photon/electron limits, and numerical evidence for localized curvature pockets.</p>
+            <span className="read-more">Read the research brief →</span>
+          </div>
+        </div>
+
         <h2 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Appendices</h2>
         <p className="chapters-intro">Supplementary mathematical reference materials</p>
 

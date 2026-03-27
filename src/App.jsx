@@ -15,6 +15,7 @@ import Chapter11 from './components/chapters/ch11/Chapter11'
 import Chapter12 from './components/chapters/ch12/Chapter12'
 import Chapter13 from './components/chapters/ch13/Chapter13'
 import Chapter14 from './components/chapters/ch14/Chapter14'
+import Khantraction from './components/chapters/khantraction/Khantraction'
 import Appendix from './components/chapters/appendix/Appendix'
 import Visualizations from './components/visualizations/Visualizations'
 import Level1Grid from './components/visualizations/Level1Grid'
@@ -42,6 +43,7 @@ function App() {
         <Route path="/chapter/12" element={<Chapter12 />} />
         <Route path="/chapter/13" element={<Chapter13 />} />
         <Route path="/chapter/14" element={<Chapter14 />} />
+        <Route path="/khantraction" element={<Khantraction />} />
         <Route path="/appendices" element={<Appendix />} />
         <Route path="/appendix/:id" element={<Appendix />} />
         <Route path="/visualizations" element={<Visualizations />} />

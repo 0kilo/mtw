@@ -508,3 +508,36 @@
     display: none;
   }
 }
+.research-section {
+  margin-top: 1.5rem;
+}
+
+.research-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(23, 52, 109, 0.4);
+  background: rgba(99, 102, 241, 0.05);
+  cursor: pointer;
+}
+
+.research-card:hover {
+  border-color: var(--primary);
+}
+
+.research-icon {
+  font-size: 2rem;
+}
+
+.research-details h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.research-details p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}

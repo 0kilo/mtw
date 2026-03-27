@@ -1,0 +1,117 @@
+.chapter-content {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.chapter-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.chapter-content h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.chapter-content h3 {
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.chapter-content p {
+  margin: 1rem 0;
+  color: var(--text-secondary);
+}
+
+.chapter-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.chapter-content code {
+  font-family: var(--mono);
+  background: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+.chapter-content pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.chapter-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.chapter-content ul, .chapter-content ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+  color: var(--text-secondary);
+}
+
+.chapter-content li {
+  margin: 0.5rem 0;
+}
+
+.chapter-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.chapter-content th, .chapter-content td {
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chapter-content th {
+  background: var(--background);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chapter-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.chapter-content blockquote {
+  border-left: 4px solid var(--primary);
+  margin: 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: var(--text-secondary);
+  background: var(--background);
+  border-radius: 0 8px 8px 0;
+}
+
+.chapter-content .summary-table {
+  margin-top: 2rem;
+}
+
+/* KaTeX styles */
+.chapter-content .katex {
+  font-size: 1.1em;
+}
+
+.chapter-content .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5em 0;
+  margin: 1em 0;
+}

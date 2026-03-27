@@ -99,3 +99,11 @@
     grid-template-columns: 1fr;
   }
 }
+.research-grid {
+  margin-bottom: 1rem;
+}
+
+.research-card {
+  background: linear-gradient(135deg, rgba(23, 52, 109, 0.05), rgba(15, 24, 42, 0.05));
+  border-color: rgba(23, 52, 109, 0.2);
+}

@@ -181,6 +181,18 @@ function Dashboard() {
           </button>
         </section>
 
+        <section className="card research-section">
+          <h3>Research Notes</h3>
+          <div className="research-card" onClick={() => navigate('/khantraction')}>
+            <div className="research-icon">🪢</div>
+            <div className="research-details">
+              <h4>Khantraction Knot</h4>
+              <p>Quaternion glue, photon limits, and the numerical profile for a spacetime knot.</p>
+            </div>
+            <span className="read-more">View summary →</span>
+          </div>
+        </section>
+
         {/* Quick Stats */}
         <section className="stats-grid">
           <div className="stat-card" onClick={() => navigate('/chapters')}>
