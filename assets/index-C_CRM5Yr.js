@@ -19162,9 +19162,10 @@ The rope-and-knot picture remains heuristic: a localized fold persists while spa
 ## Executive summary
 1. **Quaternion-valued toy model:** Khantraction models a localized contraction using a quaternion-valued field $q=s+\\vec v\\cdot\\vec\\tau$ with norm $|q|^2=s^2+\\vec v\\cdot\\vec v$, together with a quartic self-interaction and curvature coupling.
 2. **Reduced radial model:** Early numerical work on a reduced static radial system showed that the toy equations can support regular localized-looking profiles over the integration domain.
-3. **Strongest current result:** The fuller four-component norm-based quaternion model supports a **continuous family of regular radial solutions** connecting a scalar-dominated regime to a strongly quaternion-rich regime.
-4. **What grows along the family:** As quaternion richness increases, the branch also shows increasing final mass, increasing integrated curvature magnitude, and increasing exponential-quaternion vector content.
-5. **What is still missing:** The model remains a toy theory; it does not yet derive real particle properties, full stability, or experimentally relevant predictions.
+3. **Strongest current branch result:** The fuller four-component norm-based quaternion model supports a **continuous family of regular radial solutions** connecting a scalar-dominated regime to a strongly quaternion-rich regime.
+4. **New structural result:** These branches are also accurately described by an **ordered quaternionic state map** whose quaternion-rich regime occupies a dominant locked internal-angle sector.
+5. **Why that matters:** This locked sector is now the best current candidate for a branch-specific proto-excitation structure in the model.
+6. **What is still missing:** The model remains a toy theory; it does not yet derive real particle properties, full stability, or experimentally relevant predictions.
 
 ## Quaternion-valued toy field theory
 The toy-model glue Lagrangian is
@@ -19326,7 +19327,7 @@ The present Khantraction program remains limited in several important ways:
 These limitations are substantial, and they define the current epistemic status of the project.
 
 ## Ordered quaternionic state map
-A promising new structural idea is to move beyond raw quaternion components and instead parameterize the internal state by an ordered quaternionic map
+A major new structural result is that one can move beyond raw quaternion components and instead parameterize the internal state by an ordered quaternionic map
 
 $
 Q(\\omega,\\theta,\\phi,\\rho)=e^{\\omega}e^{\\theta i}e^{\\phi j}e^{\\rho k}.
@@ -19396,16 +19397,30 @@ $
 (x_0,x_1,x_2,x_3)=(e^{\\omega}a,e^{\\omega}b,e^{\\omega}c,e^{\\omega}d).
 $
 
-Its Jacobian is potentially interesting for Khantraction because it may organize branch sensitivity, transport structure, and fluctuation coordinates more cleanly than raw component variables alone. At present this is still a promising geometric/state-space construction rather than an established dynamical law.
+Direct numerical fits now show that this ordered state map describes both scalar and quaternion-rich branch data accurately. More importantly, branchwise tracking and neighborhood fits indicate that the quaternion-rich regime settles into a dominant locked ordered-angle sector approximately equivalent to
+
+$
+\\theta\\approx \\pi,
+\\qquad
+\\phi\\approx -\\frac{\\pi}{2},
+\\qquad
+\\rho\\approx +\\frac{\\pi}{2},
+$
+
+up to periodic branch ambiguities. Locked-sector scans find one dominant best-fit sector together with weaker alternate sectors that are currently better interpreted as residual parameterization degeneracies than as true species-like branches.
+
+When this ordered-state result is combined with the pre-existing radial-mode proxy analysis, the strongest current interpretation is that the locked sector is the internal-state location of the model's most distinctive fluctuation anisotropy. That does not yet yield a true particle spectrum, but it does make the ordered state map more than just a convenient change of variables.
 
 ## Future directions
 - characterize the scalar-to-quaternion branch family more sharply,
 - strengthen stability analysis along the family,
 - compute additional curvature and branch invariants,
-- test whether the ordered quaternionic state map organizes branch observables or fluctuation structure more cleanly,
+- derive fluctuation equations directly in ordered-state variables,
+- determine whether the dominant locked sector supports sharper excitation hierarchy or near-discrete structure,
+- resolve the weaker alternate sectors more rigorously,
 - and investigate whether more intrinsically quaternionic transport formulations can make quaternion direction—not just quaternion magnitude—dynamically relevant.
 
-In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior, and now a potentially useful ordered quaternionic state-space construction—not yet as an established theory of particles.
+In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior, and now a fitted ordered-state description in which the quaternion-rich regime occupies a dominant locked internal sector—not yet as an established theory of particles.
 `;function EN(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:TN})})}function DN(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`khantraction-page`,children:[(0,L.jsxs)(`div`,{className:`khantraction-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/chapters`),children:`← Back to Chapters`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h1`,{children:`Khantraction: Spacetime Knot Research`}),(0,L.jsx)(`p`,{className:`khantraction-tagline`,children:`Quaternion glue, photon limits, and the numerical profile that ties another knot between geometry and quantum mechanics.`})]})]}),(0,L.jsx)(`div`,{className:`khantraction-content`,children:(0,L.jsx)(EN,{})})]})})}var ON=`**Quaternions and the Exponential Map: A Rigorous Introduction**
 
 **Generated March 20, 2026**
