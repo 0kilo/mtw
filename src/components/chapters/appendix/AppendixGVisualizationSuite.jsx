@@ -965,7 +965,7 @@ function AppendixGVisualizationSuite({ markdown }) {
   return (
     <div className="appendix-g-visual-suite">
       {blocks.map((block) => {
-        if (block.type === 'markdown') {
+        if (typeof block.number !== 'number') {
           return <SectionMarkdown key={block.key} blockKey={block.key} content={block.content} />
         }
 
