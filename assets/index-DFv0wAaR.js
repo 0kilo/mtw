@@ -19413,7 +19413,11 @@ When this ordered-state result is combined with the pre-existing radial-mode pro
 
 The newest soft-mode results sharpen the picture further: the dominant soft fluctuation of the quaternion-rich locked sector is overwhelmingly a $\\theta$-type internal angular mode rather than a breathing-like scale mode, and a first radial $\\theta$-channel proxy suggests a small stiff core together with a broadly soft internal region across most of the object.
 
-This makes the richest branches look less like literal point-particle candidates and more like **compact structured spacetime-fold objects** with particle-like external behavior and nontrivial internal geometry.
+The spin-like story has also become stronger. The rich family now appears to occupy a single chirality class in ordered-state space, mirrored-sector tests have not produced a competitive opposite-handed partner family, and opposite angular deviations around the locked sector produce asymmetric responses, especially in the dominant $\\theta$-channel. A radial chiral-response map suggests that this chirality is globally present but most strongly anchored in the inner core.
+
+Charge is better interpreted more modestly: not as something the folded geometry intrinsically creates from nothing, but as content that may be **externally induced** and then hosted or stabilized by the structured object. In that framing, the current model already shows a first weak but systematic sign-sensitive hosting asymmetry, again strongest near the core and weaker through the bulk.
+
+This makes the richest branches look less like literal point-particle candidates and more like **compact structured spacetime-fold objects** with particle-like external behavior, nontrivial internal geometry, emerging spin-like chirality, and early charge-hosting behavior under external induction.
 
 ## Future directions
 - characterize the scalar-to-quaternion branch family more sharply,
