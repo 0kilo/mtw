@@ -19417,18 +19417,21 @@ The spin-like story has also become stronger. The rich family now appears to occ
 
 Charge is better interpreted more modestly: not as something the folded geometry intrinsically creates from nothing, but as content that may be **externally induced** and then hosted or stabilized by the structured object. In that framing, the current model already shows a first weak but systematic sign-sensitive hosting asymmetry, again strongest near the core and weaker through the bulk.
 
-This makes the richest branches look less like literal point-particle candidates and more like **compact structured spacetime-fold objects** with particle-like external behavior, nontrivial internal geometry, emerging spin-like chirality, and early charge-hosting behavior under external induction.
+The newest quantum-facing result is a first refined proto-spectrum in the dominant soft $\\theta$-channel. A denser radial shooting scan reveals multiple resonance-like candidate minima, and the leading candidates shift under both opposite chiral perturbation directions and opposite signed induced loading directions. So while Khantraction does not yet have a true quantum spectrum, its richest structured object now appears to possess a chirality-sensitive and loading-sensitive proto-spectrum.
+
+This makes the richest branches look less like literal point-particle candidates and more like **compact structured spacetime-fold objects** with particle-like external behavior, nontrivial internal geometry, emerging spin-like chirality, early charge-hosting behavior under external induction, and the first hints of a property-sensitive internal excitation landscape.
 
 ## Future directions
 - characterize the scalar-to-quaternion branch family more sharply,
 - strengthen stability analysis along the family,
 - compute additional curvature and branch invariants,
-- derive fluctuation equations directly in ordered-state variables,
-- determine whether the dominant locked sector supports sharper excitation hierarchy or near-discrete structure,
+- derive sharper fluctuation equations directly in ordered-state variables,
+- determine whether the current proto-spectrum survives improved operators and boundary conditions,
+- test whether chirality- and loading-sensitive spectral shifts remain under stronger formulations,
 - resolve the weaker alternate sectors more rigorously,
 - and investigate whether more intrinsically quaternionic transport formulations can make quaternion direction—not just quaternion magnitude—dynamically relevant.
 
-In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior, and now a fitted ordered-state description in which the quaternion-rich regime occupies a dominant locked internal sector—not yet as an established theory of particles.
+In short: Khantraction is currently best viewed as an intriguing quaternion-valued toy model with real equations, real code, a continuous family of regular radial solutions ranging from scalar-dominated to quaternion-rich behavior, and now a fitted ordered-state description in which the quaternion-rich regime occupies a dominant locked internal sector with the first hints of a chirality-sensitive and loading-sensitive proto-spectrum—not yet as an established theory of particles.
 `;function EN(){return(0,L.jsx)(`div`,{className:`chapter-content`,children:(0,L.jsx)(mb,{remarkPlugins:[xE,yA],rehypePlugins:[bD],children:TN})})}function DN(){let e=at();return(0,L.jsx)(Op,{children:(0,L.jsxs)(`div`,{className:`khantraction-page`,children:[(0,L.jsxs)(`div`,{className:`khantraction-header`,children:[(0,L.jsx)(`button`,{className:`back-button`,onClick:()=>e(`/chapters`),children:`← Back to Chapters`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h1`,{children:`Khantraction: Spacetime Knot Research`}),(0,L.jsx)(`p`,{className:`khantraction-tagline`,children:`Quaternion glue, photon limits, and the numerical profile that ties another knot between geometry and quantum mechanics.`})]})]}),(0,L.jsx)(`div`,{className:`khantraction-content`,children:(0,L.jsx)(EN,{})})]})})}var ON=`**Quaternions and the Exponential Map: A Rigorous Introduction**
 
 **Generated March 20, 2026**
