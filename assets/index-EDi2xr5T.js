@@ -19411,6 +19411,10 @@ up to periodic branch ambiguities. Locked-sector scans find one dominant best-fi
 
 When this ordered-state result is combined with the pre-existing radial-mode proxy analysis, the strongest current interpretation is that the locked sector is the internal-state location of the model's most distinctive fluctuation anisotropy. That does not yet yield a true particle spectrum, but it does make the ordered state map more than just a convenient change of variables.
 
+The newest soft-mode results sharpen the picture further: the dominant soft fluctuation of the quaternion-rich locked sector is overwhelmingly a $\\theta$-type internal angular mode rather than a breathing-like scale mode, and a first radial $\\theta$-channel proxy suggests a small stiff core together with a broadly soft internal region across most of the object.
+
+This makes the richest branches look less like literal point-particle candidates and more like **compact structured spacetime-fold objects** with particle-like external behavior and nontrivial internal geometry.
+
 ## Future directions
 - characterize the scalar-to-quaternion branch family more sharply,
 - strengthen stability analysis along the family,
