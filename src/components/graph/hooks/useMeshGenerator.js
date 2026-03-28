@@ -7,9 +7,10 @@ import * as THREE from 'three'
  * @param {Function} embedding - (u, v, w) => [x, y, z]
  * @param {Array} ranges - [[uMin, uMax], [vMin, vMax], [wMin, wMax]]
  * @param {number} resolution - Grid density (divisions per unit range)
+ * @param {Array} embeddingArgs - Additional fixed embedding parameters
  * @returns {Array<THREE.Line>} Array of line objects
  */
-export function useMeshGenerator(embedding, ranges, resolution = 10) {
+export function useMeshGenerator(embedding, ranges, resolution = 10, embeddingArgs = []) {
   return useMemo(() => {
     if (!embedding || !ranges) return []
 
@@ -20,9 +21,9 @@ export function useMeshGenerator(embedding, ranges, resolution = 10) {
     const vSpan = vMax - vMin
     const wSpan = wMax - wMin
 
-    const uDivisions = Math.max(2, Math.round(resolution * uSpan / 10))
-    const vDivisions = Math.max(2, Math.round(resolution * vSpan / 10))
-    const wDivisions = Math.max(2, Math.round(resolution * wSpan / 10))
+    const uDivisions = Math.max(2, Math.round(resolution * uSpan))
+    const vDivisions = Math.max(2, Math.round(resolution * vSpan))
+    const wDivisions = Math.max(2, Math.round(resolution * wSpan))
 
     const uStep = uSpan / uDivisions
     const vStep = vSpan / vDivisions
@@ -39,7 +40,7 @@ export function useMeshGenerator(embedding, ranges, resolution = 10) {
 
         for (let i = 0; i <= uDivisions; i++) {
           const u = uMin + i * uStep
-          const [x, y, z] = embedding(u, v, w)
+          const [x, y, z] = embedding(u, v, w, ...embeddingArgs)
           points.push(new THREE.Vector3(x, y, z))
         }
 
@@ -61,7 +62,7 @@ export function useMeshGenerator(embedding, ranges, resolution = 10) {
 
         for (let j = 0; j <= vDivisions; j++) {
           const v = vMin + j * vStep
-          const [x, y, z] = embedding(u, v, w)
+          const [x, y, z] = embedding(u, v, w, ...embeddingArgs)
           points.push(new THREE.Vector3(x, y, z))
         }
 
@@ -83,7 +84,7 @@ export function useMeshGenerator(embedding, ranges, resolution = 10) {
 
         for (let k = 0; k <= wDivisions; k++) {
           const w = wMin + k * wStep
-          const [x, y, z] = embedding(u, v, w)
+          const [x, y, z] = embedding(u, v, w, ...embeddingArgs)
           points.push(new THREE.Vector3(x, y, z))
         }
 
@@ -97,7 +98,7 @@ export function useMeshGenerator(embedding, ranges, resolution = 10) {
     }
 
     return lines
-  }, [embedding, ranges, resolution])
+  }, [embedding, ranges, resolution, embeddingArgs])
 }
 
 /**

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import MeshGrid from './MeshGrid'
 import MetricGrid from './MetricGrid'
 import GeodesicGrid from './GeodesicGrid'
@@ -31,6 +31,8 @@ function Graph() {
     gridLevel === 1 ? coordinate.ranges : metric.ranges
   )
 
+  const [tValue, setTValue] = useState(() => coordinate.bounds?.omega?.default ?? 1)
+
   // Resolution
   const [resolution, setResolution] = useState(10)
 
@@ -57,6 +59,7 @@ function Graph() {
     const coord = getCoordinateSystem(newSystem)
     if (coord) {
       setRanges(coord.ranges)
+      setTValue(coord.bounds?.omega?.default ?? 1)
     }
     setCoordinateSystem(newSystem)
   }
@@ -84,6 +87,12 @@ function Graph() {
   const bounds = currentConfig.bounds || {}
   const paramNames = currentConfig.paramNames || ['u', 'v', 'w']
   const boundsKeys = currentConfig.boundsKeys || paramNames
+  const hasT = Boolean(bounds[boundsKeys[3]])
+
+  const embeddingArgs = useMemo(
+    () => (hasT ? [tValue] : []),
+    [hasT, tValue]
+  )
 
   // Get bounds using boundsKeys as keys
   const getBound = (key) => bounds[key] || { min: -10, max: 10 }
@@ -136,7 +145,7 @@ function Graph() {
                 <option value="cartesian">Cartesian (x, y, z)</option>
                 <option value="cylindrical">Cylindrical (r, θ, z)</option>
                 <option value="spherical">Spherical (r, θ, φ)</option>
-                <option value="quaternion">Quaternion (ω, θ, φ)</option>
+                <option value="quaternion">Ordered Quaternion State (θ, φ, ρ; ω scale)</option>
               </select>
             </label>
           </div>
@@ -346,6 +355,21 @@ function Graph() {
           </div>
         )}
 
+        {hasT && (
+          <div className="control-group">
+            <label>{paramNames[3] || 't'}: {tValue.toFixed(2)}
+              <input
+                type="range"
+                min={getBound(boundsKeys[3]).min}
+                max={getBound(boundsKeys[3]).max}
+                step="0.05"
+                value={tValue}
+                onChange={(e) => setTValue(parseFloat(e.target.value))}
+              />
+            </label>
+          </div>
+        )}
+
         <div className="control-group">
           <label>Line Color
             <input type="color" value={lineColor}
@@ -365,6 +389,7 @@ function Graph() {
             ranges={ranges}
             resolution={resolution}
             lineColor={lineColor}
+            embeddingArgs={embeddingArgs}
           />
         ) : gridLevel === 2 ? (
           <MetricGrid

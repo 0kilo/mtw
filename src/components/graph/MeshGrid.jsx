@@ -23,6 +23,7 @@ function MeshGrid({
   lineColor = '#6366f1',
   showAxes = true,
   axisSize = 5,
+  embeddingArgs = [],
 }) {
   const containerRef = useRef(null)
 
@@ -34,7 +35,7 @@ function MeshGrid({
   const embedding = coordinate?.embedding
 
   // Generate mesh lines using the hook
-  const meshLines = useMeshGenerator(embedding, ranges, resolution)
+  const meshLines = useMeshGenerator(embedding, ranges, resolution, embeddingArgs)
 
   useEffect(() => {
     if (!containerRef.current || !embedding) return

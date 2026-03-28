@@ -1,97 +1,91 @@
 /**
- * Quaternion Exponential Coordinate System
+ * Ordered Quaternionic State Map Coordinate System
  *
- * Visualizes the quaternion exponential map:
- *   e^z = e^(ω + θi + φj + ρk)
- *       = e^ω × e^(θi) × e^(φj) × e^(ρk)
+ * Visualizes the ordered state map used in the current Khantraction research:
+ *   Q(ω, θ, φ, ρ) = e^ω · e^(θi) · e^(φj) · e^(ρk)
  *
- * Parameters: (ω, θ, φ, ρ) - but we fix ρ=0 for visualization
- * The 3D visualization shows the vector part (b, c, d) of the result:
- *   e^z = a + bi + cj + dk
+ * This is an ordered factorized quaternionic state construction,
+ * not the naive commuting identity e^(ω+θi+φj+ρk).
  *
- * Embedding maps (ω, θ, φ) -> (b, c, d) scaled by e^ω
+ * For visualization we vary (θ, φ, ρ) on the grid and expose ω as an
+ * explicit scale control. The 3D embedding shows the vector part (b, c, d):
+ *   Q = a + bi + cj + dk
  */
 
-/**
- * Compute quaternion exponential vector part
- * @param {number} omega - Real part
- * @param {number} theta - i-axis angle
- * @param {number} phi - j-axis angle
- * @param {number} rho - k-axis angle (typically 0)
- * @returns {[number, number, number]} [b, c, d] vector part
- */
-function expQVector(omega, theta, phi, rho = 0) {
-  const A = Math.exp(omega)
+const computeQuaternionComponents = (omega, theta, phi, rho) => {
+  const scale = Math.max(0, omega)
   const cosT = Math.cos(theta), sinT = Math.sin(theta)
   const cosP = Math.cos(phi), sinP = Math.sin(phi)
   const cosR = Math.cos(rho), sinR = Math.sin(rho)
 
-  // Vector parts (b, c, d)
-  const b = A * (sinT * cosP * cosR + cosT * sinP * sinR)
-  const c = A * (cosT * sinP * cosR - sinT * cosP * sinR)
-  const d = A * (cosT * cosP * sinR + sinT * sinP * cosR)
+  const a = scale * (cosT * cosP * cosR - sinT * sinP * sinR)
+  const b = scale * (sinT * cosP * cosR + cosT * sinP * sinR)
+  const c = scale * (cosT * sinP * cosR - sinT * cosP * sinR)
+  const d = scale * (cosT * cosP * sinR + sinT * sinP * cosR)
 
+  return [a, b, c, d]
+}
+
+
+/**
+ * Compute ordered-state map vector part
+ * @returns {[number, number, number]} [b, c, d] vector part
+ */
+function expQVector(omega, theta, phi, rho) {
+  const [, b, c, d] = computeQuaternionComponents(omega, theta, phi, rho)
   return [b, c, d]
 }
 
 export const quaternion = {
-  name: 'Quaternion (Q1)',
-  description: 'Quaternion exponential e^z = e^ω·e^(θi)·e^(φj)·e^(ρk)',
+  name: 'Ordered Quaternion State',
+  description: 'Ordered quaternion state map Q(ω, θ, φ, ρ) with θ, φ, ρ as angular axes and ω as scale',
 
   /**
-   * Embedding function: (ω, θ, φ) -> (b, c, d)
-   * Maps quaternion parameters to 3D vector part
-   * @param {number} omega - Real part (log magnitude)
-   * @param {number} theta - i-axis angle
-   * @param {number} phi - j-axis angle
-   * @returns {[number, number, number]} [x, y, z] = [b, c, d]
+   * Embedding function: (θ, φ, ρ, ω) -> (b, c, d)
+   * The UI exposes ω as the fourth control while θ, φ, ρ span the grid.
    */
-  embedding: (omega, theta, phi) => expQVector(omega, theta, phi, 0),
+  embedding: (theta, phi, rho, omega = 1) => expQVector(omega, theta, phi, rho),
 
   /**
-   * Inverse: (b, c, d) -> (ω, θ, φ)
-   * Approximate inverse for visualization
-   * @param {number} x - Vector component b
-   * @param {number} y - Vector component c
-   * @param {number} z - Vector component d
-   * @returns {[number, number, number]} [omega, theta, phi]
+   * Inverse: (b, c, d) -> (θ, φ, ρ, ω)
+   * Still approximate; the embedding is many-to-one.
    */
   inverse: (x, y, z) => {
     const r = Math.sqrt(x * x + y * y + z * z)
-    const omega = Math.log(Math.max(r, 0.001))
-    const theta = Math.atan2(x, z)
+    const omega = r
+    const theta = Math.atan2(x, Math.sqrt(y * y + z * z))
     const phi = Math.atan2(y, Math.sqrt(x * x + z * z))
-    return [omega, theta, phi]
+    const rho = Math.atan2(z, Math.sqrt(x * x + y * y))
+    return [theta, phi, rho, omega]
   },
 
   /**
    * Default parameter ranges
    * @type {[[number, number], [number, number], [number, number]]}
    */
-  ranges: [[0, 1], [-Math.PI / 4, Math.PI / 4], [-Math.PI / 4, Math.PI / 4]],
+  ranges: [
+    [Math.PI * 0.75, Math.PI * 1.25],
+    [-Math.PI * 0.75, -Math.PI * 0.25],
+    [Math.PI * 0.25, Math.PI * 0.75],
+  ],
 
   /**
    * Parameter names for UI labels
    */
-  paramNames: ['ω (real)', 'θ (i)', 'φ (j)'],
+  paramNames: ['θ (soft mode)', 'φ (locked angle)', 'ρ (chirality)', 'ω (scale)'],
 
   /**
    * Coordinate bounds (min/max for each parameter)
    */
   bounds: {
-    omega: { min: -3.14, max: 3.14, default: [0, 1] },
-    theta: { min: -Math.PI, max: Math.PI, default: [-Math.PI / 4, Math.PI / 4] },
-    phi: { min: -Math.PI, max: Math.PI, default: [-Math.PI / 4, Math.PI / 4] },
+    theta: { min: -2 * Math.PI, max: 2 * Math.PI, default: [Math.PI * 0.75, Math.PI * 1.25] },
+    phi: { min: -2 * Math.PI, max: 2 * Math.PI, default: [-Math.PI * 0.75, -Math.PI * 0.25] },
+    rho: { min: -2 * Math.PI, max: 2 * Math.PI, default: [Math.PI * 0.25, Math.PI * 0.75] },
+    omega: { min: 0, max: 10, default: 1 },
   },
 
   /**
    * Keys to access bounds (maps to paramNames index)
    */
-  boundsKeys: ['omega', 'theta', 'phi'],
-
-  /**
-   * Additional config
-   */
-  hasRho: false,  // Whether to show ρ parameter
-  rhoDefault: 0,
+  boundsKeys: ['theta', 'phi', 'rho', 'omega'],
 }
